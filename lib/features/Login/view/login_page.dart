@@ -20,8 +20,10 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController password = TextEditingController();
   TextEditingController search = TextEditingController();
   bool isChecked = false;
+  bool isselected = false;
+  var selectedColor = blackbg;
   String _verticalGroupValue = "English(United States)";
-  List<String> _status = [
+  final List<String> _status = [
     "English (UK)",
     "Portugues",
     "Espanol",
@@ -47,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   _languageSetup(context),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.07,
+                    height: MediaQuery.of(context).size.height * 0.1,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -158,58 +160,7 @@ class _LoginPageState extends State<LoginPage> {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return Dialog(
-              backgroundColor: background,
-              insetPadding: const EdgeInsets.all(8),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-              ),
-              child: Container(
-                height: 512,
-                width: double.infinity,
-                child: Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Select language',
-                        style: KTextStyle.headline3.copyWith(color: blackbg),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 19),
-                        child: SearchTextField(
-                          controller: search,
-                          readOnly: false,
-                          hintText: 'Search...',
-                          lable: 'Search',
-                        ),
-                      ),
-                      RadioGroup<String>.builder(
-                        direction: Axis.vertical,
-                        groupValue: _verticalGroupValue,
-                        horizontalAlignment: MainAxisAlignment.spaceAround,
-                        onChanged: (value) => setState(() {
-                          _verticalGroupValue = value!;
-                          print(_verticalGroupValue);
-                        }),
-                        spacebetween: 50,
-                        activeColor: blackbg,
-                        items: _status,
-                        textStyle: KTextStyle.dialog.copyWith(
-                          color: blackbg.withOpacity(0.6),
-                        ),
-                        itemBuilder: (item) => RadioButtonBuilder(
-                          item,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
+            return languageDialogbox();
           },
         );
       },
@@ -235,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: background,
       insetPadding: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      child: Container(
+      child: SizedBox(
         height: 512,
         width: double.infinity,
         child: Container(
@@ -263,13 +214,15 @@ class _LoginPageState extends State<LoginPage> {
                 horizontalAlignment: MainAxisAlignment.spaceAround,
                 onChanged: (value) => setState(() {
                   _verticalGroupValue = value!;
+                  isselected = !isselected;
                   print(_verticalGroupValue);
                 }),
                 spacebetween: 50,
-                activeColor: blackbg,
+                activeColor: isselected?Colors.lightBlue:Colors.orange,
                 items: _status,
-                textStyle:
-                    KTextStyle.dialog.copyWith(color: blackbg.withOpacity(0.6)),
+                textStyle: KTextStyle.dialog.copyWith(
+                  color: blackbg.withOpacity(0.6),
+                ),
                 itemBuilder: (item) => RadioButtonBuilder(
                   item,
                 ),

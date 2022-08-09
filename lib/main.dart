@@ -7,6 +7,7 @@ import 'features/Resetpassword/view/confirm_password.dart';
 import 'features/Resetpassword/view/reset_password_page.dart';
 import 'features/Signup/view/signup_page.dart';
 import 'features/main_screen.dart';
+import 'globalComponents/Widgets/Drawer/components/men_categories.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/resetPassword': (context) => ResetPasswordPage(),
         '/confirmPassword': (context) => ConfirmPasswordPage(),
         '/notification': (context) => NotificationPage(),
+        '/menCategories': (context) => MenSection(),
 
       },
     );

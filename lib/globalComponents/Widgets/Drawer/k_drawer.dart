@@ -8,7 +8,8 @@ class KDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      color: blackbg,
       padding: const EdgeInsets.symmetric(vertical: 40.0,horizontal: 30),
       child: SingleChildScrollView(
         child: Column(
@@ -30,9 +31,14 @@ class KDrawer extends StatelessWidget {
                   style: KTextStyle.subtitle1.copyWith(color: whiteBg),
                 ),
                 const SizedBox(height: 16),
-                Text(
-                  'Men',
-                  style: KTextStyle.subtitle1.copyWith(color: whiteBg),
+                InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/menCategories');
+                  },
+                  child: Text(
+                    'Men',
+                    style: KTextStyle.subtitle1.copyWith(color: whiteBg),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 Text(
@@ -54,7 +60,7 @@ class KDrawer extends StatelessWidget {
                   'About Us',
                   style: KTextStyle.subtitle1.copyWith(color: whiteBg),
                 ),
-                const SizedBox(height: 100),
+                const SizedBox(height: 80),
                 Text(
                   'Log In',
                   style: KTextStyle.subtitle1.copyWith(color: whiteBg),
@@ -66,6 +72,7 @@ class KDrawer extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height:70),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

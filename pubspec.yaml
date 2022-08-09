@@ -39,6 +39,8 @@ dependencies:
   flutter_switch: ^0.3.2
   group_radio_button: ^1.2.0
   convex_bottom_bar: ^3.0.0
+  carousel_indicator: ^1.0.6
+  banner_carousel: ^1.2.1
 
 dev_dependencies:
   flutter_test:

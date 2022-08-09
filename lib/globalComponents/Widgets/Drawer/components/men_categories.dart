@@ -1,31 +1,34 @@
+
 import 'package:banner_carousel/banner_carousel.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:finesse/constants/color/app_color.dart';
 import 'package:finesse/globalComponents/Style/k_text_style.dart';
-import 'package:finesse/globalComponents/Widgets/Appbar/k_appbar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../globalComponents/Widgets/Card/product_card.dart';
-import '../../../globalComponents/Widgets/Drawer/k_drawer.dart';
-import '../../../globalComponents/Widgets/textfield/search_field.dart';
+import '../../Appbar/k_appbar.dart';
+import '../../Card/product_card.dart';
+import '../../textfield/search_field.dart';
+import '../k_drawer.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+
+class MenSection extends StatefulWidget {
+  const MenSection({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<MenSection> createState() => _MenSectionState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MenSectionState extends State<MenSection> {
+
   TextEditingController search = TextEditingController();
   int selectIndex = 0;
   List<String> category = ['All', 'Men’s', 'Women’s', 'Kid’s', 'Beauty'];
   List<String> popularCategory = [
-    'TWO QUARTER',
-    'KATUA',
-    'MOJARIS',
-    'KATUA',
-    'MOJARIS'
+    'HALF SHOES',
+    'BROGUE SHOES',
+    'SLEVELESS',
   ];
   List<dynamic> categoryIcons = [
     'assets/images/box.svg',
@@ -47,11 +50,17 @@ class _HomePageState extends State<HomePage> {
     'assets/images/tshirt.png',
     'assets/images/socks.png',
   ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: background,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(56),
+          child: KAppBar(),
+        ),
+        drawer: const Drawer(child: KDrawer()),
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
           child: SingleChildScrollView(
@@ -74,103 +83,46 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBox(height: 31),
-                _categoryHeader('Categories', () {}),
-                _categorySection(),
-                const SizedBox(height: 31),
-                _categoryHeader('Popular Right Now', () {}),
-                const SizedBox(height: 8),
-                _popularCategory(),
+                Text(
+                  'Men',
+                  style: KTextStyle.headline2.copyWith(color: blackbg),
+                ),
                 const SizedBox(height: 23),
-                _categoryHeader('New Arrivals', () {}),
-                _NewProducts(),
+
+                _popularCategory(),
+                const SizedBox(height: 32),
+
+                _categoryHeader('Featured Products', () {}),
+                _featureProducts(),
+
+
                 const SizedBox(height: 32),
                 _newArrival(),
                 const SizedBox(height: 32),
-                _categoryHeader('Featured Products', () {}),
-                _featureProducts(),
-                const SizedBox(height: 44),
+
+                Text(
+                  'MEN’S CLOTHING & SHOES',
+                  style: KTextStyle.headline2.copyWith(color: blackbg),
+                ),
+
+                const SizedBox(height: 16),
+
+                Text(
+                  textAlign: TextAlign.center,
+                  'As a creator, you look for ways to excel and express\n yourself when and where you can, from reaching for\n that last rep to evolving your streetwear style. Log \nmiles or tear down the baseline in men',
+                  style: KTextStyle.subtitle3.copyWith(color: Colors.black.withOpacity(0.6)),
+                ),
+
+                const SizedBox(height: 60),
               ],
             ),
           ),
         ),
+
       ),
     );
   }
 
-  Container _NewProducts() {
-    return Container(
-      //padding: EdgeInsets.symmetric(horizontal: 12,vertical: 8),
-      height: 207,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 5,
-          itemBuilder: (BuildContext context, int index) {
-            return ProductCard(
-              //img: Image.asset(newArrivalProducts[index]),
-              name: 'Finesse Regular T-Shirt (Black)',
-              genre: "",
-              offerPrice: "14.90",
-              regularPrice: "",
-              discount: "-20%",
-              check: true,
-            );
-          }),
-    );
-  }
-
-  SizedBox _categorySection() {
-    return SizedBox(
-      height: 85,
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: category.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              setState(() {
-                selectIndex = index;
-                print("index: $selectIndex");
-              });
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(right: 12),
-                  width: 54,
-                  height: 54,
-                  decoration: BoxDecoration(
-                    color: selectIndex == index ? blackbg : searchColor,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: SvgPicture.asset(
-                      categoryIcons[index],
-                      color: index == selectIndex ? whiteBg : blackbg,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.only(right: 12),
-                  child: Center(
-                    child: Text(
-                      '${category[index]}',
-                      style: KTextStyle.subtitle6.copyWith(
-                          color: index == selectIndex
-                              ? blackbg
-                              : blackbg.withOpacity(0.3)),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
 
   Column _popularCategory() {
     return Column(
@@ -196,19 +148,19 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Center(
                         child: Text(
-                      popularCategory[index],
-                      style: KTextStyle.subtitle6
-                          .copyWith(color: Colors.black.withOpacity(0.7)),
-                    )),
+                          popularCategory[index],
+                          style: KTextStyle.subtitle6
+                              .copyWith(color: Colors.black.withOpacity(0.7)),
+                        )),
                   ),
                 ],
               );
             },
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 29),
         SizedBox(
-          height: 172,
+          height: 182,
           child: ListView.builder(
             shrinkWrap: true,
             itemCount: popularCategory.length,
@@ -216,7 +168,7 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (context, index) {
               return Container(
                 margin: const EdgeInsets.only(right: 16),
-                child: Image.asset('assets/images/product.png'),
+                child: Image.asset('assets/images/menProduct.png'),
               );
             },
           ),
