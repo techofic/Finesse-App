@@ -38,6 +38,12 @@ class KTextStyle {
     fontFamily: GoogleFonts.inter().fontFamily,
   );
 
+  static TextStyle description = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    fontFamily: GoogleFonts.inter().fontFamily,
+  );
+
   static TextStyle subtitle2 = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.w600,

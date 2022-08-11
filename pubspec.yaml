@@ -42,6 +42,7 @@ dependencies:
   carousel_indicator: ^1.0.6
   banner_carousel: ^1.2.1
   google_fonts: ^3.0.1
+  readmore: ^2.2.0
 
 dev_dependencies:
   flutter_test:

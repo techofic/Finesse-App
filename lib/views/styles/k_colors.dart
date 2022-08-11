@@ -43,5 +43,6 @@ class KColor {
   static const Color searchColor = Color(0xFFEAE7E7);
   static const Color cirColor = Color(0xFFE6E6E6);
   static const Color stickerColor = Color(0xFF37AF59);
+  static const Color dividerColor = Color(0xFF797979);
 
 }

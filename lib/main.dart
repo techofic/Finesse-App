@@ -6,6 +6,7 @@ import 'package:finesse/views/screens/auth/resetpassword/view/reset_password_pag
 import 'package:finesse/views/screens/auth/signup/view/signup_page.dart';
 import 'package:finesse/views/screens/category/men_categories.dart';
 import 'package:finesse/views/screens/main_screen.dart';
+import 'package:finesse/views/screens/product_details/product_details.dart';
 import 'package:flutter/material.dart';
 
 
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         '/confirmPassword': (context) => const ConfirmPasswordPage(),
         '/notification': (context) => const NotificationPage(),
         '/menCategories': (context) => const MenSection(),
+        '/productDetails': (context) => const ProductDetails(),
 
       },
     );
