@@ -24,6 +24,8 @@ class _KFilterState extends State<KFilter> {
             controller: controller,
             readOnly: false,
             hintText: 'Search...',
+            // TODO :: Check the border radius of this field in UI
+            // TODO :: No need of label here
             lable: 'Search',
           ),
         ),

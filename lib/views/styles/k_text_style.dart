@@ -58,7 +58,11 @@ class KTextStyle {
     height: 1.45,
     fontFamily: GoogleFonts.inter().fontFamily,
   );
-
+  // TODO :: Check the naming for styles,
+  // you don't usually have so many different subtitle styles
+  // 10 is the smallest fontSize for app,
+  // so you can call it caption
+  // 14 with w400 is usuallu bodyText
   static TextStyle subtitle3 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,

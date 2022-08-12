@@ -1,9 +1,8 @@
-
 import 'package:finesse/views/styles/k_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../../globalComponents/card/notification_card.dart';
-import '../../../globalComponents/textfield/k_search_field.dart';
+import '../../../components/card/notification_card.dart';
+import '../../../components/textfield/k_search_field.dart';
 import '../../../styles/k_text_style.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -94,10 +93,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   itemCount: 10,
                   itemBuilder: (BuildContext context, int index) {
                     return Column(
-                      children: const [
-                        NotificationCard(),
-                        SizedBox(height: 8)
-                      ],
+                      children: const [NotificationCard(), SizedBox(height: 8)],
                     );
                   },
                 ),

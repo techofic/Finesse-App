@@ -8,11 +8,32 @@ import 'package:finesse/views/screens/category/men_categories.dart';
 import 'package:finesse/views/screens/main_screen.dart';
 import 'package:finesse/views/screens/product_details/product_details.dart';
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+// TODO :: Your dir structuing, for design code will be ->
+/*
+lib
+  -src
+    -features
+    -widgets(components)
+
+Example::
+lib
+  -src
+    -features
+      -auth
+        -login
+          -view
+            login_screen.dart
+          -components
+            some_component.dart
+    -widgets(components)
+*/
+// TODO :: Please code UI extra carefully pay attention to design, colors, borders, radius etc...
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -23,8 +44,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Merriweather',
+        fontFamily: GoogleFonts.inter().fontFamily,
       ),
       initialRoute: '/login',
       routes: {
@@ -37,10 +57,7 @@ class MyApp extends StatelessWidget {
         '/notification': (context) => const NotificationPage(),
         '/menCategories': (context) => const MenSection(),
         '/productDetails': (context) => const ProductDetails(),
-
       },
     );
   }
 }
-
-

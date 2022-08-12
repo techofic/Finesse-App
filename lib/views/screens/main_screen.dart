@@ -3,8 +3,8 @@ import 'package:finesse/views/styles/b_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../globalComponents/Appbar/k_appbar.dart';
-import '../globalComponents/Drawer/k_drawer.dart';
+import '../components/Appbar/k_appbar.dart';
+import '../components/Drawer/k_drawer.dart';
 import 'Home/view/home_page.dart';
 
 class MainScreen extends StatefulWidget {
@@ -44,7 +44,13 @@ class _MainScreenState extends State<MainScreen> {
               ],
             ),
           ),
-          bottomNavigationBar: StyleProvider(
+          bottomNavigationBar:
+              // TODO :: Try using  one of these packages instead
+              // As convex bottom bar doesn't have enough customisation capabilites as our UI requires
+              // https://pub.dev/packages/motion_tab_bar_v2
+              // https://pub.dev/packages/awesome_bottom_bar inspiredInside
+
+              StyleProvider(
             style: Style(),
             child: ConvexAppBar(
               elevation: 15,
@@ -60,9 +66,7 @@ class _MainScreenState extends State<MainScreen> {
                 TabItem(
                   icon: SvgPicture.asset(
                     'assets/images/home.svg',
-                    color: _currentIndex == 0
-                        ? KColor.whiteBackground
-                        : KColor.blackbg.withOpacity(0.3),
+                    color: _currentIndex == 0 ? KColor.whiteBackground : KColor.blackbg.withOpacity(0.3),
                     // width: _currentIndex == 0 ? 19:19,
                     // height: _currentIndex == 0 ? 19:19,
                   ),
@@ -71,27 +75,21 @@ class _MainScreenState extends State<MainScreen> {
                 TabItem(
                   icon: SvgPicture.asset(
                     'assets/images/trolly.svg',
-                    color: _currentIndex == 1
-                        ? KColor.whiteBackground
-                        : KColor.blackbg.withOpacity(0.3),
+                    color: _currentIndex == 1 ? KColor.whiteBackground : KColor.blackbg.withOpacity(0.3),
                   ),
                   title: "Cart",
                 ),
                 TabItem(
                   icon: SvgPicture.asset(
                     'assets/images/wishlist.svg',
-                    color: _currentIndex == 2
-                        ? KColor.whiteBackground
-                        : KColor.blackbg.withOpacity(0.3),
+                    color: _currentIndex == 2 ? KColor.whiteBackground : KColor.blackbg.withOpacity(0.3),
                   ),
                   title: "Wishlist",
                 ),
                 TabItem(
                   icon: SvgPicture.asset(
                     'assets/images/profile.svg',
-                    color: _currentIndex == 3
-                        ? KColor.whiteBackground
-                        : KColor.blackbg.withOpacity(0.3),
+                    color: _currentIndex == 3 ? KColor.whiteBackground : KColor.blackbg.withOpacity(0.3),
                     height: _currentIndex == 3 ? 19 : 38,
                   ),
                   title: "Account",

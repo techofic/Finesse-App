@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 
-import '../../../../globalComponents/Button/k_button.dart';
-import '../../../../globalComponents/textfield/k_email_field.dart';
-import '../../../../globalComponents/textfield/k_password_field.dart';
-import '../../../../globalComponents/textfield/k_phone_field.dart';
-import '../../../../globalComponents/textfield/k_search_field.dart';
-import '../../../../globalComponents/textfield/k_text_field.dart';
+import '../../../../components/Button/k_button.dart';
+import '../../../../components/textfield/k_email_field.dart';
+import '../../../../components/textfield/k_password_field.dart';
+import '../../../../components/textfield/k_phone_field.dart';
+import '../../../../components/textfield/k_search_field.dart';
+import '../../../../components/textfield/k_text_field.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -29,15 +29,7 @@ class _SignupPageState extends State<SignupPage> {
   bool isselected = false;
   var selectedColor = KColor.blackbg;
   String _verticalGroupValue = "English(United States)";
-  final List<String> _status = [
-    "English (UK)",
-    "Portuguese",
-    "Espinosa",
-    "Francais",
-    "Turkce",
-    "Italiano",
-    "Hindi"
-  ];
+  final List<String> _status = ["English (UK)", "Portuguese", "Espinosa", "Francais", "Turkce", "Italiano", "Hindi"];
 
   @override
   Widget build(BuildContext context) {
@@ -205,8 +197,7 @@ class _SignupPageState extends State<SignupPage> {
             height: 512,
             width: double.infinity,
             child: Container(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,

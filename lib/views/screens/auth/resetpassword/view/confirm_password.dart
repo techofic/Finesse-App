@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../globalComponents/Button/k_border_btn.dart';
-import '../../../../globalComponents/Button/k_button.dart';
-import '../../../../globalComponents/textfield/k_fill_password_field.dart';
+import '../../../../components/Button/k_border_btn.dart';
+import '../../../../components/Button/k_button.dart';
+import '../../../../components/textfield/k_fill_password_field.dart';
 import '../../../../styles/k_colors.dart';
 import '../../../../styles/k_text_style.dart';
 

@@ -37,6 +37,7 @@ class KColor {
   normal color
   */
   static const Color black = Colors.black;
+  static const Color white = Colors.white;
   static const Color blackbg = Color(0xFF1B1B1B);
   static const Color baseBlack = Color(0xFF000000);
   static const Color textBorder = Color(0xFF727272);
@@ -44,5 +45,4 @@ class KColor {
   static const Color cirColor = Color(0xFFE6E6E6);
   static const Color stickerColor = Color(0xFF37AF59);
   static const Color dividerColor = Color(0xFF797979);
-
 }

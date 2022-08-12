@@ -10,13 +10,7 @@ class PhoneTextField extends StatelessWidget {
   final String hintText;
   final bool readOnly;
 
-  PhoneTextField(
-      {Key? key,
-      required this.lable,
-      required this.controller,
-      required this.hintText,
-      required this.readOnly})
-      : super(key: key);
+  PhoneTextField({Key? key, required this.lable, required this.controller, required this.hintText, required this.readOnly}) : super(key: key);
 
   TextEditingController controller = TextEditingController();
 
@@ -43,11 +37,9 @@ class PhoneTextField extends StatelessWidget {
           ),
         ),
         hintText: hintText,
-        hintStyle: KTextStyle.subtitle3
-            .copyWith(color: KColor.blackbg.withOpacity(0.4)),
+        hintStyle: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.4)),
         labelText: lable,
-        labelStyle: KTextStyle.subtitle3
-            .copyWith(color: KColor.blackbg.withOpacity(0.4)),
+        labelStyle: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.4)),
         contentPadding: const EdgeInsets.symmetric(horizontal: 19.0),
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(15.0)),
@@ -65,6 +57,9 @@ class PhoneTextField extends StatelessWidget {
           borderSide: BorderSide(color: KColor.blackbg, width: 1.0),
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
+        // TODO :: This is the behavior we were talking about
+        // UI shows label always on top
+        floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
     );
   }

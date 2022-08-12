@@ -1,8 +1,8 @@
 import 'package:find_dropdown/find_dropdown.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../globalComponents/Button/k_button.dart';
-import '../../../../globalComponents/textfield/k_text_field.dart';
+import '../../../../components/Button/k_button.dart';
+import '../../../../components/textfield/k_text_field.dart';
 import '../../../../styles/k_colors.dart';
 import '../../../../styles/k_text_style.dart';
 
@@ -44,12 +44,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Reset Password',
-                      style:
-                          KTextStyle.headline3.copyWith(color: KColor.blackbg)),
+                  Text('Reset Password', style: KTextStyle.headline3.copyWith(color: KColor.blackbg)),
                   const SizedBox(height: 12),
-                  Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Ultrices adipiscing sit integer ornare cras massa nulla.',
+                  Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Ultrices adipiscing sit integer ornare cras massa nulla.',
                       style: KTextStyle.subtitle5.copyWith(
                         color: KColor.blackbg.withOpacity(0.6),
                       )),

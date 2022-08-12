@@ -2,8 +2,6 @@ import 'package:finesse/views/styles/k_colors.dart';
 import 'package:finesse/views/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'components/product_delivery.dart';
 import 'components/product_description.dart';
 import 'components/product_review.dart';
@@ -136,29 +134,21 @@ class _ProductDetailsState extends State<ProductDetails> {
                                         });
                                       },
                                       child: AnimatedContainer(
-                                        duration:
-                                            const Duration(milliseconds: 300),
-                                        margin:
-                                            const EdgeInsets.only(right: 16),
+                                        duration: const Duration(milliseconds: 300),
+                                        margin: const EdgeInsets.only(right: 16),
                                         width: 111,
                                         height: 40,
                                         decoration: BoxDecoration(
-                                          color: index == current
-                                              ? KColor.blackbg.withOpacity(0.8)
-                                              : KColor.searchColor
-                                                  .withOpacity(0.8),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
+                                          color: index == current ? KColor.blackbg.withOpacity(0.8) : KColor.searchColor.withOpacity(0.8),
+                                          borderRadius: BorderRadius.circular(15),
                                         ),
                                         child: Center(
-                                          child: Text(items[index],
-                                              style:
-                                                  KTextStyle.subtitle3.copyWith(
-                                                color: index == current
-                                                    ? KColor.whiteBackground
-                                                    : KColor.blackbg
-                                                        .withOpacity(0.4),
-                                              ),),
+                                          child: Text(
+                                            items[index],
+                                            style: KTextStyle.subtitle3.copyWith(
+                                              color: index == current ? KColor.whiteBackground : KColor.blackbg.withOpacity(0.4),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -169,9 +159,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ),
 
                           /// MAIN BODY
-                          current == 0 ? ProductDescription() : Container(),
-                          current == 1 ? ProductReview() : Container(),
-                          current == 2 ? ProductDelivery() : Container(),
+                          current == 0 ? const ProductDescription() : Container(),
+                          current == 1 ? const ProductReview() : Container(),
+                          current == 2 ? const ProductDelivery() : Container(),
                         ],
                       ),
                     ],
@@ -219,7 +209,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ),
                       ),
                       InkWell(
+                        // When using InkWell check the spalsh effect if its radius matches the container
+                        borderRadius: BorderRadius.circular(15),
                         onTap: () {
+                          // TODO :: Product count cannot be a negative number
                           setState(() {
                             count--;
                           });

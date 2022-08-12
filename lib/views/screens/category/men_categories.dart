@@ -1,9 +1,9 @@
 import 'package:finesse/views/styles/b_style.dart';
 import 'package:flutter/material.dart';
-import '../../globalComponents/Appbar/k_appbar.dart';
-import '../../globalComponents/Drawer/k_drawer.dart';
-import '../../globalComponents/filter/k_filter.dart';
-import '../../globalComponents/slider/k_slider.dart';
+import '../../components/Appbar/k_appbar.dart';
+import '../../components/Drawer/k_drawer.dart';
+import '../../components/filter/k_filter.dart';
+import '../../components/slider/k_slider.dart';
 import '../home/components/featured_products.dart';
 import '../home/components/new_arrivals.dart';
 import '../home/components/popular_category.dart';
@@ -56,8 +56,7 @@ class _MenSectionState extends State<MenSection> {
                 Text(
                   textAlign: TextAlign.center,
                   'As a creator, you look for ways to excel and express\n yourself when and where you can, from reaching for\n that last rep to evolving your streetwear style. Log \nmiles or tear down the baseline in men',
-                  style: KTextStyle.subtitle3
-                      .copyWith(color: Colors.black.withOpacity(0.6)),
+                  style: KTextStyle.subtitle3.copyWith(color: Colors.black.withOpacity(0.6)),
                 ),
                 const SizedBox(height: 60),
               ],

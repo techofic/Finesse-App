@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../globalComponents/Card/product_card.dart';
+import '../../../components/Card/product_card.dart';
 
 class NewArrivals extends StatefulWidget {
   const NewArrivals({Key? key}) : super(key: key);

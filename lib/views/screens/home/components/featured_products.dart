@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../globalComponents/Card/product_card.dart';
+import '../../../components/Card/product_card.dart';
 
 class FeaturedProducts extends StatefulWidget {
   const FeaturedProducts({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
       height: 207,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children:  const [
+        children: const [
           ProductCard(
             //img: Image.asset(newArrivalProducts[index]),
             name: 'Mens Baseball Cap',

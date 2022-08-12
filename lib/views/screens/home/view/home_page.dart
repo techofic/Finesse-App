@@ -1,6 +1,6 @@
-import 'package:finesse/views/globalComponents/slider/k_slider.dart';
+import 'package:finesse/views/components/slider/k_slider.dart';
 import 'package:flutter/material.dart';
-import '../../../globalComponents/filter/k_filter.dart';
+import '../../../components/filter/k_filter.dart';
 import '../../../styles/k_colors.dart';
 import '../../../styles/k_text_style.dart';
 import '../components/category_section.dart';

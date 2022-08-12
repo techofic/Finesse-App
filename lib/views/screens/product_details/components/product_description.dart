@@ -101,7 +101,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
           style: KTextStyle.subtitle4.copyWith(color: Colors.black),
         ),
         const SizedBox(height: 16),
-        Container(
+        SizedBox(
           height: 150,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
