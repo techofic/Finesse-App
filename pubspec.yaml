@@ -43,6 +43,11 @@ dependencies:
   banner_carousel: ^1.2.1
   google_fonts: ^3.0.1
   readmore: ^2.2.0
+  motion_tab_bar_v2: ^0.2.6
+  smooth_page_indicator: ^1.0.0+2
+  flutter_slidable: ^2.0.0
+  dotted_line: ^3.1.0
+
 
 dev_dependencies:
   flutter_test:
