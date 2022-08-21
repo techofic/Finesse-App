@@ -1,6 +1,5 @@
 import 'package:finesse/components/appbar/appbar.dart';
 import 'package:finesse/src/features/checkout/components/add_home.dart';
-import 'package:finesse/src/features/checkout/components/add_office.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +28,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -43,7 +42,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
                 children: [
                   SizedBox(
                     width: double.infinity,
-                    height:60,
+                    height: 60,
                     child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: items.length,

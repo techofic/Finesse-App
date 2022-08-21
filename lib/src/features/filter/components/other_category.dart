@@ -26,7 +26,7 @@ class _OtherCategoryState extends State<OtherCategory> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+        SizedBox(
           width: double.infinity,
           child: GridView.builder(
             physics: const ScrollPhysics(),
@@ -35,7 +35,7 @@ class _OtherCategoryState extends State<OtherCategory> {
               crossAxisCount: 4,
               crossAxisSpacing: 9.0,
               mainAxisSpacing: 5.0,
-              childAspectRatio: 8/5,
+              childAspectRatio: 8 / 5,
             ),
             itemCount: items.length,
             itemBuilder: (ctx, index) {
@@ -49,7 +49,7 @@ class _OtherCategoryState extends State<OtherCategory> {
                     },
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 600),
-                      width: context.screenWidth*0.5,
+                      width: context.screenWidth * 0.5,
                       height: 40,
                       decoration: BoxDecoration(
                         color: index == currentIndex

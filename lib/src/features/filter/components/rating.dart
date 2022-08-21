@@ -1,6 +1,4 @@
 import 'package:finesse/styles/k_colors.dart';
-import 'package:finesse/styles/k_text_style.dart';
-import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

@@ -1,3 +1,4 @@
+import 'package:finesse/src/features/product_details/components/product_delivery.dart';
 import 'package:finesse/src/features/product_details/components/product_description.dart';
 import 'package:finesse/src/features/product_details/components/product_review.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -14,6 +15,7 @@ class ProductInfo extends StatefulWidget {
 
 class _ProductInfoState extends State<ProductInfo> {
   List<String> items = [
+    "Variations",
     "Descriptions",
     "Reviews",
   ];
@@ -125,8 +127,9 @@ class _ProductInfoState extends State<ProductInfo> {
                   ),
 
                   /// MAIN BODY
-                  if (currentIndex == 0) const ProductDescription(),
-                  if (currentIndex == 1) const ProductReview(),
+                  if (currentIndex == 0) const ProductVariation(),
+                  if (currentIndex == 1) const ProductDescription(),
+                  if (currentIndex == 2) const ProductReview(),
                 ],
               ),
             ],

@@ -3,7 +3,6 @@ import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/card/wishlist_card.dart';
 import 'package:finesse/src/features/cart/components/cart_total.dart';
 import 'package:finesse/styles/k_colors.dart';
-import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -56,9 +55,9 @@ class _CartPageState extends State<CartPage> {
                   );
                 },
               ),
-              SizedBox(height: context.screenHeight*0.05),
-              CardTotal(),
-              SizedBox(height: context.screenHeight*0.05),
+              SizedBox(height: context.screenHeight * 0.05),
+              const CardTotal(),
+              SizedBox(height: context.screenHeight * 0.05),
               Row(
                 children: [
                   Flexible(

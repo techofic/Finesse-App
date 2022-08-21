@@ -19,8 +19,11 @@ import 'package:finesse/src/features/profile/components/change_password.dart';
 import 'package:finesse/src/features/profile/components/dashboard.dart';
 import 'package:finesse/src/features/profile/components/edit_profile.dart';
 import 'package:finesse/src/features/profile/components/my_order.dart';
+import 'package:finesse/src/features/profile/components/order_details.dart';
 import 'package:finesse/src/features/profile/components/report_issue.dart';
 import 'package:finesse/src/features/profile/components/report_list.dart';
+import 'package:finesse/src/features/profile/components/track_order.dart';
+import 'package:finesse/src/features/profile/components/write_review.dart';
 import 'package:finesse/src/features/wishlist/view/wishlist_page.dart';
 import 'package:flutter/material.dart';
 
@@ -83,6 +86,18 @@ class RouteGenerator {
       case '/myOrder':
         return MaterialPageRoute(
           builder: (_) => const MyOrder(),
+        );
+      case '/orderDetails':
+        return MaterialPageRoute(
+          builder: (_) => const OrderDetails(),
+        );
+      case '/writeReview':
+        return MaterialPageRoute(
+          builder: (_) => WriteReview(),
+        );
+      case '/trackOrder':
+        return MaterialPageRoute(
+          builder: (_) => const TrackOrder(),
         );
       case '/notifications':
         return MaterialPageRoute(

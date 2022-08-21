@@ -206,6 +206,7 @@ class _ContactPageState extends State<ContactPage> {
               DescriptionTextField(
                 controller: message,
                 readOnly: false,
+                checkColor: true,
                 hintText: 'Type your message here',
                 label: '',
               ),

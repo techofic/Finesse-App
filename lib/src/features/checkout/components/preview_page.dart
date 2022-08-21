@@ -1,4 +1,3 @@
-import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/button/k_text_button.dart';
 import 'package:finesse/src/features/cart/components/cart_total.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -29,7 +28,8 @@ class _PreviewPageState extends State<PreviewPage> {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: KColor.filterDividerColor,
-                  borderRadius: BorderRadius.circular(15),),
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,36 +39,41 @@ class _PreviewPageState extends State<PreviewPage> {
                       children: [
                         Text(
                           'Order Info',
-                          style: KTextStyle.subtitle1.copyWith(color: KColor.blackbg),
+                          style: KTextStyle.subtitle1
+                              .copyWith(color: KColor.blackbg),
                         ),
                         SvgPicture.asset('assets/images/edit.svg'),
                       ],
                     ),
-                    const SizedBox(height:12),
+                    const SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Hanging Clock (x2)',
-                          style: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.6)),
+                          style: KTextStyle.subtitle3
+                              .copyWith(color: KColor.blackbg.withOpacity(0.6)),
                         ),
                         Text(
                           '\$44.90',
-                          style: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.6)),
+                          style: KTextStyle.subtitle3
+                              .copyWith(color: KColor.blackbg.withOpacity(0.6)),
                         ),
                       ],
                     ),
-                    const SizedBox(height:8),
+                    const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Hanging Clock (x2)',
-                          style: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.6)),
+                          style: KTextStyle.subtitle3
+                              .copyWith(color: KColor.blackbg.withOpacity(0.6)),
                         ),
                         Text(
                           '\$44.90',
-                          style: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.6)),
+                          style: KTextStyle.subtitle3
+                              .copyWith(color: KColor.blackbg.withOpacity(0.6)),
                         ),
                       ],
                     ),
@@ -80,7 +85,8 @@ class _PreviewPageState extends State<PreviewPage> {
                 margin: const EdgeInsets.symmetric(vertical: 16),
                 decoration: BoxDecoration(
                   color: KColor.filterDividerColor,
-                  borderRadius: BorderRadius.circular(15),),
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -93,47 +99,52 @@ class _PreviewPageState extends State<PreviewPage> {
                           children: [
                             Text(
                               'Shipping Address',
-                              style: KTextStyle.subtitle1.copyWith(color: KColor.blackbg),
+                              style: KTextStyle.subtitle1
+                                  .copyWith(color: KColor.blackbg),
                             ),
                             SvgPicture.asset('assets/images/edit.svg'),
                           ],
                         ),
-                        const SizedBox(height:12),
+                        const SizedBox(height: 12),
                         Text(
                           'Mariam Crane',
-                          style: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.6)),
+                          style: KTextStyle.subtitle3
+                              .copyWith(color: KColor.blackbg.withOpacity(0.6)),
                         ),
-                        const SizedBox(height:7),
+                        const SizedBox(height: 7),
                         Text(
                           'Mariam Crane',
-                          style: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.6)),
+                          style: KTextStyle.subtitle3
+                              .copyWith(color: KColor.blackbg.withOpacity(0.6)),
                         ),
                       ],
                     ),
-                    const SizedBox(height:16),
+                    const SizedBox(height: 16),
                     Text(
                       'Payment',
-                      style: KTextStyle.subtitle1.copyWith(color: KColor.blackbg),
+                      style:
+                          KTextStyle.subtitle1.copyWith(color: KColor.blackbg),
                     ),
-                    const SizedBox(height:16),
+                    const SizedBox(height: 16),
                     Text(
                       'Mariam Crane',
-                      style: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.6)),
+                      style: KTextStyle.subtitle3
+                          .copyWith(color: KColor.blackbg.withOpacity(0.6)),
                     ),
-                    const SizedBox(height:7),
+                    const SizedBox(height: 7),
                     Text(
                       'Mariam Crane',
-                      style: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.6)),
+                      style: KTextStyle.subtitle3
+                          .copyWith(color: KColor.blackbg.withOpacity(0.6)),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height:16),
+              const SizedBox(height: 16),
               const CardTotal(),
-
             ],
           ),
-          SizedBox(height:context.screenHeight*0.15),
+          SizedBox(height: context.screenHeight * 0.15),
           KTextButton(
             title: 'Place Order',
             price: '\$281.8',
@@ -141,7 +152,6 @@ class _PreviewPageState extends State<PreviewPage> {
               Navigator.pushNamed(context, '/confirmOrder');
             },
           ),
-
         ],
       ),
     );

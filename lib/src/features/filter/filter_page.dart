@@ -79,7 +79,7 @@ class _FilterPageState extends State<FilterPage> {
                     _categoryHeader('Category', () {}),
                     const OtherCategory(),
                     _categoryHeader('Color', () {}),
-                    SelectColor(),
+                    const SelectColor(),
                     Row(
                       children: [
                         Flexible(

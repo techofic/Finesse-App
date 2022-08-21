@@ -23,7 +23,7 @@ class _ShopPageState extends State<ShopPage> {
         child: KappBar(checkTitle: true, title: 'Shop'),
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(vertical: 12),
+        margin: const EdgeInsets.only(top: 12,bottom: 12,left: 10),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

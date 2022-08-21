@@ -8,13 +8,15 @@ class DescriptionTextField extends StatelessWidget {
   final String label;
   final String hintText;
   final bool readOnly;
+  final bool checkColor;
 
   DescriptionTextField(
       {Key? key,
-        required this.label,
-        required this.controller,
-        required this.hintText,
-        required this.readOnly})
+      required this.label,
+      required this.controller,
+      required this.hintText,
+      required this.checkColor,
+      required this.readOnly})
       : super(key: key);
   TextEditingController controller = TextEditingController();
 
@@ -33,26 +35,46 @@ class DescriptionTextField extends StatelessWidget {
       minLines: 5,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.4)),
+        hintStyle: KTextStyle.subtitle3.copyWith(
+          color: KColor.blackbg.withOpacity(0.4),
+        ),
         labelText: label,
-        labelStyle: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.4)),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 25),
+        labelStyle: KTextStyle.subtitle3.copyWith(
+          color: KColor.blackbg.withOpacity(0.4),
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25),
         border: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(15.0),
+          ),
           borderSide: BorderSide(
-            color: KColor.textBorder.withOpacity(0.8),
+            color: checkColor == false
+                ? Colors.transparent
+                : KColor.textBorder.withOpacity(0.8),
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: KColor.textBorder.withOpacity(0.8),
+            color: checkColor == false
+                ? Colors.transparent
+                : KColor.textBorder.withOpacity(0.8),
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(15.0),
+          ),
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: KColor.blackbg, width: 1.0),
-          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: checkColor == false ? Colors.transparent:KColor.blackbg,
+            width: 1.0,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(15.0),
+          ),
         ),
+        filled: checkColor==false?true:false,
+        fillColor: checkColor==false?KColor.searchColor:Colors.transparent,
       ),
     );
   }

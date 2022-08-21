@@ -1,4 +1,3 @@
-import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../styles/k_colors.dart';
@@ -38,7 +37,10 @@ class NotificationCard extends StatelessWidget {
           CircleAvatar(
             radius: 30,
             backgroundColor: KColor.cirColor.withOpacity(0.6),
-            child: Image.asset('assets/images/sound.png',height: 22,),
+            child: Image.asset(
+              'assets/images/sound.png',
+              height: 22,
+            ),
           ),
           const SizedBox(width: 16),
           Flexible(
@@ -50,7 +52,8 @@ class NotificationCard extends StatelessWidget {
                   flex: 2,
                   child: Text(
                     'Price dropped on hanging clock, grab yours now before stock runs out!',
-                    style: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.7)),
+                    style: KTextStyle.subtitle3
+                        .copyWith(color: KColor.blackbg.withOpacity(0.7)),
                   ),
                 ),
                 const SizedBox(height: 4),

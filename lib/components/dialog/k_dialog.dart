@@ -5,7 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class KDialog extends StatelessWidget {
   final String? message;
-  const KDialog({this.message,Key? key}) : super(key: key);
+  final String? subMessage;
+  final bool? checkTitle;
+
+  const KDialog({this.subMessage, this.checkTitle, this.message, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,14 @@ class KDialog extends StatelessWidget {
                   '$message',
                   style: KTextStyle.headline3.copyWith(color: KColor.blackbg),
                 ),
+                if (checkTitle == true) const SizedBox(height: 16),
+                if (checkTitle == true)
+                  Text(
+                    '$subMessage',
+                    style: KTextStyle.subtitle3.copyWith(
+                      color: KColor.blackbg.withOpacity(0.6),
+                    ),
+                  ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 InkWell(
                   onTap: () {

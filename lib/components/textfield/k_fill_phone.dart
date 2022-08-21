@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../styles/k_colors.dart';
 import '../../styles/k_text_style.dart';
 
@@ -10,7 +8,13 @@ class KFillPhone extends StatelessWidget {
   final String hintText;
   final bool readOnly;
 
-  KFillPhone({Key? key, required this.label, required this.controller, required this.hintText, required this.readOnly}) : super(key: key);
+  KFillPhone(
+      {Key? key,
+      required this.label,
+      required this.controller,
+      required this.hintText,
+      required this.readOnly})
+      : super(key: key);
 
   TextEditingController controller = TextEditingController();
 
@@ -28,9 +32,11 @@ class KFillPhone extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.4)),
+        hintStyle: KTextStyle.subtitle3
+            .copyWith(color: KColor.blackbg.withOpacity(0.4)),
         labelText: label,
-        labelStyle: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.4)),
+        labelStyle: KTextStyle.subtitle3
+            .copyWith(color: KColor.blackbg.withOpacity(0.4)),
         contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
