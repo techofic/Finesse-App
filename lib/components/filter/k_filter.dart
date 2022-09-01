@@ -1,4 +1,6 @@
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/src/features/filter/filter_page.dart';
+import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -30,28 +32,29 @@ class _KFilterState extends State<KFilter> {
             hintText: 'Search...',
             // TODO :: Check the border radius of this field in UI
             // TODO :: No need of label here
-            lable: '',
           ),
         ),
         const SizedBox(width: 14),
         InkWell(
           onTap: () {
-            // showDialog(
-            //   context: context,
-            //   builder: (BuildContext context) {
-            //     return const FilterPage();
-            //   },
-            // );
-
             showModalBottomSheet(
+              isScrollControlled: true,
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(15),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
                 ),
               ),
               context: context,
-              isScrollControlled: true,
-              builder: (context) => const FilterPage(),
+              builder: (context) {
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  curve: Curves.easeInOutExpo,
+                  height: context.screenHeight*0.87,
+                  child: const FilterPage(),
+                );
+              },
             );
           },
           child: Container(
@@ -63,8 +66,8 @@ class _KFilterState extends State<KFilter> {
             ),
             child: Center(
               child: isChecked
-                  ? SvgPicture.asset('assets/images/searchIcon.svg')
-                  : Image.asset('assets/images/filter.png'),
+                  ? SvgPicture.asset(AssetPath.homeSearchIcon)
+                  : Image.asset(AssetPath.filterIcon),
             ),
           ),
         )

@@ -23,9 +23,10 @@ class DescriptionTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textAlign: TextAlign.left,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please fillup';
+          return 'Please FillUp';
         }
         return null;
       },
@@ -33,7 +34,9 @@ class DescriptionTextField extends StatelessWidget {
       controller: controller,
       maxLines: 8,
       minLines: 5,
+      maxLength: 200,
       decoration: InputDecoration(
+        hintTextDirection: TextDirection.ltr,
         hintText: hintText,
         hintStyle: KTextStyle.subtitle3.copyWith(
           color: KColor.blackbg.withOpacity(0.4),
@@ -43,7 +46,7 @@ class DescriptionTextField extends StatelessWidget {
           color: KColor.blackbg.withOpacity(0.4),
         ),
         contentPadding:
-            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 25),
+            const EdgeInsets.symmetric(horizontal: 20.0,vertical: 15),
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
             Radius.circular(15.0),
@@ -75,6 +78,7 @@ class DescriptionTextField extends StatelessWidget {
         ),
         filled: checkColor==false?true:false,
         fillColor: checkColor==false?KColor.searchColor:Colors.transparent,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
     );
   }

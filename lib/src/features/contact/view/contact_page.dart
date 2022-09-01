@@ -4,6 +4,7 @@ import 'package:finesse/components/textfield/k_description_field.dart';
 import 'package:finesse/components/textfield/k_email_field.dart';
 import 'package:finesse/components/textfield/k_phone_field.dart';
 import 'package:finesse/components/textfield/k_text_field.dart';
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
@@ -57,7 +58,7 @@ class _ContactPageState extends State<ContactPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SvgPicture.asset(
-                    'assets/images/home.svg',
+                    AssetPath.homeIcon,
                     color: KColor.blackbg,
                     height: 18,
                   ),
@@ -85,7 +86,7 @@ class _ContactPageState extends State<ContactPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SvgPicture.asset(
-                    'assets/images/home.svg',
+                    AssetPath.homeIcon,
                     color: KColor.blackbg,
                     height: 18,
                   ),
@@ -118,7 +119,7 @@ class _ContactPageState extends State<ContactPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SvgPicture.asset(
-                    'assets/images/phone.svg',
+                    AssetPath.phone,
                     color: KColor.blackbg,
                     height: 18,
                   ),
@@ -151,7 +152,7 @@ class _ContactPageState extends State<ContactPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SvgPicture.asset(
-                    'assets/images/email.svg',
+                    AssetPath.email,
                     color: KColor.blackbg,
                     height: 18,
                   ),
@@ -193,14 +194,14 @@ class _ContactPageState extends State<ContactPage> {
                 controller: email,
                 readOnly: false,
                 hintText: 'Enter your email here...',
-                lable: 'Email',
+                label: 'Email',
               ),
               const SizedBox(height: 24),
               PhoneTextField(
                 controller: phone,
                 readOnly: false,
                 hintText: 'Enter your phone number here...',
-                lable: 'Contact',
+                label: 'Contact',
               ),
               const SizedBox(height: 24),
               DescriptionTextField(

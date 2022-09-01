@@ -23,62 +23,66 @@ class _MyOrderState extends State<MyOrder> with SingleTickerProviderStateMixin {
           preferredSize: Size.fromHeight(56),
           child: KappBar(checkTitle: true, title: 'My Orders'),
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 12),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Divider(
-                color: KColor.baseBlack.withOpacity(0.1),
-                thickness: 1,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 12),
+              child: Column(
+                children: [
+                  Divider(
+                    color: KColor.baseBlack.withOpacity(0.1),
+                    thickness: 1,
+                  ),
+                  SizedBox(
+                    height: 40,
+                    child: TabBar(
+                      indicatorColor: Colors.transparent,
+                      unselectedLabelColor: KColor.blackbg.withOpacity(0.5),
+                      labelStyle: KTextStyle.subtitle3,
+                      labelColor: KColor.blackbg,
+                      isScrollable: true,
+                      labelPadding: const EdgeInsets.only(right: 24),
+                      tabs: const [
+                        Tab(
+                          text: 'All',
+                        ),
+                        Tab(
+                          text: 'Order Placed',
+                        ),
+                        Tab(
+                          text: 'Processing',
+                        ),
+                        Tab(
+                          text: 'Shipped',
+                        ),
+                        Tab(
+                          text: 'Delivered',
+                        ),
+                      ],
+                      indicatorSize: TabBarIndicatorSize.tab,
+                    ),
+                  ),
+                  Divider(
+                    color: KColor.baseBlack.withOpacity(0.1),
+                    thickness: 1,
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 40,
-                child: TabBar(
-                  indicatorColor: Colors.transparent,
-                  unselectedLabelColor: KColor.blackbg.withOpacity(0.5),
-                  labelStyle: KTextStyle.subtitle3,
-                  labelColor: KColor.blackbg,
-                  isScrollable: true,
-                  labelPadding: const EdgeInsets.only(right: 24),
-                  tabs: const [
-                    Tab(
-                      text: 'All',
-                    ),
-                    Tab(
-                      text: 'Order Placed',
-                    ),
-                    Tab(
-                      text: 'Processing',
-                    ),
-                    Tab(
-                      text: 'Shipped',
-                    ),
-                    Tab(
-                      text: 'Delivered',
-                    ),
-                  ],
-                  indicatorSize: TabBarIndicatorSize.tab,
-                ),
+            ),
+            SizedBox(height: context.screenHeight * 0.01),
+             const Expanded(
+              child: TabBarView(
+                children: [
+                  AllOrder(),
+                  AllOrder(),
+                  AllOrder(),
+                  AllOrder(),
+                  AllOrder(),
+                ],
               ),
-              Divider(
-                color: KColor.baseBlack.withOpacity(0.1),
-                thickness: 1,
-              ),
-              SizedBox(height: context.screenHeight * 0.01),
-               const Expanded(
-                child: TabBarView(
-                  children: [
-                    AllOrder(),
-                    AllOrder(),
-                    AllOrder(),
-                    AllOrder(),
-                    AllOrder(),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

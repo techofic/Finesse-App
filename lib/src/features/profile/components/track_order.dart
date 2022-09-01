@@ -1,5 +1,7 @@
 import 'package:finesse/components/appbar/appbar.dart';
+import 'package:finesse/components/stepper/k_stepper.dart';
 import 'package:finesse/components/textfield/k_search_field.dart';
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
@@ -38,9 +40,6 @@ class _TrackOrderState extends State<TrackOrder> {
                       controller: controller,
                       readOnly: false,
                       hintText: 'Search...',
-                      // TODO :: Check the border radius of this field in UI
-                      // TODO :: No need of label here
-                      lable: '',
                     ),
                   ),
                   const SizedBox(width: 14),
@@ -53,7 +52,7 @@ class _TrackOrderState extends State<TrackOrder> {
                     ),
                     child: Center(
                       child: SvgPicture.asset(
-                        'assets/images/arrow.svg',
+                        AssetPath.arrowIcon,
                         height: 24,
                       ),
                     ),
@@ -117,6 +116,8 @@ class _TrackOrderState extends State<TrackOrder> {
                   color: KColor.blackbg,
                 ),
               ),
+              const SizedBox(height: 16),
+              const KStepper(checkStepper: false),
               SizedBox(height: context.screenHeight * 0.04),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -213,8 +214,10 @@ class _TrackOrderState extends State<TrackOrder> {
                     children: [
                       Row(
                         children: [
-                          SvgPicture.asset('assets/images/success.svg',
-                              height: 18),
+                          SvgPicture.asset(
+                            AssetPath.confirmIcon,
+                            height: 18,
+                          ),
                           const SizedBox(width: 3),
                           Text(
                             "Payment made via Paypal",
@@ -224,23 +227,12 @@ class _TrackOrderState extends State<TrackOrder> {
                           ),
                         ],
                       ),
-                      Image.asset('assets/images/logo_paypal.png', height: 24)
+                      Image.asset(AssetPath.paypalLogo, height: 24)
                     ],
                   ),
                 ],
               ),
-              Stepper(
-                type: StepperType.horizontal,
-                steps: [
-                  Step(
-                    title: Text("Step1"),
-                    content: Text("This is step 1 content"),
-                  ),
-                  Step(
-                      title: Text("Step2"),
-                      content: Text("This is step 2 content"))
-                ],
-              )
+              const SizedBox(height: 30),
             ],
           ),
         ),

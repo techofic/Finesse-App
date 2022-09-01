@@ -1,6 +1,10 @@
+import 'package:finesse/src/features/home/controllers/slider_controller.dart';
+import 'package:finesse/src/features/home/models/slider_model.dart';
+import 'package:finesse/src/features/home/state/slider_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PopularCategory extends StatefulWidget {
   const PopularCategory({Key? key}) : super(key: key);
@@ -10,71 +14,78 @@ class PopularCategory extends StatefulWidget {
 }
 
 class _PopularCategoryState extends State<PopularCategory> {
-  List<String> popularCategory = [
-    'TWO QUARTER',
-    'KATUA',
-    'MOJARIS',
-    'KATUA',
-    'MOJARIS'
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 36,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: popularCategory.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(right: 12),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 18,
-                      vertical: 10,
-                    ),
-                    height: 36,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: KColor.blackbg.withOpacity(0.7),
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        popularCategory[index],
-                        style: KTextStyle.subtitle6.copyWith(
-                          color: Colors.black.withOpacity(0.7),
+    return Consumer(
+      builder: (context, ref, _) {
+        final sliderState = ref.watch(sliderProvider);
+        final List<PopularSubCategory>? popularCategory =
+            sliderState is SliderSuccessState
+                ? sliderState.homeSliderModel?.popularSubCategory
+                : [];
+        final List<MainSlider>? middleBanner = sliderState is SliderSuccessState
+            ? sliderState.homeSliderModel?.middleBanner
+            : [];
+
+        return Column(
+          children: [
+            SizedBox(
+              height: 36,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: popularCategory!.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(right: 12),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 18,
+                          vertical: 10,
+                        ),
+                        height: 36,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: KColor.blackbg.withOpacity(0.7),
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            popularCategory[index].catName.toString(),
+                            style: KTextStyle.subtitle6.copyWith(
+                              color: Colors.black.withOpacity(0.7),
+                            ),
+                          ),
                         ),
                       ),
+                    ],
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              height: 172,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: middleBanner!.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.only(right: 16),
+                    child: Image.network(
+                      middleBanner[index].image,
                     ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-        const SizedBox(height: 24),
-        SizedBox(
-          height: 172,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: popularCategory.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: const EdgeInsets.only(right: 16),
-                child: Image.asset('assets/images/product.png'),
-              );
-            },
-          ),
-        ),
-      ],
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

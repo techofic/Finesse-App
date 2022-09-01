@@ -1,7 +1,6 @@
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductPreview extends StatefulWidget {
@@ -19,22 +18,16 @@ class _ProductPreviewState extends State<ProductPreview> {
     'assets/images/bag-two.png',
     'assets/images/bag-three.png',
   ];
-  List<Color> colors = [
-    KColor.baseBlack,
-    KColor.filterColorOne,
-    KColor.filterColorTwo,
-  ];
   int selectIndex = 0;
-  int selectColor = 0;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          height: context.screenHeight * 0.3,
+          height: context.screenHeight * 0.25,
           color: KColor.cirColor,
-          padding: const EdgeInsets.only(left: 12, right: 12, bottom: 24),
+          padding: const EdgeInsets.only(left: 12, right: 12, bottom: 15),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -47,12 +40,16 @@ class _ProductPreviewState extends State<ProductPreview> {
                   },
                 ),
               ),
+              const SizedBox(width: 8),
               Column(
                 children: [
                   Expanded(
-                    child: SizedBox(
-                      width: 258,
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      //color: Colors.indigoAccent,
+                      width: context.screenWidth*0.78,
                       height: 247,
+                      padding: const EdgeInsets.only(bottom: 15),
                       child: PageView(
                         controller: _controller,
                         children: [
@@ -91,52 +88,6 @@ class _ProductPreviewState extends State<ProductPreview> {
                   ),
                 ],
               ),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: colors.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return InkWell(
-                      onTap: () {
-                        setState(() {
-                          selectColor = index;
-                        });
-                      },
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        margin: const EdgeInsets.only(bottom: 8),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: selectColor == index
-                                ? KColor.borderColor
-                                : Colors.transparent,
-                            width: 1,
-                          ),
-                        ),
-                        child: Center(
-                          child: Container(
-                            height: 32,
-                            width: 32,
-                            decoration: BoxDecoration(
-                              color: colors[index],
-                              shape: BoxShape.circle,
-                            ),
-                            child: selectColor == index
-                                ? Center(
-                                    child: SvgPicture.asset(
-                                      'assets/images/right.svg',
-                                    ),
-                                  )
-                                : Container(),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
             ],
           ),
         ),
@@ -159,15 +110,15 @@ class _ProductPreviewState extends State<ProductPreview> {
       child: Container(
         height: 54,
         width: 54,
-        margin: const EdgeInsets.only(bottom: 11),
+        margin: const EdgeInsets.only(bottom: 5),
         padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
-              color: index == selectIndex
-                  ? KColor.borderColor
-                  : Colors.transparent,
-              width: 1),
+            color:
+                index == selectIndex ? KColor.borderColor : Colors.transparent,
+            width: 1,
+          ),
         ),
         child: Center(
           child: Image.asset(

@@ -5,7 +5,6 @@ import 'package:finesse/src/features/cart/components/cart_total.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -15,6 +14,13 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  List<String> watchName = [
+    'Hanging Clock',
+    'Atomic Clock',
+    'Mechanical Clock',
+    'Spring-Driven Clock',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,30 +34,22 @@ class _CartPageState extends State<CartPage> {
               ListView.builder(
                 physics: const ScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 3,
+                itemCount: watchName.length,
                 itemBuilder: (ctx, index) {
-                  return Slidable(
-                    key: UniqueKey(),
-                    endActionPane: ActionPane(
-                      extentRatio: 0.85,
-                      dismissible: DismissiblePane(
-                        onDismissed: () async {},
-                      ),
-                      motion: const ScrollMotion(),
-                      children: [
-                        SlidableAction(
-                          onPressed: (index) {},
-                          backgroundColor: KColor.deleteColor,
-                          foregroundColor: Colors.white,
-                          icon: Icons.delete_outline_outlined,
-                          borderRadius: const BorderRadius.only(
-                            topRight: Radius.circular(15.0),
-                            bottomRight: Radius.circular(15.0),
-                          ),
-                        ),
-                      ],
-                    ),
-                    child: const WishlistCard(isChecked: false),
+                  return WishlistCard(
+                    isChecked: false,
+                    productName: watchName[index],
+                    cancel: () {
+                      setState(() {
+                        Navigator.pop(context);
+                      });
+                    },
+                    delete: () {
+                      setState(() {
+                        watchName.removeAt(index);
+                        Navigator.pop(context);
+                      });
+                    },
                   );
                 },
               ),

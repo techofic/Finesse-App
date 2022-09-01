@@ -1,12 +1,13 @@
 import 'package:finesse/components/filter/k_filter.dart';
 import 'package:finesse/components/slider/k_slider.dart';
+import 'package:finesse/src/features/home/components/category_section.dart';
+import 'package:finesse/src/features/home/components/featured_products.dart';
+import 'package:finesse/src/features/home/components/new_arrivals.dart';
+import 'package:finesse/src/features/home/components/popular_category.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
-import '../components/category_section.dart';
-import '../components/featured_products.dart';
-import '../components/new_arrivals.dart';
-import '../components/popular_category.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.pushNamed(context, '/category');
                 },
               ),
-              const CategoryScetion(),
+              const CategorySection(),
               const SizedBox(height: 31),
               _categoryHeader('Popular Right Now', () {}),
               const SizedBox(height: 8),

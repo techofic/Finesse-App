@@ -1,4 +1,5 @@
 import 'package:finesse/components/button/k_text_button.dart';
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/src/features/cart/components/cart_total.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
@@ -42,7 +43,7 @@ class _PreviewPageState extends State<PreviewPage> {
                           style: KTextStyle.subtitle1
                               .copyWith(color: KColor.blackbg),
                         ),
-                        SvgPicture.asset('assets/images/edit.svg'),
+                        SvgPicture.asset(AssetPath.editIcon),
                       ],
                     ),
                     const SizedBox(height: 12),
@@ -102,7 +103,7 @@ class _PreviewPageState extends State<PreviewPage> {
                               style: KTextStyle.subtitle1
                                   .copyWith(color: KColor.blackbg),
                             ),
-                            SvgPicture.asset('assets/images/edit.svg'),
+                            SvgPicture.asset(AssetPath.editIcon),
                           ],
                         ),
                         const SizedBox(height: 12),
@@ -140,11 +141,10 @@ class _PreviewPageState extends State<PreviewPage> {
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
               const CardTotal(),
             ],
           ),
-          SizedBox(height: context.screenHeight * 0.15),
+          SizedBox(height: context.screenHeight * 0.03),
           KTextButton(
             title: 'Place Order',
             price: '\$281.8',

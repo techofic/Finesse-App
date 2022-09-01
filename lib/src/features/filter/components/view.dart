@@ -1,3 +1,4 @@
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
@@ -17,8 +18,8 @@ class _ViewState extends State<View> {
     "List view",
   ];
   List<dynamic> itemsIcon = [
-    'assets/images/box.svg',
-    'assets/images/filter.svg',
+    AssetPath.boxIcon,
+    AssetPath.filterIcon,
   ];
   int currentIndex = 0;
 

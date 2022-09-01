@@ -26,38 +26,42 @@ class _KDropdownState extends State<KDropdown> {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton(
-          hint: Text(
-            '${widget.hint}',
-            style: KTextStyle.subtitle3.copyWith(
-              color: KColor.blackbg.withOpacity(0.4),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 18.0,left: 9),
+          child: DropdownButton(
+            isExpanded: true,
+            hint: Text(
+              '${widget.hint}',
+              style: KTextStyle.subtitle3.copyWith(
+                color: KColor.blackbg.withOpacity(0.4),
+              ),
             ),
-          ),
-          dropdownColor: KColor.appBackground,
-          value: _selectedReason,
-          icon: const Icon(
-            Icons.keyboard_arrow_down,
-            color: KColor.blackbg,
-          ),
-          iconSize: 16,
-          onChanged: (newValue) {
-            setState(() {
-              _selectedReason = newValue as String?;
-            });
-          },
-          items: _reason.map(
-            (location) {
-              return DropdownMenuItem(
-                value: location,
-                child: Text(
-                  location,
-                  style: KTextStyle.subtitle3.copyWith(
-                    color: KColor.blackbg.withOpacity(0.4),
-                  ),
-                ),
-              );
+            dropdownColor: KColor.appBackground,
+            value: _selectedReason,
+            icon: const Icon(
+              Icons.keyboard_arrow_down,
+              color: KColor.blackbg,
+            ),
+            iconSize: 16,
+            onChanged: (newValue) {
+              setState(() {
+                _selectedReason = newValue as String?;
+              });
             },
-          ).toList(),
+            items: _reason.map(
+              (location) {
+                return DropdownMenuItem(
+                  value: location,
+                  child: Text(
+                    location,
+                    style: KTextStyle.subtitle3.copyWith(
+                      color: KColor.blackbg.withOpacity(0.4),
+                    ),
+                  ),
+                );
+              },
+            ).toList(),
+          ),
         ),
       ),
     );

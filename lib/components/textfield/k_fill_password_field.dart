@@ -1,3 +1,4 @@
+import 'package:finesse/constants/asset_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -6,12 +7,12 @@ import '../../styles/k_text_style.dart';
 
 // ignore: must_be_immutable
 class FillTextFieldPassword extends StatefulWidget {
-  final String lable;
+  final String label;
   final String hintText;
 
   FillTextFieldPassword(
       {Key? key,
-      required this.lable,
+      required this.label,
       required this.controller,
       required this.hintText})
       : super(key: key);
@@ -46,7 +47,7 @@ class _MaterialTextFieldState extends State<FillTextFieldPassword> {
         hintText: widget.hintText,
         hintStyle: KTextStyle.subtitle3
             .copyWith(color: KColor.blackbg.withOpacity(0.4),),
-        labelText: widget.lable,
+        labelText: widget.label,
         labelStyle: KTextStyle.subtitle3
             .copyWith(color: KColor.blackbg.withOpacity(0.4),),
         suffixIcon: IconButton(
@@ -56,7 +57,7 @@ class _MaterialTextFieldState extends State<FillTextFieldPassword> {
                   color: KColor.blackbg.withOpacity(0.4),
                   size: 16,
                 )
-              : SvgPicture.asset('assets/images/visible.svg'),
+              : SvgPicture.asset(AssetPath.passwordVisibleIcon),
           onPressed: () {
             setState(() {
               _passwordVisible = !_passwordVisible;
@@ -70,6 +71,7 @@ class _MaterialTextFieldState extends State<FillTextFieldPassword> {
         ),
         filled: true,
         fillColor: KColor.searchColor,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
     );
   }

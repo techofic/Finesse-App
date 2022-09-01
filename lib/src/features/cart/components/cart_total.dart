@@ -16,8 +16,9 @@ class _CardTotalState extends State<CardTotal> {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       height: 144,
       decoration: BoxDecoration(
-          color: KColor.filterDividerColor.withOpacity(0.7),
-          borderRadius: BorderRadius.circular(15)),
+        color: KColor.filterDividerColor.withOpacity(0.7),
+        borderRadius: BorderRadius.circular(15),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

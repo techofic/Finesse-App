@@ -3,8 +3,6 @@ import 'package:finesse/components/textfield/k_search_field.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -78,8 +76,7 @@ class _NotificationPageState extends State<NotificationPage> {
             SearchTextField(
               controller: search,
               readOnly: false,
-              hintText: 'Search...',
-              lable: 'Search',
+              hintText: 'Search',
             ),
             const SizedBox(height: 24),
             Flexible(
@@ -98,33 +95,19 @@ class _NotificationPageState extends State<NotificationPage> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: 4,
                       itemBuilder: (BuildContext context, int index) {
-                        return Slidable(
-                          key: UniqueKey(),
-                          endActionPane: ActionPane(
-                            extentRatio: 0.85,
-                            dismissible: DismissiblePane(
-                              onDismissed: () async {},
+                        return Column(
+                          children: [
+                            NotificationCard(
+                              cancel: () {
+                                setState(() {
+                                  Navigator.pop(context);
+                                });
+                              },
+                              delete: () {
+                                setState(() {});
+                              },
                             ),
-                            motion: const StretchMotion(),
-                            children: [
-                              SlidableAction(
-                                onPressed: (index) {},
-                                backgroundColor: KColor.deleteColor,
-                                foregroundColor: Colors.white,
-                                icon: Icons.delete_outline_outlined,
-                                borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(15.0),
-                                  bottomRight: Radius.circular(15.0),
-                                ),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: const [
-                              NotificationCard(),
-                              SizedBox(height: 8)
-                            ],
-                          ),
+                          ],
                         );
                       },
                     ),

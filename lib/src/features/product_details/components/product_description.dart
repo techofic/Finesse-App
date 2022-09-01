@@ -1,16 +1,19 @@
+import 'package:finesse/components/card/recommend_card.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDescription extends StatefulWidget {
-  const ProductDescription({Key? key}) : super(key: key);
+  final String? id;
+  const ProductDescription({this.id,Key? key}) : super(key: key);
 
   @override
   State<ProductDescription> createState() => _ProductDescriptionState();
 }
 
 class _ProductDescriptionState extends State<ProductDescription> {
+  List<String> productDetails = ["Washable", "High Quality", "Travel Friendly"];
   String details =
       "Lorem ipsum dolor sit amet, consectetur adipi scing elit. Ultrices adipiscing sit integer ornare cras massa nulla. ces adipi scing sit integer ornare cras massa nulla";
 
@@ -20,7 +23,8 @@ class _ProductDescriptionState extends State<ProductDescription> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Description',
+          widget.id.toString(),
+          // 'Description',
           style: KTextStyle.subtitle7.copyWith(color: Colors.black),
         ),
         Padding(
@@ -48,53 +52,36 @@ class _ProductDescriptionState extends State<ProductDescription> {
           style: KTextStyle.subtitle4.copyWith(color: Colors.black),
         ),
         const SizedBox(height: 16),
-        Row(
-          children: [
-            CircleAvatar(
-              radius: 2,
-              backgroundColor: KColor.black.withOpacity(0.5),
-            ),
-            const SizedBox(width: 7),
-            Text(
-              'Washable',
-              style: KTextStyle.description.copyWith(
-                color: KColor.black.withOpacity(0.5),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: productDetails.length,
+          itemBuilder: (ctx, index) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 2,
+                        backgroundColor: KColor.black.withOpacity(0.5),
+                      ),
+                      const SizedBox(width: 7),
+                      Text(
+                        productDetails[index],
+                        style: KTextStyle.description.copyWith(
+                          color: KColor.black.withOpacity(0.5),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                ],
               ),
-            ),
-          ],
+            );
+          },
         ),
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            CircleAvatar(
-              radius: 2,
-              backgroundColor: KColor.black.withOpacity(0.5),
-            ),
-            const SizedBox(width: 7),
-            Text(
-              'High Quality',
-              style: KTextStyle.description.copyWith(
-                color: KColor.black.withOpacity(0.5),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            CircleAvatar(
-              radius: 2,
-              backgroundColor: KColor.black.withOpacity(0.5),
-            ),
-            const SizedBox(width: 7),
-            Text(
-              'Travel Friendly',
-              style: KTextStyle.description.copyWith(
-                color: KColor.black.withOpacity(0.5),
-              ),
-            ),
-          ],
-        ),
+
         const SizedBox(height: 32),
         Text(
           'Recommended',
@@ -102,58 +89,15 @@ class _ProductDescriptionState extends State<ProductDescription> {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 150,
+          height: 250,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: 4,
             itemBuilder: (BuildContext context, int index) {
-              return Column(
-                children: [
-                  Container(
-                    height: 113,
-                    padding: const EdgeInsets.symmetric(horizontal: 18),
-                    margin: const EdgeInsets.only(right: 24),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: KColor.appBackground,
-                      boxShadow: [
-                        BoxShadow(
-                          color: KColor.shadowColor.withOpacity(0.2),
-                          spreadRadius: 0,
-                          blurRadius: 12,
-                          offset:
-                              const Offset(4, 4), // changes position of shadow
-                        ),
-                        BoxShadow(
-                          color: KColor.shadowColor.withOpacity(0.2),
-                          spreadRadius: 0,
-                          blurRadius: 12,
-                          offset: const Offset(
-                              -4, -4), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Image.asset(
-                        'assets/images/travel-bag.png',
-                        height: 57,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 24.0, top: 4),
-                    child: Text(
-                      '\$44.90',
-                      style:
-                          KTextStyle.subtitle4.copyWith(color: KColor.blackbg),
-                    ),
-                  ),
-                ],
-              );
+              return const RecommendCard();
             },
           ),
         ),
-        const SizedBox(height: 20),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/src/features/product_details/components/product_delivery.dart';
 import 'package:finesse/src/features/product_details/components/product_description.dart';
 import 'package:finesse/src/features/product_details/components/product_review.dart';
@@ -7,7 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductInfo extends StatefulWidget {
-  const ProductInfo({Key? key}) : super(key: key);
+  final String? productName;
+  final String? productGroup;
+  final String? price;
+  final String? id;
+
+  const ProductInfo(
+      {this.productName, this.productGroup, this.price, this.id, Key? key})
+      : super(key: key);
 
   @override
   State<ProductInfo> createState() => _ProductInfoState();
@@ -35,14 +43,14 @@ class _ProductInfoState extends State<ProductInfo> {
                 children: [
                   Expanded(
                     child: Text(
-                      "Folded Double Pocket Backpack Men’s",
+                      widget.productName.toString(),
                       style: KTextStyle.headline2.copyWith(
                         color: KColor.blackbg,
                       ),
                     ),
                   ),
                   Text(
-                    "\$44",
+                    "\$${widget.price.toString()}",
                     style: KTextStyle.headline2.copyWith(
                       color: KColor.blackbg,
                     ),
@@ -54,7 +62,7 @@ class _ProductInfoState extends State<ProductInfo> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Men’s',
+                    widget.productGroup.toString(),
                     style: KTextStyle.subtitle7.copyWith(
                       color: KColor.blackbg.withOpacity(0.3),
                     ),
@@ -76,7 +84,7 @@ class _ProductInfoState extends State<ProductInfo> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 19.0, bottom: 19),
-                child: SvgPicture.asset('assets/images/rating.svg'),
+                child: SvgPicture.asset(AssetPath.ratingIcon),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +136,7 @@ class _ProductInfoState extends State<ProductInfo> {
 
                   /// MAIN BODY
                   if (currentIndex == 0) const ProductVariation(),
-                  if (currentIndex == 1) const ProductDescription(),
+                  if (currentIndex == 1) ProductDescription(id: widget.id),
                   if (currentIndex == 2) const ProductReview(),
                 ],
               ),

@@ -30,23 +30,32 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Reset Password', style: KTextStyle.headline3.copyWith(color: KColor.blackbg),),
-                const SizedBox(height: 12),
-                Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n Ultrices adipiscing sit integer ornare cras massa nulla.',
-                    style: KTextStyle.subtitle5.copyWith(
-                      color: KColor.blackbg.withOpacity(0.6),
-                    )),
-                const SizedBox(height: 24),
-                NameTextField(
-                  controller: email,
-                  readOnly: false,
-                  hintText: '',
-                  label: 'Enter email or phone',
-                ),
-              ],
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Reset Password',
+                    style: KTextStyle.headline3.copyWith(color: KColor.blackbg),
+                  ),
+                  const SizedBox(height: 12),
+                  Flexible(
+                    child: Text(
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Ultrices adipiscing sit integer ornare cras massa nulla.',
+                      style: KTextStyle.subtitle5.copyWith(
+                        color: KColor.blackbg.withOpacity(0.6),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  NameTextField(
+                    controller: email,
+                    readOnly: false,
+                    hintText: '',
+                    label: 'Enter email or phone',
+                  ),
+                ],
+              ),
             ),
             KButton(
               title: 'Reset Password',

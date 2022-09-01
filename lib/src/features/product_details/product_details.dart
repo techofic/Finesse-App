@@ -1,3 +1,4 @@
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/src/features/product_details/components/product_info.dart';
 import 'package:finesse/src/features/product_details/components/product_preview.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -6,14 +7,27 @@ import 'package:flutter_svg/svg.dart';
 import 'components/add_to_cart.dart';
 
 class ProductDetails extends StatefulWidget {
-  const ProductDetails({Key? key}) : super(key: key);
+  final String? productName;
+  final String? productGroup;
+  final String? price;
+  final String? id;
+
+  const ProductDetails(
+      {this.productName, this.productGroup, this.price, this.id, Key? key})
+      : super(key: key);
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  
+  List<String> items = [
+    "Variations",
+    "Descriptions",
+    "Reviews",
+  ];
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,19 +50,24 @@ class _ProductDetailsState extends State<ProductDetails> {
             padding: const EdgeInsets.only(right: 12.0),
             child: Row(
               children: [
-                SvgPicture.asset('assets/images/cart.svg'),
+                SvgPicture.asset(AssetPath.cartIcon),
                 const SizedBox(width: 31.0),
-                SvgPicture.asset('assets/images/pin.svg'),
+                SvgPicture.asset(AssetPath.dotIcon),
               ],
             ),
           ),
         ],
       ),
       body: Column(
-        children: const [
-          ProductPreview(),
-          ProductInfo(),
-          AddToCart(),
+        children: [
+          const ProductPreview(),
+          ProductInfo(
+            productName: widget.productName,
+            productGroup: widget.productGroup,
+            price: widget.price,
+            id: widget.id,
+          ),
+          const AddToCart(),
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:finesse/constants/asset_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -6,12 +7,13 @@ import '../../styles/k_text_style.dart';
 
 // ignore: must_be_immutable
 class PasswordTextField extends StatefulWidget {
-  final String lable;
+  final String label;
   final String hintText;
+
 
   PasswordTextField(
       {Key? key,
-      required this.lable,
+      required this.label,
       required this.controller,
       required this.hintText})
       : super(key: key);
@@ -23,6 +25,7 @@ class PasswordTextField extends StatefulWidget {
 
 class _MaterialTextFieldState extends State<PasswordTextField> {
   bool _passwordVisible = true;
+  final FocusNode _focusNode = FocusNode();
 
   @override
   // ignore: must_call_super
@@ -34,29 +37,43 @@ class _MaterialTextFieldState extends State<PasswordTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (value) {
+        String pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$';
+        RegExp regExp = RegExp(pattern);
         if (value == null || value.isEmpty) {
-          return 'Please fillup';
+          return 'Please FillUp';
+        }else if (!regExp.hasMatch(value)) {
+          return 'Please enter valid password';
+        }else if(value.length<8){
+          return 'Password length should be at least 8 character';
         }
         return null;
       },
+
       obscureText: _passwordVisible,
       controller: widget.controller,
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: const EdgeInsets.all(14.0),
-          child: SvgPicture.asset(
-            'assets/images/lock.svg',
-          ),
+          child: SvgPicture.asset(AssetPath.passwordIcon),
         ),
         hintText: widget.hintText,
-        hintStyle: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.4)),
-        labelText: widget.lable,
-        labelStyle: KTextStyle.subtitle3.copyWith(color: KColor.blackbg.withOpacity(0.4)),
+        hintStyle: _focusNode.hasFocus
+            ? KTextStyle.subtitle3.copyWith(color: KColor.blackbg)
+            : KTextStyle.subtitle3.copyWith(
+                color: KColor.blackbg.withOpacity(0.4),
+              ),
+        labelText: widget.label,
+        labelStyle: _focusNode.hasFocus
+            ? KTextStyle.subtitle3.copyWith(color: KColor.blackbg)
+            : KTextStyle.subtitle3.copyWith(
+                color: KColor.blackbg.withOpacity(0.6),
+              ),
         suffixIcon: IconButton(
           icon: _passwordVisible
-              ? const Icon(
+              ? Icon(
                   Icons.visibility_off,
                   size: 16,
+                  color: Colors.black.withOpacity(0.4),
                 )
               : SvgPicture.asset('assets/images/visible.svg'),
           onPressed: () {
@@ -82,7 +99,9 @@ class _MaterialTextFieldState extends State<PasswordTextField> {
           borderSide: BorderSide(color: KColor.blackbg, width: 1.0),
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
+      focusNode: _focusNode,
     );
   }
 }

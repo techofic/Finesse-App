@@ -6,10 +6,12 @@ import 'package:finesse/src/features/category/category_page.dart';
 import 'package:finesse/src/features/category/men_categories.dart';
 import 'package:finesse/src/features/checkout/components/add_new_address.dart';
 import 'package:finesse/src/features/checkout/components/confirm_order.dart';
+import 'package:finesse/src/features/checkout/components/payment_page.dart';
+import 'package:finesse/src/features/checkout/components/preview_page.dart';
 import 'package:finesse/src/features/checkout/view/checkout_page.dart';
 import 'package:finesse/src/features/contact/view/contact_page.dart';
 import 'package:finesse/src/features/home/components/shop_page.dart';
-import 'package:finesse/src/features/home/view/home_page.dart';
+import 'package:finesse/src/features/home/views/home_page.dart';
 import 'package:finesse/src/features/main_screen.dart';
 import 'package:finesse/src/features/notification/view/notification_page.dart';
 import 'package:finesse/src/features/product_details/product_details.dart';
@@ -24,6 +26,7 @@ import 'package:finesse/src/features/profile/components/report_issue.dart';
 import 'package:finesse/src/features/profile/components/report_list.dart';
 import 'package:finesse/src/features/profile/components/track_order.dart';
 import 'package:finesse/src/features/profile/components/write_review.dart';
+import 'package:finesse/src/features/settings/view/settings_page.dart';
 import 'package:finesse/src/features/wishlist/view/wishlist_page.dart';
 import 'package:flutter/material.dart';
 
@@ -32,8 +35,8 @@ import '../src/features/profile/components/notifications.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    //final args = settings.arguments;
-
+    final args = settings.arguments;
+    final Map? arguments=settings.arguments as Map?;
     switch (settings.name) {
       case '/login':
         return MaterialPageRoute(
@@ -77,7 +80,12 @@ class RouteGenerator {
         );
       case '/productDetails':
         return MaterialPageRoute(
-          builder: (_) => const ProductDetails(),
+          builder: (_) => ProductDetails(
+            productName: arguments!['productName'],
+            productGroup: arguments['productGroup'],
+            price: arguments['price'],
+            id: arguments['id'],
+          ),
         );
       case '/dashboard':
         return MaterialPageRoute(
@@ -135,6 +143,14 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const CheckoutPage(),
         );
+      case '/payment':
+        return MaterialPageRoute(
+          builder: (_) => const PaymentPage(),
+        );
+      case '/preview':
+        return MaterialPageRoute(
+          builder: (_) => const PreviewPage(),
+        );
       case '/confirmOrder':
         return MaterialPageRoute(
           builder: (_) => const ConfirmOrder(),
@@ -150,6 +166,10 @@ class RouteGenerator {
       case '/contact':
         return MaterialPageRoute(
           builder: (_) => const ContactPage(),
+        );
+      case '/settings':
+        return MaterialPageRoute(
+          builder: (_) => const SettingPage(),
         );
       default:
         return MaterialPageRoute(

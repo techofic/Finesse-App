@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../styles/k_colors.dart';
 import '../../styles/k_text_style.dart';
@@ -109,51 +110,69 @@ class KDrawer extends StatelessWidget {
                     thickness: 1,
                   ),
                   const SizedBox(height: 40),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset('assets/images/phoneIcon.svg'),
-                      const SizedBox(width: 10),
-                      Text(
-                        '+88 019 3738 48',
-                        style: KTextStyle.subtitle1.copyWith(
-                          color: KColor.whiteBackground.withOpacity(0.8),
-                        ),
-                      )
-                    ],
+                  InkWell(
+                    onTap: (){
+                      launch('tel:+88019373848');
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset('assets/images/phoneIcon.svg'),
+                        const SizedBox(width: 10),
+                        Text(
+                          '+88 019 3738 48',
+                          style: KTextStyle.subtitle1.copyWith(
+                            color: KColor.whiteBackground.withOpacity(0.8),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset('assets/images/emailIcon.svg'),
-                      const SizedBox(width: 10),
-                      Text(
-                        'finesse330@gmail.com',
-                        style: KTextStyle.subtitle1.copyWith(
-                          color: KColor.whiteBackground.withOpacity(0.8),
+                  InkWell(
+                    onTap: (){
+                      launch('mailto:smith@example.org?subject=Finesse&body=First Email');
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset('assets/images/emailIcon.svg'),
+                        const SizedBox(width: 10),
+                        Text(
+                          'finesse330@gmail.com',
+                          style: KTextStyle.subtitle1.copyWith(
+                            color: KColor.whiteBackground.withOpacity(0.8),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          launch('https://www.facebook.com/');
+                        },
                         icon: SvgPicture.asset('assets/images/facebookIcon.svg'),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          launch('https://www.instagram.com/');
+                        },
                         icon: SvgPicture.asset('assets/images/instaIcon.svg'),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          launch('https://www.youtube.com/');
+                        },
                         icon: SvgPicture.asset('assets/images/youtubeIcon.svg'),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          launch('https://www.tiktok.com/');
+                        },
                         icon: SvgPicture.asset('assets/images/tiktokIcon.svg'),
                       ),
                     ],

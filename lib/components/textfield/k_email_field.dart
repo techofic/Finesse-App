@@ -1,3 +1,4 @@
+import 'package:finesse/constants/asset_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -5,14 +6,14 @@ import '../../styles/k_colors.dart';
 import '../../styles/k_text_style.dart';
 
 // ignore: must_be_immutable
-class EmailTextField extends StatelessWidget {
-  final String lable;
+class EmailTextField extends StatefulWidget {
+  final String label;
   final String hintText;
   final bool readOnly;
 
   EmailTextField(
       {Key? key,
-      required this.lable,
+      required this.label,
       required this.controller,
       required this.hintText,
       required this.readOnly})
@@ -20,30 +21,41 @@ class EmailTextField extends StatelessWidget {
   TextEditingController controller = TextEditingController();
 
   @override
+  State<EmailTextField> createState() => _EmailTextFieldState();
+}
+
+class _EmailTextFieldState extends State<EmailTextField> {
+  final FocusNode _focusNode = FocusNode();
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please fillup';
+          return 'Please FillUp';
+        }else if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)){
+          return 'Please enter a valid Email';
         }
         return null;
       },
-      readOnly: readOnly,
-      controller: controller,
+      readOnly: widget.readOnly,
+      controller: widget.controller,
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: const EdgeInsets.all(14.0),
-          child: SvgPicture.asset(
-            'assets/images/email.svg',
-          ),
+          child: SvgPicture.asset(AssetPath.emailIcon),
         ),
-        hintText: hintText,
-        hintStyle: KTextStyle.subtitle3.copyWith(
+        hintText: widget.hintText,
+        hintStyle: _focusNode.hasFocus
+            ? KTextStyle.subtitle3.copyWith(color: KColor.blackbg)
+            : KTextStyle.subtitle3.copyWith(
           color: KColor.blackbg.withOpacity(0.4),
         ),
-        labelText: lable,
-        labelStyle: KTextStyle.subtitle3.copyWith(
-          color: KColor.blackbg.withOpacity(0.4),
+        labelText: widget.label,
+        labelStyle: _focusNode.hasFocus
+            ? KTextStyle.subtitle3.copyWith(color: KColor.blackbg)
+            : KTextStyle.subtitle3.copyWith(
+          color: KColor.blackbg.withOpacity(0.6),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
         border: OutlineInputBorder(
@@ -64,7 +76,9 @@ class EmailTextField extends StatelessWidget {
             Radius.circular(15.0),
           ),
         ),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
+      focusNode: _focusNode,
     );
   }
 }

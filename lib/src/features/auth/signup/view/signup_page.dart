@@ -1,10 +1,10 @@
-
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/textfield/k_email_field.dart';
 import 'package:finesse/components/textfield/k_password_field.dart';
 import 'package:finesse/components/textfield/k_phone_field.dart';
 import 'package:finesse/components/textfield/k_search_field.dart';
 import 'package:finesse/components/textfield/k_text_field.dart';
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
@@ -27,11 +27,20 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController password = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
   TextEditingController search = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
-  bool isselected = false;
+  bool isSelected = false;
   var selectedColor = KColor.blackbg;
   String _verticalGroupValue = "English(United States)";
-  final List<String> _status = ["English (UK)", "Portuguese", "Espinosa", "Francais", "Turkce", "Italiano", "Hindi"];
+  final List<String> _status = [
+    "English (UK)",
+    "Portuguese",
+    "Espinosa",
+    "Francais",
+    "Turkce",
+    "Italiano",
+    "Hindi"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -44,111 +53,120 @@ class _SignupPageState extends State<SignupPage> {
           margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
           child: Center(
             child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _SelectLanguage(context),
-                  SizedBox(
-                    height: context.screenHeight * 0.07,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset('assets/images/logo.svg'),
-                      SizedBox(
-                        height: context.screenHeight * 0.065,
-                      ),
-                      Text(
-                        'Create Your Account',
-                        style: KTextStyle.headline1.copyWith(
-                          color: KColor.blackbg,
-                        ),
-                      ),
-                      SizedBox(
-                        height: context.screenHeight * 0.04,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: NameTextField(
-                              controller: firstName,
-                              readOnly: false,
-                              hintText: 'First name',
-                              label: 'First name',
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            flex: 2,
-                            child: NameTextField(
-                              controller: firstName,
-                              readOnly: false,
-                              hintText: 'Last name',
-                              label: 'Last name',
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 24),
-                      EmailTextField(
-                        controller: email,
-                        readOnly: false,
-                        hintText: 'Enter your email here...',
-                        lable: 'Email',
-                      ),
-                      const SizedBox(height: 24),
-                      PhoneTextField(
-                        controller: phone,
-                        readOnly: false,
-                        hintText: 'Enter your phone number here...',
-                        lable: 'Phone Number',
-                      ),
-                      const SizedBox(height: 24),
-                      PasswordTextField(
-                        controller: password,
-                        hintText: 'Enter your password here...',
-                        lable: 'Password',
-                      ),
-                      const SizedBox(height: 24),
-                      PasswordTextField(
-                        controller: confirmPassword,
-                        hintText: 'Enter your password here...',
-                        lable: 'Confirm Password',
-                      ),
-                      const SizedBox(height: 24),
-                      KButton(
-                        title: 'Create Account',
-                        onTap: () {},
-                      ),
-                      const SizedBox(height: 24),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/login');
-                        },
-                        child: RichText(
-                          text: TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: 'Already a member?',
-                                style: KTextStyle.subtitle3.copyWith(
-                                  color: KColor.blackbg.withOpacity(0.4),
-                                ),
-                              ),
-                              TextSpan(
-                                text: ' Login',
-                                style: KTextStyle.subtitle7.copyWith(
-                                  color: KColor.blackbg,
-                                ),
-                              ),
-                            ],
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _SelectLanguage(context),
+                    SizedBox(height: context.screenHeight * 0.07),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(AssetPath.logo),
+                        SizedBox(height: context.screenHeight * 0.065),
+                        Text(
+                          'Create Your Account',
+                          style: KTextStyle.headline1.copyWith(
+                            color: KColor.blackbg,
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 24),
-                    ],
-                  ),
-                ],
+                        SizedBox(height: context.screenHeight * 0.04),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: NameTextField(
+                                controller: firstName,
+                                readOnly: false,
+                                hintText: 'First name',
+                                label: 'First name',
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              flex: 2,
+                              child: NameTextField(
+                                controller: lastName,
+                                readOnly: false,
+                                hintText: 'Last name',
+                                label: 'Last name',
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 24),
+                        EmailTextField(
+                          controller: email,
+                          readOnly: false,
+                          hintText: 'Enter your email here...',
+                          label: 'Email',
+                        ),
+                        const SizedBox(height: 24),
+                        PhoneTextField(
+                          controller: phone,
+                          readOnly: false,
+                          hintText: 'Enter your phone number here...',
+                          label: 'Phone Number',
+                        ),
+                        const SizedBox(height: 24),
+                        PasswordTextField(
+                          controller: password,
+                          hintText: 'Enter your password here...',
+                          label: 'Password',
+                        ),
+                        const SizedBox(height: 24),
+                        PasswordTextField(
+                          controller: confirmPassword,
+                          hintText: 'Re-enter your password here...',
+                          label: 'Confirm Password',
+                        ),
+                        const SizedBox(height: 24),
+                        KButton(
+                          title: 'Create Account',
+                          onTap: () {
+                            if (_formKey.currentState!.validate()) {
+                              if (password.text != confirmPassword.text) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("Password does not match"),
+                                    duration: Duration(milliseconds: 3000),
+                                  ),
+                                );
+                              }
+                              Navigator.pushNamed(context, '/login');
+                            }
+                          },
+                        ),
+                        const SizedBox(height: 24),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/login');
+                          },
+                          child: RichText(
+                            text: TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'Already a member?',
+                                  style: KTextStyle.subtitle3.copyWith(
+                                    color: KColor.blackbg.withOpacity(0.4),
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: ' Login',
+                                  style: KTextStyle.subtitle7.copyWith(
+                                    color: KColor.blackbg,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -199,7 +217,8 @@ class _SignupPageState extends State<SignupPage> {
             height: 512,
             width: double.infinity,
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -214,7 +233,6 @@ class _SignupPageState extends State<SignupPage> {
                       controller: search,
                       readOnly: false,
                       hintText: 'Search...',
-                      lable: 'Search',
                     ),
                   ),
                   RadioGroup<String>.builder(
@@ -223,10 +241,10 @@ class _SignupPageState extends State<SignupPage> {
                     horizontalAlignment: MainAxisAlignment.spaceAround,
                     onChanged: (value) => setState(() {
                       _verticalGroupValue = value!;
-                      isselected = !isselected;
+                      isSelected = !isSelected;
                     }),
                     spacebetween: 50,
-                    activeColor: isselected ? Colors.lightBlue : Colors.orange,
+                    activeColor: isSelected ? Colors.lightBlue : Colors.orange,
                     items: _status,
                     textStyle: KTextStyle.dialog.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),

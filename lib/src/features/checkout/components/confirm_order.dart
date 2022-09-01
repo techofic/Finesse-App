@@ -1,6 +1,7 @@
 import 'package:finesse/components/appbar/appbar.dart';
 import 'package:finesse/components/button/k_border_btn.dart';
 import 'package:finesse/components/button/k_button.dart';
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
@@ -22,7 +23,7 @@ class ConfirmOrder extends StatelessWidget {
         child: Column(
           children: [
             Image.asset(
-              'assets/images/confirm.png',
+              AssetPath.confirm,
               height: context.screenHeight * 0.35,
             ),
             SizedBox(height:context.screenHeight*0.02),
@@ -56,7 +57,7 @@ class ConfirmOrder extends StatelessWidget {
             KBorderButton(
               title: 'Track Order',
               onTap: () {
-                Navigator.pushNamed(context, '/home');
+                Navigator.pushNamed(context, '/mainScreen');
               },
             ),
 

@@ -3,17 +3,28 @@ import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/dialog/k_dialog.dart';
 import 'package:finesse/components/dropdown/k_dropdown.dart';
 import 'package:finesse/components/textfield/k_description_field.dart';
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:text_divider/text_divider.dart';
 
-class WriteReview extends StatelessWidget {
+class WriteReview extends StatefulWidget {
   WriteReview({Key? key}) : super(key: key);
 
+  @override
+  State<WriteReview> createState() => _WriteReviewState();
+}
+
+class _WriteReviewState extends State<WriteReview> {
   TextEditingController message = TextEditingController();
+
+  var rating = 0.0;
+  int selectIndex = 0;
+  int selectedRatting = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -94,8 +105,25 @@ class WriteReview extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 24.0, bottom: 12),
-                      child: SvgPicture.asset('assets/images/rating.svg',
-                          height: 40),
+                      child: RatingBar.builder(
+                        initialRating: 2,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        allowHalfRating: false,
+                        itemCount: 5,
+                        unratedColor: KColor.filterDividerColor,
+                        itemPadding:
+                            const EdgeInsets.symmetric(horizontal: 4.0),
+                        itemBuilder: (context, index) => SvgPicture.asset(
+                            AssetPath.startIcon,
+                            height: 40,
+                            color: KColor.rattingColor),
+                        onRatingUpdate: (rating) {
+                          setState(() {
+                            //selectedRatting = rating as int;
+                          });
+                        },
+                      ),
                     ),
                     Text(
                       'Great!',
@@ -139,12 +167,12 @@ class WriteReview extends StatelessWidget {
                       color: KColor.blackbg,
                     ),
                   ),
-                  Text(
-                    '(20/200)',
-                    style: KTextStyle.subtitle3.copyWith(
-                      color: KColor.blackbg.withOpacity(0.6),
-                    ),
-                  ),
+                  // Text(
+                  //   '(20/200)',
+                  //   style: KTextStyle.subtitle3.copyWith(
+                  //     color: KColor.blackbg.withOpacity(0.6),
+                  //   ),
+                  // ),
                 ],
               ),
               const SizedBox(height: 16),
@@ -152,8 +180,8 @@ class WriteReview extends StatelessWidget {
                 controller: message,
                 readOnly: false,
                 checkColor: false,
-                hintText: 'Type your message here',
-                label: 'Write here...',
+                hintText: 'Write here...',
+                label: '',
               ),
               const SizedBox(height: 16),
               Row(
@@ -162,10 +190,11 @@ class WriteReview extends StatelessWidget {
                     height: 48,
                     width: 48,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: KColor.searchColor),
+                      borderRadius: BorderRadius.circular(15),
+                      color: KColor.searchColor,
+                    ),
                     child: Center(
-                      child: SvgPicture.asset('assets/images/camera.svg'),
+                      child: SvgPicture.asset(AssetPath.cameraIcon),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -176,7 +205,7 @@ class WriteReview extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                         color: KColor.searchColor),
                     child: Center(
-                      child: SvgPicture.asset('assets/images/video.svg'),
+                      child: SvgPicture.asset(AssetPath.recordIcon),
                     ),
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,7 @@ class ProductReview extends StatelessWidget {
                 ],
               ),
             ),
-            SvgPicture.asset('assets/images/rating.svg'),
+            SvgPicture.asset(AssetPath.ratingIcon),
           ],
         ),
         const SizedBox(height: 8),

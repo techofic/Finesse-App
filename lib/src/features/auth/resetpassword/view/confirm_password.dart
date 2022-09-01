@@ -42,7 +42,7 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
                 FillTextFieldPassword(
                   controller: password,
                   hintText: '*************',
-                  lable: '*************',
+                  label: '',
                 ),
                 const SizedBox(height: 24),
                 Text(
@@ -53,7 +53,7 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
                 FillTextFieldPassword(
                   controller: password,
                   hintText: '*************',
-                  lable: '*************',
+                  label: '',
                 ),
               ],
             ),

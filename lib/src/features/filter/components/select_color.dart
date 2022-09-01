@@ -1,3 +1,4 @@
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _SelectColorState extends State<SelectColor> {
               childAspectRatio: 5 / 4,
             ),
             itemCount: colors.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (ctx,index) {
               return InkWell(
                 onTap: () {
                   setState(() {
@@ -75,7 +76,7 @@ class _SelectColorState extends State<SelectColor> {
                       child: selectColor == index
                           ? Center(
                               child: SvgPicture.asset(
-                                'assets/images/right.svg',
+                                AssetPath.checkIcon,
                               ),
                             )
                           : Container(),

@@ -37,7 +37,7 @@ class _AboutPageState extends State<AboutPage> {
                   padding: const EdgeInsets.only(top: 16.0, bottom: 24),
                   child: Text(
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla.',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.about.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),
@@ -52,7 +52,7 @@ class _AboutPageState extends State<AboutPage> {
                   padding: const EdgeInsets.only(top: 16.0, bottom: 24),
                   child: Text(
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla.',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.about.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),
@@ -67,13 +67,13 @@ class _AboutPageState extends State<AboutPage> {
                   padding: const EdgeInsets.only(top: 16.0, bottom: 24),
                   child: Text(
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla. ',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.about.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),
                 ),
                 Text(
-                  'Our Shops',
+                  'Our Partners',
                   style: KTextStyle.headline2.copyWith(
                     color: KColor.blackbg,
                   ),
@@ -82,7 +82,7 @@ class _AboutPageState extends State<AboutPage> {
                   padding: const EdgeInsets.only(top: 16.0, bottom: 24),
                   child: Text(
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla. ',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.about.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),

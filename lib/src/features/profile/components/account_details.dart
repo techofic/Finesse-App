@@ -1,6 +1,7 @@
 import 'package:finesse/components/appbar/appbar.dart';
 import 'package:finesse/components/button/k_border_btn.dart';
 import 'package:finesse/components/button/k_button.dart';
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
@@ -76,7 +77,7 @@ class AccountDetails extends StatelessWidget {
               const SizedBox(width: 8),
               InkWell(
                 onTap: onPressed,
-                child: SvgPicture.asset('assets/images/edit.svg'),
+                child: SvgPicture.asset(AssetPath.editIcon),
               ),
             ],
           ),

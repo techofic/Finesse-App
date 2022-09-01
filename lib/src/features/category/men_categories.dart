@@ -1,4 +1,3 @@
-
 import 'package:finesse/components/appbar/k_appbar.dart';
 import 'package:finesse/components/drawer/k_drawer.dart';
 import 'package:finesse/components/filter/k_filter.dart';
@@ -58,7 +57,8 @@ class _MenSectionState extends State<MenSection> {
                 Text(
                   textAlign: TextAlign.center,
                   'As a creator, you look for ways to excel and express\n yourself when and where you can, from reaching for\n that last rep to evolving your streetwear style. Log \nmiles or tear down the baseline in men',
-                  style: KTextStyle.subtitle3.copyWith(color: Colors.black.withOpacity(0.6)),
+                  style: KTextStyle.subtitle3
+                      .copyWith(color: Colors.black.withOpacity(0.6)),
                 ),
                 const SizedBox(height: 60),
               ],

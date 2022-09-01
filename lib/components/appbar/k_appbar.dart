@@ -1,9 +1,9 @@
 
+import 'package:finesse/constants/asset_path.dart';
+import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-
-import '../../styles/k_colors.dart';
 
 class KAppBar extends StatefulWidget {
   const KAppBar({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class _KAppBarState extends State<KAppBar> {
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },
-            icon: SvgPicture.asset('assets/images/drawerIon.svg'),
+            icon: SvgPicture.asset(AssetPath.drawerIcon),
           );
         },
       ),
@@ -74,7 +74,7 @@ class _KAppBarState extends State<KAppBar> {
             Scaffold.of(context).openDrawer();
             Navigator.pushNamed(context, '/notification');
           },
-          icon: SvgPicture.asset('assets/images/notificationIcon.svg'),
+          icon: SvgPicture.asset(AssetPath.notificationIcon),
         ),
       ],
     );

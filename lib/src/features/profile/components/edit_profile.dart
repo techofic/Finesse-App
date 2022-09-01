@@ -101,7 +101,7 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ],
               ),
-              SizedBox(height: context.screenHeight*0.1),
+              SizedBox(height: context.screenHeight*0.08),
               KButton(
                 title: 'Save Changes',
                 onTap: () {

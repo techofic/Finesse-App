@@ -46,7 +46,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   FillTextFieldPassword(
                     controller: prePassword,
                     hintText: '*************',
-                    lable: '',
+                    label: '',
                   ),
                   const SizedBox(height: 24),
                   Text(
@@ -57,7 +57,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   FillTextFieldPassword(
                     controller: newPassword,
                     hintText: '*************',
-                    lable: '',
+                    label: '',
                   ),
                   const SizedBox(height: 24),
                   Text(
@@ -68,7 +68,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   FillTextFieldPassword(
                     controller: confirmPassword,
                     hintText: '*************',
-                    lable: '',
+                    label: '',
                   ),
                 ],
               ),
