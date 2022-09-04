@@ -47,7 +47,7 @@ class _EditProfileState extends State<EditProfile> {
                   const SizedBox(height: 16),
                   KFillNormal(
                     controller: name,
-                    hintText: 'Marwa Saad',
+                    hintText: 'Enter your name here...',
                     label: '',
                     readOnly: false,
                   ),
@@ -59,7 +59,7 @@ class _EditProfileState extends State<EditProfile> {
                   const SizedBox(height: 16),
                   KFillNormal(
                     controller: email,
-                    hintText: 'marwasaad605@gmail.com',
+                    hintText: 'Enter your email here...',
                     label: '',
                     readOnly: false,
                   ),
@@ -71,7 +71,7 @@ class _EditProfileState extends State<EditProfile> {
                   const SizedBox(height: 16),
                   KFillNormal(
                     controller: address,
-                    hintText: 'House No 8, Lane 5, St John Hill City, Toronto',
+                    hintText: 'Enter your address here...',
                     label: '',
                     readOnly: false,
                   ),
@@ -83,7 +83,7 @@ class _EditProfileState extends State<EditProfile> {
                   const SizedBox(height: 16),
                   KFillPhone(
                     controller: cardNo,
-                    hintText: 'Visa Card :  374883****',
+                    hintText: 'Enter your card number here...',
                     label: '',
                     readOnly: false,
                   ),
@@ -95,7 +95,7 @@ class _EditProfileState extends State<EditProfile> {
                   const SizedBox(height: 16),
                   KFillPhone(
                     controller: phone,
-                    hintText: '+999 677839 33',
+                    hintText: 'Enter your phone number here...',
                     label: '',
                     readOnly: false,
                   ),

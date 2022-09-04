@@ -14,7 +14,7 @@ import 'package:finesse/src/features/home/components/shop_page.dart';
 import 'package:finesse/src/features/home/views/home_page.dart';
 import 'package:finesse/src/features/main_screen.dart';
 import 'package:finesse/src/features/notification/view/notification_page.dart';
-import 'package:finesse/src/features/product_details/product_details.dart';
+import 'package:finesse/src/features/product_details/view/product_details.dart';
 import 'package:finesse/src/features/profile/components/account_details.dart';
 import 'package:finesse/src/features/profile/components/address.dart';
 import 'package:finesse/src/features/profile/components/change_password.dart';
@@ -36,7 +36,7 @@ import '../src/features/profile/components/notifications.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
-    final Map? arguments=settings.arguments as Map?;
+    final Map? arguments = settings.arguments as Map?;
     switch (settings.name) {
       case '/login':
         return MaterialPageRoute(
@@ -84,9 +84,28 @@ class RouteGenerator {
             productName: arguments!['productName'],
             productGroup: arguments['productGroup'],
             price: arguments['price'],
+            description: arguments['description'],
             id: arguments['id'],
           ),
         );
+      // case '/productInfo':
+      //   return MaterialPageRoute(
+      //     builder: (_) => ProductDetails(
+      //       productName: arguments!['productName'],
+      //       productGroup: arguments['productGroup'],
+      //       price: arguments['price'],
+      //       description: arguments['description'],
+      //     ),
+      //   );
+      // case '/productDescription':
+      //   return MaterialPageRoute(
+      //     builder: (_) => ProductDetails(
+      //       productName: arguments!['productName'],
+      //       productGroup: arguments['productGroup'],
+      //       price: arguments['price'],
+      //       description: arguments['description'],
+      //     ),
+      //   );
       case '/dashboard':
         return MaterialPageRoute(
           builder: (_) => const Dashboard(),
@@ -137,7 +156,11 @@ class RouteGenerator {
         );
       case '/wishlist':
         return MaterialPageRoute(
-          builder: (_) => const WishlistPage(),
+          builder: (_) => WishlistPage(
+            productName: arguments!['productName'],
+            productGroup: arguments['productGroup'],
+            price: arguments['price'],
+          ),
         );
       case '/checkout':
         return MaterialPageRoute(

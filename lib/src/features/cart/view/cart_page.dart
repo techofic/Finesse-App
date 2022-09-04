@@ -37,6 +37,7 @@ class _CartPageState extends State<CartPage> {
                 itemCount: watchName.length,
                 itemBuilder: (ctx, index) {
                   return WishlistCard(
+                    img: '',
                     isChecked: false,
                     productName: watchName[index],
                     cancel: () {

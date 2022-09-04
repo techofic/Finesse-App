@@ -26,7 +26,13 @@ class _ProductPreviewState extends State<ProductPreview> {
       children: [
         Container(
           height: context.screenHeight * 0.25,
-          color: KColor.cirColor,
+          decoration: const BoxDecoration(
+              color: KColor.cirColor,
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(-20),
+                  bottomRight: Radius.circular(20)
+              )
+          ),
           padding: const EdgeInsets.only(left: 12, right: 12, bottom: 15),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,

@@ -13,6 +13,7 @@ class ProductCard extends StatelessWidget {
   final String? offerPrice;
   final String? regularPrice;
   final VoidCallback? tap;
+  final VoidCallback? pressed;
 
   const ProductCard(
       {required this.img,
@@ -23,6 +24,7 @@ class ProductCard extends StatelessWidget {
       required this.offerPrice,
       required this.regularPrice,
       this.tap,
+      this.pressed,
       Key? key})
       : super(key: key);
 
@@ -123,39 +125,43 @@ class ProductCard extends StatelessWidget {
                                         left: 8,
                                         bottom: 1,
                                         child: SvgPicture.asset(
-                                            'assets/images/line.svg'),
+                                          'assets/images/line.svg',
+                                        ),
                                       )
                                     ],
                                   ),
                                 ],
                               ),
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color:
-                                        KColor.btnShadowColor.withOpacity(0.06),
-                                    spreadRadius: 0,
-                                    blurRadius: 12,
-                                    offset: const Offset(4, 4),
+                            InkWell(
+                              onTap: pressed,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color:
+                                          KColor.btnShadowColor.withOpacity(0.06),
+                                      spreadRadius: 0,
+                                      blurRadius: 12,
+                                      offset: const Offset(4, 4),
+                                    ),
+                                    BoxShadow(
+                                      color:
+                                          KColor.btnShadowColor.withOpacity(0.06),
+                                      spreadRadius: 0,
+                                      blurRadius: 12,
+                                      offset: const Offset(-4, -4),
+                                    ),
+                                  ],
+                                ),
+                                child: const CircleAvatar(
+                                  radius: 13,
+                                  backgroundColor: KColor.appBackground,
+                                  child: Icon(
+                                    Icons.favorite_outlined,
+                                    color: Colors.black,
+                                    size: 13,
                                   ),
-                                  BoxShadow(
-                                    color:
-                                        KColor.btnShadowColor.withOpacity(0.06),
-                                    spreadRadius: 0,
-                                    blurRadius: 12,
-                                    offset: const Offset(-4, -4),
-                                  ),
-                                ],
-                              ),
-                              child: const CircleAvatar(
-                                radius: 13,
-                                backgroundColor: KColor.appBackground,
-                                child: Icon(
-                                  Icons.favorite_outlined,
-                                  color: Colors.black,
-                                  size: 13,
                                 ),
                               ),
                             ),

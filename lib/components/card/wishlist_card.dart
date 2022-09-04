@@ -7,12 +7,24 @@ import '../../styles/k_colors.dart';
 import '../../styles/k_text_style.dart';
 
 class WishlistCard extends StatefulWidget {
+  final String? img;
   final bool? isChecked;
   final String? productName;
+  final String? group;
+  final int? price;
   final VoidCallback? cancel;
   final VoidCallback? delete;
 
-  const WishlistCard({this.isChecked,this.productName,this.cancel,this.delete, Key? key}) : super(key: key);
+  const WishlistCard(
+      {required this.img,
+      this.isChecked,
+      this.productName,
+      this.group,
+      this.price,
+      this.cancel,
+      this.delete,
+      Key? key})
+      : super(key: key);
 
   @override
   State<WishlistCard> createState() => _WishlistCardState();
@@ -35,17 +47,15 @@ class _WishlistCardState extends State<WishlistCard> {
           builder: (BuildContext context) {
             return KConfirmDialog(
               message: 'Delete product',
-              subMessage:
-              'Are you sure you want to delete this product?',
+              subMessage: 'Are you sure you want to delete this product?',
               onCancel: widget.cancel,
               onDelete: widget.delete,
             );
           },
         );
-
       },
       background: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
         margin: const EdgeInsets.only(bottom: 16),
         decoration: const BoxDecoration(
           color: KColor.deleteColor,
@@ -57,7 +67,11 @@ class _WishlistCardState extends State<WishlistCard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Image.asset('assets/images/Delete.png',height: 23,),
+            Image.network(
+              '${widget.img}',
+              height: 23,
+              fit: BoxFit.fill,
+            ),
           ],
         ),
       ),
@@ -109,7 +123,7 @@ class _WishlistCardState extends State<WishlistCard> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        '12:34',
+                        '${widget.group}',
                         style: KTextStyle.subtitle5.copyWith(
                           color: KColor.blackbg.withOpacity(0.3),
                         ),
@@ -122,7 +136,7 @@ class _WishlistCardState extends State<WishlistCard> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "\$44.90",
+                      "\$${widget.price.toString()}",
                       style: KTextStyle.subtitle1.copyWith(
                         color: KColor.blackbg,
                       ),

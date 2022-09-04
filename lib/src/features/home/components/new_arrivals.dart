@@ -7,6 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../controllers/slider_controller.dart';
+
 class NewArrivals extends StatefulWidget {
   const NewArrivals({Key? key}) : super(key: key);
 
@@ -53,7 +55,20 @@ class _NewArrivalsState extends State<NewArrivals> {
                         'productName': newCategory[index].productName,
                         'productGroup': newCategory[index].allgroup.groupName,
                         'price': newCategory[index].sellingPrice.toString(),
-                        'id': newCategory[index].id.toString(),
+                        'description': newCategory[index].briefDescription,
+                        'id': newCategory[index].id,
+                      },
+                    );
+                  },
+                  pressed: (){
+                    Navigator.pushNamed(
+                      context,
+                      '/wishlist',
+                      arguments: {
+                        'img': newCategory[index].productImage,
+                        'productName': newCategory[index].productName,
+                        'productGroup': newCategory[index].allgroup.groupName,
+                        'price': newCategory[index].sellingPrice.toString(),
                       },
                     );
                   },

@@ -7,7 +7,8 @@ class API {
       'http://staginapi.duare.net/'; // Live Staging API URL
   static const LIVE =
       'http://mobileapi.scorebee.com/api/'; // Live Production API URL
-  static const TEST = 'https://finesseapi.dreamsgallerybd.com/'; // Live Staging API URL
+  static const TEST =
+      'https://finesseapi.dreamsgallerybd.com/'; // Live Staging API URL
   static const BASE = AppMode.PRODUCTION_MODE ? LIVE : TEST;
   static const BASEImage = AppMode.PRODUCTION_MODE ? LIVEImage : TESTImage;
 
@@ -17,6 +18,8 @@ class API {
   //products category
   static const productsCategory = 'app/ladingProducts';
   static const category = 'app/allGroups';
-  static const shop = 'app/shopPageData?order=id,desc&page=1&groupId=&categoryId=&str=&price=&brandId=&colour=&size';
+  static const shop =
+      'app/shopPageData?order=id,desc&page=1&groupId=&categoryId=&str=&price=&brandId=&colour=&size';
 
+  static productDetails(productId) => 'app/getSingleproduct/$productId';
 }

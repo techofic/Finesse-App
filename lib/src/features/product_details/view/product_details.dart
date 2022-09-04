@@ -4,16 +4,17 @@ import 'package:finesse/src/features/product_details/components/product_preview.
 import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'components/add_to_cart.dart';
+import '../components/add_to_cart.dart';
 
 class ProductDetails extends StatefulWidget {
   final String? productName;
   final String? productGroup;
   final String? price;
-  final String? id;
+  final String? description;
+  final int? id;
 
   const ProductDetails(
-      {this.productName, this.productGroup, this.price, this.id, Key? key})
+      {this.productName, this.productGroup, this.price, this.description,this.id, Key? key})
       : super(key: key);
 
   @override
@@ -65,7 +66,8 @@ class _ProductDetailsState extends State<ProductDetails> {
             productName: widget.productName,
             productGroup: widget.productGroup,
             price: widget.price,
-            id: widget.id,
+            description: widget.description,
+            id: widget.id.toString(),
           ),
           const AddToCart(),
         ],

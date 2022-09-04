@@ -40,7 +40,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       theme: ThemeData(
         fontFamily: GoogleFonts.inter().fontFamily,
       ),
-      initialRoute: '/login',
+      initialRoute: '/mainScreen',
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
