@@ -1,16 +1,16 @@
 import 'package:finesse/service/app_mode.dart';
 
 class API {
-  static const LIVEImage =
+  static const liveImage =
       'http://mobileapi.scorebee.com/'; // Live Production API URL
-  static const TESTImage =
+  static const testImage =
       'http://staginapi.duare.net/'; // Live Staging API URL
-  static const LIVE =
+  static const live =
       'http://mobileapi.scorebee.com/api/'; // Live Production API URL
-  static const TEST =
+  static const test =
       'https://finesseapi.dreamsgallerybd.com/'; // Live Staging API URL
-  static const BASE = AppMode.PRODUCTION_MODE ? LIVE : TEST;
-  static const BASEImage = AppMode.PRODUCTION_MODE ? LIVEImage : TESTImage;
+  static const base = AppMode.PRODUCTION_MODE ? live : test;
+  static const baseImage = AppMode.PRODUCTION_MODE ? liveImage : testImage;
 
   //Slider
   static const slider = 'app/allFrontSliders';

@@ -34,7 +34,6 @@ class DescriptionTextField extends StatelessWidget {
       controller: controller,
       maxLines: 8,
       minLines: 5,
-      maxLength: 200,
       decoration: InputDecoration(
         hintTextDirection: TextDirection.ltr,
         hintText: hintText,

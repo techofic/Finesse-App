@@ -61,7 +61,9 @@ class _ProductDetailsState extends State<ProductDetails> {
       ),
       body: Column(
         children: [
-          const ProductPreview(),
+          ProductPreview(
+            id: widget.id.toString(),
+          ),
           ProductInfo(
             productName: widget.productName,
             productGroup: widget.productGroup,

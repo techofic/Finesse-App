@@ -4,10 +4,6 @@ import 'package:finesse/src/features/home/models/products_category_model.dart';
 import 'package:finesse/src/features/home/state/product_category_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:shimmer/shimmer.dart';
-
-import '../controllers/slider_controller.dart';
 
 class NewArrivals extends StatefulWidget {
   const NewArrivals({Key? key}) : super(key: key);

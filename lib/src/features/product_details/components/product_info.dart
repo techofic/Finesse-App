@@ -1,10 +1,8 @@
 import 'package:finesse/constants/asset_path.dart';
-import 'package:finesse/src/features/product_details/components/product_delivery.dart';
+import 'package:finesse/src/features/product_details/components/product_variation.dart';
 import 'package:finesse/src/features/product_details/components/product_description.dart';
 import 'package:finesse/src/features/product_details/components/product_review.dart';
 import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
-import 'package:finesse/src/features/product_details/model/product_details_model.dart';
-import 'package:finesse/src/features/product_details/state/product_details_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
@@ -47,10 +45,7 @@ class _ProductInfoState extends State<ProductInfo> {
           decoration: const BoxDecoration(
               //color: Colors.orange,
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20)
-              )
-          ),
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20))),
           child: Padding(
             padding: const EdgeInsets.only(top: 24, left: 12, right: 12),
             child: Column(
@@ -117,35 +112,45 @@ class _ProductInfoState extends State<ProductInfo> {
                         itemBuilder: (ctx, index) {
                           return Column(
                             children: [
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    currentIndex = index;
-                                  });
-                                },
-                                child: AnimatedContainer(
-                                  duration: const Duration(milliseconds: 300),
-                                  margin: const EdgeInsets.only(right: 16),
-                                  width: 111,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: index == currentIndex
-                                        ? KColor.blackbg.withOpacity(0.8)
-                                        : KColor.searchColor.withOpacity(0.8),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      items[index],
-                                      style: KTextStyle.subtitle3.copyWith(
-                                        color: index == currentIndex
-                                            ? KColor.whiteBackground
-                                            : KColor.blackbg.withOpacity(0.4),
+                              Consumer(builder: (context, ref, _) {
+                                return InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      currentIndex = index;
+                                    });
+                                    if (currentIndex == 0 &&
+                                        currentIndex == 1) {
+                                      ref
+                                          .read(productDetailsProvider.notifier)
+                                          .fetchProductsDetails(
+                                            widget.id.toString(),
+                                          );
+                                    }
+                                  },
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 300),
+                                    margin: const EdgeInsets.only(right: 16),
+                                    width: 111,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color: index == currentIndex
+                                          ? KColor.blackbg.withOpacity(0.8)
+                                          : KColor.searchColor.withOpacity(0.8),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        items[index],
+                                        style: KTextStyle.subtitle3.copyWith(
+                                          color: index == currentIndex
+                                              ? KColor.whiteBackground
+                                              : KColor.blackbg.withOpacity(0.4),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
+                                );
+                              }),
                             ],
                           );
                         },
@@ -153,8 +158,10 @@ class _ProductInfoState extends State<ProductInfo> {
                     ),
 
                     /// MAIN BODY
-                    if (currentIndex == 0) const ProductVariation(),
-                    if (currentIndex == 1) ProductDescription(id: widget.id.toString()),
+                    if (currentIndex == 0)
+                      ProductVariation(id: widget.id.toString()),
+                    if (currentIndex == 1)
+                      ProductDescription(id: widget.id.toString()),
                     if (currentIndex == 2) const ProductReview(),
                   ],
                 ),

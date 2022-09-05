@@ -1,5 +1,4 @@
 import 'package:finesse/components/dropdown/k_dropdown.dart';
-import 'package:finesse/src/features/filter/components/select_color.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
@@ -7,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ProductVariation extends StatefulWidget {
-  const ProductVariation({Key? key}) : super(key: key);
+  final String? id;
+
+  const ProductVariation({this.id, Key? key}) : super(key: key);
 
   @override
   State<ProductVariation> createState() => _ProductVariationState();
@@ -88,10 +89,10 @@ class _ProductVariationState extends State<ProductVariation> {
                       ),
                       child: selectColor == index
                           ? Center(
-                        child: SvgPicture.asset(
-                          'assets/images/right.svg',
-                        ),
-                      )
+                              child: SvgPicture.asset(
+                                'assets/images/right.svg',
+                              ),
+                            )
                           : Container(),
                     ),
                   ),

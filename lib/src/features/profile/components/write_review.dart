@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:finesse/components/appbar/appbar.dart';
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/dialog/k_dialog.dart';
@@ -10,10 +12,12 @@ import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:text_divider/text_divider.dart';
+import 'package:video_player/video_player.dart';
 
 class WriteReview extends StatefulWidget {
-  WriteReview({Key? key}) : super(key: key);
+  const WriteReview({Key? key}) : super(key: key);
 
   @override
   State<WriteReview> createState() => _WriteReviewState();
@@ -25,6 +29,37 @@ class _WriteReviewState extends State<WriteReview> {
   var rating = 0.0;
   int selectIndex = 0;
   int selectedRatting = 0;
+  int maxLength = 200;
+  File? image;
+  File? video;
+  late VideoPlayerController _controller;
+
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+      final imageTemporary = File(image.path);
+      setState(() {
+        this.image = imageTemporary;
+      });
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future pickVideo(ImageSource source) async {
+    try {
+      final video = await ImagePicker()
+          .pickVideo(source: source, maxDuration: const Duration(seconds: 10));
+      if (video == null) return;
+      final imageTemporary = File(video.path);
+      setState(() {
+        this.video = imageTemporary;
+      });
+    } catch (e) {
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,12 +202,12 @@ class _WriteReviewState extends State<WriteReview> {
                       color: KColor.blackbg,
                     ),
                   ),
-                  // Text(
-                  //   '(20/200)',
-                  //   style: KTextStyle.subtitle3.copyWith(
-                  //     color: KColor.blackbg.withOpacity(0.6),
-                  //   ),
-                  // ),
+                  Text(
+                    '(${message.text.length}/$maxLength)',
+                    style: KTextStyle.subtitle3.copyWith(
+                      color: KColor.blackbg.withOpacity(0.6),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 16),
@@ -186,26 +221,32 @@ class _WriteReviewState extends State<WriteReview> {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  Container(
-                    height: 48,
-                    width: 48,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: KColor.searchColor,
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(AssetPath.cameraIcon),
+                  InkWell(
+                    onTap: () => pickImage(ImageSource.camera),
+                    child: Container(
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: KColor.searchColor,
+                      ),
+                      child: Center(
+                        child: SvgPicture.asset(AssetPath.cameraIcon),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 16),
-                  Container(
-                    height: 48,
-                    width: 48,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: KColor.searchColor),
-                    child: Center(
-                      child: SvgPicture.asset(AssetPath.recordIcon),
+                  InkWell(
+                    onTap: () => pickVideo(ImageSource.camera),
+                    child: Container(
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: KColor.searchColor),
+                      child: Center(
+                        child: SvgPicture.asset(AssetPath.recordIcon),
+                      ),
                     ),
                   ),
                 ],

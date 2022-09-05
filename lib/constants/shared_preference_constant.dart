@@ -1,6 +1,5 @@
-const String TOKEN = 'ACCESS';
-const String LOGGED_IN = 'LOGGED_IN';
+const String token = 'ACCESS';
+const String loggedIn = 'LOGGED_IN';
 const String isNewInstalled = '';
-const String USER_ID = 'USER_ID';
-
-String registrationtype = 'Registration Type';
+const String userId = 'USER_ID';
+String registrationType = 'Registration Type';

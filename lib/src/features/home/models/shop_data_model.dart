@@ -93,9 +93,7 @@ class Product {
         productName: json["productName"],
         model: json["model"],
         description: json["description"],
-        briefDescription: json["brief_description"] == null
-            ? null
-            : json["brief_description"],
+        briefDescription: json["brief_description"],
         sellingPrice: json["sellingPrice"],
         averageBuyingPrice: json["averageBuyingPrice"],
         productImage: json["productImage"],
@@ -132,7 +130,7 @@ class Product {
         "productName": productName,
         "model": model,
         "description": description,
-        "brief_description": briefDescription == null ? null : briefDescription,
+        "brief_description": briefDescription,
         "sellingPrice": sellingPrice,
         "averageBuyingPrice": averageBuyingPrice,
         "productImage": productImage,
@@ -182,8 +180,8 @@ class AllImage {
   Map<String, dynamic> toJson() => {
         "id": id,
         "productId": productId,
-        "url": url == null ? null : url,
-        "tagId": tagId == null ? null : tagId,
+        "url": url,
+        "tagId": tagId,
       };
 }
 
@@ -352,9 +350,7 @@ class EnumValues<T> {
   EnumValues(this.map);
 
   Map<T, String>? get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
+    reverseMap ??= map.map((k, v) => MapEntry(v, k));
     return reverseMap;
   }
 }

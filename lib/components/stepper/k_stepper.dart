@@ -1,7 +1,4 @@
 import 'package:dotted_line/dotted_line.dart';
-import 'package:finesse/src/features/checkout/components/add_new_address.dart';
-import 'package:finesse/src/features/checkout/components/payment_page.dart';
-import 'package:finesse/src/features/checkout/components/preview_page.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
@@ -83,17 +80,12 @@ class _KStepperState extends State<KStepper> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            //height: context.screenHeight * 0.05,
-            //color: Colors.redAccent,
-            child: Image.asset(
-              trackIcons[index],
-              height: 42,
-            ),
+          Image.asset(
+            trackIcons[index],
+            height: 42,
           ),
           const SizedBox(height: 4),
-          Container(
-            //color: Colors.orange,
+          SizedBox(
             width: context.screenWidth * 0.17,
             child: Text(
               textAlign: TextAlign.center,
@@ -138,23 +130,20 @@ class _KStepperState extends State<KStepper> {
         ),
         index == items.length - 1
             ? Container()
-            : Container(
-                //color: Colors.lightBlue,
-                child: SizedBox(
-                  width: 20,
-                  height: 92,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: DottedLine(
-                      direction: Axis.vertical,
-                      dashLength: 6.0,
-                      dashColor: KColor.textBorder.withOpacity(0.8),
-                      lineThickness: 1,
-                      dashGapLength: 6.0,
-                    ),
-                  ),
+            : SizedBox(
+              width: 20,
+              height: 92,
+              child: Align(
+                alignment: Alignment.center,
+                child: DottedLine(
+                  direction: Axis.vertical,
+                  dashLength: 6.0,
+                  dashColor: KColor.textBorder.withOpacity(0.8),
+                  lineThickness: 1,
+                  dashGapLength: 6.0,
                 ),
-              )
+              ),
+            )
       ],
     );
   }

@@ -9,14 +9,14 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../styles/k_text_style.dart';
 
-class stepper extends StatefulWidget {
-  const stepper({Key? key}) : super(key: key);
+class Steppers extends StatefulWidget {
+  const Steppers({Key? key}) : super(key: key);
 
   @override
-  State<stepper> createState() => _stepperState();
+  State<Steppers> createState() => _SteppersState();
 }
 
-class _stepperState extends State<stepper> {
+class _SteppersState extends State<Steppers> {
   List<String> checkout = [
     "Address",
     "Payment",
@@ -62,7 +62,7 @@ class _stepperState extends State<stepper> {
         const SizedBox(height: 16),
         stepTitle(),
         SizedBox(height: context.screenHeight*0.03),
-        if (currentIndex == 0) const AddressPage(),
+        if (currentIndex == 0)  AddressPage(pageIndex: currentIndex,),
         if (currentIndex == 1) const PaymentPage(),
         if (currentIndex == 2) const PreviewPage(),
 
@@ -90,22 +90,19 @@ class _stepperState extends State<stepper> {
         //index == checkout.length - 1?const SizedBox(width: 12,):const SizedBox(width: 0,),
         index == checkout.length - 1
             ? Container()
-            : Container(
-                //color: Colors.lightBlue,
-                child: SizedBox(
-                  width: context.screenWidth / 2.9,
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: DottedLine(
-                      direction: Axis.horizontal,
-                      dashLength: 6.0,
-                      dashColor: KColor.textBorder.withOpacity(0.8),
-                      lineThickness: 1,
-                      dashGapLength: 4.0,
-                    ),
-                  ),
+            : SizedBox(
+              width: context.screenWidth / 2.9,
+              child: Align(
+                alignment: Alignment.center,
+                child: DottedLine(
+                  direction: Axis.horizontal,
+                  dashLength: 6.0,
+                  dashColor: KColor.textBorder.withOpacity(0.8),
+                  lineThickness: 1,
+                  dashGapLength: 4.0,
                 ),
               ),
+            ),
       ],
     );
   }

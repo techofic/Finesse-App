@@ -16,7 +16,7 @@ class Network {
     if (await isNetworkAvailable()) {
       Response response;
 
-      var accessToken = getStringAsync(TOKEN);
+      var accessToken = getStringAsync(token);
 
       var headers = {
         'Content-type': 'application/json',
@@ -28,15 +28,15 @@ class Network {
         headers.addAll(header);
       }
 
-      print('\nURL: ${API.BASE}$endPoint');
+      print('\nURL: ${API.base}$endPoint');
       print("Headers: $headers\n");
       if (requireToken) {
         response = await get(
-            Uri.parse(noBaseUrl ? '$endPoint' : '${API.BASE}$endPoint'),
+            Uri.parse(noBaseUrl ? endPoint : '${API.base}$endPoint'),
             headers: headers);
       } else {
         response = await get(
-            Uri.parse(noBaseUrl ? '$endPoint' : '${API.BASE}$endPoint'));
+            Uri.parse(noBaseUrl ? endPoint : '${API.base}$endPoint'));
       }
 
       return response;
@@ -51,10 +51,11 @@ class Network {
     } else if (response.statusCode >= 200 && response.statusCode <= 210) {
       print('\nSuccessCode: ${response.statusCode}');
       print('SuccessResponse: ${response.body}\n');
-      if (response.body.isNotEmpty)
+      if (response.body.isNotEmpty) {
         return json.decode(response.body);
-      else
+      } else {
         return response.body;
+      }
     } else {
       print('\nErrorCode: ${response.statusCode}');
       print("ErrorResponse: ${response.body}\n");
@@ -63,7 +64,7 @@ class Network {
         /// Session expired
         toast('Session expired! Login to continue...', bgColor: KColor.red);
 
-        setValue(LOGGED_IN, false);
+        setValue(loggedIn, false);
         NavigationService.navigateToReplacement(
             CupertinoPageRoute(builder: (_) => const LoginPage()));
       } else if (response.statusCode == 422) {

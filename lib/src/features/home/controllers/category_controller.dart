@@ -32,7 +32,6 @@ class CategoryController extends StateNotifier<BaseState> {
     } catch (error, stackTrace) {
       print("error = $error");
       print("error = $stackTrace");
-      print("saddddddddd");
       state = const ErrorState();
     }
   }

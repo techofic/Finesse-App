@@ -57,7 +57,7 @@ class _NotificationCardState extends State<NotificationCard> {
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
-        margin: EdgeInsets.only(bottom: 8),
+        margin: const EdgeInsets.only(bottom: 8),
         height: 114,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),

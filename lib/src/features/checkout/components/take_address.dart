@@ -1,6 +1,7 @@
 import 'package:finesse/components/button/k_border_btn.dart';
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/constants/asset_path.dart';
+import 'package:finesse/src/features/checkout/components/payment_page.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
@@ -8,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AddressPage extends StatefulWidget {
-  const AddressPage({Key? key}) : super(key: key);
+  final int? pageIndex;
+  const AddressPage({this.pageIndex,Key? key}) : super(key: key);
 
   @override
   State<AddressPage> createState() => _AddressPageState();
@@ -120,7 +122,11 @@ class _AddressPageState extends State<AddressPage> {
           KButton(
             title: 'Proceed to Payment',
             onTap: () {
-              Navigator.pushNamed(context, '/payment');
+              setState(() {
+                if (widget.pageIndex == 1) const PaymentPage();
+              });
+
+              //Navigator.pushNamed(context, '/payment');
             },
           ),
           const SizedBox(height: 16),

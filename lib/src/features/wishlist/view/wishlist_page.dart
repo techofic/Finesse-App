@@ -1,8 +1,6 @@
 import 'package:finesse/components/card/wishlist_card.dart';
-import 'package:finesse/src/features/home/models/products_category_model.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class WishlistPage extends StatefulWidget {
   final String? img;
@@ -25,24 +23,23 @@ class _WishlistPageState extends State<WishlistPage> {
       backgroundColor: KColor.appBackground,
       body: SingleChildScrollView(
         child: Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-          child: WishlistCard(
-            img: widget.img,
-            isChecked: true,
-            productName: widget.productName,
-            cancel: () {
-              setState(() {
-                Navigator.pop(context);
-              });
-            },
-            delete: () {
-              setState(() {
-                Navigator.pop(context);
-              });
-            },
-          )
-        ),
+            alignment: Alignment.center,
+            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            child: WishlistCard(
+              img: widget.img,
+              isChecked: true,
+              productName: widget.productName,
+              cancel: () {
+                setState(() {
+                  Navigator.pop(context);
+                });
+              },
+              delete: () {
+                setState(() {
+                  Navigator.pop(context);
+                });
+              },
+            )),
       ),
     );
   }

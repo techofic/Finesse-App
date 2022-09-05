@@ -27,6 +27,7 @@ class _KFillPhoneState extends State<KFillPhone> {
   Color _color = KColor.searchColor.withOpacity(0.8);
 
   @override
+  // ignore: must_call_super
   void initState() {
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {

@@ -24,8 +24,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 16),
           child: Column(
-            children: const [
-              stepper(),
+            children:  const [
+              Steppers()
             ],
           ),
         ),

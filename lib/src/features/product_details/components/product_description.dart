@@ -19,15 +19,17 @@ class ProductDescription extends StatefulWidget {
 }
 
 class _ProductDescriptionState extends State<ProductDescription> {
-  List<String> productDetailss = ["Washable", "High Quality", "Travel Friendly"];
+  List<String> productDetailss = [
+    "Washable",
+    "High Quality",
+    "Travel Friendly"
+  ];
+  String convert = '';
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
-        ref
-            .read(productDetailsProvider.notifier)
-            .fetchProductsDetails(widget.id.toString());
         final productDetailsState = ref.watch(productDetailsProvider);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,14 +38,12 @@ class _ProductDescriptionState extends State<ProductDescription> {
               'Description',
               style: KTextStyle.subtitle7.copyWith(color: Colors.black),
             ),
-            if(productDetailsState is ProductDetailsSuccessState)...[
+            if (productDetailsState is ProductDetailsSuccessState) ...[
               Padding(
                 padding: const EdgeInsets.only(top: 16.0, bottom: 24),
-                child:ReadMoreText(
+                child: ReadMoreText(
                   '${productDetailsState.productDetailsModel?.product.model}',
-                  //widget.description.toString(),
                   trimLines: 2,
-                  colorClickableText: Colors.pink,
                   trimMode: TrimMode.Line,
                   trimCollapsedText: 'read more...',
                   trimExpandedText: ' Show less',
@@ -58,8 +58,8 @@ class _ProductDescriptionState extends State<ProductDescription> {
                   ),
                 ),
               ),
-            ],
 
+            ],
             Text(
               'Product Details',
               style: KTextStyle.subtitle4.copyWith(color: Colors.black),

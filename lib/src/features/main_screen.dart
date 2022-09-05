@@ -1,6 +1,3 @@
-import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
-import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:finesse/components/appbar/k_appbar.dart';
 import 'package:finesse/components/drawer/k_drawer.dart';
 import 'package:finesse/src/features/cart/view/cart_page.dart';
@@ -8,9 +5,8 @@ import 'package:finesse/src/features/home/views/home_page.dart';
 import 'package:finesse/src/features/profile/profile_page.dart';
 import 'package:finesse/src/features/wishlist/view/wishlist_page.dart';
 import 'package:finesse/styles/k_colors.dart';
-import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

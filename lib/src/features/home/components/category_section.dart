@@ -21,7 +21,10 @@ class _CategorySectionState extends State<CategorySection> {
     AssetPath.boxIcon,
     AssetPath.boxIcon,
     AssetPath.boxIcon,
-    AssetPath.boxIcon
+    AssetPath.boxIcon,
+    AssetPath.boxIcon,
+    AssetPath.boxIcon,
+    AssetPath.boxIcon,
   ];
 
   @override
@@ -59,8 +62,7 @@ class _CategorySectionState extends State<CategorySection> {
                     ),
                     child: Center(
                       child: SvgPicture.asset(
-                        "",
-                        // "categoryIcons[index]",
+                         categoryIcons[index],
                         color: index == selectIndex
                             ? KColor.whiteBackground
                             : KColor.blackbg,
