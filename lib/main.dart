@@ -12,6 +12,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
   await initialize();
   runApp(const ProviderScope(child: MyApp()));
 }
