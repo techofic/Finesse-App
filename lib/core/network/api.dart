@@ -11,6 +11,10 @@ class API {
       'https://finesseapi.dreamsgallerybd.com/'; // Live Staging API URL
   static const base = AppMode.PRODUCTION_MODE ? live : test;
   static const baseImage = AppMode.PRODUCTION_MODE ? liveImage : testImage;
+  //registration
+  static const signup = 'app/registration';
+  //login
+  static const login = 'app/login';
 
   //Slider
   static const slider = 'app/allFrontSliders';
