@@ -36,7 +36,6 @@ dependencies:
   flutter_switch: ^0.3.2
   group_radio_button: ^1.2.0
   convex_bottom_bar: ^3.0.0
-  awesome_bottom_bar: ^1.2.1
   banner_carousel: ^1.2.1
   google_fonts: ^3.0.1
   readmore: ^2.2.0
@@ -61,6 +60,7 @@ dependencies:
   step_progress_indicator: ^1.0.2
   flutter_native_timezone: ^2.0.0
   auto_reload: ^1.1.0
+  shared_preferences: ^2.0.15
 
 
 dev_dependencies:

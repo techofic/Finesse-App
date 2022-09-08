@@ -2,13 +2,14 @@ import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/textfield/k_password_field.dart';
 import 'package:finesse/components/textfield/k_phone_field.dart';
 import 'package:finesse/constants/asset_path.dart';
-import 'package:finesse/service/page_transition.dart';
 import 'package:finesse/src/features/main_screen.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -22,6 +23,12 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool isChecked = false;
+
+  @override
+  void initState() {
+    _loadUserEmailPassword();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                       PhoneTextField(
                         controller: phone,
                         readOnly: false,
-                        hintText: '999 004 5950',
+                        hintText: 'Enter your phone number here...',
                         label: 'Phone',
                       ),
                       const SizedBox(height: 33),
@@ -79,19 +86,25 @@ class _LoginPageState extends State<LoginPage> {
                                     value: isChecked,
                                     // visualDensity: VisualDensity.comfortable,
                                     activeColor: KColor.blackbg,
-                                    // TODO :: Always use KColor class for colors
-                                    // So that you don't face issues when theming
                                     checkColor: KColor.white,
-                                    // TODO :: Note: the UI had a radius on the checkbox
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(2)),
-                                    // TODO :: Note: and the checkbox border color was black
-                                    // Similarly re check, notice and use all tiny details about the design from UI
+                                      borderRadius: BorderRadius.circular(2),
+                                    ),
                                     side: const BorderSide(color: KColor.black),
                                     onChanged: (value) {
                                       setState(() {
                                         isChecked = value!;
                                       });
+                                      SharedPreferences.getInstance().then(
+                                        (prefs) {
+                                          prefs.setBool("remember_me", value!);
+                                          prefs.setString('email', phone.text);
+                                          prefs.setString(
+                                            'password',
+                                            password.text,
+                                          );
+                                        },
+                                      );
                                     },
                                   ),
                                 ),
@@ -123,10 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                         title: 'Sign In',
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.pushReplacement(
-                              context,
-                              BottomTransition(const MainScreen()),
-                            );
+                            Navigator.pushNamed(context, '/mainScreen');
                           }
                         },
                       ),
@@ -164,5 +174,25 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void _loadUserEmailPassword() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var phoneValue = prefs.getString("email") ?? "";
+      var passwordValue = prefs.getString("password") ?? "";
+      var rememberMe = prefs.getBool("remember_me") ?? false;
+      print(phoneValue);
+      print(passwordValue);
+      if (rememberMe) {
+        setState(() {
+          isChecked = true;
+        });
+        phone.text = phoneValue;
+        password.text = passwordValue;
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

@@ -6,7 +6,7 @@ class BottomTransition extends PageRouteBuilder {
   BottomTransition(this.page)
       : super(
     pageBuilder: (context, animation, anotherAnimation) => page,
-    transitionDuration: const Duration(milliseconds: 3000),
+    transitionDuration: const Duration(milliseconds: 1000),
     transitionsBuilder: (context, animation, anotherAnimation, child) {
       animation = CurvedAnimation(
         curve: Curves.fastLinearToSlowEaseIn,

@@ -37,14 +37,8 @@ class _MaterialTextFieldState extends State<PasswordTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (value) {
-        String pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$';
-        RegExp regExp = RegExp(pattern);
         if (value == null || value.isEmpty) {
           return 'Please FillUp';
-        }else if (!regExp.hasMatch(value)) {
-          return 'Please enter valid password';
-        }else if(value.length<8){
-          return 'Password length should be at least 8 character';
         }
         return null;
       },
