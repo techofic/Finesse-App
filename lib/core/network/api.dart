@@ -11,9 +11,9 @@ class API {
       'https://finesseapi.dreamsgallerybd.com/'; // Live Staging API URL
   static const base = AppMode.PRODUCTION_MODE ? live : test;
   static const baseImage = AppMode.PRODUCTION_MODE ? liveImage : testImage;
-  //registration
+
+  //authentication
   static const signup = 'app/registration';
-  //login
   static const login = 'app/login';
 
   //Slider
@@ -26,4 +26,5 @@ class API {
       'app/shopPageData?order=id,desc&page=1&groupId=&categoryId=&str=&price=&brandId=&colour=&size';
 
   static productDetails(productId) => 'app/getSingleproduct/$productId';
+  static productRecommendation(productId) => 'app/relatedProduct/$productId';
 }

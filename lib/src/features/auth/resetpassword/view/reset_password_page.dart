@@ -51,8 +51,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   NameTextField(
                     controller: email,
                     readOnly: false,
-                    hintText: '',
-                    label: 'Enter email or phone',
+                    hintText: 'Enter email or phone',
+                    label: '',
                   ),
                 ],
               ),

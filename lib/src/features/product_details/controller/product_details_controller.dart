@@ -23,7 +23,8 @@ class ProductDetailsController extends StateNotifier<BaseState> {
     var responseBody;
     try {
       responseBody = await Network.handleResponse(
-          await Network.getRequest(API.productDetails(productId)));
+        await Network.getRequest(API.productDetails(productId)),
+      );
       if (responseBody != null) {
         productDetailsModel = ProductDetailsModel.fromJson(responseBody);
         state = ProductDetailsSuccessState(productDetailsModel);

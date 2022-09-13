@@ -33,42 +33,42 @@ class _KAppBarState extends State<KAppBar> {
         },
       ),
       actions: [
-        FlutterSwitch(
-          width: 36.0,
-          height: 20.0,
-          toggleSize: 18.0,
-          value: status,
-          borderRadius: 15.0,
-          padding: 2.0,
-          activeToggleColor: Colors.white,
-          inactiveToggleColor: Colors.white,
-          activeColor: const Color(0xFF797979),
-          inactiveColor: const Color(0xFF797979),
-          activeIcon: const Icon(
-            Icons.nightlight_round,
-            color: KColor.blackbg,
-          ),
-          inactiveIcon: const Icon(
-            Icons.wb_sunny,
-            color: KColor.blackbg,
-          ),
-          onToggle: (val) {
-            setState(() {
-              status = val;
-              if (val) {
-                setState(() {
-                  theme = !theme;
-                  themeColor = KColor.blackbg;
-                });
-              } else {
-                setState(() {
-                  themeColor = KColor.appBackground;
-                });
-              }
-            });
-          },
-        ),
-        const SizedBox(width: 26),
+        // FlutterSwitch(
+        //   width: 36.0,
+        //   height: 20.0,
+        //   toggleSize: 18.0,
+        //   value: status,
+        //   borderRadius: 15.0,
+        //   padding: 2.0,
+        //   activeToggleColor: Colors.white,
+        //   inactiveToggleColor: Colors.white,
+        //   activeColor: const Color(0xFF797979),
+        //   inactiveColor: const Color(0xFF797979),
+        //   activeIcon: const Icon(
+        //     Icons.nightlight_round,
+        //     color: KColor.blackbg,
+        //   ),
+        //   inactiveIcon: const Icon(
+        //     Icons.wb_sunny,
+        //     color: KColor.blackbg,
+        //   ),
+        //   onToggle: (val) {
+        //     setState(() {
+        //       status = val;
+        //       if (val) {
+        //         setState(() {
+        //           theme = !theme;
+        //           themeColor = KColor.blackbg;
+        //         });
+        //       } else {
+        //         setState(() {
+        //           themeColor = KColor.appBackground;
+        //         });
+        //       }
+        //     });
+        //   },
+        // ),
+        //const SizedBox(width: 26),
         IconButton(
           onPressed: () {
             Scaffold.of(context).openDrawer();

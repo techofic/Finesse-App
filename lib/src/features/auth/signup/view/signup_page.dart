@@ -30,6 +30,7 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController password = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
   TextEditingController search = TextEditingController();
+  String? name;
   final _formKey = GlobalKey<FormState>();
 
   bool isSelected = false;
@@ -125,43 +126,42 @@ class _SignupPageState extends State<SignupPage> {
                           label: 'Confirm Password',
                         ),
                         const SizedBox(height: 24),
-                        Consumer(builder: (context, ref, _) {
-                          final authState = ref.watch(signupProvider);
-                          return KButton(
-                            title: authState is LoadingState
-                                ? 'Please wait...'
-                                : 'Create Account',
-                            onTap: () {
-                              print("tap");
-                              if (!(authState is LoadingState)) {
-                                print("pressed");
-                                if (_formKey.currentState!.validate()) {
-                                  print("validate");
-                                  if (password.text != confirmPassword.text) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content:
-                                            Text("Password does not match"),
-                                        duration: Duration(milliseconds: 3000),
-                                      ),
-                                    );
-                                    print(password.text);
-                                    print(confirmPassword.text);
-
-
-
+                        Consumer(
+                          builder: (context, ref, _) {
+                            final authState = ref.watch(signupProvider);
+                            return KButton(
+                              title: authState is LoadingState
+                                  ? 'Please wait...'
+                                  : 'Create Account',
+                              onTap: () {
+                                if (authState is! LoadingState) {
+                                  if (_formKey.currentState!.validate()) {
+                                    if (password.text != confirmPassword.text) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content:
+                                              Text("Password does not match"),
+                                          duration:
+                                              Duration(milliseconds: 3000),
+                                        ),
+                                      );
+                                    }
+                                    ref.read(signupProvider.notifier).register(
+                                          name:
+                                              "${firstName.text} ${lastName.text}",
+                                          email: email.text,
+                                          phone: phone.text,
+                                          password: password.text,
+                                          username: phone.text,
+                                        );
                                   }
-                                  ref.read(signupProvider.notifier).register(
-                                      firstName: firstName.text,
-                                      lastName: lastName.text,
-                                      email: email.text,
-                                      phone: phone.text,
-                                      password: password.text);
                                 }
-                              }
-                            },
-                          );
-                        }),
+                                Navigator.pushNamed(context, '/login');
+                              },
+                            );
+                          },
+                        ),
                         const SizedBox(height: 24),
                         InkWell(
                           onTap: () {

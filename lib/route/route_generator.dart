@@ -1,4 +1,5 @@
 import 'package:finesse/src/features/about/view/about_page.dart';
+import 'package:finesse/src/features/auth/login/view/otp_page.dart';
 import 'package:finesse/src/features/auth/resetpassword/view/confirm_password.dart';
 import 'package:finesse/src/features/auth/resetpassword/view/reset_password_page.dart';
 import 'package:finesse/src/features/auth/signup/view/signup_page.dart';
@@ -41,6 +42,13 @@ class RouteGenerator {
       case '/login':
         return MaterialPageRoute(
           builder: (_) => const LoginPage(),
+        );
+      case '/otp':
+        return MaterialPageRoute(
+          builder: (_) => OtpPage(
+            phoneNumber: arguments!['phoneNumber'],
+            password: arguments['password'],
+          ),
         );
       case '/signup':
         return MaterialPageRoute(

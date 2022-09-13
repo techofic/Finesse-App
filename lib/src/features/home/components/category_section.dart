@@ -29,65 +29,65 @@ class _CategorySectionState extends State<CategorySection> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, ref, _) {
-      final categoryState = ref.watch(categoryProvider);
-      final List<Group>? categoryData =
-      categoryState is CategorySuccessState
-          ? categoryState.categoryModel?.groups
-          : [];
-      return SizedBox(
-        height: 85,
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: categoryData!.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () {
-                setState(() {
-                  selectIndex = index;
-                });
-              },
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(right: 24),
-                    width: 54,
-                    height: 54,
-                    decoration: BoxDecoration(
-                      color: selectIndex == index
-                          ? KColor.blackbg
-                          : KColor.searchColor,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                         categoryIcons[index],
-                        color: index == selectIndex
-                            ? KColor.whiteBackground
-                            : KColor.blackbg,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Container(
-                    margin: const EdgeInsets.only(right: 24),
-                    child: Text(
-                      categoryData[index].groupName.toString(),
-                      style: KTextStyle.subtitle6.copyWith(
-                        color: index == selectIndex
+    return Consumer(
+      builder: (context, ref, _) {
+        final categoryState = ref.watch(categoryProvider);
+        final List<Group>? categoryData = categoryState is CategorySuccessState
+            ? categoryState.categoryModel?.groups
+            : [];
+        return SizedBox(
+          height: 85,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: categoryData!.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  setState(() {
+                    selectIndex = index;
+                  });
+                },
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 24),
+                      width: 54,
+                      height: 54,
+                      decoration: BoxDecoration(
+                        color: selectIndex == index
                             ? KColor.blackbg
-                            : KColor.blackbg.withOpacity(0.3),
+                            : KColor.searchColor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: SvgPicture.asset(
+                          categoryIcons[index],
+                          color: index == selectIndex
+                              ? KColor.whiteBackground
+                              : KColor.blackbg,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      );
-    },);
-
+                    const SizedBox(height: 8),
+                    Container(
+                      margin: const EdgeInsets.only(right: 24),
+                      child: Text(
+                        categoryData[index].groupName.toString(),
+                        style: KTextStyle.subtitle6.copyWith(
+                          color: index == selectIndex
+                              ? KColor.blackbg
+                              : KColor.blackbg.withOpacity(0.3),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 }

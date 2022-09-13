@@ -61,7 +61,7 @@ dependencies:
   flutter_native_timezone: ^2.0.0
   auto_reload: ^1.1.0
   shared_preferences: ^2.0.15
-
+  pin_code_fields: ^7.4.0
 
 dev_dependencies:
   flutter_test:

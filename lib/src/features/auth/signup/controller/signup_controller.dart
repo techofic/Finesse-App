@@ -19,20 +19,20 @@ class SignupController extends StateNotifier<BaseState> {
   SignupController({this.ref}) : super(const InitialState());
 
   Future register({
-    required String firstName,
-    required String lastName,
+    required String name,
     required String email,
     required String phone,
     required String password,
+    required String username,
   }) async {
     state = const LoadingState();
     var responseBody;
     var requestBody = {
-      'first_name': firstName,
-      'last_name': lastName,
+      'name': name,
       'email': email,
       'contact': phone,
       'password': password,
+      'username': username,
     };
     try {
       responseBody = await Network.handleResponse(

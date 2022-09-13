@@ -5,6 +5,7 @@ import 'package:finesse/src/features/home/controllers/category_controller.dart';
 import 'package:finesse/src/features/home/controllers/product_category_controller.dart';
 import 'package:finesse/src/features/home/controllers/shop_controller.dart';
 import 'package:finesse/src/features/home/controllers/slider_controller.dart';
+import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';

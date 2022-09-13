@@ -29,20 +29,24 @@ class _ProductPreviewState extends State<ProductPreview> {
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, _) {
       final productDetailsState = ref.watch(productDetailsProvider);
+      final productPreview = productDetailsState is ProductDetailsSuccessState
+          ? productDetailsState.productDetailsModel?.product
+          : [];
       return Column(
         children: [
           Container(
             height: context.screenHeight * 0.25,
             decoration: const BoxDecoration(
-                color: KColor.cirColor,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(-20),
-                    bottomRight: Radius.circular(20))),
+              color: KColor.cirColor,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(-20),
+                bottomRight: Radius.circular(20),
+              ),
+            ),
             padding: const EdgeInsets.only(left: 12, right: 12, bottom: 15),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
@@ -63,12 +67,14 @@ class _ProductPreviewState extends State<ProductPreview> {
                           height: 54,
                           width: 54,
                           margin: const EdgeInsets.only(bottom: 5),
-                          padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 2),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 3, horizontal: 2),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(
-                              color:
-                              index == selectIndex ? KColor.borderColor : Colors.transparent,
+                              color: index == selectIndex
+                                  ? KColor.borderColor
+                                  : Colors.transparent,
                               width: 1,
                             ),
                           ),
@@ -117,12 +123,12 @@ class _ProductPreviewState extends State<ProductPreview> {
                                 curve: Curves.easeInOut,
                               );
                             });
-                            if(index == selectIndex){
+                            if (index == selectIndex) {
                               ref
                                   .read(productDetailsProvider.notifier)
                                   .fetchProductsDetails(
-                                widget.id.toString(),
-                              );
+                                    widget.id.toString(),
+                                  );
                             }
                           },
                           effect: ExpandingDotsEffect(
@@ -138,9 +144,7 @@ class _ProductPreviewState extends State<ProductPreview> {
                     ),
                   ],
                 ),
-                if (productDetailsState is ProductDetailsSuccessState) ...[
 
-                ],
               ],
             ),
           ),
@@ -148,6 +152,7 @@ class _ProductPreviewState extends State<ProductPreview> {
       );
     });
   }
+
   InkWell _productPreview(int index) {
     return InkWell(
       onTap: () {
@@ -159,7 +164,6 @@ class _ProductPreviewState extends State<ProductPreview> {
             curve: Curves.easeInOut,
           );
         });
-
       },
       child: Container(
         height: 54,

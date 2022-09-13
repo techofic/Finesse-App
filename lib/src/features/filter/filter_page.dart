@@ -26,11 +26,11 @@ class _FilterPageState extends State<FilterPage> {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 12.0),
+            margin: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 8.0),
             child: Column(
               children: [
                 SvgPicture.asset(AssetPath.cancelIcon),
-                const SizedBox(height: 15),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -54,7 +54,7 @@ class _FilterPageState extends State<FilterPage> {
             ),
           ),
            Padding(
-            padding: const EdgeInsets.only(top: 5.0, bottom: 10),
+            padding: const EdgeInsets.only(top: 5.0, bottom: 5),
             child: Divider(
               color: KColor.dividerColor.withOpacity(0.5),
             ),

@@ -3,6 +3,7 @@ import 'package:finesse/src/features/product_details/components/product_variatio
 import 'package:finesse/src/features/product_details/components/product_description.dart';
 import 'package:finesse/src/features/product_details/components/product_review.dart';
 import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
+import 'package:finesse/src/features/product_details/controller/product_recommendation_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
@@ -118,14 +119,17 @@ class _ProductInfoState extends State<ProductInfo> {
                                     setState(() {
                                       currentIndex = index;
                                     });
-                                    if (currentIndex == 0 &&
-                                        currentIndex == 1) {
-                                      ref
-                                          .read(productDetailsProvider.notifier)
-                                          .fetchProductsDetails(
-                                            widget.id.toString(),
-                                          );
-                                    }
+                                    ref
+                                        .read(productDetailsProvider.notifier)
+                                        .fetchProductsDetails(
+                                      widget.id.toString(),
+                                    );
+                                    ref
+                                        .read(productRecommendationProvider.notifier)
+                                        .fetchProductsRecommendation(
+                                        widget.id.toString(),
+                                    );
+
                                   },
                                   child: AnimatedContainer(
                                     duration: const Duration(milliseconds: 300),
