@@ -58,16 +58,14 @@ class Network {
         var header = {"Authorization": "Bearer $accessToken"};
         headers.addAll(header);
       }
-
       print('\nURL: ${API.base}$endPoint');
       print("Headers: $headers");
       print('Request Body: ${jsonEncode(body)}\n');
 
-      Response response = await post(Uri.parse('${API.base}' + '$endPoint'),
+      Response response = await post(Uri.parse('${API.base}$endPoint'),
           body: jsonEncode(body), headers: headers);
 
       //print('Response: $response');
-
       return response;
     } else {
       throw noInternetMessage;

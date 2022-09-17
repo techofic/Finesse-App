@@ -4,10 +4,7 @@ import 'package:finesse/core/network/api.dart';
 import 'package:finesse/core/network/network_utils.dart';
 import 'package:finesse/service/navigation_service.dart';
 import 'package:finesse/src/features/auth/login/state/login_state.dart';
-import 'package:finesse/src/features/auth/login/view/login_page.dart';
-import 'package:finesse/src/features/auth/signup/state/signup_state.dart';
 import 'package:finesse/src/features/auth/signup/view/signup_page.dart';
-import 'package:finesse/src/features/home/views/home_page.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,9 +27,8 @@ class loginController extends StateNotifier<BaseState> {
   }) async {
     state = const LoadingState();
     var responseBody;
-
     var requestBody = {
-      'email': phone,
+      'contact': phone,
       'password': password,
     };
     try {
@@ -40,16 +36,20 @@ class loginController extends StateNotifier<BaseState> {
         await Network.postRequest(API.login, requestBody),
       );
       if (responseBody != null) {
-
+        if (responseBody['access_token'] != null) {
           state = const LoginSuccessState();
           setValue(loggedIn, true);
+          setValue(token, responseBody['access_token']);
           toast("Login Successful", bgColor: KColor.selectColor);
 
           //ref!.read(initDataProvider).fetchData();
 
           NavigationService?.navigateToReplacement(
-              CupertinoPageRoute(builder: (context) => SignupPage()));
-
+            CupertinoPageRoute(
+              builder: (context) => SignupPage(),
+            ),
+          );
+        }
       } else {
         state = const ErrorState();
       }

@@ -1,14 +1,18 @@
 import 'package:finesse/components/appbar/appbar.dart';
-import 'package:finesse/components/button/k_border_btn.dart';
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/dialog/k_dialog.dart';
 import 'package:finesse/components/textfield/k_fill_password_field.dart';
+import 'package:finesse/core/base/base_state.dart';
+import 'package:finesse/src/features/auth/resetpassword/controller/password_reset_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ConfirmPasswordPage extends StatefulWidget {
-  const ConfirmPasswordPage({Key? key}) : super(key: key);
+  final String? token;
+  final String? phoneNumber;
+  const ConfirmPasswordPage({this.token,this.phoneNumber, Key? key}) : super(key: key);
 
   @override
   State<ConfirmPasswordPage> createState() => _ConfirmPasswordPageState();
@@ -24,7 +28,7 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle:true,title: 'Reset Password'),
+        child: KappBar(checkTitle: true, title: 'Reset Password'),
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
@@ -51,33 +55,35 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
                 ),
                 const SizedBox(height: 16),
                 FillTextFieldPassword(
-                  controller: password,
+                  controller: confirmPassword,
                   hintText: '*************',
                   label: '',
                 ),
               ],
             ),
-            Column(
-              children: [
-                KButton(
-                  title: 'Reset',
+            Consumer(
+              builder: (context, ref, _) {
+                final authState = ref.watch(resetPasswordProvider);
+                return KButton(
+                  title: authState is LoadingState ? 'Please wait...' : 'Reset',
                   onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const KDialog(message: 'Password Reset!');
-                      },
-                    );
+                    if (authState is! LoadingState) {
+                      ref.read(resetPasswordProvider.notifier).resetPassword(
+                            token: widget.token.toString(),
+                            password: password.text,
+                            confirmPassword: confirmPassword.text,
+                            phone: widget.phoneNumber.toString()
+                          );
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const KDialog(message: 'Password Reset!');
+                        },
+                      );
+                    }
                   },
-                ),
-                const SizedBox(height: 16),
-                KBorderButton(
-                  title: 'Go Back',
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
+                );
+              },
             ),
           ],
         ),

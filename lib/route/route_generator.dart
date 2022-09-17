@@ -2,6 +2,7 @@ import 'package:finesse/src/features/about/view/about_page.dart';
 import 'package:finesse/src/features/auth/login/view/otp_page.dart';
 import 'package:finesse/src/features/auth/resetpassword/view/confirm_password.dart';
 import 'package:finesse/src/features/auth/resetpassword/view/reset_password_page.dart';
+import 'package:finesse/src/features/auth/resetpassword/view/send_code.dart';
 import 'package:finesse/src/features/auth/signup/view/signup_page.dart';
 import 'package:finesse/src/features/category/category_page.dart';
 import 'package:finesse/src/features/category/men_categories.dart';
@@ -68,11 +69,22 @@ class RouteGenerator {
         );
       case '/resetPassword':
         return MaterialPageRoute(
-          builder: (_) => const ResetPasswordPage(),
+          builder: (_) => ResetPasswordPage(
+
+          ),
+        );
+      case '/setOtp':
+        return MaterialPageRoute(
+          builder: (_) => SendCode(
+            phoneNumber: arguments!['phoneNumber'],
+          ),
         );
       case '/confirmPassword':
         return MaterialPageRoute(
-          builder: (_) => const ConfirmPasswordPage(),
+          builder: (_) => ConfirmPasswordPage(
+            token: arguments!['token'],
+            phoneNumber: arguments['phoneNumber'],
+          ),
         );
       case '/notification':
         return MaterialPageRoute(

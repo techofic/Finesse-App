@@ -1,5 +1,5 @@
-import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:finesse/styles/k_colors.dart';
 
 class KCheckedButton extends StatefulWidget {
   const KCheckedButton(

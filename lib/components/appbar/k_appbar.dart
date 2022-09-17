@@ -1,9 +1,7 @@
-
 import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 
 class KAppBar extends StatefulWidget {
   const KAppBar({Key? key}) : super(key: key);

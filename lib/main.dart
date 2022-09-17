@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/route/route_generator.dart';
 import 'package:finesse/src/features/home/controllers/category_controller.dart';
 import 'package:finesse/src/features/home/controllers/product_category_controller.dart';
@@ -37,13 +38,15 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    bool _isNewInstall = getBoolAsync(isNewInstalled, defaultValue: true);
+
     return MaterialApp(
       title: 'Finesse',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: GoogleFonts.inter().fontFamily,
       ),
-      initialRoute: '/login',
+      initialRoute: _isNewInstall?'/mainScreen':'/login',
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

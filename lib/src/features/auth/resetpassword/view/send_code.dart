@@ -4,7 +4,7 @@ import 'package:finesse/components/appbar/appbar.dart';
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/constants/shared_preference_data.dart';
 import 'package:finesse/core/base/base_state.dart';
-import 'package:finesse/src/features/auth/login/controller/login_controller.dart';
+import 'package:finesse/src/features/auth/resetpassword/controller/password_reset_controller.dart';
 import 'package:finesse/src/features/auth/signup/controller/otp_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
@@ -13,38 +13,31 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class OtpPage extends StatefulWidget {
+class SendCode extends StatefulWidget {
   final String? phoneNumber;
   final String? password;
 
-  const OtpPage({
+  const SendCode({
     Key? key,
     this.phoneNumber,
     this.password,
   }) : super(key: key);
 
   @override
-  _OtpPageState createState() => _OtpPageState();
+  _SendCodeState createState() => _SendCodeState();
 }
 
-class _OtpPageState extends State<OtpPage> {
+class _SendCodeState extends State<SendCode> {
   TextEditingController otp = TextEditingController();
   StreamController<ErrorAnimationType>? errorController;
   final SharedPreferencesHelper _helper = SharedPreferencesHelper();
   bool hasError = false;
   String currentText = "";
-  String? localName;
   final _formKey = GlobalKey<FormState>();
-
-  getData() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    localName = pref.getString("name") ?? "";
-  }
 
   @override
   void initState() {
     errorController = StreamController<ErrorAnimationType>();
-    getData();
     super.initState();
   }
 
@@ -76,14 +69,6 @@ class _OtpPageState extends State<OtpPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4.0),
-              child: Text(
-                localName.toString(),
-                style: KTextStyle.headline4,
-                textAlign: TextAlign.center,
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0),
               child: Text(
@@ -163,28 +148,24 @@ class _OtpPageState extends State<OtpPage> {
                   "Didn't receive the code? ",
                   style: KTextStyle.dialog.copyWith(color: KColor.blackbg),
                 ),
-                Consumer(
-                  builder: (context, ref, _) {
-                    final authState = ref.watch(otpProvider);
-                    return TextButton(
-                      onPressed: (){
-                        if (authState is! LoadingState) {
-                          if (_formKey.currentState!.validate()) {
-                            ref.read(otpProvider.notifier).otpSendAgain(
+                Consumer(builder: (context, ref, _) {
+                  final authState = ref.watch(resetPasswordProvider);
+                  return TextButton(
+                    onPressed: () {
+                      if (authState is! LoadingState) {
+                        ref.read(resetPasswordProvider.notifier).sendCodeAgain(
                               phone: widget.phoneNumber.toString(),
                             );
-                          }
-                        }
-                      },
-                      child: Text(
-                        authState is LoadingState ? 'Please wait...' : 'Resend',
-                        style: KTextStyle.subtitle1.copyWith(
-                          color: KColor.blackbg,
-                        ),
+                      }
+                    },
+                    child: Text(
+                      authState is LoadingState ? 'Please wait...' : 'Resend',
+                      style: KTextStyle.subtitle2.copyWith(
+                        color: KColor.blackbg,
                       ),
-                    );
-                  }
-                ),
+                    ),
+                  );
+                }),
               ],
             ),
             const SizedBox(height: 20),
@@ -197,13 +178,19 @@ class _OtpPageState extends State<OtpPage> {
                   onTap: () {
                     if (authState is! LoadingState) {
                       if (_formKey.currentState!.validate()) {
-                        ref.read(otpProvider.notifier).otpSend(
-                              phone: widget.phoneNumber.toString(),
-                              otp: otp.text,
+                        ref.read(resetPasswordProvider.notifier).sendPhone(
+                              phone: otp.text,
                             );
                       }
                     }
-                    Navigator.pushNamed(context, '/mainScreen');
+                    Navigator.pushNamed(
+                      context,
+                      '/confirmPassword',
+                      arguments: {
+                        'token': otp.text,
+                        'phoneNumber': widget.phoneNumber,
+                      },
+                    );
                   },
                 );
               },

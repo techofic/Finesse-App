@@ -5,6 +5,7 @@ import 'package:finesse/components/textfield/k_phone_field.dart';
 import 'package:finesse/components/textfield/k_search_field.dart';
 import 'package:finesse/components/textfield/k_text_field.dart';
 import 'package:finesse/constants/asset_path.dart';
+import 'package:finesse/constants/shared_preference_data.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/auth/signup/controller/signup_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -32,7 +33,7 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController search = TextEditingController();
   String? name;
   final _formKey = GlobalKey<FormState>();
-
+  final SharedPreferencesHelper _helper = SharedPreferencesHelper();
   bool isSelected = false;
   var selectedColor = KColor.blackbg;
   String _verticalGroupValue = "English(United States)";
@@ -155,9 +156,27 @@ class _SignupPageState extends State<SignupPage> {
                                           password: password.text,
                                           username: phone.text,
                                         );
+                                    _helper.name(
+                                      "${firstName.text} ${lastName.text}",
+                                    );
+                                    _helper.email(
+                                      email.text,
+                                    );
+                                    _helper.contact(
+                                      phone.text,
+                                    );
+
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/otp',
+                                      arguments: {
+                                        'phoneNumber': phone.text,
+                                        'password': password.text,
+                                      },
+                                    );
                                   }
                                 }
-                                Navigator.pushNamed(context, '/login');
+                                //Navigator.pushNamed(context, '/login');
                               },
                             );
                           },
