@@ -1,4 +1,5 @@
 import 'package:finesse/constants/shared_preference_constant.dart';
+import 'package:finesse/constants/shared_preference_data.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/core/network/api.dart';
 import 'package:finesse/core/network/network_utils.dart';
@@ -36,13 +37,11 @@ class loginController extends StateNotifier<BaseState> {
         await Network.postRequest(API.login, requestBody),
       );
       if (responseBody != null) {
-        if (responseBody['access_token'] != null) {
+        if (responseBody['token'] != null) {
           state = const LoginSuccessState();
           setValue(loggedIn, true);
-          setValue(token, responseBody['access_token']);
+          setValue(token, responseBody['token']);
           toast("Login Successful", bgColor: KColor.selectColor);
-
-          //ref!.read(initDataProvider).fetchData();
 
           NavigationService?.navigateToReplacement(
             CupertinoPageRoute(

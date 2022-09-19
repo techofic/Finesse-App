@@ -7,6 +7,7 @@ import 'package:finesse/src/features/home/controllers/product_category_controlle
 import 'package:finesse/src/features/home/controllers/shop_controller.dart';
 import 'package:finesse/src/features/home/controllers/slider_controller.dart';
 import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
+import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,11 +35,12 @@ class _MyAppState extends ConsumerState<MyApp> {
     ref.read(productCategoryProvider.notifier).fetchProductsCategoryDetails();
     ref.read(shopProvider.notifier).fetchShopDetails();
     ref.read(categoryProvider.notifier).fetchCategoryDetails();
+    ref.read(wishlistProvider.notifier).fetchWishlistProducts();
   }
 
   @override
   Widget build(BuildContext context) {
-    bool _isNewInstall = getBoolAsync(isNewInstalled, defaultValue: true);
+    bool isNewInstall = getBoolAsync(isNewInstalled, defaultValue: true);
 
     return MaterialApp(
       title: 'Finesse',
@@ -46,7 +48,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       theme: ThemeData(
         fontFamily: GoogleFonts.inter().fontFamily,
       ),
-      initialRoute: _isNewInstall?'/mainScreen':'/login',
+      initialRoute: isNewInstall?'/mainScreen':'/login',
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

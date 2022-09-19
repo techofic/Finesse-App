@@ -1,7 +1,9 @@
 import 'package:finesse/components/card/product_card.dart';
+import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/home/controllers/product_category_controller.dart';
 import 'package:finesse/src/features/home/models/products_category_model.dart';
 import 'package:finesse/src/features/home/state/product_category_state.dart';
+import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,6 +18,7 @@ class _NewArrivalsState extends State<NewArrivals> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, _) {
+      final wishlistState = ref.watch(wishlistProvider);
       final newArrivalState = ref.watch(productCategoryProvider);
       final List<Product>? newCategory =
           newArrivalState is ProductCategorySuccessState
@@ -56,17 +59,12 @@ class _NewArrivalsState extends State<NewArrivals> {
                       },
                     );
                   },
-                  pressed: (){
-                    Navigator.pushNamed(
-                      context,
-                      '/wishlist',
-                      arguments: {
-                        'img': newCategory[index].productImage,
-                        'productName': newCategory[index].productName,
-                        'productGroup': newCategory[index].allgroup.groupName,
-                        'price': newCategory[index].sellingPrice.toString(),
-                      },
-                    );
+                  pressed: () {
+                    if (wishlistState is! LoadingState) {
+                      ref.read(wishlistProvider.notifier).addWishlist(
+                        id: newCategory[index].id.toString(),
+                      );
+                    }
                   },
                 );
               },
