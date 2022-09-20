@@ -3,8 +3,9 @@ import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/core/network/api.dart';
 import 'package:finesse/core/network/network_utils.dart';
 import 'package:finesse/service/navigation_service.dart';
+import 'package:finesse/src/features/cart/model/cart_model.dart';
+import 'package:finesse/src/features/cart/state/cart_state.dart';
 import 'package:finesse/src/features/product_details/components/product_info.dart';
-import 'package:finesse/src/features/wishlist/model/wishlist_product_model.dart';
 import 'package:finesse/src/features/wishlist/state/wishlist_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,18 +13,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 /// Providers
-final wishlistProvider = StateNotifierProvider<wishlistControllerr, BaseState>(
-  (ref) => wishlistControllerr(ref: ref),
+final cartProvider = StateNotifierProvider<cartControllerr, BaseState>(
+  (ref) => cartControllerr(ref: ref),
 );
 
 /// Controllers
-class wishlistControllerr extends StateNotifier<BaseState> {
+class cartControllerr extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  wishlistControllerr({this.ref}) : super(const InitialState());
-  WishlistModel? wishlistModel;
+  cartControllerr({this.ref}) : super(const InitialState());
+  CartModel? cartModel;
 
-  Future addWishlist({
+  Future addCart({
     required String id,
   }) async {
     state = const LoadingState();
@@ -44,7 +45,6 @@ class wishlistControllerr extends StateNotifier<BaseState> {
               bgColor: KColor.selectColor);
 
           NavigationService?.navigateToReplacement(
-
             CupertinoPageRoute(
               builder: (context) => ProductInfo(),
             ),
@@ -60,16 +60,15 @@ class wishlistControllerr extends StateNotifier<BaseState> {
     }
   }
 
-  Future fetchWishlistProducts() async {
+  Future cartDetails() async {
     state = const LoadingState();
     var responseBody;
     try {
-      responseBody = await Network.handleResponse(
-        await Network.getRequest(API.getWishlist),
-      );
+      responseBody =
+          await Network.handleResponse(await Network.getRequest(API.getCart));
       if (responseBody != null) {
-        wishlistModel = WishlistModel.fromJson(responseBody);
-        state = WishlistSuccessState(wishlistModel);
+        cartModel = CartModel.fromJson(responseBody);
+        state = CartSuccessState(cartModel);
       } else {
         state = const ErrorState();
       }
@@ -80,7 +79,45 @@ class wishlistControllerr extends StateNotifier<BaseState> {
     }
   }
 
-  Future deleteWishlist({
+  Future updateCart({
+    required String id,
+    required String quantity,
+  }) async {
+    state = const LoadingState();
+    var responseBody;
+    var requestBody = {
+      'id': id,
+      'quantity': quantity,
+    };
+    try {
+      responseBody = await Network.handleResponse(
+        await Network.postRequest(API.updateCart, requestBody),
+      );
+      if (responseBody != null) {
+        if (responseBody['token'] != null) {
+          state = const DeleteWishlistSuccessState();
+          setValue(loggedIn, true);
+          setValue(token, responseBody['token']);
+          toast("Product delete in wishlist Successful",
+              bgColor: KColor.selectColor);
+
+          NavigationService?.navigateToReplacement(
+            CupertinoPageRoute(
+              builder: (context) => ProductInfo(),
+            ),
+          );
+        }
+      } else {
+        state = const ErrorState();
+      }
+    } catch (error, stackTrace) {
+      print(error);
+      print(stackTrace);
+      state = const ErrorState();
+    }
+  }
+
+  Future deleteCart({
     required String id,
   }) async {
     state = const LoadingState();
@@ -90,15 +127,17 @@ class wishlistControllerr extends StateNotifier<BaseState> {
     };
     try {
       responseBody = await Network.handleResponse(
-        await Network.postRequest(API.deleteWishlist, requestBody),
+        await Network.postRequest(API.deleteCart, requestBody),
       );
       if (responseBody != null) {
         if (responseBody['token'] != null) {
-          state = const DeleteWishlistSuccessState();
+          state = const DeleteCartSuccessState();
           setValue(loggedIn, true);
           setValue(token, responseBody['token']);
-          toast("Product delete in wishlist Successful",
-              bgColor: KColor.selectColor);
+          toast(
+            "Product delete in cart Successful",
+            bgColor: KColor.selectColor,
+          );
 
           NavigationService?.navigateToReplacement(
             CupertinoPageRoute(

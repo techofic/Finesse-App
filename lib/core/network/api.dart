@@ -38,4 +38,10 @@ class API {
   static const addWishlist = 'app/wishlist';
   static const getWishlist = 'app/wishList';
   static const deleteWishlist = 'app/deleteWishlist';
+
+  //cart
+  static const addCart = 'app/cart';
+  static const getCart = 'app/cart';
+  static const updateCart = 'app/cart_update';
+  static const deleteCart = 'app/cart_delete';
 }

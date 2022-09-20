@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/route/route_generator.dart';
+import 'package:finesse/src/features/cart/controller/cart_controller.dart';
 import 'package:finesse/src/features/home/controllers/category_controller.dart';
 import 'package:finesse/src/features/home/controllers/product_category_controller.dart';
 import 'package:finesse/src/features/home/controllers/shop_controller.dart';
@@ -36,6 +37,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     ref.read(shopProvider.notifier).fetchShopDetails();
     ref.read(categoryProvider.notifier).fetchCategoryDetails();
     ref.read(wishlistProvider.notifier).fetchWishlistProducts();
+    ref.read(cartProvider.notifier).cartDetails();
   }
 
   @override

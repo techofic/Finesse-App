@@ -69,9 +69,7 @@ class RouteGenerator {
         );
       case '/resetPassword':
         return MaterialPageRoute(
-          builder: (_) => ResetPasswordPage(
-
-          ),
+          builder: (_) => ResetPasswordPage(),
         );
       case '/setOtp':
         return MaterialPageRoute(
@@ -176,11 +174,7 @@ class RouteGenerator {
         );
       case '/wishlist':
         return MaterialPageRoute(
-          builder: (_) => WishlistPage(
-            productName: arguments!['productName'],
-            productGroup: arguments['productGroup'],
-            price: arguments['price'],
-          ),
+          builder: (_) => const WishlistPage(),
         );
       case '/checkout':
         return MaterialPageRoute(

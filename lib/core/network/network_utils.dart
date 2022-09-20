@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:finesse/constants/shared_preference_constant.dart';
-import 'package:finesse/constants/shared_preference_data.dart';
 import 'package:finesse/service/navigation_service.dart';
 import 'package:finesse/src/features/auth/login/view/login_page.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -16,9 +15,7 @@ class Network {
       {bool requireToken = true, bool noBaseUrl = false}) async {
     if (await isNetworkAvailable()) {
       Response response;
-
       var accessToken = getStringAsync(token);
-
       var headers = {
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -49,7 +46,6 @@ class Network {
   static postRequest(String endPoint, body, {bool requireToken = true}) async {
     if (await isNetworkAvailable()) {
       var accessToken = getStringAsync(token);
-
       var headers = {
         'Content-type': 'application/json',
         'Accept': 'application/json',

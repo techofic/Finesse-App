@@ -8,14 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WishlistPage extends StatefulWidget {
-  final String? img;
-  final String? productName;
-  final String? productGroup;
-  final String? price;
-
-  const WishlistPage(
-      {this.img, this.productName, this.productGroup, this.price, Key? key})
-      : super(key: key);
+  const WishlistPage({Key? key}) : super(key: key);
 
   @override
   State<WishlistPage> createState() => _WishlistPageState();
@@ -83,10 +76,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                               .toString(),
                                         );
                                   }
-                                  setState(() {
-                                    print("delete finished");
-                                    Navigator.pop(context);
-                                  });
+                                  Navigator.pop(context);
                                 },
                               ),
                             );
