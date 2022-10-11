@@ -12,15 +12,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 /// Providers
-final wishlistProvider = StateNotifierProvider<wishlistControllerr, BaseState>(
-  (ref) => wishlistControllerr(ref: ref),
+final wishlistProvider = StateNotifierProvider<wishlistController, BaseState>(
+  (ref) => wishlistController(ref: ref),
 );
 
 /// Controllers
-class wishlistControllerr extends StateNotifier<BaseState> {
+class wishlistController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  wishlistControllerr({this.ref}) : super(const InitialState());
+  wishlistController({this.ref}) : super(const InitialState());
   WishlistModel? wishlistModel;
 
   Future addWishlist({
@@ -46,7 +46,7 @@ class wishlistControllerr extends StateNotifier<BaseState> {
           NavigationService?.navigateToReplacement(
 
             CupertinoPageRoute(
-              builder: (context) => ProductInfo(),
+              builder: (context) => const ProductInfo(),
             ),
           );
         }
@@ -102,7 +102,7 @@ class wishlistControllerr extends StateNotifier<BaseState> {
 
           NavigationService?.navigateToReplacement(
             CupertinoPageRoute(
-              builder: (context) => ProductInfo(),
+              builder: (context) => const ProductInfo(),
             ),
           );
         }

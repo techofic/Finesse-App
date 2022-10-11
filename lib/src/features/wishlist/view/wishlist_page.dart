@@ -1,11 +1,14 @@
 import 'package:finesse/components/card/wishlist_card.dart';
+import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/core/base/base_state.dart';
+import 'package:finesse/src/features/auth/login/view/login_page.dart';
 import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
 import 'package:finesse/src/features/wishlist/state/wishlist_state.dart';
 import 'package:finesse/src/features/wishlist/view/empty_product_page.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class WishlistPage extends StatefulWidget {
   const WishlistPage({Key? key}) : super(key: key);
@@ -20,7 +23,12 @@ class _WishlistPageState extends State<WishlistPage> {
     return Consumer(
       builder: (context, ref, _) {
         final wishlistProductsState = ref.watch(wishlistProvider);
-        return Scaffold(
+        bool checkLogin = getBoolAsync(loggedIn, defaultValue: false);
+        String checktoken = getStringAsync(token);
+        print("wishlist : $checkLogin");
+        print("wishlist token : $checktoken");
+        return checkLogin
+            ?Scaffold(
           backgroundColor: KColor.appBackground,
           body: SingleChildScrollView(
             child: Column(
@@ -87,7 +95,8 @@ class _WishlistPageState extends State<WishlistPage> {
               ],
             ),
           ),
-        );
+        )
+            : const LoginPage();
       },
     );
   }

@@ -9,7 +9,9 @@ import 'package:finesse/src/features/product_details/state/product_recommendatio
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
 
 import '../model/producr_recommendation_model.dart';
@@ -26,7 +28,7 @@ class ProductDescription extends StatefulWidget {
 }
 
 class _ProductDescriptionState extends State<ProductDescription> {
-  List<String> productDetails = ["Washable", "High Quality", "Travel Friendly"];
+
   String convert = '';
 
   @override
@@ -41,11 +43,6 @@ class _ProductDescriptionState extends State<ProductDescription> {
                 ? productDetailsState.productRecommendationModel?.product
                 : [];
 
-        final categoryState = ref.watch(categoryProvider);
-        final List<Group>? categoryData = categoryState is CategorySuccessState
-            ? categoryState.categoryModel?.groups
-            : [];
-
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -54,61 +51,73 @@ class _ProductDescriptionState extends State<ProductDescription> {
               style: KTextStyle.subtitle7.copyWith(color: Colors.black),
             ),
             if (productDetailsState is ProductDetailsSuccessState) ...[
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0, bottom: 24),
-                child: ReadMoreText(
-                  '${productDetailsState.productDetailsModel?.product.briefDescription}',
-                  trimLines: 2,
-                  trimMode: TrimMode.Line,
-                  trimCollapsedText: 'read more...',
-                  trimExpandedText: ' Show less',
-                  style: KTextStyle.description.copyWith(
-                    color: KColor.blackbg.withOpacity(0.5),
-                  ),
-                  moreStyle: KTextStyle.description.copyWith(
-                    color: KColor.blackbg,
-                  ),
-                  lessStyle: KTextStyle.description.copyWith(
-                    color: KColor.blackbg,
-                  ),
-                ),
-              ),
-              Text(
-                'Product Details',
-                style: KTextStyle.subtitle4.copyWith(color: Colors.black),
-              ),
-              const SizedBox(height: 16),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: categoryData!.length,
-                itemBuilder: (ctx, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 2,
-                              backgroundColor: KColor.black.withOpacity(0.5),
-                            ),
-                            const SizedBox(width: 7),
-                            Text(
-                              categoryData[index].groupName.toString(),
-                              style: KTextStyle.description.copyWith(
-                                color: KColor.black.withOpacity(0.5),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                      ],
-                    ),
-                  );
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 16.0, bottom: 24),
+              //   child: ReadMoreText(
+              //     '${productDetailsState.productDetailsModel?.product.briefDescription}',
+              //     trimLines: 2,
+              //     trimMode: TrimMode.Line,
+              //     trimCollapsedText: 'read more...',
+              //     trimExpandedText: ' Show less',
+              //     style: KTextStyle.description.copyWith(
+              //       color: KColor.blackbg.withOpacity(0.5),
+              //     ),
+              //     moreStyle: KTextStyle.description.copyWith(
+              //       color: KColor.blackbg,
+              //     ),
+              //     lessStyle: KTextStyle.description.copyWith(
+              //       color: KColor.blackbg,
+              //     ),
+              //   ),
+              // ),
+              Html(
+                data: productDetailsState
+                    .productDetailsModel?.product.briefDescription,
+                style: {
+                  'span': Style(
+                      color: KColor.blackbg.withOpacity(0.5),
+                      fontSize: FontSize.medium,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: GoogleFonts.inter().fontFamily,
+                      whiteSpace: WhiteSpace.NORMAL),
                 },
               ),
+              // Text(
+              //   'Product Details',
+              //   style: KTextStyle.subtitle4.copyWith(color: Colors.black),
+              // ),
+              // const SizedBox(height: 16),
+              // ListView.builder(
+              //   shrinkWrap: true,
+              //   itemCount: categoryData!.length,
+              //   itemBuilder: (ctx, index) {
+              //     return Padding(
+              //       padding: const EdgeInsets.only(left: 8.0),
+              //       child: Column(
+              //         children: [
+              //           Row(
+              //             children: [
+              //               CircleAvatar(
+              //                 radius: 2,
+              //                 backgroundColor: KColor.black.withOpacity(0.5),
+              //               ),
+              //               const SizedBox(width: 7),
+              //               Text(
+              //                 categoryData[index].groupName.toString(),
+              //                 style: KTextStyle.description.copyWith(
+              //                   color: KColor.black.withOpacity(0.5),
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //           const SizedBox(height: 8),
+              //         ],
+              //       ),
+              //     );
+              //   },
+              // ),
             ],
-            const SizedBox(height: 32),
+            //const SizedBox(height: 32),
             if (productRecommendationState
                 is ProductRecommendationSuccessState) ...{
               Text(
@@ -124,10 +133,8 @@ class _ProductDescriptionState extends State<ProductDescription> {
                       .productRecommendationModel?.product.length,
                   itemBuilder: (BuildContext context, int index) {
                     return RecommendCard(
-                      img: productRecommendationState
-                          .productRecommendationModel?.product[index].images
-                          ?.split('')
-                          .toString(),
+                      img: productRecommendationState.productRecommendationModel
+                              ?.product[index].images
                     );
                   },
                 ),

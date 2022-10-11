@@ -1,3 +1,4 @@
+
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/textfield/k_email_field.dart';
 import 'package:finesse/components/textfield/k_password_field.dart';
@@ -63,8 +64,8 @@ class _SignupPageState extends State<SignupPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _SelectLanguage(context),
-                    SizedBox(height: context.screenHeight * 0.07),
+                    // _SelectLanguage(context),
+                    SizedBox(height: context.screenHeight * 0.05),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -273,6 +274,7 @@ class _SignupPageState extends State<SignupPage> {
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 19),
                     child: SearchTextField(
+                      callbackFunction: (e){},
                       controller: search,
                       readOnly: false,
                       hintText: 'Search...',

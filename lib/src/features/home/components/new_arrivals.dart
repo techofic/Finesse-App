@@ -7,6 +7,8 @@ import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../product_details/controller/product_details_controller.dart';
+
 class NewArrivals extends StatefulWidget {
   const NewArrivals({Key? key}) : super(key: key);
 
@@ -57,6 +59,11 @@ class _NewArrivalsState extends State<NewArrivals> {
                         'description': newCategory[index].briefDescription,
                         'id': newCategory[index].id,
                       },
+                    );
+                    ref
+                        .read(productDetailsProvider.notifier)
+                        .fetchProductsDetails(
+                      newCategory[index].id,
                     );
                   },
                   pressed: () {

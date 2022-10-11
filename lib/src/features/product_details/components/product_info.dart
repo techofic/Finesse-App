@@ -6,7 +6,6 @@ import 'package:finesse/src/features/product_details/components/product_review.d
 import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:finesse/src/features/product_details/controller/product_recommendation_controller.dart';
 import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
-import 'package:finesse/src/features/wishlist/state/wishlist_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
@@ -139,11 +138,11 @@ class _ProductInfoState extends State<ProductInfo> {
                                     setState(() {
                                       currentIndex = index;
                                     });
-                                    ref
-                                        .read(productDetailsProvider.notifier)
-                                        .fetchProductsDetails(
-                                          widget.id.toString(),
-                                        );
+                                    // ref
+                                    //     .read(productDetailsProvider.notifier)
+                                    //     .fetchProductsDetails(
+                                    //   widget.id.toString(),
+                                    // );
                                     ref
                                         .read(productRecommendationProvider
                                             .notifier)

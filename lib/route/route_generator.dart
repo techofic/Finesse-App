@@ -4,6 +4,7 @@ import 'package:finesse/src/features/auth/resetpassword/view/confirm_password.da
 import 'package:finesse/src/features/auth/resetpassword/view/reset_password_page.dart';
 import 'package:finesse/src/features/auth/resetpassword/view/send_code.dart';
 import 'package:finesse/src/features/auth/signup/view/signup_page.dart';
+import 'package:finesse/src/features/cart/view/cart_page.dart';
 import 'package:finesse/src/features/category/category_page.dart';
 import 'package:finesse/src/features/category/men_categories.dart';
 import 'package:finesse/src/features/checkout/components/add_new_address.dart';
@@ -28,6 +29,7 @@ import 'package:finesse/src/features/profile/components/report_issue.dart';
 import 'package:finesse/src/features/profile/components/report_list.dart';
 import 'package:finesse/src/features/profile/components/track_order.dart';
 import 'package:finesse/src/features/profile/components/write_review.dart';
+import 'package:finesse/src/features/profile/view/profile_page.dart';
 import 'package:finesse/src/features/settings/view/settings_page.dart';
 import 'package:finesse/src/features/wishlist/view/wishlist_page.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +39,6 @@ import '../src/features/profile/components/notifications.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
     final Map? arguments = settings.arguments as Map?;
     switch (settings.name) {
       case '/login':
@@ -58,6 +59,10 @@ class RouteGenerator {
       case '/home':
         return MaterialPageRoute(
           builder: (_) => const HomePage(),
+        );
+      case '/cart':
+        return MaterialPageRoute(
+          builder: (_) => const CartPage(),
         );
       case '/shop':
         return MaterialPageRoute(
@@ -124,6 +129,10 @@ class RouteGenerator {
       //       description: arguments['description'],
       //     ),
       //   );
+      case '/profile':
+        return MaterialPageRoute(
+          builder: (_) => const ProfilePage(),
+        );
       case '/dashboard':
         return MaterialPageRoute(
           builder: (_) => const Dashboard(),

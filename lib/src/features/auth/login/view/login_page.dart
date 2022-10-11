@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                                       );
                                 }
                               }
-                              Navigator.pushNamed(context, '/mainScreen');
+
                             },
                           );
                         },

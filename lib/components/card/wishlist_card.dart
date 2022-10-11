@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../styles/k_colors.dart';
 import '../../styles/k_text_style.dart';
 
+// ignore: must_be_immutable
 class WishlistCard extends StatefulWidget {
   int? quantity;
   final String? img;

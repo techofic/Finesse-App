@@ -2,9 +2,13 @@ import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/src/features/product_details/components/product_info.dart';
 import 'package:finesse/src/features/product_details/components/product_preview.dart';
 import 'package:finesse/styles/k_colors.dart';
+import 'package:finesse/styles/k_text_style.dart';
+import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import '../components/add_to_cart.dart';
+import '../controller/product_details_controller.dart';
 
 class ProductDetails extends StatefulWidget {
   final String? productName;
@@ -14,7 +18,12 @@ class ProductDetails extends StatefulWidget {
   final int? id;
 
   const ProductDetails(
-      {this.productName, this.productGroup, this.price, this.description,this.id, Key? key})
+      {this.productName,
+      this.productGroup,
+      this.price,
+      this.description,
+      this.id,
+      Key? key})
       : super(key: key);
 
   @override
@@ -47,14 +56,33 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12.0),
-            child: Row(
-              children: [
-                SvgPicture.asset(AssetPath.cartIcon),
-                const SizedBox(width: 31.0),
-                SvgPicture.asset(AssetPath.dotIcon),
-              ],
+          InkWell(
+            onTap: ()=>Navigator.pushNamed(context, '/cart'),
+            child: SizedBox(
+              width: context.screenWidth*0.2,
+              child: Stack(
+                children: [
+                  Center(child: SvgPicture.asset(AssetPath.cartIcon)),
+                  Positioned(
+                    right: 18,
+                    top: 8,
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: CircleAvatar(
+                        radius: 10,
+                        backgroundColor: KColor.stickerColor,
+                        child: Center(
+                          child: Text(
+                            '55',
+                            style: KTextStyle.subtitle9
+                                .copyWith(color: KColor.white,),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

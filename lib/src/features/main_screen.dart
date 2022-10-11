@@ -4,12 +4,12 @@ import 'package:finesse/components/navigation/chip_style.dart';
 import 'package:finesse/components/navigation/inspired/inspired.dart';
 import 'package:finesse/components/navigation/k_navigation_bar.dart';
 import 'package:finesse/components/navigation/tab_item.dart';
+import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/src/features/cart/view/cart_page.dart';
 import 'package:finesse/src/features/home/views/home_page.dart';
-import 'package:finesse/src/features/profile/profile_page.dart';
+import 'package:finesse/src/features/profile/view/profile_page.dart';
 import 'package:finesse/src/features/wishlist/view/wishlist_page.dart';
 import 'package:finesse/styles/k_colors.dart';
-import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -52,19 +52,19 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         bottomNavigationBar: KNavigationBar(
           items: const [
             TabItem(
-              icon: 'assets/images/home.svg',
+              icon: AssetPath.homeBottomIcon,
               title: 'Home',
             ),
             TabItem(
-              icon: 'assets/images/trolly.svg',
+              icon: AssetPath.cartBottomIcon,
               title: 'Cart',
             ),
             TabItem(
-              icon: 'assets/images/wishlist.svg',
+              icon: AssetPath.wishlistBottomIcon,
               title: 'Wishlist',
             ),
             TabItem(
-              icon: 'assets/images/profile.svg',
+              icon: AssetPath.profileBottomIcon,
               title: 'Account',
             ),
           ],

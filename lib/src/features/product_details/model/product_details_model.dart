@@ -117,7 +117,7 @@ class Product {
   int? sellingPrice;
   String? averageBuyingPrice;
   String? productImage;
-  List<Image> images;
+  List<ProductImage> images;
   int? isNew;
   int? totalSale;
   int? isFeatured;
@@ -152,7 +152,7 @@ class Product {
         sellingPrice: json["sellingPrice"],
         averageBuyingPrice: json["averageBuyingPrice"],
         productImage: json["productImage"],
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        images: List<ProductImage>.from(json["images"].map((x) => ProductImage.fromJson(x))),
         isNew: json["isNew"],
         totalSale: json["totalSale"],
         isFeatured: json["isFeatured"],
@@ -342,14 +342,14 @@ class Details {
       };
 }
 
-class Image {
-  Image({
+class ProductImage {
+  ProductImage({
     this.url,
   });
 
   String? url;
 
-  factory Image.fromJson(Map<String?, dynamic> json) => Image(
+  factory ProductImage.fromJson(Map<String?, dynamic> json) => ProductImage(
         url: json["url"],
       );
 

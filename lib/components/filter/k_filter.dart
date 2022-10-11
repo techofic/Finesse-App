@@ -19,6 +19,7 @@ class KFilter extends StatefulWidget {
 class _KFilterState extends State<KFilter> {
   TextEditingController controller = TextEditingController();
   bool isChecked = true;
+  String? value = '';
 
   @override
   Widget build(BuildContext context) {
@@ -27,36 +28,19 @@ class _KFilterState extends State<KFilter> {
         Expanded(
           flex: 8,
           child: SearchTextField(
+            callbackFunction: (value) {
+              setState(() {
+                value = controller.text;
+              });
+            },
             controller: controller,
             readOnly: false,
             hintText: 'Search...',
-            // TODO :: Check the border radius of this field in UI
-            // TODO :: No need of label here
           ),
         ),
-        const SizedBox(width: 14),
+        const SizedBox(width: 10),
         InkWell(
-          onTap: () {
-            showModalBottomSheet(
-              isScrollControlled: true,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(20.0),
-                ),
-              ),
-              context: context,
-              builder: (context) {
-                return AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
-                  curve: Curves.easeInOutExpo,
-                  height: context.screenHeight*0.87,
-                  child: const FilterPage(),
-                );
-              },
-            );
-          },
+          onTap: ()=>Navigator.pushNamed(context, '/shop'),
           child: Container(
             height: 48,
             width: 48,
@@ -65,12 +49,46 @@ class _KFilterState extends State<KFilter> {
               borderRadius: BorderRadius.circular(15),
             ),
             child: Center(
-              child: isChecked
-                  ? SvgPicture.asset(AssetPath.homeSearchIcon)
-                  : Image.asset(AssetPath.filterIcon),
+              child: SvgPicture.asset(AssetPath.homeSearchIcon),
             ),
           ),
         )
+        // InkWell(
+        //   onTap: () {
+        //     showModalBottomSheet(
+        //       isScrollControlled: true,
+        //       shape: const RoundedRectangleBorder(
+        //         borderRadius: BorderRadius.only(
+        //           topLeft: Radius.circular(20.0),
+        //           topRight: Radius.circular(20.0),
+        //         ),
+        //       ),
+        //       context: context,
+        //       builder: (context) {
+        //         return AnimatedContainer(
+        //           duration: const Duration(milliseconds: 300),
+        //           margin: const EdgeInsets.symmetric(horizontal: 8),
+        //           curve: Curves.easeInOutExpo,
+        //           height: context.screenHeight*0.87,
+        //           child: const FilterPage(),
+        //         );
+        //       },
+        //     );
+        //   },
+        //   child: Container(
+        //     height: 48,
+        //     width: 48,
+        //     decoration: BoxDecoration(
+        //       color: KColor.searchColor.withOpacity(0.8),
+        //       borderRadius: BorderRadius.circular(15),
+        //     ),
+        //     child: Center(
+        //       child: isChecked
+        //           ? SvgPicture.asset(AssetPath.homeSearchIcon)
+        //           : Image.asset(AssetPath.filterIcon),
+        //     ),
+        //   ),
+        // )
       ],
     );
   }

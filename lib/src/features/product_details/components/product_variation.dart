@@ -1,9 +1,15 @@
 import 'package:finesse/components/dropdown/k_dropdown.dart';
+import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
+import 'package:finesse/src/features/product_details/model/all_branda.dart';
+import 'package:finesse/src/features/product_details/model/product_details_model.dart';
+import 'package:finesse/src/features/product_details/state/product_details_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 class ProductVariation extends StatefulWidget {
   final String? id;
@@ -15,12 +21,7 @@ class ProductVariation extends StatefulWidget {
 }
 
 class _ProductVariationState extends State<ProductVariation> {
-  List<String> items = [
-    "4",
-    "5",
-    "7",
-    "8",
-  ];
+  List<dynamic> items = ['4', '5', '7', '8'];
   List<Color> colors = [
     Colors.grey,
     Colors.black,
@@ -34,132 +35,132 @@ class _ProductVariationState extends State<ProductVariation> {
   ];
   int selectColor = 0;
   int currentIndex = 0;
+  String? _brands;
+  bool isChecked = false;
+  bool isCheckedd = false;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Select Variations',
-          style: KTextStyle.headline6.copyWith(color: Colors.black),
-        ),
-        const SizedBox(height: 24),
-        Text(
-          'Color',
-          style: KTextStyle.subtitle1.copyWith(color: Colors.black),
-        ),
-        const SizedBox(height: 16),
-        SizedBox(
-          width: context.screenWidth,
-          height: 40,
-          child: ListView.builder(
-            physics: const ScrollPhysics(),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: colors.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  setState(() {
-                    selectColor = index;
-                  });
-                },
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 1000),
-                  curve: Curves.bounceInOut,
-                  height: 48,
-                  width: 48,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: selectColor == index
-                          ? KColor.borderColor
-                          : Colors.transparent,
-                      width: 1,
-                    ),
-                  ),
-                  child: Center(
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        color: colors[index],
-                        shape: BoxShape.circle,
+    return Consumer(
+      builder: (context, ref, _) {
+        final brandState = ref.watch(allBrandsProvider);
+        final colorState = ref.watch(productDetailsProvider);
+
+        final List<Brand> brandData = brandState is AllBrandsSuccessState
+            ? brandState.brandModel!.brands
+            : [];
+        final List<AllVariation> colorData =
+            colorState is ProductDetailsSuccessState
+                ? colorState.productDetailsModel!.allVariation
+                : [];
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Select Variations',
+              style: KTextStyle.headline6.copyWith(color: Colors.black),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'Color',
+              style: KTextStyle.subtitle1.copyWith(color: Colors.black),
+            ),
+            const SizedBox(height: 16),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: colorData.length,
+              itemBuilder: (ctx, index) {
+                return Container(
+                  color: Colors.lightGreen,
+                  child: Row(
+                    children: [
+                      Checkbox(
+                        value: isChecked,
+                        onChanged: (newValue) {
+                          setState(() {
+                            isChecked = newValue!;
+                            isCheckedd = newValue!;
+                          });
+                        },
                       ),
-                      child: selectColor == index
-                          ? Center(
-                              child: SvgPicture.asset(
-                                'assets/images/right.svg',
-                              ),
-                            )
-                          : Container(),
-                    ),
+                      Text(colorData[index].values[index].value.toString())
+                    ],
                   ),
-                ),
-              );
-            },
-          ),
-        ),
-        const SizedBox(height: 24),
-        Text(
-          'Size',
-          style: KTextStyle.subtitle1.copyWith(color: Colors.black),
-        ),
-        const SizedBox(height: 16),
-        SizedBox(
-          width: double.infinity,
-          height: 50,
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: items.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (ctx, index) {
-              return Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        currentIndex = index;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      margin: const EdgeInsets.only(right: 16),
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: index == currentIndex
-                            ? KColor.blackbg.withOpacity(0.8)
-                            : KColor.searchColor.withOpacity(0.8),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Center(
-                        child: Text(
-                          items[index],
-                          style: KTextStyle.subtitle3.copyWith(
+                );
+              },
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'Size',
+              style: KTextStyle.subtitle1.copyWith(color: Colors.black),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: items.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (ctx, index) {
+                  return Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            currentIndex = index;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          margin: const EdgeInsets.only(right: 16),
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
                             color: index == currentIndex
-                                ? KColor.whiteBackground
-                                : KColor.blackbg.withOpacity(0.4),
+                                ? KColor.blackbg.withOpacity(0.8)
+                                : KColor.searchColor.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Center(
+                            child: Text(
+                              items[index],
+                              style: KTextStyle.subtitle3.copyWith(
+                                color: index == currentIndex
+                                    ? KColor.whiteBackground
+                                    : KColor.blackbg.withOpacity(0.4),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-        const SizedBox(height: 24),
-        Text(
-          'Brand',
-          style: KTextStyle.subtitle1.copyWith(color: Colors.black),
-        ),
-        const SizedBox(height: 16),
-        const KDropdown(hint: 'Select a Brand'),
-        const SizedBox(height: 70),
-      ],
+                    ],
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'Brand',
+              style: KTextStyle.subtitle1.copyWith(color: Colors.black),
+            ),
+            const SizedBox(height: 16),
+            KDropdown(
+              hint: 'Select a Brand',
+              selectedReason: _brands,
+              data: brandData.map((e) => e.name).toList(),
+              change: (value) {
+                setState(() {
+                  _brands = value;
+                });
+              },
+            ),
+            const SizedBox(height: 70),
+          ],
+        );
+      },
     );
   }
 }

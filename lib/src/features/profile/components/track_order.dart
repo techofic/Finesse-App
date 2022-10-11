@@ -37,6 +37,7 @@ class _TrackOrderState extends State<TrackOrder> {
                   Expanded(
                     flex: 8,
                     child: SearchTextField(
+                      callbackFunction: (e){},
                       controller: controller,
                       readOnly: false,
                       hintText: 'Search...',

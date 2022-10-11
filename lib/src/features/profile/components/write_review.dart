@@ -25,7 +25,7 @@ class WriteReview extends StatefulWidget {
 
 class _WriteReviewState extends State<WriteReview> {
   TextEditingController message = TextEditingController();
-
+  String? _selectedReason;
   var rating = 0.0;
   int selectIndex = 0;
   int selectedRatting = 0;
@@ -177,8 +177,10 @@ class _WriteReviewState extends State<WriteReview> {
                 ),
               ),
               const SizedBox(height: 16),
-              const KDropdown(
+              KDropdown(
                 hint: 'The product was awesome!',
+                selectedReason: _selectedReason,
+                change: (e){}, data: [],
               ),
               Padding(
                 padding: const EdgeInsets.all(32.0),
@@ -242,8 +244,9 @@ class _WriteReviewState extends State<WriteReview> {
                       height: 48,
                       width: 48,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: KColor.searchColor),
+                        borderRadius: BorderRadius.circular(15),
+                        color: KColor.searchColor,
+                      ),
                       child: Center(
                         child: SvgPicture.asset(AssetPath.recordIcon),
                       ),

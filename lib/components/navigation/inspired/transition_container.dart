@@ -54,7 +54,7 @@ class TransitionContainer extends StatefulWidget {
         super(key: key);
 
   @override
-  _State createState() {
+  State createState() {
     return _State();
   }
 }

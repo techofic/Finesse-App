@@ -141,7 +141,7 @@ class _PreviewPageState extends State<PreviewPage> {
                   ],
                 ),
               ),
-              const CardTotal(),
+               CardTotal(),
             ],
           ),
           SizedBox(height: context.screenHeight * 0.03),

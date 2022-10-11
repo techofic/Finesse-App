@@ -4,6 +4,8 @@ import 'package:finesse/components/appbar/appbar.dart';
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/constants/shared_preference_data.dart';
 import 'package:finesse/core/base/base_state.dart';
+import 'package:finesse/src/features/auth/login/controller/login_controller.dart';
+import 'package:finesse/src/features/auth/login/state/login_state.dart';
 import 'package:finesse/src/features/auth/resetpassword/controller/password_reset_controller.dart';
 import 'package:finesse/src/features/auth/signup/controller/otp_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -96,6 +98,20 @@ class _SendCodeState extends State<SendCode> {
                 ),
                 textAlign: TextAlign.center,
               ),
+            ),
+            const SizedBox(height: 12),
+            Consumer(
+              builder: (context, ref, _) {
+                final countOtpState = ref.watch(loginProvider);
+                return Column(
+                  children: [
+                    if(countOtpState is LoginSuccessState)...[
+                      //if(countOtpState.userModel!.user.otpCount ==3)
+                      Text(countOtpState.userModel!.otpCount.toString()),
+                    ]
+                  ],
+                );
+              }
             ),
             const SizedBox(height: 20),
             Form(

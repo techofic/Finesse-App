@@ -35,6 +35,7 @@ class _SettingPageState extends State<SettingPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SearchTextField(
+                callbackFunction: (e){},
                 controller: search,
                 readOnly: false,
                 hintText: 'Search',

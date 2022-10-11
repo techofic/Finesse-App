@@ -21,6 +21,7 @@ class _AddHomeState extends State<AddHome> {
   TextEditingController phone = TextEditingController();
   TextEditingController postalCode = TextEditingController();
   TextEditingController address = TextEditingController();
+  String? _selectedReason;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,7 @@ class _AddHomeState extends State<AddHome> {
                     style: KTextStyle.subtitle1.copyWith(color: KColor.blackbg),
                   ),
                   const SizedBox(height: 16),
-                  const KDropdown(hint: 'City'),
+                  KDropdown(hint: 'City',selectedReason: _selectedReason,change: (e){}, data: [],),
                 ],
               ),
             ),
@@ -88,7 +89,7 @@ class _AddHomeState extends State<AddHome> {
                     style: KTextStyle.subtitle1.copyWith(color: KColor.blackbg),
                   ),
                   const SizedBox(height: 16),
-                  const KDropdown(hint: 'Area'),
+                  KDropdown(hint: 'Area',selectedReason: _selectedReason,change: (e){}, data: [],),
                 ],
               ),
             ),
@@ -106,7 +107,7 @@ class _AddHomeState extends State<AddHome> {
                     style: KTextStyle.subtitle1.copyWith(color: KColor.blackbg),
                   ),
                   const SizedBox(height: 16),
-                  const KDropdown(hint: 'Zone'),
+                  KDropdown(hint: 'Zone',selectedReason: _selectedReason,change: (e){}, data: [],),
                 ],
               ),
             ),

@@ -8,7 +8,6 @@ import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -33,9 +32,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 31),
               _categoryHeader(
                 'Categories',
-                () {
-                  Navigator.pushNamed(context, '/category');
-                },
+                () => Navigator.pushNamed(context, '/category'),
               ),
               const CategorySection(),
               const SizedBox(height: 31),
@@ -48,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 32),
               _categoryHeader('Featured Products', () {}),
               const FeaturedProducts(),
-              const SizedBox(height: 44),
+              const SizedBox(height: 30),
             ],
           ),
         ),

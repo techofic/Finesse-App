@@ -1,4 +1,5 @@
 
+import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,7 +42,7 @@ class KDrawer extends StatelessWidget {
                 const SizedBox(height: 16),
                 InkWell(
                   onTap: (){
-                    Navigator.pushNamed(context, '/menCategories');
+                    Navigator.pushNamed(context, '/shop');
                   },
                   child: Text(
                     'Men',
@@ -49,14 +50,24 @@ class KDrawer extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text(
-                  'Women',
-                  style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
+                InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/shop');
+                  },
+                  child: Text(
+                    'Women',
+                    style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
+                  ),
                 ),
                 const SizedBox(height: 16),
-                Text(
-                  'Kids',
-                  style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
+                InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/shop');
+                  },
+                  child: Text(
+                    'Kids',
+                    style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 InkWell(
@@ -78,7 +89,7 @@ class KDrawer extends StatelessWidget {
                     style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
                   ),
                 ),
-                const SizedBox(height: 80),
+                SizedBox(height: context.screenHeight*0.1),
                 InkWell(
                   onTap: (){
                     Navigator.pushNamed(context, '/login');
@@ -112,6 +123,7 @@ class KDrawer extends StatelessWidget {
                   const SizedBox(height: 40),
                   InkWell(
                     onTap: (){
+                      // ignore: deprecated_member_use
                       launch('tel:+88019373848');
                     },
                     child: Row(
@@ -131,6 +143,7 @@ class KDrawer extends StatelessWidget {
                   const SizedBox(height: 12),
                   InkWell(
                     onTap: (){
+                      // ignore: deprecated_member_use
                       launch('mailto:smith@example.org?subject=Finesse&body=First Email');
                     },
                     child: Row(
@@ -153,24 +166,28 @@ class KDrawer extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () {
+                          // ignore: deprecated_member_use
                           launch('https://www.facebook.com/');
                         },
                         icon: SvgPicture.asset('assets/images/facebookIcon.svg'),
                       ),
                       IconButton(
                         onPressed: () {
+                          // ignore: deprecated_member_use
                           launch('https://www.instagram.com/');
                         },
                         icon: SvgPicture.asset('assets/images/instaIcon.svg'),
                       ),
                       IconButton(
                         onPressed: () {
+                          // ignore: deprecated_member_use
                           launch('https://www.youtube.com/');
                         },
                         icon: SvgPicture.asset('assets/images/youtubeIcon.svg'),
                       ),
                       IconButton(
                         onPressed: () {
+                          // ignore: deprecated_member_use
                           launch('https://www.tiktok.com/');
                         },
                         icon: SvgPicture.asset('assets/images/tiktokIcon.svg'),
