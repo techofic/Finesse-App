@@ -1,7 +1,4 @@
 import 'package:finesse/components/card/recommend_card.dart';
-import 'package:finesse/src/features/home/controllers/category_controller.dart';
-import 'package:finesse/src/features/home/models/category_model.dart';
-import 'package:finesse/src/features/home/state/category_state.dart';
 import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:finesse/src/features/product_details/controller/product_recommendation_controller.dart';
 import 'package:finesse/src/features/product_details/state/product_details_state.dart';
@@ -12,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:readmore/readmore.dart';
-
 import '../model/producr_recommendation_model.dart';
 
 class ProductDescription extends StatefulWidget {
@@ -28,7 +23,6 @@ class ProductDescription extends StatefulWidget {
 }
 
 class _ProductDescriptionState extends State<ProductDescription> {
-
   String convert = '';
 
   @override
@@ -75,11 +69,12 @@ class _ProductDescriptionState extends State<ProductDescription> {
                     .productDetailsModel?.product.briefDescription,
                 style: {
                   'span': Style(
-                      color: KColor.blackbg.withOpacity(0.5),
-                      fontSize: FontSize.medium,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: GoogleFonts.inter().fontFamily,
-                      whiteSpace: WhiteSpace.NORMAL),
+                    color: KColor.blackbg.withOpacity(0.5),
+                    fontSize: FontSize.medium,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: GoogleFonts.inter().fontFamily,
+                    whiteSpace: WhiteSpace.NORMAL,
+                  ),
                 },
               ),
               // Text(
@@ -133,9 +128,8 @@ class _ProductDescriptionState extends State<ProductDescription> {
                       .productRecommendationModel?.product.length,
                   itemBuilder: (BuildContext context, int index) {
                     return RecommendCard(
-                      img: productRecommendationState.productRecommendationModel
-                              ?.product[index].images
-                    );
+                        img: productRecommendationState
+                            .productRecommendationModel?.product[index].images);
                   },
                 ),
               ),

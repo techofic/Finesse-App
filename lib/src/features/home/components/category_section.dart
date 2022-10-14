@@ -1,4 +1,5 @@
 import 'package:finesse/constants/asset_path.dart';
+import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/home/controllers/category_controller.dart';
 import 'package:finesse/src/features/home/models/category_model.dart';
 import 'package:finesse/src/features/home/state/category_state.dart';
@@ -7,6 +8,7 @@ import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CategorySection extends StatefulWidget {
   const CategorySection({Key? key}) : super(key: key);
@@ -37,55 +39,62 @@ class _CategorySectionState extends State<CategorySection> {
             : [];
         return SizedBox(
           height: 85,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: categoryData!.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  setState(() {
-                    selectIndex = index;
-                  });
-                },
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(right: 24),
-                      width: 54,
-                      height: 54,
-                      decoration: BoxDecoration(
-                        color: selectIndex == index
-                            ? KColor.blackbg
-                            : KColor.searchColor,
-                        borderRadius: BorderRadius.circular(15),
+          child: categoryState is LoadingState
+              ? Container(
+            child: Shimmer.fromColors(
+              baseColor: Colors.black,
+              highlightColor: Colors.redAccent, child: Container(),
+            ),
+          )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: categoryData!.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectIndex = index;
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(right: 24),
+                            width: 54,
+                            height: 54,
+                            decoration: BoxDecoration(
+                              color: selectIndex == index
+                                  ? KColor.blackbg
+                                  : KColor.searchColor,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Center(
+                              child: SvgPicture.asset(
+                                categoryIcons[index],
+                                color: index == selectIndex
+                                    ? KColor.whiteBackground
+                                    : KColor.blackbg,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            margin: const EdgeInsets.only(right: 24),
+                            child: Text(
+                              categoryData[index].groupName.toString(),
+                              style: KTextStyle.subtitle6.copyWith(
+                                color: index == selectIndex
+                                    ? KColor.blackbg
+                                    : KColor.blackbg.withOpacity(0.3),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          categoryIcons[index],
-                          color: index == selectIndex
-                              ? KColor.whiteBackground
-                              : KColor.blackbg,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Container(
-                      margin: const EdgeInsets.only(right: 24),
-                      child: Text(
-                        categoryData[index].groupName.toString(),
-                        style: KTextStyle.subtitle6.copyWith(
-                          color: index == selectIndex
-                              ? KColor.blackbg
-                              : KColor.blackbg.withOpacity(0.3),
-                        ),
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              );
-            },
-          ),
         );
       },
     );

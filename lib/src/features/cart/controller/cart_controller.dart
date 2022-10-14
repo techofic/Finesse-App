@@ -13,15 +13,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 /// Providers
-final cartProvider = StateNotifierProvider<cartControllerr, BaseState>(
-  (ref) => cartControllerr(ref: ref),
+final cartProvider = StateNotifierProvider<cartController, BaseState>(
+  (ref) => cartController(ref: ref),
 );
 
 /// Controllers
-class cartControllerr extends StateNotifier<BaseState> {
+class cartController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  cartControllerr({this.ref}) : super(const InitialState());
+  cartController({this.ref}) : super(const InitialState());
   CartModel? cartModel;
 
   Future addCart({

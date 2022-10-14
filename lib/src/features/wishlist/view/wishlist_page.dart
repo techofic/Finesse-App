@@ -1,4 +1,5 @@
 import 'package:finesse/components/card/wishlist_card.dart';
+import 'package:finesse/components/shimmer/k_shimmer.dart';
 import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/auth/login/view/login_page.dart';
@@ -24,78 +25,95 @@ class _WishlistPageState extends State<WishlistPage> {
       builder: (context, ref, _) {
         final wishlistProductsState = ref.watch(wishlistProvider);
         bool checkLogin = getBoolAsync(loggedIn, defaultValue: false);
-        String checktoken = getStringAsync(token);
+        String checkToken = getStringAsync(token);
         print("wishlist : $checkLogin");
-        print("wishlist token : $checktoken");
+        print("wishlist token : $checkToken");
         return checkLogin
-            ?Scaffold(
-          backgroundColor: KColor.appBackground,
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                if (wishlistProductsState is WishlistSuccessState) ...[
-                  wishlistProductsState.wishlistModel!.wishlist.data.isEmpty
-                      ? const EmptyProductPage(
-                          message:
-                              'Your haven’t added anything to your wishlist yet.Add your favourites here.',
-                        )
-                      : ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: wishlistProductsState
-                              .wishlistModel?.wishlist.data.length,
-                          itemBuilder: (ctx, index) {
-                            return Container(
-                              alignment: Alignment.center,
-                              margin: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 12,
-                              ),
-                              child: WishlistCard(
-                                img: wishlistProductsState.wishlistModel
-                                    ?.wishlist.data[index].product.productImage,
-                                isChecked: true,
-                                productName: wishlistProductsState.wishlistModel
-                                    ?.wishlist.data[index].product.productName,
-                                group: wishlistProductsState
-                                    .wishlistModel
-                                    ?.wishlist
-                                    .data[index]
-                                    .product
-                                    .allgroup
-                                    .groupName,
-                                price: wishlistProductsState.wishlistModel
-                                    ?.wishlist.data[index].product.sellingPrice,
-                                cancel: () {
-                                  setState(() {
-                                    Navigator.pop(context);
-                                  });
+            ? Scaffold(
+                backgroundColor: KColor.appBackground,
+                body: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      if (wishlistProductsState is LoadingState) ...[
+                        const KShimmer(shimmerHeight: 123)
+                      ],
+                      if (wishlistProductsState is WishlistSuccessState) ...[
+                        wishlistProductsState
+                                .wishlistModel!.wishlist.data.isEmpty
+                            ? const EmptyProductPage(
+                                message:
+                                    'Your haven’t added anything to your wishlist yet.Add your favourites here.',
+                              )
+                            : ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: wishlistProductsState
+                                    .wishlistModel?.wishlist.data.length,
+                                itemBuilder: (ctx, index) {
+                                  return Container(
+                                    alignment: Alignment.center,
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 12,
+                                    ),
+                                    child: WishlistCard(
+                                      img: wishlistProductsState
+                                          .wishlistModel
+                                          ?.wishlist
+                                          .data[index]
+                                          .product
+                                          .productImage,
+                                      isChecked: true,
+                                      productName: wishlistProductsState
+                                          .wishlistModel
+                                          ?.wishlist
+                                          .data[index]
+                                          .product
+                                          .productName,
+                                      group: wishlistProductsState
+                                          .wishlistModel
+                                          ?.wishlist
+                                          .data[index]
+                                          .product
+                                          .allgroup
+                                          .groupName,
+                                      price: wishlistProductsState
+                                          .wishlistModel
+                                          ?.wishlist
+                                          .data[index]
+                                          .product
+                                          .sellingPrice,
+                                      cancel: () {
+                                        setState(() {
+                                          Navigator.pop(context);
+                                        });
+                                      },
+                                      delete: () {
+                                        if (wishlistProductsState
+                                            is! LoadingState) {
+                                          ref
+                                              .read(wishlistProvider.notifier)
+                                              .deleteWishlist(
+                                                id: wishlistProductsState
+                                                    .wishlistModel!
+                                                    .wishlist
+                                                    .data[index]
+                                                    .id
+                                                    .toString(),
+                                              );
+                                        }
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  );
                                 },
-                                delete: () {
-                                  if (wishlistProductsState is! LoadingState) {
-                                    ref
-                                        .read(wishlistProvider.notifier)
-                                        .deleteWishlist(
-                                          id: wishlistProductsState
-                                              .wishlistModel!
-                                              .wishlist
-                                              .data[index]
-                                              .id
-                                              .toString(),
-                                        );
-                                  }
-                                  Navigator.pop(context);
-                                },
                               ),
-                            );
-                          },
-                        ),
-                ],
-                const SizedBox(height: 20)
-              ],
-            ),
-          ),
-        )
+                      ],
+                      const SizedBox(height: 20)
+                    ],
+                  ),
+                ),
+              )
             : const LoginPage();
       },
     );

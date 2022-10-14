@@ -5,11 +5,8 @@ import 'package:finesse/src/features/product_details/model/product_details_model
 import 'package:finesse/src/features/product_details/state/product_details_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
-import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
 
 class ProductVariation extends StatefulWidget {
   final String? id;
@@ -22,37 +19,39 @@ class ProductVariation extends StatefulWidget {
 
 class _ProductVariationState extends State<ProductVariation> {
   List<dynamic> items = ['4', '5', '7', '8'];
-  List<Color> colors = [
-    Colors.grey,
-    Colors.black,
-    Colors.blue,
-    Colors.red,
-    Colors.orangeAccent,
-    Colors.green,
-    Colors.yellowAccent,
-    Colors.lightBlueAccent,
-    Colors.lime,
-  ];
-  int selectColor = 0;
   int currentIndex = 0;
   String? _brands;
   bool isChecked = false;
-  bool isCheckedd = false;
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
-        final brandState = ref.watch(allBrandsProvider);
-        final colorState = ref.watch(productDetailsProvider);
-
+         final brandState = ref.watch(allBrandsProvider);
+        // final colorState = ref.watch(productDetailsProvider);
         final List<Brand> brandData = brandState is AllBrandsSuccessState
             ? brandState.brandModel!.brands
             : [];
-        final List<AllVariation> colorData =
-            colorState is ProductDetailsSuccessState
-                ? colorState.productDetailsModel!.allVariation
-                : [];
+        // // final List<Product> colorData = colorState is ProductDetailsSuccessState
+        // //     ? colorState.productDetailsModel!.allVariation
+        // //     : [];
+        //
+        // List<Product> list = [];
+        //
+        // @override
+        // void initState() {
+        //   super.initState();
+        //   setState(() {
+        //     list = colorState;
+        //   });
+        // }
+
+        final productDetailsState = ref.watch(productDetailsProvider);
+
+        final List<Value>? productImageList =
+        productDetailsState is ProductDetailsSuccessState
+            ? productDetailsState.productDetailsModel?.product.color
+            : [];
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,29 +67,28 @@ class _ProductVariationState extends State<ProductVariation> {
             ),
             const SizedBox(height: 16),
             ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: colorData.length,
-              itemBuilder: (ctx, index) {
-                return Container(
-                  color: Colors.lightGreen,
-                  child: Row(
-                    children: [
-                      Checkbox(
-                        value: isChecked,
-                        onChanged: (newValue) {
-                          setState(() {
-                            isChecked = newValue!;
-                            isCheckedd = newValue!;
-                          });
-                        },
-                      ),
-                      Text(colorData[index].values[index].value.toString())
-                    ],
-                  ),
-                );
-              },
-            ),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: productImageList?.length,
+                itemBuilder: (ctx, index) {
+                  return Container(
+                    color: Colors.lightGreen,
+                    child: Row(
+                      children: [
+                        Checkbox(
+                          value: isChecked,
+                          onChanged: (newValue) {
+                            setState(() {
+                              isChecked = newValue!;
+                            });
+                          },
+                        ),
+                        Text("productImageList![index].value.toString()"),
+                      ],
+                    ),
+                  );
+                },
+              ),
             const SizedBox(height: 24),
             Text(
               'Size',

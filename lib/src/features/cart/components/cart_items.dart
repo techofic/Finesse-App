@@ -1,4 +1,5 @@
 import 'package:finesse/components/card/wishlist_card.dart';
+import 'package:finesse/components/shimmer/k_shimmer.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/cart/controller/cart_controller.dart';
 import 'package:finesse/src/features/cart/state/cart_state.dart';
@@ -7,6 +8,7 @@ import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CartItems extends StatefulWidget {
   const CartItems({Key? key}) : super(key: key);
@@ -17,6 +19,11 @@ class CartItems extends StatefulWidget {
 
 class _CartItemsState extends State<CartItems> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
@@ -24,6 +31,9 @@ class _CartItemsState extends State<CartItems> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (cartState is LoadingState) ...[
+              const KShimmer(shimmerHeight: 123)
+            ],
             if (cartState is CartSuccessState) ...[
               cartState.cartModel!.allCarts.isEmpty
                   ? const EmptyProductPage(

@@ -118,6 +118,7 @@ class Product {
   String? averageBuyingPrice;
   String? productImage;
   List<ProductImage> images;
+  List<Value>? color;
   int? isNew;
   int? totalSale;
   int? isFeatured;

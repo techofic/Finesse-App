@@ -25,7 +25,7 @@ class ProductInfo extends StatefulWidget {
       this.price,
       this.description,
       this.id,
-      Key? key})
+      Key? key,})
       : super(key: key);
 
   @override
@@ -138,11 +138,11 @@ class _ProductInfoState extends State<ProductInfo> {
                                     setState(() {
                                       currentIndex = index;
                                     });
-                                    // ref
-                                    //     .read(productDetailsProvider.notifier)
-                                    //     .fetchProductsDetails(
-                                    //   widget.id.toString(),
-                                    // );
+                                    ref
+                                        .read(productDetailsProvider.notifier)
+                                        .fetchProductsDetails(
+                                      widget.id.toString(),
+                                    );
                                     ref
                                         .read(productRecommendationProvider
                                             .notifier)

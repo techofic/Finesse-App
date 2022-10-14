@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+
               const KFilter(check: true),
               const SizedBox(height: 24),
               const KSlider(selectSliders: 1),

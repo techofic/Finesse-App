@@ -1,11 +1,14 @@
 import 'package:finesse/components/button/k_border_btn.dart';
 import 'package:finesse/components/button/k_button.dart';
+import 'package:finesse/constants/shared_preference_constant.dart';
+import 'package:finesse/src/features/auth/login/view/login_page.dart';
 import 'package:finesse/src/features/cart/components/cart_items.dart';
 import 'package:finesse/src/features/cart/components/products_amount.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -26,7 +29,8 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
-        return Scaffold(
+        bool checkLogin = getBoolAsync(loggedIn, defaultValue: false);
+        return checkLogin?Scaffold(
           backgroundColor: KColor.appBackground,
           body: SingleChildScrollView(
             child: Container(
@@ -63,7 +67,7 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
           ),
-        );
+        ): const LoginPage();
       },
     );
   }

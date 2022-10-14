@@ -69,7 +69,8 @@ class _MyAppState extends ConsumerState<MyApp> {
       theme: ThemeData(
         fontFamily: GoogleFonts.inter().fontFamily,
       ),
-      initialRoute: checkLogin?'/mainScreen':'/login',
+      //initialRoute: checkLogin?'/mainScreen':'/login',
+      initialRoute: '/mainScreen',
       onGenerateRoute: RouteGenerator.generateRoute,
       navigatorKey: NavigationService.navigatorKey,
     );

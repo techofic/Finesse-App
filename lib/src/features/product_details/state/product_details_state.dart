@@ -5,7 +5,7 @@ import 'package:finesse/src/features/product_details/model/product_details_model
 class ProductDetailsSuccessState extends SuccessState {
   final ProductDetailsModel? productDetailsModel;
 
-  const ProductDetailsSuccessState(this.productDetailsModel);
+  const ProductDetailsSuccessState(this.productDetailsModel,);
 }
 
 class AllBrandsSuccessState extends SuccessState {

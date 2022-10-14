@@ -1,4 +1,3 @@
-
 import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:finesse/src/features/product_details/state/product_details_state.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -109,9 +108,8 @@ class _ProductPreviewState extends State<ProductPreview> {
                                 controller: _controller,
                                 itemBuilder: (ctx, position) {
                                   return Image.network(
-                                      productImageList[position]
-                                          .url
-                                          .toString());
+                                    productImageList[position].url.toString(),
+                                  );
                                 }),
                           ),
                         ),
@@ -129,9 +127,7 @@ class _ProductPreviewState extends State<ProductPreview> {
                                     curve: Curves.easeInOut,
                                   );
                                 });
-                                if (index == selectIndex) {
-
-                                }
+                                if (index == selectIndex) {}
                               },
                               effect: ExpandingDotsEffect(
                                 activeDotColor: KColor.blackbg,

@@ -23,7 +23,7 @@ class ProductDetails extends StatefulWidget {
       this.price,
       this.description,
       this.id,
-      Key? key})
+      Key? key,})
       : super(key: key);
 
   @override
