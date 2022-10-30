@@ -61,6 +61,7 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
                           id: featureCategory[index].id.toString(),
                         );
                       }
+                      ref.read(wishlistProvider.notifier).fetchWishlistProducts();
                     },
                   );
                 },

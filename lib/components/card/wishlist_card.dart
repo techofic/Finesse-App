@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finesse/components/dialog/k_confirm_dialog.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/gestures.dart';
@@ -14,20 +15,24 @@ class WishlistCard extends StatefulWidget {
   final String? productName;
   final String? group;
   final int? price;
+  int? total;
   final VoidCallback? cancel;
   final VoidCallback? delete;
+  final VoidCallback? add;
 
-  WishlistCard(
-      {required this.img,
-      this.quantity,
-      this.isChecked,
-      this.productName,
-      this.group,
-      this.price,
-      this.cancel,
-      this.delete,
-      Key? key})
-      : super(key: key);
+  WishlistCard({
+    required this.img,
+    this.quantity,
+    this.isChecked,
+    this.productName,
+    this.group,
+    this.price,
+    this.cancel,
+    this.delete,
+    this.add,
+    this.total,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<WishlistCard> createState() => _WishlistCardState();
@@ -112,9 +117,10 @@ class _WishlistCardState extends State<WishlistCard> {
                       topLeft: Radius.circular(15),
                       bottomLeft: Radius.circular(15),
                     ),
-                    child: Image.network(
-                      '${widget.img}',
+                    child: CachedNetworkImage(
+                      imageUrl: '${widget.img}',
                       fit: BoxFit.fill,
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
                     ),
                   ),
                 ),
@@ -162,13 +168,16 @@ class _WishlistCardState extends State<WishlistCard> {
                                 ? SizedBox(width: context.screenWidth * 0.32)
                                 : SizedBox(width: context.screenWidth * 0.14),
                             widget.isChecked == true
-                                ? CircleAvatar(
-                                    radius: 18,
-                                    backgroundColor: KColor.baseBlack,
-                                    child: SvgPicture.asset(
-                                      'assets/images/trolly.svg',
-                                      color: Colors.white,
-                                      height: 19,
+                                ? InkWell(
+                                    onTap: widget.add,
+                                    child: CircleAvatar(
+                                      radius: 18,
+                                      backgroundColor: KColor.baseBlack,
+                                      child: SvgPicture.asset(
+                                        'assets/images/trolly.svg',
+                                        color: Colors.white,
+                                        height: 19,
+                                      ),
                                     ),
                                   )
                                 : Row(
@@ -222,6 +231,7 @@ class _WishlistCardState extends State<WishlistCard> {
                                               widget.quantity = 0;
                                             }
                                           });
+                                          // ref.read(cartProvider.notifier).up;
                                         },
                                         child: Container(
                                           height: 32,

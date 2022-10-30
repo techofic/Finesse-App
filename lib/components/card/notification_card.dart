@@ -1,5 +1,4 @@
 import 'package:finesse/components/dialog/k_confirm_dialog.dart';
-import 'package:finesse/utils/extension.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

@@ -49,6 +49,9 @@ class API {
   static const deleteCart = 'app/cart_delete';
   static const allCity = 'app/cities';
   static allZone({id = ""}) => 'app/zones/$id';
+  static const getPromoCode= 'app/checkCoupon';
+  static const getReferralCode = 'app/checkReferralCode';
+  static const getGiftVoucher = 'app/checkGiftVoucherCode';
 
   //notification
   static const getNotification = 'app/getNotiDetails';
@@ -59,4 +62,9 @@ class API {
   static const addReport = 'app/reports';
   static const getReport = 'app/reports?page=1';
   static const editUser = 'app/user/edit';
+
+  //order
+  static const addOrder = 'app/orderApp';
+  static const getOrder = 'app/order';
+  static const deleteOrder = 'app/cancelOrder';
 }

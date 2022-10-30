@@ -112,7 +112,7 @@ class Network {
       } else if (response.statusCode == 401 || response.statusCode == 404) {
         /// Custom message
         if (jsonDecode(response.body)['message'] == "Unauthenticated.") {
-          // toast('Login to continue...', bgColor: KColor.red);
+          toast('Login to continue...', bgColor: KColor.red);
 
           // setValue(LOGGED_IN, false);
           // NavigationService.navigateToReplacement(CupertinoPageRoute(builder: (_) => LoginScreen()));

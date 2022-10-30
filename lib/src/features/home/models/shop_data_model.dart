@@ -173,8 +173,8 @@ class AllImage {
   factory AllImage.fromJson(Map<String, dynamic> json) => AllImage(
         id: json["id"],
         productId: json["productId"],
-        url: json["url"] == null ? null : json["url"],
-        tagId: json["tagId"] == null ? null : json["tagId"],
+        url: json["url"],
+        tagId: json["tagId"],
       );
 
   Map<String, dynamic> toJson() => {

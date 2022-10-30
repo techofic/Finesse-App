@@ -11,6 +11,7 @@ import 'package:finesse/src/features/checkout/components/add_new_address.dart';
 import 'package:finesse/src/features/checkout/components/confirm_order.dart';
 import 'package:finesse/src/features/checkout/components/payment_page.dart';
 import 'package:finesse/src/features/checkout/components/preview_page.dart';
+import 'package:finesse/src/features/checkout/components/take_address.dart';
 import 'package:finesse/src/features/checkout/view/checkout_page.dart';
 import 'package:finesse/src/features/contact/view/contact_page.dart';
 import 'package:finesse/src/features/home/components/shop_page.dart';
@@ -74,7 +75,7 @@ class RouteGenerator {
         );
       case '/resetPassword':
         return MaterialPageRoute(
-          builder: (_) => ResetPasswordPage(),
+          builder: (_) => const ResetPasswordPage(),
         );
       case '/setOtp':
         return MaterialPageRoute(
@@ -216,6 +217,10 @@ class RouteGenerator {
       case '/settings':
         return MaterialPageRoute(
           builder: (_) => const SettingPage(),
+        );
+      case '/addAddress':
+        return MaterialPageRoute(
+          builder: (_) => const AddressPage(),
         );
       default:
         return MaterialPageRoute(

@@ -7,6 +7,7 @@ import 'package:finesse/components/navigation/tab_item.dart';
 import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/core/base/base_state.dart';
+import 'package:finesse/src/features/auth/login/controller/login_controller.dart';
 import 'package:finesse/src/features/cart/controller/cart_controller.dart';
 import 'package:finesse/src/features/cart/view/cart_page.dart';
 import 'package:finesse/src/features/home/views/home_page.dart';
@@ -53,8 +54,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                 onPageChanged: (index) {
                   setState(() => _currentIndex = index);
                   if (wishlistState is! LoadingState) {
-                    ref.read(wishlistProvider.notifier).fetchWishlistProducts();
-                    ref.read(cartProvider.notifier).cartDetails();
+                    if(_currentIndex==1)ref.read(cartProvider.notifier).cartDetails();
+                    if(_currentIndex==2) ref.read(wishlistProvider.notifier).fetchWishlistProducts();
+                    if(_currentIndex==3) ref.read(loginProvider.notifier).userModel;
                   }
                 },
                 children: const [

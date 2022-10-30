@@ -2,13 +2,12 @@ import 'package:finesse/components/card/wishlist_card.dart';
 import 'package:finesse/components/shimmer/k_shimmer.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/cart/controller/cart_controller.dart';
+import 'package:finesse/src/features/cart/model/cart_model.dart';
 import 'package:finesse/src/features/cart/state/cart_state.dart';
 import 'package:finesse/src/features/wishlist/view/empty_product_page.dart';
-import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shimmer/shimmer.dart';
 
 class CartItems extends StatefulWidget {
   const CartItems({Key? key}) : super(key: key);
@@ -19,20 +18,17 @@ class CartItems extends StatefulWidget {
 
 class _CartItemsState extends State<CartItems> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
         final cartState = ref.watch(cartProvider);
+        final List<AllCart>? cartData =
+            cartState is CartSuccessState ? cartState.cartModel?.allCarts : [];
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (cartState is LoadingState) ...[
-              const KShimmer(shimmerHeight: 123)
+              const KLoading(shimmerHeight: 123)
             ],
             if (cartState is CartSuccessState) ...[
               cartState.cartModel!.allCarts.isEmpty
@@ -45,16 +41,12 @@ class _CartItemsState extends State<CartItems> {
                       itemCount: cartState.cartModel?.allCarts.length,
                       itemBuilder: (ctx, index) {
                         return WishlistCard(
-                          img: cartState.cartModel?.allCarts[index].details.img,
+                          img: cartData?[index].details?.img,
                           isChecked: false,
-                          productName: cartState
-                              .cartModel?.allCarts[index].details.productName,
-                          group: cartState
-                              .cartModel?.allCarts[index].details.groupName,
-                          price: cartState
-                              .cartModel?.allCarts[index].details.sellingPrice,
-                          quantity:
-                              cartState.cartModel?.allCarts[index].quantity,
+                          productName: cartData?[index].details?.productName,
+                          group: cartData?[index].details?.groupName,
+                          price: cartData?[index].details?.sellingPrice,
+                          quantity: cartData?[index].quantity,
                           cancel: () {
                             setState(() {
                               Navigator.pop(context);
@@ -68,12 +60,13 @@ class _CartItemsState extends State<CartItems> {
                                   );
                             }
                             Navigator.pop(context);
+                            ref.read(cartProvider.notifier).cartDetails();
                           },
                         );
                       },
                     ),
             ],
-            SizedBox(height: context.screenHeight * 0.05),
+            SizedBox(height: context.screenHeight * 0.04),
           ],
         );
       },

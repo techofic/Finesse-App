@@ -1,5 +1,7 @@
 import 'package:finesse/components/appbar/appbar.dart';
 import 'package:finesse/components/card/report_card.dart';
+import 'package:finesse/components/shimmer/k_shimmer.dart';
+import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/profile/controller/profile_controller.dart';
 import 'package:finesse/src/features/profile/state/profile_state.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -32,6 +34,9 @@ class _ReportListState extends State<ReportList> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (reportState is LoadingState) ...[
+                    const KLoading(shimmerHeight: 123)
+                  ],
                   if (reportState is FetchReportSuccessState) ...[
                     ListView.builder(
                       shrinkWrap: true,
@@ -46,7 +51,8 @@ class _ReportListState extends State<ReportList> {
                                   .reportModel?.data.data[index].createdAt
                                   .toString(),
                               0),
-                          reason: reportState.reportModel?.data.data[index].reason,
+                          reason:
+                              reportState.reportModel?.data.data[index].reason,
                           img: reportState.reportModel?.data.data[index].image,
                         );
                       },

@@ -142,6 +142,7 @@ class _ShopPageState extends State<ShopPage> {
                                         id: shopData[index].id.toString(),
                                       );
                                 }
+                                ref.read(wishlistProvider.notifier).fetchWishlistProducts();
                               });
                         },
                       ),

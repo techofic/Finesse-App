@@ -1,9 +1,6 @@
 import 'package:finesse/constants/asset_path.dart';
-import 'package:finesse/src/features/filter/filter_page.dart';
-import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../styles/k_colors.dart';
 import '../textfield/k_search_field.dart';
 

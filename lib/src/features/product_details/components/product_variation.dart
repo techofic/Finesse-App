@@ -28,26 +28,11 @@ class _ProductVariationState extends State<ProductVariation> {
     return Consumer(
       builder: (context, ref, _) {
          final brandState = ref.watch(allBrandsProvider);
-        // final colorState = ref.watch(productDetailsProvider);
         final List<Brand> brandData = brandState is AllBrandsSuccessState
             ? brandState.brandModel!.brands
             : [];
-        // // final List<Product> colorData = colorState is ProductDetailsSuccessState
-        // //     ? colorState.productDetailsModel!.allVariation
-        // //     : [];
-        //
-        // List<Product> list = [];
-        //
-        // @override
-        // void initState() {
-        //   super.initState();
-        //   setState(() {
-        //     list = colorState;
-        //   });
-        // }
 
         final productDetailsState = ref.watch(productDetailsProvider);
-
         final List<Value>? productImageList =
         productDetailsState is ProductDetailsSuccessState
             ? productDetailsState.productDetailsModel?.product.color
@@ -60,35 +45,6 @@ class _ProductVariationState extends State<ProductVariation> {
               'Select Variations',
               style: KTextStyle.headline6.copyWith(color: Colors.black),
             ),
-            const SizedBox(height: 24),
-            Text(
-              'Color',
-              style: KTextStyle.subtitle1.copyWith(color: Colors.black),
-            ),
-            const SizedBox(height: 16),
-            ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: productImageList?.length,
-                itemBuilder: (ctx, index) {
-                  return Container(
-                    color: Colors.lightGreen,
-                    child: Row(
-                      children: [
-                        Checkbox(
-                          value: isChecked,
-                          onChanged: (newValue) {
-                            setState(() {
-                              isChecked = newValue!;
-                            });
-                          },
-                        ),
-                        Text("productImageList![index].value.toString()"),
-                      ],
-                    ),
-                  );
-                },
-              ),
             const SizedBox(height: 24),
             Text(
               'Size',

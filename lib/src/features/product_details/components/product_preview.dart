@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:finesse/src/features/product_details/state/product_details_state.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -5,7 +6,6 @@ import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../model/product_details_model.dart';
 
 class ProductPreview extends StatefulWidget {
@@ -36,13 +36,7 @@ class _ProductPreviewState extends State<ProductPreview> {
           children: [
             Container(
               height: context.screenHeight * 0.25,
-              decoration: const BoxDecoration(
-                color: KColor.cirColor,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(-20),
-                  bottomRight: Radius.circular(20),
-                ),
-              ),
+              color: KColor.cirColor,
               padding: const EdgeInsets.only(left: 12, right: 12, bottom: 15),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -51,8 +45,7 @@ class _ProductPreviewState extends State<ProductPreview> {
                     Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
-                        itemCount: productDetailsState
-                            .productDetailsModel!.product.images.length,
+                        itemCount: productImageList.length,
                         itemBuilder: (context, int index) {
                           return InkWell(
                             onTap: () {
@@ -83,9 +76,12 @@ class _ProductPreviewState extends State<ProductPreview> {
                                 ),
                               ),
                               child: Center(
-                                child: Image.network(
-                                  productImageList[index].url.toString(),
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      productImageList[index].url.toString(),
                                   height: 52,
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
                                 ),
                               ),
                             ),
@@ -99,7 +95,6 @@ class _ProductPreviewState extends State<ProductPreview> {
                         Expanded(
                           child: Container(
                             alignment: Alignment.centerRight,
-                            //color: Colors.indigoAccent,
                             width: context.screenWidth * 0.78,
                             height: 247,
                             padding: const EdgeInsets.only(bottom: 15),

@@ -1,10 +1,11 @@
+import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class KShimmer extends StatelessWidget {
+class KLoading extends StatelessWidget {
   final double? shimmerHeight;
 
-  const KShimmer({
+  const KLoading({
     Key? key,
     this.shimmerHeight,
   }) : super(key: key);
@@ -16,13 +17,19 @@ class KShimmer extends StatelessWidget {
       child: Shimmer.fromColors(
         baseColor: Colors.grey.shade300,
         highlightColor: Colors.grey.shade400,
-        child: Container(
-          height: shimmerHeight,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(15),
-          ),
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: 5,
+          itemBuilder: (ctx, index) {
+            return Container(
+              height: shimmerHeight,
+              width: context.screenWidth*0.2,
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(15),
+              ),
+            );
+          },
         ),
       ),
     );

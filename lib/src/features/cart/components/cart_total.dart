@@ -5,13 +5,17 @@ import 'package:flutter/material.dart';
 class CardTotal extends StatefulWidget {
   final int? subTotal;
   final int? deliveryFee;
+  final int? rounding;
+  final String? discount;
   int? total;
 
-    CardTotal({
+  CardTotal({
     Key? key,
     this.subTotal,
     this.deliveryFee,
     this.total,
+    this.discount,
+    this.rounding,
   }) : super(key: key);
 
   @override
@@ -22,8 +26,7 @@ class _CardTotalState extends State<CardTotal> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      height: 144,
+      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 18.0),
       decoration: BoxDecoration(
         color: KColor.filterDividerColor.withOpacity(0.7),
         borderRadius: BorderRadius.circular(15),
@@ -34,6 +37,10 @@ class _CardTotalState extends State<CardTotal> {
           _getTotal('Subtotal', widget.subTotal.toString()),
           const SizedBox(height: 15),
           _getTotal('Delivery fee', widget.deliveryFee.toString()),
+          const SizedBox(height: 15),
+          _getTotal('Discount', widget.discount.toString()),
+          const SizedBox(height: 15),
+          _getTotal('Rounding', widget.rounding.toString()),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 3.0),
             child: Divider(

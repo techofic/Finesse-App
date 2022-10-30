@@ -166,6 +166,7 @@ class _ReportIssueState extends State<ReportIssue> {
                   KBorderButton(
                     title: 'View Report List',
                     onTap: () {
+                      ref.read(reportProvider.notifier).fetchReports();
                       Navigator.pushNamed(context, '/reportList');
                     },
                   ),

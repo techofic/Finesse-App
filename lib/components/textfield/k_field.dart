@@ -1,7 +1,4 @@
-import 'package:finesse/constants/asset_path.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../styles/k_colors.dart';
 import '../../styles/k_text_style.dart';
 
@@ -37,7 +34,6 @@ class _KTextFieldState extends State<KTextField> {
         }
         return null;
       },
-      keyboardType: TextInputType.number,
       controller: widget.controller,
       decoration: InputDecoration(
         hintText: widget.hintText,

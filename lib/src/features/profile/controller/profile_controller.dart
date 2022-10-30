@@ -3,6 +3,7 @@ import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/core/network/api.dart';
 import 'package:finesse/core/network/network_utils.dart';
 import 'package:finesse/service/navigation_service.dart';
+import 'package:finesse/src/features/auth/login/model/user_model.dart';
 import 'package:finesse/src/features/auth/signup/view/signup_page.dart';
 import 'package:finesse/src/features/profile/model/report_model.dart';
 import 'package:finesse/src/features/profile/state/profile_state.dart';
@@ -90,22 +91,53 @@ class reportController extends StateNotifier<BaseState> {
       state = const ErrorState();
     }
   }
+}
+
+class profileController extends StateNotifier<BaseState> {
+  final Ref? ref;
+
+  profileController({this.ref}) : super(const InitialState());
+
+  User? userModel;
 
   Future editProfile({
+    required int id,
     required String name,
     required String email,
-    required String contact,
-    required String address,
-    required String zoneId,
+    required User user,
   }) async {
     state = const LoadingState();
     var responseBody;
+    var customer = {
+      "id": user.customer.id,
+      "userId": user.customer.userId,
+      "customerName": user.customer.customerName,
+      "email": user.customer.email,
+      "zone": "60 feet road",
+      "facebook": user.customer.facebook,
+      "instagram": user.customer.instagram,
+      "cityId": 14,
+      "areaId": 8375,
+      "zoneId": 412,
+      "postCode": null
+    };
     var requestBody = {
+      'id': id,
       'name': name,
       'email': email,
-      'contact': contact,
-      'address': address,
-      'zoneId': zoneId,
+      'customer': {
+        "id": user.customer.id,
+        "userId": user.customer.userId,
+        "customerName": user.customer.customerName,
+        "email": user.customer.email,
+        "zone": "60 feet road",
+        "facebook": user.customer.facebook,
+        "instagram": user.customer.instagram,
+        "cityId": 14,
+        "areaId": 8375,
+        "zoneId": 412,
+        "postCode": null
+      }
     };
     try {
       responseBody = await Network.handleResponse(
@@ -135,41 +167,124 @@ class reportController extends StateNotifier<BaseState> {
   }
 }
 
-class profileController extends StateNotifier<BaseState> {
+class OrderController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  profileController({this.ref}) : super(const InitialState());
+  OrderController({this.ref}) : super(const InitialState());
+  ReportModel? reportModel;
 
-  Future editProfile({
-    required String name,
-    required String email,
+  Future order({
+    required int areaId,
+    required String billingAddress,
+    required String billingArea,
+    required String billingCity,
+    required String billingZone,
+    required int cityId,
     required String contact,
-    required String address,
-    required String zoneId,
+    required String coupon,
+    required String date,
+    required int dgAmount,
+    required int discount,
+    required String discountType,
+    required String email,
+    required int giftVoucherAmount,
+    required int giftVoucherCode,
+    required int grandTotal,
+    required int isDGMoney,
+    required int isDifferentShipping,
+    required int membershipDiscount,
+    required int membershipDiscountAmount,
+    required String name,
+    required String notes,
+    required String paymentType,
+    required int postCode,
+    required int promoDiscount,
+    required int promoDiscountAmount,
+    required int referralCode,
+    required int referralDiscount,
+    required int referralDiscountAmount,
+    required int roundAmount,
+    required int shippingPrice,
+
+
   }) async {
     state = const LoadingState();
     var responseBody;
     var requestBody = {
-      'name': name,
-      'email': email,
-      'contact': contact,
-      'address': address,
-      'zoneId': zoneId,
+      // 'description': description,
+      // 'reason': reason,
+      // 'userId': userId,
+      // 'orderId': orderId,
+      // 'image': image,
     };
     try {
       responseBody = await Network.handleResponse(
-        await Network.postRequest(API.editUser, requestBody),
+        await Network.postRequest(API.addReport, requestBody),
       );
       if (responseBody != null) {
         if (responseBody['token'] != null) {
-          state = const EditProfileSuccessState();
+          state = const ReportSuccessState();
           setValue(loggedIn, true);
           setValue(token, responseBody['token']);
-          toast("Edit user Successfully", bgColor: KColor.selectColor);
+          toast("Add report Successfully", bgColor: KColor.selectColor);
 
           NavigationService?.navigateToReplacement(
             CupertinoPageRoute(
-              builder: (context) => const ProfilePage(),
+              builder: (context) => SignupPage(),
+            ),
+          );
+        }
+      } else {
+        state = const ErrorState();
+      }
+    } catch (error, stackTrace) {
+      print(error);
+      print(stackTrace);
+      state = const ErrorState();
+    }
+  }
+
+  Future fetchOrders() async {
+    state = const LoadingState();
+    var responseBody;
+    try {
+      responseBody = await Network.handleResponse(
+        await Network.getRequest(API.getOrder),
+      );
+      if (responseBody != null) {
+        reportModel = ReportModel.fromJson(responseBody);
+        state = FetchReportSuccessState(reportModel);
+      } else {
+        state = const ErrorState();
+      }
+    } catch (error, stackTrace) {
+      print("error = $error");
+      print("error = $stackTrace");
+      state = const ErrorState();
+    }
+  }
+
+  Future cancelOrder({
+    required int id,
+    required int invoiceId,
+  }) async {
+    state = const LoadingState();
+    var responseBody;
+    var requestBody = {'id': id, 'invoice_id': invoiceId};
+    try {
+      responseBody = await Network.handleResponse(
+        await Network.postRequest(API.deleteOrder, requestBody),
+      );
+      if (responseBody != null) {
+        if (responseBody['token'] != null) {
+          state = const OrderSuccessState();
+          setValue(loggedIn, true);
+          setValue(token, responseBody['token']);
+          toast("Order Post Successfully", bgColor: KColor.selectColor);
+
+          NavigationService?.navigateToReplacement(
+            CupertinoPageRoute(
+              builder: (context) => SignupPage(),
             ),
           );
         }

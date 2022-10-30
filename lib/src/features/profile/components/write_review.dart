@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:finesse/components/appbar/appbar.dart';
 import 'package:finesse/components/button/k_button.dart';
+import 'package:finesse/components/card/review_card.dart';
 import 'package:finesse/components/dialog/k_dialog.dart';
 import 'package:finesse/components/dropdown/k_dropdown.dart';
 import 'package:finesse/components/textfield/k_description_field.dart';
@@ -75,58 +76,7 @@ class _WriteReviewState extends State<WriteReview> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: KColor.appBackground,
-                  boxShadow: [
-                    BoxShadow(
-                      color: KColor.shadowColor.withOpacity(0.2),
-                      spreadRadius: 0,
-                      blurRadius: 12,
-                      offset: const Offset(4, 4), // changes position of shadow
-                    ),
-                    BoxShadow(
-                      color: KColor.shadowColor.withOpacity(0.2),
-                      spreadRadius: 0,
-                      blurRadius: 12,
-                      offset:
-                          const Offset(-4, -4), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'assets/images/watch-two.png',
-                      height: 49,
-                    ),
-                    const SizedBox(width: 16),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Hanging Clock',
-                          style: KTextStyle.subtitle4.copyWith(
-                            color: KColor.blackbg,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          "\$44.90",
-                          style: KTextStyle.subtitle1.copyWith(
-                            color: KColor.blackbg,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              const ReviewCard(),
               SizedBox(height: context.screenHeight * 0.05),
               Center(
                 child: Column(
@@ -152,12 +102,9 @@ class _WriteReviewState extends State<WriteReview> {
                         itemBuilder: (context, index) => SvgPicture.asset(
                             AssetPath.startIcon,
                             height: 40,
-                            color: KColor.rattingColor),
-                        onRatingUpdate: (rating) {
-                          setState(() {
-                            //selectedRatting = rating as int;
-                          });
-                        },
+                            color: KColor.rattingColor,
+                        ),
+                        onRatingUpdate: (double value) {  },
                       ),
                     ),
                     Text(
@@ -278,3 +225,5 @@ class _WriteReviewState extends State<WriteReview> {
     );
   }
 }
+
+

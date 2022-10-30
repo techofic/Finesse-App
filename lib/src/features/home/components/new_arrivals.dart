@@ -34,7 +34,6 @@ class _NewArrivalsState extends State<NewArrivals> {
       return Column(
         children: [
           SizedBox(
-            //padding: EdgeInsets.symmetric(horizontal: 12,vertical: 8),
             height: 222,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -72,6 +71,7 @@ class _NewArrivalsState extends State<NewArrivals> {
                         id: newCategory[index].id.toString(),
                       );
                     }
+                    ref.read(wishlistProvider.notifier).fetchWishlistProducts();
                   },
                 );
               },

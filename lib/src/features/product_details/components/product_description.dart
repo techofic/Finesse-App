@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../model/producr_recommendation_model.dart';
 
 class ProductDescription extends StatefulWidget {
   final String? id;
@@ -32,10 +31,6 @@ class _ProductDescriptionState extends State<ProductDescription> {
         final productDetailsState = ref.watch(productDetailsProvider);
         final productRecommendationState =
             ref.watch(productRecommendationProvider);
-        final List<Product>? productRecommendationData =
-            productDetailsState is ProductRecommendationSuccessState
-                ? productDetailsState.productRecommendationModel?.product
-                : [];
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,29 +39,11 @@ class _ProductDescriptionState extends State<ProductDescription> {
               'Description',
               style: KTextStyle.subtitle7.copyWith(color: Colors.black),
             ),
+
             if (productDetailsState is ProductDetailsSuccessState) ...[
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 16.0, bottom: 24),
-              //   child: ReadMoreText(
-              //     '${productDetailsState.productDetailsModel?.product.briefDescription}',
-              //     trimLines: 2,
-              //     trimMode: TrimMode.Line,
-              //     trimCollapsedText: 'read more...',
-              //     trimExpandedText: ' Show less',
-              //     style: KTextStyle.description.copyWith(
-              //       color: KColor.blackbg.withOpacity(0.5),
-              //     ),
-              //     moreStyle: KTextStyle.description.copyWith(
-              //       color: KColor.blackbg,
-              //     ),
-              //     lessStyle: KTextStyle.description.copyWith(
-              //       color: KColor.blackbg,
-              //     ),
-              //   ),
-              // ),
               Html(
                 data: productDetailsState
-                    .productDetailsModel?.product.briefDescription,
+                    .productDetailsModel?.product.briefDescription ??'No data available',
                 style: {
                   'span': Style(
                     color: KColor.blackbg.withOpacity(0.5),
@@ -77,49 +54,15 @@ class _ProductDescriptionState extends State<ProductDescription> {
                   ),
                 },
               ),
-              // Text(
-              //   'Product Details',
-              //   style: KTextStyle.subtitle4.copyWith(color: Colors.black),
-              // ),
-              // const SizedBox(height: 16),
-              // ListView.builder(
-              //   shrinkWrap: true,
-              //   itemCount: categoryData!.length,
-              //   itemBuilder: (ctx, index) {
-              //     return Padding(
-              //       padding: const EdgeInsets.only(left: 8.0),
-              //       child: Column(
-              //         children: [
-              //           Row(
-              //             children: [
-              //               CircleAvatar(
-              //                 radius: 2,
-              //                 backgroundColor: KColor.black.withOpacity(0.5),
-              //               ),
-              //               const SizedBox(width: 7),
-              //               Text(
-              //                 categoryData[index].groupName.toString(),
-              //                 style: KTextStyle.description.copyWith(
-              //                   color: KColor.black.withOpacity(0.5),
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //           const SizedBox(height: 8),
-              //         ],
-              //       ),
-              //     );
-              //   },
-              // ),
             ],
-            //const SizedBox(height: 32),
+
             if (productRecommendationState
                 is ProductRecommendationSuccessState) ...{
               Text(
                 'Recommended',
                 style: KTextStyle.subtitle4.copyWith(color: Colors.black),
               ),
-              //const SizedBox(height: 16),
+
               SizedBox(
                 height: 170,
                 child: ListView.builder(
@@ -128,8 +71,11 @@ class _ProductDescriptionState extends State<ProductDescription> {
                       .productRecommendationModel?.product.length,
                   itemBuilder: (BuildContext context, int index) {
                     return RecommendCard(
-                        img: productRecommendationState
-                            .productRecommendationModel?.product[index].images);
+                      img: productRecommendationState.productRecommendationModel
+                          ?.product[index].productImage,
+                      price: productRecommendationState.productRecommendationModel
+                          ?.product[index].sellingPrice.toString(),
+                    );
                   },
                 ),
               ),

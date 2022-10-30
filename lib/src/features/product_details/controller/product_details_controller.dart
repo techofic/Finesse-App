@@ -25,6 +25,7 @@ class ProductDetailsController extends StateNotifier<BaseState> {
   ProductDetailsController({this.ref}) : super(const InitialState());
   ProductDetailsModel? productDetailsModel;
   ColorModel? colorModel;
+
   Future fetchProductsDetails(productId) async {
     state = const LoadingState();
     var responseBody;

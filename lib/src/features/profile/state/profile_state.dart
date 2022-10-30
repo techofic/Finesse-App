@@ -5,6 +5,10 @@ class ReportSuccessState extends SuccessState {
   const ReportSuccessState();
 }
 
+class OrderSuccessState extends SuccessState {
+  const OrderSuccessState();
+}
+
 class FetchReportSuccessState extends SuccessState {
   ReportModel? reportModel;
 
