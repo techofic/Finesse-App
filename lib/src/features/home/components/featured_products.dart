@@ -1,7 +1,9 @@
 import 'package:finesse/components/card/product_card.dart';
+import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/home/controllers/product_category_controller.dart';
 import 'package:finesse/src/features/home/models/products_category_model.dart';
 import 'package:finesse/src/features/home/state/product_category_state.dart';
+import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,6 +19,7 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
+        final wishlistState = ref.watch(wishlistProvider);
         final featureCategoryState = ref.watch(productCategoryProvider);
         final List<Product>? featureCategory =
             featureCategoryState is ProductCategorySuccessState
@@ -47,8 +50,17 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
                           'productName': featureCategory[index].productName,
                           'productGroup': featureCategory[index].allgroup.groupName,
                           'price': featureCategory[index].sellingPrice.toString(),
+                          'description': featureCategory[index].briefDescription,
+                          'id': featureCategory[index].id,
                         },
                       );
+                    },
+                    pressed: () {
+                      if (wishlistState is! LoadingState) {
+                        ref.read(wishlistProvider.notifier).addWishlist(
+                          id: featureCategory[index].id.toString(),
+                        );
+                      }
                     },
                   );
                 },

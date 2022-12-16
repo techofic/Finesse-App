@@ -7,8 +7,9 @@ class KDialog extends StatelessWidget {
   final String? message;
   final String? subMessage;
   final bool? checkTitle;
+  final VoidCallback? tap;
 
-  const KDialog({this.subMessage, this.checkTitle, this.message, Key? key})
+  const KDialog({this.subMessage, this.checkTitle, this.message, this.tap,Key? key})
       : super(key: key);
 
   @override
@@ -42,9 +43,7 @@ class KDialog extends StatelessWidget {
                   ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/login');
-                  },
+                  onTap: tap,
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: 54,
@@ -55,8 +54,9 @@ class KDialog extends StatelessWidget {
                     child: Center(
                       child: Text(
                         'Go Back',
-                        style: KTextStyle.subtitle1
-                            .copyWith(color: KColor.whiteBackground),
+                        style: KTextStyle.subtitle1.copyWith(
+                          color: KColor.whiteBackground,
+                        ),
                       ),
                     ),
                   ),

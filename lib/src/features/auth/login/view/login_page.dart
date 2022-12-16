@@ -64,9 +64,6 @@ class _LoginPageState extends State<LoginPage> {
                         label: 'Phone',
                       ),
                       const SizedBox(height: 33),
-                      // TODO :: Again I would suggest to combine the textfields into one component
-                      // and take border/background colors as optional parameters
-                      // Check ScoreBee app's TextField for reference
                       PasswordTextField(
                         controller: password,
                         hintText: 'Enter your password here...',

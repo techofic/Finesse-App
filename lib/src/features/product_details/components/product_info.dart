@@ -1,9 +1,12 @@
 import 'package:finesse/constants/asset_path.dart';
+import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/product_details/components/product_variation.dart';
 import 'package:finesse/src/features/product_details/components/product_description.dart';
 import 'package:finesse/src/features/product_details/components/product_review.dart';
 import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:finesse/src/features/product_details/controller/product_recommendation_controller.dart';
+import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
+import 'package:finesse/src/features/wishlist/state/wishlist_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +47,12 @@ class _ProductInfoState extends State<ProductInfo> {
       child: SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(
-              //color: Colors.orange,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+            //color: Colors.orange,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
           child: Padding(
             padding: const EdgeInsets.only(top: 24, left: 12, right: 12),
             child: Column(
@@ -81,18 +87,32 @@ class _ProductInfoState extends State<ProductInfo> {
                         color: KColor.blackbg.withOpacity(0.3),
                       ),
                     ),
-                    Material(
-                      borderRadius: BorderRadius.circular(32),
-                      elevation: 4,
-                      child: const CircleAvatar(
-                        backgroundColor: KColor.appBackground,
-                        radius: 16,
-                        child: Icon(
-                          Icons.favorite_outlined,
-                          color: KColor.baseBlack,
-                          size: 13,
-                        ),
-                      ),
+                    Consumer(
+                      builder: (context, ref, _) {
+                        final wishlistState = ref.watch(wishlistProvider);
+                        return InkWell(
+                          onTap: () {
+                            if (wishlistState is! LoadingState) {
+                              ref.read(wishlistProvider.notifier).addWishlist(
+                                    id: widget.id.toString(),
+                                  );
+                            }
+                          },
+                          child: Material(
+                            borderRadius: BorderRadius.circular(32),
+                            elevation: 4,
+                            child: const CircleAvatar(
+                              backgroundColor: KColor.appBackground,
+                              radius: 16,
+                              child: Icon(
+                                Icons.favorite_outlined,
+                                color: KColor.baseBlack,
+                                size: 13,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -122,14 +142,14 @@ class _ProductInfoState extends State<ProductInfo> {
                                     ref
                                         .read(productDetailsProvider.notifier)
                                         .fetchProductsDetails(
-                                      widget.id.toString(),
-                                    );
+                                          widget.id.toString(),
+                                        );
                                     ref
-                                        .read(productRecommendationProvider.notifier)
+                                        .read(productRecommendationProvider
+                                            .notifier)
                                         .fetchProductsRecommendation(
-                                        widget.id.toString(),
-                                    );
-
+                                          widget.id.toString(),
+                                        );
                                   },
                                   child: AnimatedContainer(
                                     duration: const Duration(milliseconds: 300),

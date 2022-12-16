@@ -36,4 +36,15 @@ class SharedPreferencesHelper {
       },
     );
   }
+
+  Future<bool> setToken(String token) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString("token", token);
+  }
+
+  Future<String> getToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString("token") ?? '';
+  }
+
 }

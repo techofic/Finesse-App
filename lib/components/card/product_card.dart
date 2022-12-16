@@ -1,7 +1,9 @@
+import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductCard extends StatelessWidget {
@@ -77,7 +79,10 @@ class ProductCard extends StatelessWidget {
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        right: 12.0, left: 12.0, bottom: 4.0),
+                      right: 12.0,
+                      left: 12.0,
+                      bottom: 4.0,
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,15 +144,15 @@ class ProductCard extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
-                                      color:
-                                          KColor.btnShadowColor.withOpacity(0.06),
+                                      color: KColor.btnShadowColor
+                                          .withOpacity(0.06),
                                       spreadRadius: 0,
                                       blurRadius: 12,
                                       offset: const Offset(4, 4),
                                     ),
                                     BoxShadow(
-                                      color:
-                                          KColor.btnShadowColor.withOpacity(0.06),
+                                      color: KColor.btnShadowColor
+                                          .withOpacity(0.06),
                                       spreadRadius: 0,
                                       blurRadius: 12,
                                       offset: const Offset(-4, -4),
