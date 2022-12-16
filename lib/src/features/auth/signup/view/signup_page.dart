@@ -5,10 +5,14 @@ import 'package:finesse/components/textfield/k_phone_field.dart';
 import 'package:finesse/components/textfield/k_search_field.dart';
 import 'package:finesse/components/textfield/k_text_field.dart';
 import 'package:finesse/constants/asset_path.dart';
+import 'package:finesse/constants/shared_preference_data.dart';
+import 'package:finesse/core/base/base_state.dart';
+import 'package:finesse/src/features/auth/signup/controller/signup_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 
@@ -27,8 +31,9 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController password = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
   TextEditingController search = TextEditingController();
+  String? name;
   final _formKey = GlobalKey<FormState>();
-
+  final SharedPreferencesHelper _helper = SharedPreferencesHelper();
   bool isSelected = false;
   var selectedColor = KColor.blackbg;
   String _verticalGroupValue = "English(United States)";
@@ -122,20 +127,58 @@ class _SignupPageState extends State<SignupPage> {
                           label: 'Confirm Password',
                         ),
                         const SizedBox(height: 24),
-                        KButton(
-                          title: 'Create Account',
-                          onTap: () {
-                            if (_formKey.currentState!.validate()) {
-                              if (password.text != confirmPassword.text) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text("Password does not match"),
-                                    duration: Duration(milliseconds: 3000),
-                                  ),
-                                );
-                              }
-                              Navigator.pushNamed(context, '/login');
-                            }
+                        Consumer(
+                          builder: (context, ref, _) {
+                            final authState = ref.watch(signupProvider);
+                            return KButton(
+                              title: authState is LoadingState
+                                  ? 'Please wait...'
+                                  : 'Create Account',
+                              onTap: () {
+                                if (authState is! LoadingState) {
+                                  if (_formKey.currentState!.validate()) {
+                                    if (password.text != confirmPassword.text) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content:
+                                              Text("Password does not match"),
+                                          duration:
+                                              Duration(milliseconds: 3000),
+                                        ),
+                                      );
+                                    }
+                                    ref.read(signupProvider.notifier).register(
+                                          name:
+                                              "${firstName.text} ${lastName.text}",
+                                          email: email.text,
+                                          phone: phone.text,
+                                          password: password.text,
+                                          username: phone.text,
+                                        );
+                                    _helper.name(
+                                      "${firstName.text} ${lastName.text}",
+                                    );
+                                    _helper.email(
+                                      email.text,
+                                    );
+                                    _helper.contact(
+                                      phone.text,
+                                    );
+
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/otp',
+                                      arguments: {
+                                        'phoneNumber': phone.text,
+                                        'password': password.text,
+                                      },
+                                    );
+                                  }
+                                }
+                                //Navigator.pushNamed(context, '/login');
+                              },
+                            );
                           },
                         ),
                         const SizedBox(height: 24),

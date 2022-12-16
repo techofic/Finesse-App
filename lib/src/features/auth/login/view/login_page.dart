@@ -2,11 +2,13 @@ import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/textfield/k_password_field.dart';
 import 'package:finesse/components/textfield/k_phone_field.dart';
 import 'package:finesse/constants/asset_path.dart';
-import 'package:finesse/src/features/main_screen.dart';
+import 'package:finesse/core/base/base_state.dart';
+import 'package:finesse/src/features/auth/login/controller/login_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -132,14 +134,28 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                       const SizedBox(height: 40),
-                      KButton(
-                        title: 'Sign In',
-                        onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.pushNamed(context, '/mainScreen');
-                          }
+                      Consumer(
+                        builder: (context, ref, _) {
+                          final authState = ref.watch(loginProvider);
+                          return KButton(
+                            title: authState is LoadingState
+                                ? 'Please wait...'
+                                : 'Sign In',
+                            onTap: () {
+                              if (authState is! LoadingState) {
+                                if (_formKey.currentState!.validate()) {
+                                  ref.read(loginProvider.notifier).login(
+                                        phone: phone.text,
+                                        password: password.text,
+                                      );
+                                }
+                              }
+                              Navigator.pushNamed(context, '/mainScreen');
+                            },
+                          );
                         },
                       ),
+
                       const SizedBox(height: 40),
                       InkWell(
                         onTap: () {
@@ -182,8 +198,6 @@ class _LoginPageState extends State<LoginPage> {
       var phoneValue = prefs.getString("email") ?? "";
       var passwordValue = prefs.getString("password") ?? "";
       var rememberMe = prefs.getBool("remember_me") ?? false;
-      print(phoneValue);
-      print(passwordValue);
       if (rememberMe) {
         setState(() {
           isChecked = true;

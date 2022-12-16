@@ -1,10 +1,12 @@
 import 'package:finesse/components/card/profile_card.dart';
+import 'package:finesse/constants/shared_preference_data.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -14,6 +16,22 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+  final SharedPreferencesHelper _helper = SharedPreferencesHelper();
+  getData() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    name = pref.getString("name") ?? "";
+    email = pref.getString("email") ?? "";
+  }
+  String? name;
+  String? email;
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,14 +88,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Marwa Saad',
+                        name.toString(),
                         style: KTextStyle.headline2.copyWith(
                           color: KColor.blackbg,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'marwasaad605@gmail.com',
+                        email.toString(),
                         style: KTextStyle.subtitle3.copyWith(
                           color: KColor.blackbg.withOpacity(0.4),
                         ),
