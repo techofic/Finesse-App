@@ -4,7 +4,13 @@ import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 
 class ReportCard extends StatefulWidget {
-  const ReportCard({Key? key}) : super(key: key);
+  final String? id;
+  final String? date;
+  final String? reason;
+  final String? img;
+
+  const ReportCard({this.id, this.date, this.reason, this.img, Key? key})
+      : super(key: key);
 
   @override
   State<ReportCard> createState() => _ReportCardState();
@@ -39,14 +45,14 @@ class _ReportCardState extends State<ReportCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "ID: #99045677 ",
+            "ID: ${widget.id} ",
             style: KTextStyle.subtitle1.copyWith(
               color: KColor.blackbg,
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            "Placed on 8 May",
+            "Placed on ${widget.date}",
             style: KTextStyle.subtitle3.copyWith(
               color: KColor.blackbg.withOpacity(0.3),
             ),
@@ -61,7 +67,7 @@ class _ReportCardState extends State<ReportCard> {
                 ),
               ),
               Text(
-                "Faulty Good",
+                "${widget.reason}",
                 style: KTextStyle.subtitle4.copyWith(
                   color: KColor.deleteColor,
                 ),
@@ -94,8 +100,8 @@ class _ReportCardState extends State<ReportCard> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.asset(
-                  'assets/images/watch-two.png',
+                Image.network(
+                  widget.img.toString(),
                   height: 49,
                 ),
                 const SizedBox(width: 16),
@@ -105,8 +111,8 @@ class _ReportCardState extends State<ReportCard> {
                   children: [
                     Text(
                       'Hanging Clock',
-                      style: KTextStyle.subtitle4
-                          .copyWith(color: KColor.blackbg,
+                      style: KTextStyle.subtitle4.copyWith(
+                        color: KColor.blackbg,
                       ),
                     ),
                     const SizedBox(height: 8),

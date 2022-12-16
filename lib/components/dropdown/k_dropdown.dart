@@ -1,25 +1,34 @@
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
+import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 
 class KDropdown extends StatefulWidget {
   final String? hint;
+  final int? id;
+  String? selectedReason;
+  final Function(String value)? change;
+  final List<dynamic> data;
 
-  const KDropdown({this.hint, Key? key}) : super(key: key);
+  KDropdown({
+    this.hint,
+    Key? key,
+    required this.data,
+    this.selectedReason,
+    this.change,
+    this.id,
+  }) : super(key: key);
 
   @override
   State<KDropdown> createState() => _KDropdownState();
 }
 
 class _KDropdownState extends State<KDropdown> {
-  final List<String> _reason = ['sick', 'casual', 'half day']; // Option 2
-  String? _selectedReason;
-
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 48,
-      width: MediaQuery.of(context).size.width,
+      width: context.screenWidth,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: KColor.searchColor.withOpacity(0.8),
@@ -27,7 +36,7 @@ class _KDropdownState extends State<KDropdown> {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: DropdownButtonHideUnderline(
         child: Padding(
-          padding: const EdgeInsets.only(right: 18.0,left: 9),
+          padding: const EdgeInsets.only(right: 18.0, left: 9),
           child: DropdownButton(
             isExpanded: true,
             hint: Text(
@@ -37,18 +46,24 @@ class _KDropdownState extends State<KDropdown> {
               ),
             ),
             dropdownColor: KColor.appBackground,
-            value: _selectedReason,
+            menuMaxHeight: context.screenHeight * 0.5,
+            alignment: AlignmentDirectional.bottomStart,
+            value: widget.selectedReason,
             icon: const Icon(
               Icons.keyboard_arrow_down,
               color: KColor.blackbg,
             ),
             iconSize: 16,
-            onChanged: (newValue) {
-              setState(() {
-                _selectedReason = newValue as String?;
-              });
+            onChanged: (val) {
+              if (widget.change != null) widget.change!(val as String);
             },
-            items: _reason.map(
+            // onChanged: (newValue) {
+            //   setState(() {
+            //     widget.selectedReason = newValue as String?;
+            //     print('selected item : ${widget.selectedReason}');
+            //   });
+            // },
+            items: widget.data.map(
               (location) {
                 return DropdownMenuItem(
                   value: location,

@@ -34,4 +34,8 @@ class AssetPath {
   static const paypal = 'assets/images/paypal.png';
   static const paypalLogo = 'assets/images/logo_paypal.png';
   static const confirm = 'assets/images/confirm.png';
+  static const homeBottomIcon = 'assets/images/home.svg';
+  static const cartBottomIcon = 'assets/images/trolly.svg';
+  static const wishlistBottomIcon = 'assets/images/wishlist.svg';
+  static const profileBottomIcon = 'assets/images/profile.svg';
 }

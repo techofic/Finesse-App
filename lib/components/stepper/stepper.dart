@@ -1,7 +1,4 @@
 import 'package:dotted_line/dotted_line.dart';
-import 'package:finesse/src/features/checkout/components/payment_page.dart';
-import 'package:finesse/src/features/checkout/components/preview_page.dart';
-import 'package:finesse/src/features/checkout/components/take_address.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +7,8 @@ import 'package:flutter_svg/svg.dart';
 import '../../styles/k_text_style.dart';
 
 class Steppers extends StatefulWidget {
-  const Steppers({Key? key}) : super(key: key);
+  final int? checkIndex;
+  const Steppers({Key? key, this.checkIndex}) : super(key: key);
 
   @override
   State<Steppers> createState() => _SteppersState();
@@ -22,9 +20,7 @@ class _SteppersState extends State<Steppers> {
     "Payment",
     "Preview",
   ];
-
   int currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,7 +47,6 @@ class _SteppersState extends State<Steppers> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       _buildSteps(index),
-                      //_stepsDescription(index),
                     ],
                   ),
                 ),
@@ -61,11 +56,6 @@ class _SteppersState extends State<Steppers> {
         ),
         const SizedBox(height: 16),
         stepTitle(),
-        SizedBox(height: context.screenHeight*0.03),
-        if (currentIndex == 0)  AddressPage(pageIndex: currentIndex,),
-        if (currentIndex == 1) const PaymentPage(),
-        if (currentIndex == 2) const PreviewPage(),
-
       ],
     );
   }
@@ -75,7 +65,7 @@ class _SteppersState extends State<Steppers> {
       children: [
         Container(
           margin: index == 0
-              ? const EdgeInsets.only(left: 24.0)
+              ? const EdgeInsets.only(left: 18.0)
               : const EdgeInsets.all(0),
           height: 24,
           width: 24,
@@ -87,7 +77,6 @@ class _SteppersState extends State<Steppers> {
                   'assets/images/inactiveIcon.svg',
                 ),
         ),
-        //index == checkout.length - 1?const SizedBox(width: 12,):const SizedBox(width: 0,),
         index == checkout.length - 1
             ? Container()
             : SizedBox(
@@ -110,14 +99,6 @@ class _SteppersState extends State<Steppers> {
   Container stepTitle(){
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12),
-      // margin: index==0?
-      // const EdgeInsets.only(left: 12):
-      // index<checkout.length?
-      // const EdgeInsets.all(0):
-      // index==checkout.length-1?
-      // const EdgeInsets.only(right: 20):
-      // const EdgeInsets.all(0),
-
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -147,18 +128,4 @@ class _SteppersState extends State<Steppers> {
     );
   }
 
-  Container _stepsDescription(int index) {
-    return Container(
-      color: Colors.orangeAccent,
-      child: Text(
-        textAlign: TextAlign.center,
-        checkout[index],
-        style: KTextStyle.subtitle3.copyWith(
-          color: index == currentIndex
-              ? KColor.blackbg
-              : KColor.textBorder.withOpacity(0.8),
-        ),
-      ),
-    );
-  }
 }

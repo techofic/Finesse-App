@@ -4,7 +4,6 @@ import 'package:finesse/components/appbar/appbar.dart';
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/constants/shared_preference_data.dart';
 import 'package:finesse/core/base/base_state.dart';
-import 'package:finesse/src/features/auth/login/controller/login_controller.dart';
 import 'package:finesse/src/features/auth/signup/controller/otp_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';

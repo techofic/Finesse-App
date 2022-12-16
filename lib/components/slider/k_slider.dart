@@ -1,9 +1,11 @@
 import 'package:banner_carousel/banner_carousel.dart';
+import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/home/controllers/slider_controller.dart';
 import 'package:finesse/src/features/home/models/slider_model.dart';
 import 'package:finesse/src/features/home/state/slider_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../styles/k_colors.dart';
 
@@ -38,23 +40,29 @@ class _KSliderState extends State<KSlider> {
         return Container(
           color: KColor.appBackground,
           child: pageSliders == 1
-              ? BannerCarousel.fullScreen(
-                  onTap: (index) {
-                    Navigator.pushNamed(context, '/shop');
-                  },
-                  banners: bannerList,
-                  customizedIndicators: const IndicatorModel.animation(
-                    width: 8,
-                    height: 8,
-                    spaceBetween: 4,
-                    widthAnimation: 30,
-                  ),
-                  height: 140,
-                  borderRadius: 10,
-                  activeColor: KColor.blackbg,
-                  animation: true,
-                  initialPage: 0,
-                )
+              ? sliderState is LoadingState
+                  ? Shimmer.fromColors(
+                      baseColor: Colors.black,
+                      highlightColor: Colors.redAccent,
+                      child: Container(height: 150),
+                    )
+                  : BannerCarousel.fullScreen(
+                      onTap: (index) {
+                        Navigator.pushNamed(context, '/shop');
+                      },
+                      banners: bannerList,
+                      customizedIndicators: const IndicatorModel.animation(
+                        width: 8,
+                        height: 8,
+                        spaceBetween: 4,
+                        widthAnimation: 30,
+                      ),
+                      height: 140,
+                      borderRadius: 10,
+                      activeColor: KColor.blackbg,
+                      animation: true,
+                      initialPage: 0,
+                    )
               : BannerCarousel(
                   banners: BannerImages.listProducts,
                   customizedIndicators: const IndicatorModel.animation(

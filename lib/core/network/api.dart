@@ -15,6 +15,7 @@ class API {
   //authentication
   static const signup = 'app/registration';
   static const login = 'app/login';
+  static const logout = 'app/logout';
   static const otp = 'app/activeAccount';
   static const sendOtp = 'app/sendActivationCode';
   static const sendPhone = 'app/sendResetMessage';
@@ -27,8 +28,10 @@ class API {
   //products category
   static const productsCategory = 'app/ladingProducts';
   static const category = 'app/allGroups';
-  static const shop =
-      'app/shopPageData?order=id,desc&page=1&groupId=&categoryId=&str=&price=&brandId=&colour=&size';
+  static const allBrand = 'app/AllBrands';
+
+  static shop({str = ""}) =>
+      'app/shopPageData?order=id,desc&page=1&groupId=&categoryId=&str=$str&price=&brandId=&colour=&size';
 
   static productDetails(productId) => 'app/getSingleproduct/$productId';
 
@@ -38,4 +41,30 @@ class API {
   static const addWishlist = 'app/wishlist';
   static const getWishlist = 'app/wishList';
   static const deleteWishlist = 'app/deleteWishlist';
+
+  //cart
+  static const addCart = 'app/cart';
+  static const getCart = 'app/cart';
+  static const updateCart = 'app/cart_update';
+  static const deleteCart = 'app/cart_delete';
+  static const allCity = 'app/cities';
+  static allZone({id = ""}) => 'app/zones/$id';
+  static const getPromoCode= 'app/checkCoupon';
+  static const getReferralCode = 'app/checkReferralCode';
+  static const getGiftVoucher = 'app/checkGiftVoucherCode';
+
+  //notification
+  static const getNotification = 'app/getNotiDetails';
+  static const updateNotification = 'app/updateNoti';
+  static const deleteNotification = 'app/deleteNoti';
+
+  //profile
+  static const addReport = 'app/reports';
+  static const getReport = 'app/reports?page=1';
+  static const editUser = 'app/user/edit';
+
+  //order
+  static const addOrder = 'app/orderApp';
+  static const getOrder = 'app/order';
+  static const deleteOrder = 'app/cancelOrder';
 }

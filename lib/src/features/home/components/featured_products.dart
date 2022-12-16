@@ -29,7 +29,7 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
         return Column(
           children: [
             SizedBox(
-              height: 207,
+              height: 220,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: featureCategory!.length,
@@ -61,6 +61,7 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
                           id: featureCategory[index].id.toString(),
                         );
                       }
+                      ref.read(wishlistProvider.notifier).fetchWishlistProducts();
                     },
                   );
                 },

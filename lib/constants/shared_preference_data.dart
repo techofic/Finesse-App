@@ -12,7 +12,6 @@ class SharedPreferencesHelper {
       (pref) {
         pref.setString('contact', contact);
         contactValue = pref.getString("contact") ?? "";
-        print("local database: $contactValue");
       },
     );
   }
@@ -22,7 +21,7 @@ class SharedPreferencesHelper {
       (pref) {
         pref.setString('email', email);
         emailValue = pref.getString("email") ?? "";
-        print("local database: $emailValue");
+        // print("local database: $emailValue");
       },
     );
   }
@@ -32,7 +31,7 @@ class SharedPreferencesHelper {
       (pref) {
         pref.setString('name', name);
         nameValue = pref.getString("name") ?? "";
-        print("local database: $nameValue");
+        //print("local database: $nameValue");
       },
     );
   }

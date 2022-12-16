@@ -126,5 +126,11 @@ class KTextStyle {
     height: 2,
     fontFamily: GoogleFonts.inter().fontFamily,
   );
+  static TextStyle subtitle9 = TextStyle(
+    fontSize: 8,
+    fontWeight: FontWeight.w500,
+    height: 2,
+    fontFamily: GoogleFonts.inter().fontFamily,
+  );
 
 }

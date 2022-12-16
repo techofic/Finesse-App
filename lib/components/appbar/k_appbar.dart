@@ -1,6 +1,8 @@
 import 'package:finesse/constants/asset_path.dart';
+import 'package:finesse/src/features/notification/controller/notification_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class KAppBar extends StatefulWidget {
@@ -67,12 +69,17 @@ class _KAppBarState extends State<KAppBar> {
         //   },
         // ),
         //const SizedBox(width: 26),
-        IconButton(
-          onPressed: () {
-            Scaffold.of(context).openDrawer();
-            Navigator.pushNamed(context, '/notification');
+        Consumer(
+          builder:(context,ref,_){
+            return IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+                Navigator.pushNamed(context, '/notification');
+                ref.read(notificationProvider.notifier).fetchNotification();
+              },
+              icon: SvgPicture.asset(AssetPath.notificationIcon),
+            );
           },
-          icon: SvgPicture.asset(AssetPath.notificationIcon),
         ),
       ],
     );

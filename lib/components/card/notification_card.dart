@@ -6,9 +6,11 @@ import '../../styles/k_colors.dart';
 import '../../styles/k_text_style.dart';
 
 class NotificationCard extends StatefulWidget {
+  final String? msg;
+  final String? date;
   final VoidCallback? cancel;
   final VoidCallback? delete;
-  const NotificationCard({this.cancel,this.delete,Key? key}) : super(key: key);
+  const NotificationCard({this.cancel,this.delete,Key? key, this.msg, this.date}) : super(key: key);
 
   @override
   State<NotificationCard> createState() => _NotificationCardState();
@@ -56,8 +58,8 @@ class _NotificationCardState extends State<NotificationCard> {
         ),
       ),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
-        margin: const EdgeInsets.only(bottom: 8),
+        margin: const EdgeInsets.only(top: 10,bottom:8,left: 2,right: 2),
+        padding: const EdgeInsets.only(left: 20),
         height: 114,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
@@ -78,7 +80,7 @@ class _NotificationCardState extends State<NotificationCard> {
           ],
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
               radius: 30,
@@ -97,14 +99,14 @@ class _NotificationCardState extends State<NotificationCard> {
                   Flexible(
                     flex: 2,
                     child: Text(
-                      'Price dropped on hanging clock, grab yours now before stock runs out!',
+                      widget.msg.toString(),
                       style: KTextStyle.subtitle3
                           .copyWith(color: KColor.blackbg.withOpacity(0.7)),
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '12:34',
+                    widget.date.toString(),
                     style: KTextStyle.subtitle5
                         .copyWith(color: KColor.blackbg.withOpacity(0.3)),
                   )

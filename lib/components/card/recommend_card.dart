@@ -21,7 +21,7 @@ class _RecommendCardState extends State<RecommendCard> {
       children: [
         Container(
           height: 113,
-          padding: const EdgeInsets.only(left: 18, right: 18, top: 16),
+          //padding: const EdgeInsets.only(left: 18, right: 18, top: 16),
           margin: const EdgeInsets.only(right: 20, left: 8, top: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
@@ -44,17 +44,19 @@ class _RecommendCardState extends State<RecommendCard> {
               ),
             ],
           ),
-          child: Center(
+          child: ClipRRect(
+            borderRadius:  BorderRadius.circular(10),
             child: Image.network(
               '${widget.img}',
-              height: 57,
+              height: 113,
+              fit: BoxFit.cover,
             ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(right: 20.0, top: 6),
           child: Text(
-            '\$44.90',
+            '${widget.price}',
             style: KTextStyle.subtitle4.copyWith(color: KColor.blackbg),
           ),
         ),

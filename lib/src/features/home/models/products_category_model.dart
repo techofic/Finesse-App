@@ -5,13 +5,11 @@ class ProductsCategory {
     required this.featuredProducts,
     required this.newProducts,
     required this.middlePromotionalCard,
-    required this.landingSettings,
   });
 
   List<Product> featuredProducts;
   List<Product> newProducts;
   List<MiddlePromotionalCard> middlePromotionalCard;
-  LandingSettings landingSettings;
 
   factory ProductsCategory.fromJson(Map<String, dynamic> json) =>
       ProductsCategory(
@@ -22,7 +20,6 @@ class ProductsCategory {
         middlePromotionalCard: List<MiddlePromotionalCard>.from(
             json["middlePromotionalCard"]
                 .map((x) => MiddlePromotionalCard.fromJson(x))),
-        landingSettings: LandingSettings.fromJson(json["landingSettings"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,7 +28,6 @@ class ProductsCategory {
         "newProducts": List<dynamic>.from(newProducts.map((x) => x.toJson())),
         "middlePromotionalCard":
             List<dynamic>.from(middlePromotionalCard.map((x) => x.toJson())),
-        "landingSettings": landingSettings.toJson(),
       };
 }
 
@@ -103,13 +99,11 @@ class Product {
         productName: json["productName"],
         model: json["model"],
         description: json["description"],
-        briefDescription: json["brief_description"] == null
-            ? null
-            : json["brief_description"],
+        briefDescription: json["brief_description"],
         sellingPrice: json["sellingPrice"],
         averageBuyingPrice: json["averageBuyingPrice"],
         productImage: json["productImage"],
-        images: json["images"] == null ? null : json["images"],
+        images: json["images"],
         isNew: json["isNew"],
         totalSale: json["totalSale"],
         isFeatured: json["isFeatured"],
@@ -139,7 +133,7 @@ class Product {
         "sellingPrice": sellingPrice,
         "averageBuyingPrice": averageBuyingPrice,
         "productImage": productImage,
-        "images": images == null ? null : images,
+        "images": images,
         "isNew": isNew,
         "totalSale": totalSale,
         "isFeatured": isFeatured,
@@ -203,62 +197,13 @@ class Details {
   String? size;
 
   factory Details.fromJson(Map<String, dynamic> json) => Details(
-        color: json["Color"] == null ? null : json["Color"],
-        size: json["Size"] == null ? null : json["Size"],
+        color: json["Color"],
+        size: json["Size"],
       );
 
   Map<String, dynamic> toJson() => {
-        "Color": color == null ? null : color,
-        "Size": size == null ? null : size,
-      };
-}
-
-class LandingSettings {
-  LandingSettings({
-    this.id,
-    this.mainHeader,
-    this.middleCards,
-    this.promotionalCards,
-    this.bestProducts,
-    this.newProducts,
-    this.featuredProducts,
-    required this.createdAt,
-    required this.updatedAt,
-  });
-
-  int? id;
-  int? mainHeader;
-  int? middleCards;
-  int? promotionalCards;
-  int? bestProducts;
-  int? newProducts;
-  int? featuredProducts;
-  DateTime createdAt;
-  DateTime updatedAt;
-
-  factory LandingSettings.fromJson(Map<String, dynamic> json) =>
-      LandingSettings(
-        id: json["id"],
-        mainHeader: json["mainHeader"],
-        middleCards: json["middleCards"],
-        promotionalCards: json["promotionalCards"],
-        bestProducts: json["bestProducts"],
-        newProducts: json["newProducts"],
-        featuredProducts: json["featuredProducts"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "mainHeader": mainHeader,
-        "middleCards": middleCards,
-        "promotionalCards": promotionalCards,
-        "bestProducts": bestProducts,
-        "newProducts": newProducts,
-        "featuredProducts": featuredProducts,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
+        "Color": color,
+        "Size": size,
       };
 }
 

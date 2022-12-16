@@ -195,7 +195,7 @@ class Product {
         "productName": productName,
         "model": model,
         "description": description,
-        "brief_description": briefDescription == null ? null : briefDescription,
+        "brief_description": briefDescription,
         "sellingPrice": sellingPrice,
         "averageBuyingPrice": averageBuyingPrice,
         "productImage": productImage,
@@ -377,6 +377,6 @@ class Details {
 
   Map<String?, dynamic> toJson() => {
         "Color": color,
-        "Size": size == null ? null : size,
+        "Size": size,
       };
 }

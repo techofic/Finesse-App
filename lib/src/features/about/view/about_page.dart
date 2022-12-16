@@ -24,71 +24,10 @@ class _AboutPageState extends State<AboutPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Our History',
-                  style: KTextStyle.headline2.copyWith(
-                    color: KColor.blackbg,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0, bottom: 24),
-                  child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla.',
-                    style: KTextStyle.about.copyWith(
-                      color: KColor.blackbg.withOpacity(0.6),
-                    ),
-                  ),
-                ),
-                Text(
-                  'Privacy Policy',
-                  style: KTextStyle.headline2.copyWith(
-                    color: KColor.blackbg,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0, bottom: 24),
-                  child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla.',
-                    style: KTextStyle.about.copyWith(
-                      color: KColor.blackbg.withOpacity(0.6),
-                    ),
-                  ),
-                ),
-                Text(
-                  'Our Shops',
-                  style: KTextStyle.headline2.copyWith(
-                    color: KColor.blackbg,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0, bottom: 24),
-                  child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla. ',
-                    style: KTextStyle.about.copyWith(
-                      color: KColor.blackbg.withOpacity(0.6),
-                    ),
-                  ),
-                ),
-                Text(
-                  'Our Partners',
-                  style: KTextStyle.headline2.copyWith(
-                    color: KColor.blackbg,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0, bottom: 24),
-                  child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla. ',
-                    style: KTextStyle.about.copyWith(
-                      color: KColor.blackbg.withOpacity(0.6),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            _aboutInfo('Our History'),
+            _aboutInfo('Privacy Policy'),
+            _aboutInfo('Our Shops'),
+            _aboutInfo('Our Partners'),
             Column(
               children: [
                 Divider(
@@ -106,6 +45,33 @@ class _AboutPageState extends State<AboutPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Column _aboutInfo(heading) {
+    return Column(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              heading,
+              style: KTextStyle.headline2.copyWith(
+                color: KColor.blackbg,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0, bottom: 24),
+              child: Text(
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices adipiscing sit integer ornare cras massa nulla.',
+                style: KTextStyle.about.copyWith(
+                  color: KColor.blackbg.withOpacity(0.6),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

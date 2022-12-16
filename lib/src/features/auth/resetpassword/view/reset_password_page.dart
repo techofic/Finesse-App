@@ -46,15 +46,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       style:
                           KTextStyle.headline3.copyWith(color: KColor.blackbg),
                     ),
-                    const SizedBox(height: 12),
-                    Flexible(
-                      child: Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Ultrices adipiscing sit integer ornare cras massa nulla.',
-                        style: KTextStyle.subtitle5.copyWith(
-                          color: KColor.blackbg.withOpacity(0.6),
-                        ),
-                      ),
-                    ),
                     const SizedBox(height: 24),
                     PhoneTextField(
                       controller: phone,

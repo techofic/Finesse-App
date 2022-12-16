@@ -4,14 +4,23 @@ import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 
 class AddToCart extends StatefulWidget {
-  const AddToCart({Key? key}) : super(key: key);
+  int quantity;
+  final VoidCallback add;
+  final VoidCallback remove;
+  final VoidCallback cart;
+
+   AddToCart({
+    Key? key,
+    this.quantity = 0,
+    required this.cart, required this.add, required this.remove,
+  }) : super(key: key);
 
   @override
   State<AddToCart> createState() => _AddToCartState();
 }
 
 class _AddToCartState extends State<AddToCart> {
-  int count = 0;
+  //int widget.quantity = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +33,7 @@ class _AddToCartState extends State<AddToCart> {
           Row(
             children: [
               InkWell(
-                onTap: () {
-                  setState(() {
-                    count++;
-                  });
-                },
+                onTap: widget.add,
                 child: Container(
                   height: 54,
                   width: 54,
@@ -48,7 +53,7 @@ class _AddToCartState extends State<AddToCart> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 22.0),
                 child: Text(
-                  count.toString(),
+                  widget.quantity.toString(),
                   style: KTextStyle.headline3.copyWith(
                     color: KColor.blackbg,
                   ),
@@ -57,14 +62,7 @@ class _AddToCartState extends State<AddToCart> {
               InkWell(
                 // When using InkWell check the spalsh effect if its radius matches the container
                 borderRadius: BorderRadius.circular(15),
-                onTap: () {
-                  setState(() {
-                    count--;
-                    if (count < 0) {
-                      count = 0;
-                    }
-                  });
-                },
+                onTap: widget.remove,
                 child: Container(
                   height: 54,
                   width: 54,
@@ -84,7 +82,7 @@ class _AddToCartState extends State<AddToCart> {
             ],
           ),
           InkWell(
-            onTap: () {},
+            onTap: widget.cart,
             child: Container(
               height: 54,
               width: context.screenWidth * 0.45,

@@ -2,8 +2,6 @@ import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/core/network/api.dart';
 import 'package:finesse/core/network/network_utils.dart';
 import 'package:finesse/src/features/product_details/model/producr_recommendation_model.dart';
-import 'package:finesse/src/features/product_details/model/product_details_model.dart';
-import 'package:finesse/src/features/product_details/state/product_details_state.dart';
 import 'package:finesse/src/features/product_details/state/product_recommendation_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

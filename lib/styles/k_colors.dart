@@ -21,6 +21,8 @@ class KColor {
   time grey text color
   */
   static const Color timeGreyText = Color(0xFFA1A6AB);
+  static const Color baseGrey = Color(0xE0E0E0FF);
+  static const Color highlightGrey = Color(0xA1A6ABFF);
 
   /*
   button banckground color e10600
