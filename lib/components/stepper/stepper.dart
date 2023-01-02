@@ -64,9 +64,7 @@ class _SteppersState extends State<Steppers> {
     return Row(
       children: [
         Container(
-          margin: index == 0
-              ? const EdgeInsets.only(left: 18.0)
-              : const EdgeInsets.all(0),
+          margin: index == 0 ? const EdgeInsets.only(left: 18.0) : const EdgeInsets.all(0),
           height: 24,
           width: 24,
           child: currentIndex == index
@@ -80,23 +78,23 @@ class _SteppersState extends State<Steppers> {
         index == checkout.length - 1
             ? Container()
             : SizedBox(
-              width: context.screenWidth / 2.9,
-              child: Align(
-                alignment: Alignment.center,
-                child: DottedLine(
-                  direction: Axis.horizontal,
-                  dashLength: 6.0,
-                  dashColor: KColor.textBorder.withOpacity(0.8),
-                  lineThickness: 1,
-                  dashGapLength: 4.0,
+                width: context.screenWidth / 2.9,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: DottedLine(
+                    direction: Axis.horizontal,
+                    dashLength: 6.0,
+                    dashColor: KColor.textBorder.withOpacity(0.8),
+                    lineThickness: 1,
+                    dashGapLength: 4.0,
+                  ),
                 ),
               ),
-            ),
       ],
     );
   }
 
-  Container stepTitle(){
+  Container stepTitle() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12),
       child: Row(
@@ -105,27 +103,20 @@ class _SteppersState extends State<Steppers> {
           Text(
             textAlign: TextAlign.center,
             "Address",
-            style: KTextStyle.subtitle3.copyWith(
-              color: KColor.blackbg
-            ),
+            style: KTextStyle.bodyText1.copyWith(color: KColor.blackbg),
           ),
           Text(
             textAlign: TextAlign.center,
             "Payment",
-            style: KTextStyle.subtitle3.copyWith(
-                color: KColor.blackbg
-            ),
+            style: KTextStyle.bodyText1.copyWith(color: KColor.blackbg),
           ),
           Text(
             textAlign: TextAlign.center,
             "Preview",
-            style: KTextStyle.subtitle3.copyWith(
-                color: KColor.blackbg
-            ),
+            style: KTextStyle.bodyText1.copyWith(color: KColor.blackbg),
           ),
         ],
       ),
     );
   }
-
 }

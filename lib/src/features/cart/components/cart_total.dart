@@ -2,6 +2,7 @@ import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CardTotal extends StatefulWidget {
   final int? subTotal;
   final int? deliveryFee;

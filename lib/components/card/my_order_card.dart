@@ -46,7 +46,7 @@ class MyOrderCard extends StatelessWidget {
               ),
               Text(
                 isChecked == true ? "Delivered" : "Shipped",
-                style: KTextStyle.subtitle4.copyWith(
+                style: KTextStyle.bodyText2.copyWith(
                   color: isChecked == true ? KColor.selectColor : KColor.red12,
                 ),
               ),
@@ -55,21 +55,21 @@ class MyOrderCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             "Placed on 8 May",
-            style: KTextStyle.subtitle3.copyWith(
+            style: KTextStyle.bodyText1.copyWith(
               color: KColor.blackbg.withOpacity(0.3),
             ),
           ),
           const SizedBox(height: 15),
           Text(
             "Mariam Crane",
-            style: KTextStyle.subtitle3.copyWith(
+            style: KTextStyle.bodyText1.copyWith(
               color: KColor.blackbg.withOpacity(0.3),
             ),
           ),
           const SizedBox(height: 7),
           Text(
             "+97 4556 7681",
-            style: KTextStyle.subtitle3.copyWith(
+            style: KTextStyle.bodyText1.copyWith(
               color: KColor.blackbg.withOpacity(0.3),
             ),
           ),
@@ -79,13 +79,13 @@ class MyOrderCard extends StatelessWidget {
               children: [
                 Text(
                   "Total : ",
-                  style: KTextStyle.subtitle4.copyWith(
+                  style: KTextStyle.bodyText2.copyWith(
                     color: KColor.blackbg.withOpacity(0.7),
                   ),
                 ),
                 Text(
                   "\$44.90",
-                  style: KTextStyle.subtitle4.copyWith(
+                  style: KTextStyle.bodyText2.copyWith(
                     color: KColor.blackbg.withOpacity(0.7),
                   ),
                 ),
@@ -101,7 +101,7 @@ class MyOrderCard extends StatelessWidget {
                   const SizedBox(width: 3),
                   Text(
                     "Payment made via Paypal",
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),
@@ -114,8 +114,7 @@ class MyOrderCard extends StatelessWidget {
                   },
                   child: Container(
                     height: 40,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(

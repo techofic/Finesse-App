@@ -25,8 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Consumer(
       builder: (context, ref, _) {
         final userState = ref.watch(loginProvider);
-        final User? userData =
-            userState is LoginSuccessState ? userState.userModel : null;
+        final User? userData = userState is LoginSuccessState ? userState.userModel : null;
         bool checkLogin = getBoolAsync(loggedIn, defaultValue: false);
         print(checkLogin.toString());
         return checkLogin
@@ -77,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        if (userState is LoginSuccessState)...[
+                        if (userState is LoginSuccessState) ...[
                           Padding(
                             padding: const EdgeInsets.only(bottom: 30),
                             child: Center(
@@ -93,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   const SizedBox(height: 8),
                                   Text(
                                     userData.email ?? "",
-                                    style: KTextStyle.subtitle3.copyWith(
+                                    style: KTextStyle.bodyText1.copyWith(
                                       color: KColor.blackbg.withOpacity(0.4),
                                     ),
                                   ),

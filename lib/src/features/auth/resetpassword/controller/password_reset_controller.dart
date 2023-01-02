@@ -9,21 +9,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Providers
-final resetPasswordProvider = StateNotifierProvider<resetPasswordController, BaseState>(
-      (ref) => resetPasswordController(ref: ref),
+final resetPasswordProvider = StateNotifierProvider<ResetPasswordController, BaseState>(
+  (ref) => ResetPasswordController(ref: ref),
 );
 
 /// Controllers
-class resetPasswordController extends StateNotifier<BaseState> {
+class ResetPasswordController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  resetPasswordController({this.ref}) : super(const InitialState());
+  ResetPasswordController({this.ref}) : super(const InitialState());
 
   Future sendPhone({
     required String phone,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'contact': phone,
     };
@@ -35,8 +35,7 @@ class resetPasswordController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         state = const SignupSuccessState();
         print("Send phone number Successful");
-        NavigationService.navigateToReplacement(
-            CupertinoPageRoute(builder: (context) => const LoginPage()));
+        NavigationService.navigateToReplacement(CupertinoPageRoute(builder: (context) => const LoginPage()));
       } else {
         state = const ErrorState();
       }
@@ -51,7 +50,7 @@ class resetPasswordController extends StateNotifier<BaseState> {
     required String phone,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'contact': phone,
     };
@@ -63,8 +62,7 @@ class resetPasswordController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         state = const SignupSuccessState();
         print("Send phone number again Successful");
-        NavigationService.navigateToReplacement(
-            CupertinoPageRoute(builder: (context) => const LoginPage()));
+        NavigationService.navigateToReplacement(CupertinoPageRoute(builder: (context) => const LoginPage()));
       } else {
         state = const ErrorState();
       }
@@ -82,7 +80,7 @@ class resetPasswordController extends StateNotifier<BaseState> {
     required String phone,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'cpassword': confirmPassword,
       'password': password,
@@ -97,8 +95,7 @@ class resetPasswordController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         state = const SignupSuccessState();
         print("Password reset Successful");
-        NavigationService.navigateToReplacement(
-            CupertinoPageRoute(builder: (context) => const ResetPasswordPage()));
+        NavigationService.navigateToReplacement(CupertinoPageRoute(builder: (context) => const ResetPasswordPage()));
       } else {
         state = const ErrorState();
       }

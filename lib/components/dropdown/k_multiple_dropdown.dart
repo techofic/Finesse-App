@@ -3,6 +3,7 @@ import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import '../../../../styles/k_text_style.dart';
 
+// ignore: must_be_immutable
 class KMultilevelDropdown extends StatefulWidget {
   final String? hint;
   final String? checkValue;
@@ -11,7 +12,7 @@ class KMultilevelDropdown extends StatefulWidget {
   final Function(String value)? change;
   final List<dynamic> data;
 
-   KMultilevelDropdown({
+  KMultilevelDropdown({
     Key? key,
     this.hint,
     this.id,
@@ -26,7 +27,6 @@ class KMultilevelDropdown extends StatefulWidget {
 }
 
 class _KMultilevelDropdownState extends State<KMultilevelDropdown> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,40 +41,39 @@ class _KMultilevelDropdownState extends State<KMultilevelDropdown> {
         child: Padding(
           padding: const EdgeInsets.only(right: 18.0, left: 9),
           child: DropdownButton<String>(
-            key: (widget.changeValue != null) ? Key(widget.changeValue!) : UniqueKey(),
-            isExpanded: true,
-            hint: Text(
-              widget.hint.toString(),
-              style: KTextStyle.subtitle3.copyWith(
-                color: KColor.blackbg.withOpacity(0.4),
+              key: (widget.changeValue != null) ? Key(widget.changeValue!) : UniqueKey(),
+              isExpanded: true,
+              hint: Text(
+                widget.hint.toString(),
+                style: KTextStyle.bodyText1.copyWith(
+                  color: KColor.blackbg.withOpacity(0.4),
+                ),
               ),
-            ),
-            dropdownColor: KColor.appBackground,
-            menuMaxHeight: context.screenHeight * 0.5,
-            alignment: AlignmentDirectional.bottomStart,
-            value: widget.changeValue,
-            icon: const Icon(
-              Icons.keyboard_arrow_down,
-              color: KColor.blackbg,
-            ),
-            iconSize: 16,
-            onChanged: (val) {
-              if (widget.change != null) widget.change!(val as String);
-            },
-            items: widget.data.map(
-                  (location) {
-                    return DropdownMenuItem(
-                      value: widget.checkValue,
-                      child: Text(
-                        location,
-                        style: KTextStyle.subtitle3.copyWith(
-                          color: KColor.blackbg.withOpacity(0.4),
-                        ),
+              dropdownColor: KColor.appBackground,
+              menuMaxHeight: context.screenHeight * 0.5,
+              alignment: AlignmentDirectional.bottomStart,
+              value: widget.changeValue,
+              icon: const Icon(
+                Icons.keyboard_arrow_down,
+                color: KColor.blackbg,
+              ),
+              iconSize: 16,
+              onChanged: (val) {
+                if (widget.change != null) widget.change!(val as String);
+              },
+              items: widget.data.map(
+                (location) {
+                  return DropdownMenuItem(
+                    value: widget.checkValue,
+                    child: Text(
+                      location,
+                      style: KTextStyle.bodyText1.copyWith(
+                        color: KColor.blackbg.withOpacity(0.4),
                       ),
-                    );
-                  },
-                ).toList()
-          ),
+                    ),
+                  );
+                },
+              ).toList()),
         ),
       ),
     );

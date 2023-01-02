@@ -3,6 +3,7 @@ import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class KDropdown extends StatefulWidget {
   final String? hint;
   final int? id;
@@ -41,7 +42,7 @@ class _KDropdownState extends State<KDropdown> {
             isExpanded: true,
             hint: Text(
               '${widget.hint}',
-              style: KTextStyle.subtitle3.copyWith(
+              style: KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.4),
               ),
             ),
@@ -69,7 +70,7 @@ class _KDropdownState extends State<KDropdown> {
                   value: location,
                   child: Text(
                     location,
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.4),
                     ),
                   ),

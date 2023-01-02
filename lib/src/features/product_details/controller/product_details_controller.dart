@@ -8,14 +8,12 @@ import 'package:finesse/src/features/product_details/state/product_details_state
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Providers
-final productDetailsProvider =
-    StateNotifierProvider<ProductDetailsController, BaseState>(
+final productDetailsProvider = StateNotifierProvider<ProductDetailsController, BaseState>(
   (ref) => ProductDetailsController(ref: ref),
 );
 
-final allBrandsProvider =
-StateNotifierProvider<AllBrandController, BaseState>(
-      (ref) => AllBrandController(ref: ref),
+final allBrandsProvider = StateNotifierProvider<AllBrandController, BaseState>(
+  (ref) => AllBrandController(ref: ref),
 );
 
 /// Controllers
@@ -28,7 +26,7 @@ class ProductDetailsController extends StateNotifier<BaseState> {
 
   Future fetchProductsDetails(productId) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     try {
       responseBody = await Network.handleResponse(
         await Network.getRequest(API.productDetails(productId)),
@@ -54,7 +52,7 @@ class AllBrandController extends StateNotifier<BaseState> {
   BrandModel? brandModel;
   Future fetchAllBrands() async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     try {
       responseBody = await Network.handleResponse(
         await Network.getRequest(API.allBrand),
@@ -72,4 +70,3 @@ class AllBrandController extends StateNotifier<BaseState> {
     }
   }
 }
-

@@ -25,7 +25,7 @@ class _ReportListState extends State<ReportList> {
           backgroundColor: KColor.appBackground,
           appBar: const PreferredSize(
             preferredSize: Size.fromHeight(56),
-            child: KappBar(checkTitle: true, title: 'Report List'),
+            child: KAppBar(checkTitle: true, title: 'Report List'),
           ),
           body: SingleChildScrollView(
             child: Container(
@@ -34,9 +34,7 @@ class _ReportListState extends State<ReportList> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (reportState is LoadingState) ...[
-                    const KLoading(shimmerHeight: 123)
-                  ],
+                  if (reportState is LoadingState) ...[const KLoading(shimmerHeight: 123)],
                   if (reportState is FetchReportSuccessState) ...[
                     ListView.builder(
                       shrinkWrap: true,
@@ -44,15 +42,9 @@ class _ReportListState extends State<ReportList> {
                       itemCount: reportState.reportModel?.data.data.length,
                       itemBuilder: (ctx, index) {
                         return ReportCard(
-                          id: reportState.reportModel?.data.data[index].id
-                              .toString(),
-                          date: createDate(
-                              reportState
-                                  .reportModel?.data.data[index].createdAt
-                                  .toString(),
-                              0),
-                          reason:
-                              reportState.reportModel?.data.data[index].reason,
+                          id: reportState.reportModel?.data.data[index].id.toString(),
+                          date: createDate(reportState.reportModel?.data.data[index].createdAt.toString(), 0),
+                          reason: reportState.reportModel?.data.data[index].reason,
                           img: reportState.reportModel?.data.data[index].image,
                         );
                       },
@@ -74,10 +66,7 @@ class _ReportListState extends State<ReportList> {
 
   String imageData(String? image, int? index) {
     index = image?.indexOf(":");
-    List data = [
-      image?.substring(0, index).trim(),
-      image?.substring(index! + 1).trim()
-    ];
+    List data = [image?.substring(0, index).trim(), image?.substring(index! + 1).trim()];
     print(data[0]);
     print(data[1]);
     return data[index!];

@@ -129,7 +129,7 @@ class Product {
         "productName": productName,
         "model": model,
         "description": description,
-        "brief_description": briefDescription == null ? null : briefDescription,
+        "brief_description": briefDescription,
         "sellingPrice": sellingPrice,
         "averageBuyingPrice": averageBuyingPrice,
         "productImage": productImage,
@@ -238,7 +238,7 @@ class MiddlePromotionalCard {
       MiddlePromotionalCard(
         id: json["id"],
         subHeader: json["subHeader"],
-        header: json["header"] == null ? null : json["header"],
+        header: json["header"],
         buttonText: json["buttonText"],
         link: json["link"],
         appLink: json["appLink"],
@@ -252,7 +252,7 @@ class MiddlePromotionalCard {
   Map<String, dynamic> toJson() => {
         "id": id,
         "subHeader": subHeader,
-        "header": header == null ? null : header,
+        "header": header,
         "buttonText": buttonText,
         "link": link,
         "appLink": appLink,

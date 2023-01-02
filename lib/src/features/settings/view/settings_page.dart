@@ -26,7 +26,7 @@ class _SettingPageState extends State<SettingPage> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle: true, title: 'Settings'),
+        child: KAppBar(checkTitle: true, title: 'Settings'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -35,7 +35,7 @@ class _SettingPageState extends State<SettingPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SearchTextField(
-                callbackFunction: (e){},
+                callbackFunction: (e) {},
                 controller: search,
                 readOnly: false,
                 hintText: 'Search',
@@ -61,7 +61,7 @@ class _SettingPageState extends State<SettingPage> {
                   ),
                   Text(
                     'Clear cache',
-                    style: KTextStyle.subtitle5.copyWith(
+                    style: KTextStyle.caption1.copyWith(
                       color: KColor.blackbg,
                     ),
                   ),
@@ -145,7 +145,7 @@ class _SettingPageState extends State<SettingPage> {
               const SizedBox(height: 8),
               Text(
                 'Allow notification of promos and flash deals.',
-                style: KTextStyle.subtitle5.copyWith(
+                style: KTextStyle.caption1.copyWith(
                   color: KColor.blackbg.withOpacity(0.4),
                 ),
               ),
@@ -162,14 +162,14 @@ class _SettingPageState extends State<SettingPage> {
               SizedBox(height: context.screenHeight * 0.02),
               Text(
                 'Version',
-                style: KTextStyle.subtitle5.copyWith(
+                style: KTextStyle.caption1.copyWith(
                   color: KColor.blackbg.withOpacity(0.4),
                 ),
               ),
               const SizedBox(height: 3),
               Text(
                 '8.9.0',
-                style: KTextStyle.subtitle5.copyWith(
+                style: KTextStyle.caption1.copyWith(
                   color: KColor.blackbg.withOpacity(0.4),
                 ),
               ),

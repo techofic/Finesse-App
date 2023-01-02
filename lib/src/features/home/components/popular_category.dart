@@ -19,13 +19,8 @@ class _PopularCategoryState extends State<PopularCategory> {
     return Consumer(
       builder: (context, ref, _) {
         final sliderState = ref.watch(sliderProvider);
-        final List<PopularSubCategory>? popularCategory =
-            sliderState is SliderSuccessState
-                ? sliderState.homeSliderModel?.popularSubCategory
-                : [];
-        final List<MainSlider>? middleBanner = sliderState is SliderSuccessState
-            ? sliderState.homeSliderModel?.middleBanner
-            : [];
+        final List<PopularSubCategory>? popularCategory = sliderState is SliderSuccessState ? sliderState.homeSliderModel?.popularSubCategory : [];
+        final List<MainSlider>? middleBanner = sliderState is SliderSuccessState ? sliderState.homeSliderModel?.middleBanner : [];
 
         return Column(
           children: [
@@ -55,7 +50,7 @@ class _PopularCategoryState extends State<PopularCategory> {
                         child: Center(
                           child: Text(
                             popularCategory[index].catName.toString(),
-                            style: KTextStyle.subtitle6.copyWith(
+                            style: KTextStyle.bodyText3.copyWith(
                               color: Colors.black.withOpacity(0.7),
                             ),
                           ),

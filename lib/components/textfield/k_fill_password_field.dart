@@ -10,12 +10,7 @@ class FillTextFieldPassword extends StatefulWidget {
   final String label;
   final String hintText;
 
-  FillTextFieldPassword(
-      {Key? key,
-      required this.label,
-      required this.controller,
-      required this.hintText})
-      : super(key: key);
+  FillTextFieldPassword({Key? key, required this.label, required this.controller, required this.hintText}) : super(key: key);
 
   TextEditingController controller = TextEditingController();
 
@@ -45,11 +40,13 @@ class _MaterialTextFieldState extends State<FillTextFieldPassword> {
       controller: widget.controller,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        hintStyle: KTextStyle.subtitle3
-            .copyWith(color: KColor.blackbg.withOpacity(0.4),),
+        hintStyle: KTextStyle.bodyText1.copyWith(
+          color: KColor.blackbg.withOpacity(0.4),
+        ),
         labelText: widget.label,
-        labelStyle: KTextStyle.subtitle3
-            .copyWith(color: KColor.blackbg.withOpacity(0.4),),
+        labelStyle: KTextStyle.bodyText1.copyWith(
+          color: KColor.blackbg.withOpacity(0.4),
+        ),
         suffixIcon: IconButton(
           icon: _passwordVisible
               ? Icon(

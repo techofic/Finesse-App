@@ -46,7 +46,7 @@ class _KStepperState extends State<KStepper> {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount:items.length,
+      itemCount: items.length,
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {
@@ -90,7 +90,7 @@ class _KStepperState extends State<KStepper> {
             child: Text(
               textAlign: TextAlign.center,
               track[index],
-              style: KTextStyle.subtitle3.copyWith(
+              style: KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg,
               ),
             ),
@@ -103,12 +103,10 @@ class _KStepperState extends State<KStepper> {
   Flexible _stepsDescription(int index) {
     return Flexible(
       child: Text(
-        textAlign:TextAlign.left,
+        textAlign: TextAlign.left,
         items[index],
-        style: KTextStyle.subtitle3.copyWith(
-          color: index == currentIndex
-              ? KColor.blackbg
-              : KColor.textBorder.withOpacity(0.8),
+        style: KTextStyle.bodyText1.copyWith(
+          color: index == currentIndex ? KColor.blackbg : KColor.textBorder.withOpacity(0.8),
         ),
       ),
     );
@@ -131,19 +129,19 @@ class _KStepperState extends State<KStepper> {
         index == items.length - 1
             ? Container()
             : SizedBox(
-              width: 20,
-              height: 92,
-              child: Align(
-                alignment: Alignment.center,
-                child: DottedLine(
-                  direction: Axis.vertical,
-                  dashLength: 6.0,
-                  dashColor: KColor.textBorder.withOpacity(0.8),
-                  lineThickness: 1,
-                  dashGapLength: 6.0,
+                width: 20,
+                height: 92,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: DottedLine(
+                    direction: Axis.vertical,
+                    dashLength: 6.0,
+                    dashColor: KColor.textBorder.withOpacity(0.8),
+                    lineThickness: 1,
+                    dashGapLength: 6.0,
+                  ),
                 ),
-              ),
-            )
+              )
       ],
     );
   }

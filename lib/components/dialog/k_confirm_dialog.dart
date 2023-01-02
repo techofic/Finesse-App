@@ -10,8 +10,7 @@ class KConfirmDialog extends StatelessWidget {
   final VoidCallback? onDelete;
   final VoidCallback? onCancel;
 
-  const KConfirmDialog({this.subMessage,this.message, this.onDelete,this.onCancel,Key? key})
-      : super(key: key);
+  const KConfirmDialog({this.subMessage, this.message, this.onDelete, this.onCancel, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,20 +32,17 @@ class KConfirmDialog extends StatelessWidget {
                   style: KTextStyle.headline3.copyWith(color: KColor.blackbg),
                 ),
                 const SizedBox(height: 16),
-                  Text(
-                    '$subMessage',
-                    style: KTextStyle.subtitle3.copyWith(
-                      color: KColor.blackbg.withOpacity(0.6),
-                    ),
+                Text(
+                  '$subMessage',
+                  style: KTextStyle.bodyText1.copyWith(
+                    color: KColor.blackbg.withOpacity(0.6),
                   ),
+                ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 Row(
                   children: [
                     Flexible(
-                      child: KBorderButton(
-                        title: 'Cancel',
-                        onTap: onCancel
-                      ),
+                      child: KBorderButton(title: 'Cancel', onTap: onCancel),
                     ),
                     const SizedBox(width: 16),
                     Flexible(

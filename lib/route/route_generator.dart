@@ -148,7 +148,7 @@ class RouteGenerator {
         );
       case '/writeReview':
         return MaterialPageRoute(
-          builder: (_) => WriteReview(),
+          builder: (_) => const WriteReview(),
         );
       case '/trackOrder':
         return MaterialPageRoute(

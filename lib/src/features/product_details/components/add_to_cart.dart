@@ -3,6 +3,7 @@ import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class AddToCart extends StatefulWidget {
   int quantity;
   final VoidCallback add;

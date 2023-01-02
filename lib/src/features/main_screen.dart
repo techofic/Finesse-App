@@ -35,8 +35,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     return Consumer(
       builder: (context, ref, _) {
         final wishlistState = ref.watch(wishlistProvider);
-        final cartState = ref.watch(cartProvider);
+        // final cartState = ref.watch(cartProvider);
         bool checkLogin = getBoolAsync(loggedIn, defaultValue: false);
+
         return Container(
           color: KColor.appBackground,
           child: Scaffold(
@@ -46,7 +47,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                     child: KAppBar(),
                   )
                 : AppBar(backgroundColor: KColor.appBackground, elevation: 0),
-            drawer: checkLogin?const Drawer(child: KDrawer()): const Drawer(backgroundColor: KColor.appBackground),
+            drawer: checkLogin ? const Drawer(child: KDrawer()) : const Drawer(backgroundColor: KColor.appBackground),
             body: SizedBox.expand(
               child: PageView(
                 physics: const NeverScrollableScrollPhysics(),
@@ -54,9 +55,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                 onPageChanged: (index) {
                   setState(() => _currentIndex = index);
                   if (wishlistState is! LoadingState) {
-                    if(_currentIndex==1)ref.read(cartProvider.notifier).cartDetails();
-                    if(_currentIndex==2) ref.read(wishlistProvider.notifier).fetchWishlistProducts();
-                    if(_currentIndex==3) ref.read(loginProvider.notifier).userModel;
+                    if (_currentIndex == 1) ref.read(cartProvider.notifier).cartDetails();
+                    if (_currentIndex == 2) ref.read(wishlistProvider.notifier).fetchWishlistProducts();
+                    if (_currentIndex == 3) ref.read(loginProvider.notifier).userModel;
                   }
                 },
                 children: const [
@@ -109,8 +110,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               ),
               iconSize: 24,
               elevation: 15,
-              chipStyle: const ChipStyle(
-                  convexBridge: true, background: KColor.blackbg),
+              chipStyle: const ChipStyle(convexBridge: true, background: KColor.blackbg),
               itemStyle: ItemStyle.circle,
               animated: true,
             ),

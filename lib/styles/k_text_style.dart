@@ -80,32 +80,29 @@ class KTextStyle {
     height: 1.45,
     fontFamily: GoogleFonts.inter().fontFamily,
   );
-  // TODO :: Check the naming for styles,
-  // you don't usually have so many different subtitle styles
-  // 10 is the smallest fontSize for app,
-  // so you can call it caption
-  // 14 with w400 is usuallu bodyText
-  static TextStyle subtitle3 = TextStyle(
+
+  static TextStyle bodyText1 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    //height: 2,
     fontFamily: GoogleFonts.inter().fontFamily,
   );
-  static TextStyle subtitle4 = TextStyle(
+
+  static TextStyle bodyText2 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w700,
     fontFamily: GoogleFonts.inter().fontFamily,
   );
 
-  static TextStyle subtitle6 = TextStyle(
+  static TextStyle bodyText3 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w600,
     fontFamily: GoogleFonts.inter().fontFamily,
   );
 
-  static TextStyle subtitle5 = TextStyle(
-    fontSize: 12,
+  static TextStyle about = TextStyle(
+    fontSize: 14,
     fontWeight: FontWeight.w400,
+    height: 2,
     fontFamily: GoogleFonts.inter().fontFamily,
   );
 
@@ -115,22 +112,22 @@ class KTextStyle {
     fontFamily: GoogleFonts.inter().fontFamily,
   );
 
-  static TextStyle subtitle8 = TextStyle(
+  static TextStyle caption1 = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    fontFamily: GoogleFonts.inter().fontFamily,
+  );
+
+  static TextStyle caption2 = TextStyle(
     fontSize: 10,
     fontWeight: FontWeight.w400,
     fontFamily: GoogleFonts.inter().fontFamily,
   );
-  static TextStyle about = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-    height: 2,
-    fontFamily: GoogleFonts.inter().fontFamily,
-  );
-  static TextStyle subtitle9 = TextStyle(
+
+  static TextStyle overline = TextStyle(
     fontSize: 8,
     fontWeight: FontWeight.w500,
     height: 2,
     fontFamily: GoogleFonts.inter().fontFamily,
   );
-
 }

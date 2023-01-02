@@ -26,13 +26,11 @@ class _EditProfileState extends State<EditProfile> {
                 backgroundColor: KColor.appBackground,
                 appBar: const PreferredSize(
                   preferredSize: Size.fromHeight(56),
-                  child:
-                      KappBar(checkTitle: true, title: 'Account Information'),
+                  child: KAppBar(checkTitle: true, title: 'Account Information'),
                 ),
                 body: SingleChildScrollView(
                   child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 12),
+                    margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

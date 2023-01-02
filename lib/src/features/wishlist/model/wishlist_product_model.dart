@@ -158,9 +158,7 @@ class Product {
         productName: json["productName"],
         model: json["model"],
         description: json["description"],
-        briefDescription: json["brief_description"] == null
-            ? null
-            : json["brief_description"],
+        briefDescription: json["brief_description"],
         sellingPrice: json["sellingPrice"],
         averageBuyingPrice: json["averageBuyingPrice"],
         productImage: json["productImage"],
@@ -372,7 +370,7 @@ class Details {
 
   factory Details.fromJson(Map<String?, dynamic> json) => Details(
         color: json["Color"],
-        size: json["Size"] == null ? null : json["Size"],
+        size: json["Size"],
       );
 
   Map<String?, dynamic> toJson() => {

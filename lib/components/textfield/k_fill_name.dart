@@ -59,14 +59,14 @@ class _KFillNormalState extends State<KFillNormal> {
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: _focusNode.hasFocus
-            ? KTextStyle.subtitle3.copyWith(
+            ? KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.8),
               )
-            : KTextStyle.subtitle3.copyWith(
+            : KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.4),
               ),
         labelText: widget.label,
-        labelStyle: KTextStyle.subtitle3.copyWith(
+        labelStyle: KTextStyle.bodyText1.copyWith(
           color: KColor.blackbg.withOpacity(0.4),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),

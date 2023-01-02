@@ -74,8 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Row(
                               children: [
                                 SizedBox(
@@ -110,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                                 const SizedBox(width: 7),
                                 Text(
                                   'Remember Password',
-                                  style: KTextStyle.subtitle3.copyWith(
+                                  style: KTextStyle.bodyText1.copyWith(
                                     color: KColor.blackbg,
                                   ),
                                 ),
@@ -123,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             child: Text(
                               'Forgot password?',
-                              style: KTextStyle.subtitle3.copyWith(
+                              style: KTextStyle.bodyText1.copyWith(
                                 color: KColor.blackbg,
                               ),
                             ),
@@ -135,9 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                         builder: (context, ref, _) {
                           final authState = ref.watch(loginProvider);
                           return KButton(
-                            title: authState is LoadingState
-                                ? 'Please wait...'
-                                : 'Sign In',
+                            title: authState is LoadingState ? 'Please wait...' : 'Sign In',
                             onTap: () {
                               if (authState is! LoadingState) {
                                 if (_formKey.currentState!.validate()) {
@@ -147,12 +144,10 @@ class _LoginPageState extends State<LoginPage> {
                                       );
                                 }
                               }
-
                             },
                           );
                         },
                       ),
-
                       const SizedBox(height: 40),
                       InkWell(
                         onTap: () {
@@ -163,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                             children: [
                               TextSpan(
                                 text: 'New here?',
-                                style: KTextStyle.subtitle3.copyWith(
+                                style: KTextStyle.bodyText1.copyWith(
                                   color: KColor.blackbg.withOpacity(0.4),
                                 ),
                               ),

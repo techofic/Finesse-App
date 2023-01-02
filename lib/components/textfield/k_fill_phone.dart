@@ -8,13 +8,7 @@ class KFillPhone extends StatefulWidget {
   final String hintText;
   final bool readOnly;
 
-  KFillPhone(
-      {Key? key,
-      required this.label,
-      required this.controller,
-      required this.hintText,
-      required this.readOnly})
-      : super(key: key);
+  KFillPhone({Key? key, required this.label, required this.controller, required this.hintText, required this.readOnly}) : super(key: key);
 
   TextEditingController controller = TextEditingController();
 
@@ -50,7 +44,7 @@ class _KFillPhoneState extends State<KFillPhone> {
         RegExp regExp = RegExp(pattern);
         if (value == null || value.isEmpty) {
           return 'Please FillUp';
-        }else if (!regExp.hasMatch(value)) {
+        } else if (!regExp.hasMatch(value)) {
           return 'Please enter valid mobile number';
         }
         return null;
@@ -61,15 +55,14 @@ class _KFillPhoneState extends State<KFillPhone> {
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: _focusNode.hasFocus
-            ? KTextStyle.subtitle3.copyWith(
+            ? KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.8),
               )
-            : KTextStyle.subtitle3.copyWith(
+            : KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.4),
               ),
         labelText: widget.label,
-        labelStyle: KTextStyle.subtitle3
-            .copyWith(color: KColor.blackbg.withOpacity(0.4)),
+        labelStyle: KTextStyle.bodyText1.copyWith(color: KColor.blackbg.withOpacity(0.4)),
         contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0)),

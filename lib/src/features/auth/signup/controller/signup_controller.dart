@@ -26,7 +26,7 @@ class SignupController extends StateNotifier<BaseState> {
     required String username,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'name': name,
       'email': email,
@@ -42,8 +42,7 @@ class SignupController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         state = const SignupSuccessState();
         print("Registration Successful");
-        NavigationService.navigateToReplacement(
-            CupertinoPageRoute(builder: (context) => const LoginPage()));
+        NavigationService.navigateToReplacement(CupertinoPageRoute(builder: (context) => const LoginPage()));
       } else {
         state = const ErrorState();
       }

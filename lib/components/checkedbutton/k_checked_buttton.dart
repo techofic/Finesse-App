@@ -1,13 +1,8 @@
+import 'package:finesse/styles/b_style.dart';
 import 'package:flutter/material.dart';
-import 'package:finesse/styles/k_colors.dart';
 
 class KCheckedButton extends StatefulWidget {
-  const KCheckedButton(
-      {required this.height,
-      required this.radius,
-      required this.width,
-      Key? key})
-      : super(key: key);
+  const KCheckedButton({required this.height, required this.radius, required this.width, Key? key}) : super(key: key);
 
   final double width;
   final double height;

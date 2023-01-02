@@ -10,13 +10,7 @@ class PasswordTextField extends StatefulWidget {
   final String label;
   final String hintText;
 
-
-  PasswordTextField(
-      {Key? key,
-      required this.label,
-      required this.controller,
-      required this.hintText})
-      : super(key: key);
+  PasswordTextField({Key? key, required this.label, required this.controller, required this.hintText}) : super(key: key);
   TextEditingController controller = TextEditingController();
 
   @override
@@ -42,7 +36,6 @@ class _MaterialTextFieldState extends State<PasswordTextField> {
         }
         return null;
       },
-
       obscureText: _passwordVisible,
       controller: widget.controller,
       decoration: InputDecoration(
@@ -52,14 +45,14 @@ class _MaterialTextFieldState extends State<PasswordTextField> {
         ),
         hintText: widget.hintText,
         hintStyle: _focusNode.hasFocus
-            ? KTextStyle.subtitle3.copyWith(color: KColor.blackbg)
-            : KTextStyle.subtitle3.copyWith(
+            ? KTextStyle.bodyText1.copyWith(color: KColor.blackbg)
+            : KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.4),
               ),
         labelText: widget.label,
         labelStyle: _focusNode.hasFocus
-            ? KTextStyle.subtitle3.copyWith(color: KColor.blackbg)
-            : KTextStyle.subtitle3.copyWith(
+            ? KTextStyle.bodyText1.copyWith(color: KColor.blackbg)
+            : KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.6),
               ),
         suffixIcon: IconButton(

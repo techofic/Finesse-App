@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
               const KFilter(check: true),
               const SizedBox(height: 24),
               const KSlider(selectSliders: 1),
@@ -68,7 +67,7 @@ class _HomePageState extends State<HomePage> {
               onTap: tap,
               child: Text(
                 'View all',
-                style: KTextStyle.subtitle6.copyWith(
+                style: KTextStyle.bodyText3.copyWith(
                   color: Colors.black.withOpacity(0.3),
                 ),
               ),

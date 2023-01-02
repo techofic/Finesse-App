@@ -15,7 +15,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:text_divider/text_divider.dart';
-import 'package:video_player/video_player.dart';
 
 class WriteReview extends StatefulWidget {
   const WriteReview({Key? key}) : super(key: key);
@@ -33,7 +32,6 @@ class _WriteReviewState extends State<WriteReview> {
   int maxLength = 200;
   File? image;
   File? video;
-  late VideoPlayerController _controller;
 
   Future pickImage(ImageSource source) async {
     try {
@@ -50,8 +48,7 @@ class _WriteReviewState extends State<WriteReview> {
 
   Future pickVideo(ImageSource source) async {
     try {
-      final video = await ImagePicker()
-          .pickVideo(source: source, maxDuration: const Duration(seconds: 10));
+      final video = await ImagePicker().pickVideo(source: source, maxDuration: const Duration(seconds: 10));
       if (video == null) return;
       final imageTemporary = File(video.path);
       setState(() {
@@ -68,7 +65,7 @@ class _WriteReviewState extends State<WriteReview> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle: true, title: 'Write Review'),
+        child: KAppBar(checkTitle: true, title: 'Write Review'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -97,19 +94,18 @@ class _WriteReviewState extends State<WriteReview> {
                         allowHalfRating: false,
                         itemCount: 5,
                         unratedColor: KColor.filterDividerColor,
-                        itemPadding:
-                            const EdgeInsets.symmetric(horizontal: 4.0),
+                        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                         itemBuilder: (context, index) => SvgPicture.asset(
-                            AssetPath.startIcon,
-                            height: 40,
-                            color: KColor.rattingColor,
+                          AssetPath.startIcon,
+                          height: 40,
+                          color: KColor.rattingColor,
                         ),
-                        onRatingUpdate: (double value) {  },
+                        onRatingUpdate: (double value) {},
                       ),
                     ),
                     Text(
                       'Great!',
-                      style: KTextStyle.subtitle3.copyWith(
+                      style: KTextStyle.bodyText1.copyWith(
                         color: KColor.blackbg.withOpacity(0.4),
                       ),
                     ),
@@ -127,7 +123,8 @@ class _WriteReviewState extends State<WriteReview> {
               KDropdown(
                 hint: 'The product was awesome!',
                 selectedReason: _selectedReason,
-                change: (e){}, data: [],
+                change: (e) {},
+                data: const [],
               ),
               Padding(
                 padding: const EdgeInsets.all(32.0),
@@ -136,7 +133,7 @@ class _WriteReviewState extends State<WriteReview> {
                   thickness: 1,
                   text: Text(
                     'or',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.4),
                     ),
                   ),
@@ -153,7 +150,7 @@ class _WriteReviewState extends State<WriteReview> {
                   ),
                   Text(
                     '(${message.text.length}/$maxLength)',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),
@@ -225,5 +222,3 @@ class _WriteReviewState extends State<WriteReview> {
     );
   }
 }
-
-

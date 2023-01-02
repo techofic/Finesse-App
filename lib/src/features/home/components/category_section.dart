@@ -32,9 +32,7 @@ class _CategorySectionState extends State<CategorySection> {
     return Consumer(
       builder: (context, ref, _) {
         final categoryState = ref.watch(categoryProvider);
-        final List<Group>? categoryData = categoryState is CategorySuccessState
-            ? categoryState.categoryModel?.groups
-            : [];
+        final List<Group>? categoryData = categoryState is CategorySuccessState ? categoryState.categoryModel?.groups : [];
         return SizedBox(
           height: 85,
           child: ListView.builder(
@@ -55,17 +53,13 @@ class _CategorySectionState extends State<CategorySection> {
                       width: 54,
                       height: 54,
                       decoration: BoxDecoration(
-                        color: selectIndex == index
-                            ? KColor.blackbg
-                            : KColor.searchColor,
+                        color: selectIndex == index ? KColor.blackbg : KColor.searchColor,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
                         child: SvgPicture.asset(
                           categoryIcons[index],
-                          color: index == selectIndex
-                              ? KColor.whiteBackground
-                              : KColor.blackbg,
+                          color: index == selectIndex ? KColor.whiteBackground : KColor.blackbg,
                         ),
                       ),
                     ),
@@ -74,10 +68,8 @@ class _CategorySectionState extends State<CategorySection> {
                       margin: const EdgeInsets.only(right: 24),
                       child: Text(
                         categoryData[index].groupName.toString(),
-                        style: KTextStyle.subtitle6.copyWith(
-                          color: index == selectIndex
-                              ? KColor.blackbg
-                              : KColor.blackbg.withOpacity(0.3),
+                        style: KTextStyle.bodyText3.copyWith(
+                          color: index == selectIndex ? KColor.blackbg : KColor.blackbg.withOpacity(0.3),
                         ),
                       ),
                     ),

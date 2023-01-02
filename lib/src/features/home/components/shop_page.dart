@@ -33,14 +33,12 @@ class _ShopPageState extends State<ShopPage> {
       builder: (context, ref, _) {
         final wishlistState = ref.watch(wishlistProvider);
         final shopState = ref.watch(shopProvider);
-        final List<Product>? shopData = shopState is ShopSuccessState
-            ? shopState.shopDataModel?.products
-            : [];
+        final List<Product>? shopData = shopState is ShopSuccessState ? shopState.shopDataModel?.products : [];
         return Scaffold(
           backgroundColor: KColor.appBackground,
           appBar: const PreferredSize(
             preferredSize: Size.fromHeight(56),
-            child: KappBar(checkTitle: true, title: 'Shop'),
+            child: KAppBar(checkTitle: true, title: 'Shop'),
           ),
           body: Container(
             margin: const EdgeInsets.only(top: 12, left: 12),
@@ -50,43 +48,42 @@ class _ShopPageState extends State<ShopPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Row(
-                      children: [
-                        Expanded(
-                          flex: 8,
-                          child: SearchTextField(
-                            callbackFunction: (query) {
-                              ref.read(shopProvider.notifier).fetchShopProductList(str: query);
-                            },
-                            controller: controller,
-                            readOnly: false,
-                            hintText: 'Search here...',
+                    children: [
+                      Expanded(
+                        flex: 8,
+                        child: SearchTextField(
+                          callbackFunction: (query) {
+                            ref.read(shopProvider.notifier).fetchShopProductList(str: query);
+                          },
+                          controller: controller,
+                          readOnly: false,
+                          hintText: 'Search here...',
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Container(
+                        height: 48,
+                        width: 48,
+                        decoration: BoxDecoration(
+                          color: KColor.searchColor.withOpacity(0.8),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Center(
+                          child: Image.asset(
+                            AssetPath.filterIcon,
+                            height: 24,
                           ),
                         ),
-                        const SizedBox(width: 14),
-                        Container(
-                          height: 48,
-                          width: 48,
-                          decoration: BoxDecoration(
-                            color: KColor.searchColor.withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Center(
-                            child: Image.asset(
-                              AssetPath.filterIcon,
-                              height: 24,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
+                  ),
                   const SizedBox(height: 24),
                   Expanded(
                     child: SingleChildScrollView(
                       child: GridView.builder(
                         physics: const ScrollPhysics(),
                         shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 3.0,
                           mainAxisSpacing: 6.0,
@@ -98,14 +95,8 @@ class _ShopPageState extends State<ShopPage> {
                           return ProductCard(
                               img: shopData![index].productImage,
                               name: shopData[index].productName,
-                              genre: shopData[index]
-                                  .allgroup
-                                  .groupName
-                                  .toString()
-                                  .split('.')
-                                  .last,
-                              offerPrice:
-                                  shopData[index].sellingPrice.toString(),
+                              genre: shopData[index].allgroup.groupName.toString().split('.').last,
+                              offerPrice: shopData[index].sellingPrice.toString(),
                               regularPrice: "",
                               discount: shopData[index].discount.toString(),
                               check: false,
@@ -115,30 +106,19 @@ class _ShopPageState extends State<ShopPage> {
                                   '/productDetails',
                                   arguments: {
                                     'productName': shopData[index].productName,
-                                    'productGroup': shopData[index]
-                                        .allgroup
-                                        .groupName
-                                        .toString()
-                                        .split('.')
-                                        .last,
-                                    'price':
-                                        shopData[index].sellingPrice.toString(),
-                                    'description':
-                                        shopData[index].briefDescription,
+                                    'productGroup': shopData[index].allgroup.groupName.toString().split('.').last,
+                                    'price': shopData[index].sellingPrice.toString(),
+                                    'description': shopData[index].briefDescription,
                                     'id': shopData[index].id,
                                   },
                                 );
-                                ref
-                                    .read(productDetailsProvider.notifier)
-                                    .fetchProductsDetails(
-                                  shopData[index].id,
-                                );
+                                ref.read(productDetailsProvider.notifier).fetchProductsDetails(
+                                      shopData[index].id,
+                                    );
                               },
                               pressed: () {
                                 if (wishlistState is! LoadingState) {
-                                  ref
-                                      .read(wishlistProvider.notifier)
-                                      .addWishlist(
+                                  ref.read(wishlistProvider.notifier).addWishlist(
                                         id: shopData[index].id.toString(),
                                       );
                                 }

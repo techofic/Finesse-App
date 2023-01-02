@@ -11,13 +11,7 @@ class PhoneTextField extends StatefulWidget {
   final String hintText;
   final bool readOnly;
 
-  PhoneTextField(
-      {Key? key,
-      required this.label,
-      required this.controller,
-      required this.hintText,
-      required this.readOnly})
-      : super(key: key);
+  PhoneTextField({Key? key, required this.label, required this.controller, required this.hintText, required this.readOnly}) : super(key: key);
 
   TextEditingController controller = TextEditingController();
 
@@ -36,7 +30,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         RegExp regExp = RegExp(pattern);
         if (value == null || value.isEmpty) {
           return 'Please FillUp';
-        }else if (!regExp.hasMatch(value)) {
+        } else if (!regExp.hasMatch(value)) {
           return 'Please enter valid mobile number';
         }
         return null;
@@ -56,14 +50,14 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
         ),
         hintText: widget.hintText,
         hintStyle: _focusNode.hasFocus
-            ? KTextStyle.subtitle3.copyWith(color: KColor.blackbg)
-            : KTextStyle.subtitle3.copyWith(
+            ? KTextStyle.bodyText1.copyWith(color: KColor.blackbg)
+            : KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.4),
               ),
         labelText: widget.label,
         labelStyle: _focusNode.hasFocus
-            ? KTextStyle.subtitle3.copyWith(color: KColor.blackbg)
-            : KTextStyle.subtitle3.copyWith(
+            ? KTextStyle.bodyText1.copyWith(color: KColor.blackbg)
+            : KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.6),
               ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 19.0),

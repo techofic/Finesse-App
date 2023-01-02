@@ -16,13 +16,12 @@ class _SettingsState extends State<Settings> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle: true, title: 'Settings'),
+        child: KAppBar(checkTitle: true, title: 'Settings'),
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         child: Column(
-          children: const [
-          ],
+          children: const [],
         ),
       ),
     );

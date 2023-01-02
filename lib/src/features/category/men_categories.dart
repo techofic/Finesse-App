@@ -57,8 +57,7 @@ class _MenSectionState extends State<MenSection> {
                 Text(
                   textAlign: TextAlign.center,
                   'As a creator, you look for ways to excel and express\n yourself when and where you can, from reaching for\n that last rep to evolving your streetwear style. Log \nmiles or tear down the baseline in men',
-                  style: KTextStyle.subtitle3
-                      .copyWith(color: Colors.black.withOpacity(0.6)),
+                  style: KTextStyle.bodyText1.copyWith(color: Colors.black.withOpacity(0.6)),
                 ),
                 const SizedBox(height: 60),
               ],
@@ -83,7 +82,7 @@ class _MenSectionState extends State<MenSection> {
               onTap: tap,
               child: Text(
                 'View all',
-                style: KTextStyle.subtitle6.copyWith(
+                style: KTextStyle.bodyText3.copyWith(
                   color: Colors.black.withOpacity(0.3),
                 ),
               ),

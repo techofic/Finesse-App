@@ -26,7 +26,7 @@ class _FilterPageState extends State<FilterPage> {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 8.0),
+            margin: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
             child: Column(
               children: [
                 SvgPicture.asset(AssetPath.cancelIcon),
@@ -36,8 +36,9 @@ class _FilterPageState extends State<FilterPage> {
                   children: [
                     Text(
                       'Filters',
-                      style: KTextStyle.headline3
-                          .copyWith(color: KColor.blackbg,),
+                      style: KTextStyle.headline3.copyWith(
+                        color: KColor.blackbg,
+                      ),
                     ),
                     IconButton(
                       onPressed: () {
@@ -53,7 +54,7 @@ class _FilterPageState extends State<FilterPage> {
               ],
             ),
           ),
-           Padding(
+          Padding(
             padding: const EdgeInsets.only(top: 5.0, bottom: 5),
             child: Divider(
               color: KColor.dividerColor.withOpacity(0.5),
@@ -99,7 +100,6 @@ class _FilterPageState extends State<FilterPage> {
         ],
       ),
     );
-
   }
 
   Column _categoryHeader(title, tap) {
@@ -116,7 +116,7 @@ class _FilterPageState extends State<FilterPage> {
               onTap: tap,
               child: Text(
                 'Reset',
-                style: KTextStyle.subtitle6.copyWith(
+                style: KTextStyle.bodyText3.copyWith(
                   color: KColor.baseBlack.withOpacity(0.3),
                 ),
               ),

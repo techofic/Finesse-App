@@ -19,8 +19,7 @@ class ProductReview extends StatelessWidget {
                 children: <TextSpan>[
                   TextSpan(
                     text: 'Ratings & Reviews ',
-                    style:
-                        KTextStyle.subtitle7.copyWith(color: KColor.baseBlack),
+                    style: KTextStyle.subtitle7.copyWith(color: KColor.baseBlack),
                   ),
                   TextSpan(
                     text: '(230)',
@@ -33,7 +32,7 @@ class ProductReview extends StatelessWidget {
             ),
             Text(
               'View all',
-              style: KTextStyle.subtitle6.copyWith(
+              style: KTextStyle.bodyText3.copyWith(
                 color: KColor.baseBlack.withOpacity(0.3),
               ),
             ),
@@ -59,13 +58,13 @@ class ProductReview extends StatelessWidget {
                 children: <TextSpan>[
                   TextSpan(
                     text: name,
-                    style: KTextStyle.subtitle4.copyWith(
+                    style: KTextStyle.bodyText2.copyWith(
                       color: KColor.baseBlack.withOpacity(0.8),
                     ),
                   ),
                   TextSpan(
                     text: '  12 May 2022',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.baseBlack.withOpacity(0.4),
                     ),
                   ),

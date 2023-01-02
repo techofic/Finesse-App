@@ -24,7 +24,7 @@ class _TrackOrderState extends State<TrackOrder> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle: true, title: 'Track Order'),
+        child: KAppBar(checkTitle: true, title: 'Track Order'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -37,7 +37,7 @@ class _TrackOrderState extends State<TrackOrder> {
                   Expanded(
                     flex: 8,
                     child: SearchTextField(
-                      callbackFunction: (e){},
+                      callbackFunction: (e) {},
                       controller: controller,
                       readOnly: false,
                       hintText: 'Search...',
@@ -84,7 +84,7 @@ class _TrackOrderState extends State<TrackOrder> {
                       const SizedBox(height: 8),
                       Text(
                         "6 May",
-                        style: KTextStyle.subtitle3.copyWith(
+                        style: KTextStyle.bodyText1.copyWith(
                           color: KColor.blackbg.withOpacity(0.4),
                         ),
                       ),
@@ -102,7 +102,7 @@ class _TrackOrderState extends State<TrackOrder> {
                       const SizedBox(height: 8),
                       Text(
                         "6 May - 12 May",
-                        style: KTextStyle.subtitle3.copyWith(
+                        style: KTextStyle.bodyText1.copyWith(
                           color: KColor.blackbg.withOpacity(0.4),
                         ),
                       ),
@@ -132,8 +132,7 @@ class _TrackOrderState extends State<TrackOrder> {
                   ),
                   const SizedBox(height: 16),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: KColor.appBackground,
@@ -142,15 +141,13 @@ class _TrackOrderState extends State<TrackOrder> {
                           color: KColor.shadowColor.withOpacity(0.2),
                           spreadRadius: 0,
                           blurRadius: 12,
-                          offset:
-                              const Offset(4, 4), // changes position of shadow
+                          offset: const Offset(4, 4), // changes position of shadow
                         ),
                         BoxShadow(
                           color: KColor.shadowColor.withOpacity(0.2),
                           spreadRadius: 0,
                           blurRadius: 12,
-                          offset: const Offset(
-                              -4, -4), // changes position of shadow
+                          offset: const Offset(-4, -4), // changes position of shadow
                         ),
                       ],
                     ),
@@ -168,7 +165,7 @@ class _TrackOrderState extends State<TrackOrder> {
                           children: [
                             Text(
                               'Hanging Clock',
-                              style: KTextStyle.subtitle4.copyWith(
+                              style: KTextStyle.bodyText2.copyWith(
                                 color: KColor.blackbg,
                               ),
                             ),
@@ -222,7 +219,7 @@ class _TrackOrderState extends State<TrackOrder> {
                           const SizedBox(width: 3),
                           Text(
                             "Payment made via Paypal",
-                            style: KTextStyle.subtitle3.copyWith(
+                            style: KTextStyle.bodyText1.copyWith(
                               color: KColor.blackbg.withOpacity(0.6),
                             ),
                           ),

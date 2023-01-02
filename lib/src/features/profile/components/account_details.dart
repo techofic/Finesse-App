@@ -15,49 +15,49 @@ class AccountDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context,ref,_){
-      final userState = ref.watch(loginProvider);
-      final User? userData = userState is LoginSuccessState?
-      userState.userModel: null;
+    return Consumer(
+      builder: (context, ref, _) {
+        final userState = ref.watch(loginProvider);
+        final User? userData = userState is LoginSuccessState ? userState.userModel : null;
 
-      return Scaffold(
-        backgroundColor: KColor.appBackground,
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(56),
-          child: KappBar(checkTitle: true, title: 'Account Details'),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _editProfile('Name',userData?.name??"",(){}),
-                _editProfile('Email',userData!.email.toString(),(){}),
-                _editProfile('Address',userData.customer.address ?? "Not set yet",(){}),
-                _editProfile('Phone Number',userData.contact.toString(),(){}),
-                SizedBox(height: context.screenHeight*0.22),
-                KButton(
-                  title: 'Change Password',
-                  onTap: () {
-                    Navigator.pushNamed(context, '/changePassword');
-                  },
-                ),
-                const SizedBox(height: 16),
-                KBorderButton(
-                  title: 'Edit Profile',
-                  onTap: () {
-                    Navigator.pushNamed(context, '/editProfile');
-                  },
-                ),
-                const SizedBox(height: 16),
-              ],
+        return Scaffold(
+          backgroundColor: KColor.appBackground,
+          appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(56),
+            child: KAppBar(checkTitle: true, title: 'Account Details'),
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _editProfile('Name', userData?.name ?? "", () {}),
+                  _editProfile('Email', userData!.email.toString(), () {}),
+                  _editProfile('Address', userData.customer.address ?? "Not set yet", () {}),
+                  _editProfile('Phone Number', userData.contact.toString(), () {}),
+                  SizedBox(height: context.screenHeight * 0.22),
+                  KButton(
+                    title: 'Change Password',
+                    onTap: () {
+                      Navigator.pushNamed(context, '/changePassword');
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  KBorderButton(
+                    title: 'Edit Profile',
+                    onTap: () {
+                      Navigator.pushNamed(context, '/editProfile');
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    },);
-
+        );
+      },
+    );
   }
 
   Column _editProfile(String title, String info, onPressed) {

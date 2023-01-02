@@ -44,9 +44,9 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   bool _isLoggedIn = false;
 
-  initData(){
+  initData() {
     _isLoggedIn = getBoolAsync(loggedIn, defaultValue: false);
-    if(_isLoggedIn) ref.read(loginProvider.notifier).userModel;
+    if (_isLoggedIn) ref.read(loginProvider.notifier).userModel;
     ref.read(sliderProvider.notifier).fetchSliderDetails();
     ref.read(productCategoryProvider.notifier).fetchProductsCategoryDetails();
     ref.read(shopProvider.notifier).fetchShopProductList();
@@ -62,7 +62,6 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    bool checkLogin = getBoolAsync(loggedIn,defaultValue: false);
     return MaterialApp(
       title: 'Finesse',
       debugShowCheckedModeBanner: false,
@@ -79,8 +78,6 @@ class _MyAppState extends ConsumerState<MyApp> {
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }

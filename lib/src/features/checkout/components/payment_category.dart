@@ -1,4 +1,4 @@
-import 'package:finesse/components/checkedbutton/k_checkedButtton.dart';
+import 'package:finesse/components/checkedbutton/k_checked_buttton.dart';
 import 'package:finesse/constants/asset_path.dart';
 import 'package:flutter/material.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -47,9 +47,7 @@ class _PaymentCategoryState extends State<PaymentCategory> {
             decoration: BoxDecoration(
               color: KColor.filterDividerColor,
               border: Border.all(
-                color: index == selectedIndex
-                    ? KColor.baseBlack
-                    : Colors.transparent,
+                color: index == selectedIndex ? KColor.baseBlack : Colors.transparent,
               ),
               borderRadius: BorderRadius.circular(15),
             ),
@@ -69,7 +67,7 @@ class _PaymentCategoryState extends State<PaymentCategory> {
                         const SizedBox(width: 16),
                         Text(
                           payment[index],
-                          style: KTextStyle.subtitle4.copyWith(
+                          style: KTextStyle.bodyText2.copyWith(
                             color: KColor.baseBlack,
                           ),
                         ),
@@ -93,14 +91,14 @@ class _PaymentCategoryState extends State<PaymentCategory> {
                         children: [
                           Text(
                             'Paypal Email',
-                            style: KTextStyle.subtitle3.copyWith(
+                            style: KTextStyle.bodyText1.copyWith(
                               color: KColor.blackbg.withOpacity(0.6),
                             ),
                           ),
                           const SizedBox(height: 7),
                           Text(
                             'mari12346@gmail.com',
-                            style: KTextStyle.subtitle3.copyWith(
+                            style: KTextStyle.bodyText1.copyWith(
                               color: KColor.blackbg.withOpacity(0.6),
                             ),
                           ),

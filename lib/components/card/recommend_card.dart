@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class RecommendCard extends StatefulWidget {
   final String? img;
   final String? price;
-  const RecommendCard({
-    this.img,
-    this.price,
-    Key? key}) : super(key: key);
+  const RecommendCard({this.img, this.price, Key? key}) : super(key: key);
 
   @override
   State<RecommendCard> createState() => _RecommendCardState();
@@ -45,7 +42,7 @@ class _RecommendCardState extends State<RecommendCard> {
             ],
           ),
           child: ClipRRect(
-            borderRadius:  BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10),
             child: Image.network(
               '${widget.img}',
               height: 113,
@@ -57,7 +54,7 @@ class _RecommendCardState extends State<RecommendCard> {
           padding: const EdgeInsets.only(right: 20.0, top: 6),
           child: Text(
             '${widget.price}',
-            style: KTextStyle.subtitle4.copyWith(color: KColor.blackbg),
+            style: KTextStyle.bodyText2.copyWith(color: KColor.blackbg),
           ),
         ),
       ],

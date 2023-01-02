@@ -28,7 +28,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(),
+        child: KAppBar(),
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -43,8 +43,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   children: [
                     Text(
                       'Reset Password',
-                      style:
-                          KTextStyle.headline3.copyWith(color: KColor.blackbg),
+                      style: KTextStyle.headline3.copyWith(color: KColor.blackbg),
                     ),
                     const SizedBox(height: 24),
                     PhoneTextField(
@@ -60,9 +59,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 builder: (context, ref, _) {
                   final authState = ref.watch(resetPasswordProvider);
                   return KButton(
-                    title: authState is LoadingState
-                        ? 'Please wait...'
-                        : 'Reset Password',
+                    title: authState is LoadingState ? 'Please wait...' : 'Reset Password',
                     onTap: () {
                       if (authState is! LoadingState) {
                         if (_formKey.currentState!.validate()) {

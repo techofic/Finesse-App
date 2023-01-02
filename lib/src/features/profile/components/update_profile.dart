@@ -1,12 +1,10 @@
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/textfield/k_fill_name.dart';
 import 'package:finesse/components/textfield/k_fill_phone.dart';
-import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/auth/login/controller/login_controller.dart';
 import 'package:finesse/src/features/auth/login/model/user_model.dart';
 import 'package:finesse/src/features/auth/login/state/login_state.dart';
-import 'package:finesse/src/features/auth/login/view/login_page.dart';
 import 'package:finesse/src/features/cart/components/get_location.dart';
 import 'package:finesse/src/features/profile/controller/profile_controller.dart';
 import 'package:finesse/styles/k_colors.dart';

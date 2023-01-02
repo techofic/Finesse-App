@@ -9,8 +9,7 @@ class KDialog extends StatelessWidget {
   final bool? checkTitle;
   final VoidCallback? tap;
 
-  const KDialog({this.subMessage, this.checkTitle, this.message, this.tap,Key? key})
-      : super(key: key);
+  const KDialog({this.subMessage, this.checkTitle, this.message, this.tap, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class KDialog extends StatelessWidget {
                 if (checkTitle == true)
                   Text(
                     '$subMessage',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),

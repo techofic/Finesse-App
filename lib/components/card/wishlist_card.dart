@@ -137,7 +137,7 @@ class _WishlistCardState extends State<WishlistCard> {
                             Flexible(
                               child: Text(
                                 '${widget.productName}',
-                                style: KTextStyle.subtitle3.copyWith(
+                                style: KTextStyle.bodyText1.copyWith(
                                   color: KColor.blackbg,
                                 ),
                               ),
@@ -145,7 +145,7 @@ class _WishlistCardState extends State<WishlistCard> {
                             const SizedBox(height: 8),
                             Text(
                               '${widget.group}',
-                              style: KTextStyle.subtitle5.copyWith(
+                              style: KTextStyle.caption1.copyWith(
                                 color: KColor.blackbg.withOpacity(0.3),
                               ),
                             )
@@ -164,9 +164,7 @@ class _WishlistCardState extends State<WishlistCard> {
                                 color: KColor.blackbg,
                               ),
                             ),
-                            widget.isChecked == true
-                                ? SizedBox(width: context.screenWidth * 0.32)
-                                : SizedBox(width: context.screenWidth * 0.14),
+                            widget.isChecked == true ? SizedBox(width: context.screenWidth * 0.32) : SizedBox(width: context.screenWidth * 0.14),
                             widget.isChecked == true
                                 ? InkWell(
                                     onTap: widget.add,
@@ -186,8 +184,7 @@ class _WishlistCardState extends State<WishlistCard> {
                                         borderRadius: BorderRadius.circular(10),
                                         onTap: () {
                                           setState(() {
-                                            widget.quantity =
-                                                (widget.quantity! + 1);
+                                            widget.quantity = (widget.quantity! + 1);
                                           });
                                         },
                                         child: Container(
@@ -198,8 +195,7 @@ class _WishlistCardState extends State<WishlistCard> {
                                               color: KColor.blackbg,
                                               width: 1,
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
+                                            borderRadius: BorderRadius.circular(10),
                                           ),
                                           child: const Center(
                                             child: Icon(
@@ -225,8 +221,7 @@ class _WishlistCardState extends State<WishlistCard> {
                                         borderRadius: BorderRadius.circular(10),
                                         onTap: () {
                                           setState(() {
-                                            widget.quantity =
-                                                (widget.quantity! - 1);
+                                            widget.quantity = (widget.quantity! - 1);
                                             if (widget.quantity! < 0) {
                                               widget.quantity = 0;
                                             }
@@ -237,11 +232,8 @@ class _WishlistCardState extends State<WishlistCard> {
                                           height: 32,
                                           width: 32,
                                           decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: KColor.blackbg,
-                                                width: 1),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
+                                            border: Border.all(color: KColor.blackbg, width: 1),
+                                            borderRadius: BorderRadius.circular(10),
                                           ),
                                           child: const Center(
                                             child: Icon(

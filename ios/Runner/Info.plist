@@ -45,9 +45,12 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
-	<key>NSPhotoLibraryUsageDescription</key>
 	<key>NSCameraUsageDescription</key>
+	<string>This app would like to access your camera for capturing photos for posts and stories</string>
 	<key>NSMicrophoneUsageDescription</key>
+	<string>This app would like to access your micropone for capturing videos for posts and stories</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app would like to access your photos for posts and stories</string>
 
 </dict>
 </plist>

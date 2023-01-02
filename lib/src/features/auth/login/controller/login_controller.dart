@@ -7,22 +7,21 @@ import 'package:finesse/src/features/auth/login/model/user_model.dart';
 import 'package:finesse/src/features/auth/login/state/login_state.dart';
 import 'package:finesse/src/features/auth/login/view/login_page.dart';
 import 'package:finesse/src/features/main_screen.dart';
-import 'package:finesse/src/features/profile/controller/profile_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 /// Providers
-final loginProvider = StateNotifierProvider<loginController, BaseState>(
-  (ref) => loginController(ref: ref),
+final loginProvider = StateNotifierProvider<LoginController, BaseState>(
+  (ref) => LoginController(ref: ref),
 );
 
 /// Controllers
-class loginController extends StateNotifier<BaseState> {
+class LoginController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  loginController({this.ref}) : super(const InitialState());
+  LoginController({this.ref}) : super(const InitialState());
   User? userModel;
 
   Future login({
@@ -30,7 +29,7 @@ class loginController extends StateNotifier<BaseState> {
     required String password,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'contact': phone,
       'password': password,
@@ -53,7 +52,7 @@ class loginController extends StateNotifier<BaseState> {
 
           NavigationService.navigateToReplacement(
             CupertinoPageRoute(
-              builder: (context) => MainScreen(),
+              builder: (context) => const MainScreen(),
             ),
           );
         }
@@ -69,14 +68,14 @@ class loginController extends StateNotifier<BaseState> {
 
   Future logout() async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     try {
       responseBody = await Network.handleResponse(
         await Network.getRequest(API.logout),
       );
       if (responseBody != null) {
         setValue(loggedIn, false);
-        var userData;
+        // var userData;
         state = LoginSuccessState(userModel);
         toast("Logout", bgColor: KColor.selectColor);
         NavigationService.popNavigate();

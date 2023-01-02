@@ -44,18 +44,14 @@ class _MainCategoryState extends State<MainCategory> {
                       width: 83,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: index == currentIndex
-                            ? KColor.blackbg.withOpacity(0.8)
-                            : KColor.searchColor.withOpacity(0.8),
+                        color: index == currentIndex ? KColor.blackbg.withOpacity(0.8) : KColor.searchColor.withOpacity(0.8),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
                         child: Text(
                           items[index],
-                          style: KTextStyle.subtitle3.copyWith(
-                            color: index == currentIndex
-                                ? KColor.whiteBackground
-                                : KColor.blackbg.withOpacity(0.4),
+                          style: KTextStyle.bodyText1.copyWith(
+                            color: index == currentIndex ? KColor.whiteBackground : KColor.blackbg.withOpacity(0.4),
                           ),
                         ),
                       ),

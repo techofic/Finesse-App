@@ -19,10 +19,9 @@ class CategoryController extends StateNotifier<BaseState> {
 
   Future fetchCategoryDetails() async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     try {
-      responseBody =
-          await Network.handleResponse(await Network.getRequest(API.category));
+      responseBody = await Network.handleResponse(await Network.getRequest(API.category));
       if (responseBody != null) {
         categoryModel = CategoryModel.fromJson(responseBody);
         state = CategorySuccessState(categoryModel);

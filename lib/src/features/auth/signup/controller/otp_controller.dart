@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Providers
 final otpProvider = StateNotifierProvider<OtpController, BaseState>(
-      (ref) => OtpController(ref: ref),
+  (ref) => OtpController(ref: ref),
 );
 
 /// Controllers
@@ -23,7 +23,7 @@ class OtpController extends StateNotifier<BaseState> {
     required String otp,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'email': phone,
       'token': otp,
@@ -36,8 +36,7 @@ class OtpController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         state = const OtpSuccessState();
         print("Otp send Successful");
-        NavigationService.navigateToReplacement(
-            CupertinoPageRoute(builder: (context) => const LoginPage()));
+        NavigationService.navigateToReplacement(CupertinoPageRoute(builder: (context) => const LoginPage()));
       } else {
         state = const ErrorState();
       }
@@ -52,7 +51,7 @@ class OtpController extends StateNotifier<BaseState> {
     required String phone,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'contact': phone,
     };
@@ -64,8 +63,7 @@ class OtpController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         state = const OtpSuccessState();
         print("Otp send again Successful");
-        NavigationService.navigateToReplacement(
-            CupertinoPageRoute(builder: (context) => const LoginPage()));
+        NavigationService.navigateToReplacement(CupertinoPageRoute(builder: (context) => const LoginPage()));
       } else {
         state = const ErrorState();
       }

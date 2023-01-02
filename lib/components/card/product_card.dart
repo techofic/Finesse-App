@@ -71,8 +71,7 @@ class ProductCard extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: '$img',
                       fit: BoxFit.fill,
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
                     ),
                   ),
                 ),
@@ -91,14 +90,13 @@ class ProductCard extends StatelessWidget {
                         Flexible(
                           child: Text(
                             '$name',
-                            style: KTextStyle.subtitle5
-                                .copyWith(color: KColor.blackbg),
+                            style: KTextStyle.caption1.copyWith(color: KColor.blackbg),
                           ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           '$genre',
-                          style: KTextStyle.subtitle8.copyWith(
+                          style: KTextStyle.caption2.copyWith(
                             color: KColor.blackbg.withOpacity(0.3),
                           ),
                         ),
@@ -114,17 +112,15 @@ class ProductCard extends StatelessWidget {
                                 children: [
                                   Text(
                                     "\$$offerPrice",
-                                    style: KTextStyle.subtitle7
-                                        .copyWith(color: KColor.blackbg),
+                                    style: KTextStyle.subtitle7.copyWith(color: KColor.blackbg),
                                   ),
                                   const SizedBox(height: 2),
                                   Stack(
                                     children: [
                                       Text(
                                         '$regularPrice',
-                                        style: KTextStyle.subtitle8.copyWith(
-                                          color:
-                                              KColor.blackbg.withOpacity(0.3),
+                                        style: KTextStyle.caption2.copyWith(
+                                          color: KColor.blackbg.withOpacity(0.3),
                                         ),
                                       ),
                                       Positioned(
@@ -145,15 +141,13 @@ class ProductCard extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
-                                      color: KColor.btnShadowColor
-                                          .withOpacity(0.06),
+                                      color: KColor.btnShadowColor.withOpacity(0.06),
                                       spreadRadius: 0,
                                       blurRadius: 12,
                                       offset: const Offset(4, 4),
                                     ),
                                     BoxShadow(
-                                      color: KColor.btnShadowColor
-                                          .withOpacity(0.06),
+                                      color: KColor.btnShadowColor.withOpacity(0.06),
                                       spreadRadius: 0,
                                       blurRadius: 12,
                                       offset: const Offset(-4, -4),
@@ -196,8 +190,7 @@ class ProductCard extends StatelessWidget {
                   child: Center(
                     child: Text(
                       '$discount',
-                      style: KTextStyle.sticker
-                          .copyWith(color: KColor.whiteBackground),
+                      style: KTextStyle.sticker.copyWith(color: KColor.whiteBackground),
                     ),
                   ),
                 ),

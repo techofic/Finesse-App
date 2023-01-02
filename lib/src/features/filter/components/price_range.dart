@@ -3,7 +3,6 @@ import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 
-
 class PriceRange extends StatefulWidget {
   const PriceRange({Key? key}) : super(key: key);
 
@@ -45,13 +44,9 @@ class _PriceRangeState extends State<PriceRange> {
                       width: context.screenWidth * 0.44,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: index == currentIndex
-                            ? Colors.transparent
-                            : KColor.searchColor.withOpacity(0.8),
-                        border:Border.all(
-                          color: index == currentIndex
-                              ? KColor.blackbg.withOpacity(0.8)
-                              : KColor.searchColor.withOpacity(0.8),
+                        color: index == currentIndex ? Colors.transparent : KColor.searchColor.withOpacity(0.8),
+                        border: Border.all(
+                          color: index == currentIndex ? KColor.blackbg.withOpacity(0.8) : KColor.searchColor.withOpacity(0.8),
                         ),
                         borderRadius: BorderRadius.circular(15),
                       ),
@@ -61,7 +56,7 @@ class _PriceRangeState extends State<PriceRange> {
                           children: [
                             Text(
                               items[index],
-                              style: KTextStyle.subtitle3.copyWith(
+                              style: KTextStyle.bodyText1.copyWith(
                                 color: KColor.blackbg.withOpacity(0.4),
                               ),
                             ),

@@ -21,7 +21,7 @@ class _MyOrderState extends State<MyOrder> with SingleTickerProviderStateMixin {
         backgroundColor: KColor.appBackground,
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(56),
-          child: KappBar(checkTitle: true, title: 'My Orders'),
+          child: KAppBar(checkTitle: true, title: 'My Orders'),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +39,7 @@ class _MyOrderState extends State<MyOrder> with SingleTickerProviderStateMixin {
                     child: TabBar(
                       indicatorColor: Colors.transparent,
                       unselectedLabelColor: KColor.blackbg.withOpacity(0.5),
-                      labelStyle: KTextStyle.subtitle3,
+                      labelStyle: KTextStyle.bodyText1,
                       labelColor: KColor.blackbg,
                       isScrollable: true,
                       labelPadding: const EdgeInsets.only(right: 24),
@@ -71,7 +71,7 @@ class _MyOrderState extends State<MyOrder> with SingleTickerProviderStateMixin {
               ),
             ),
             SizedBox(height: context.screenHeight * 0.01),
-             const Expanded(
+            const Expanded(
               child: TabBarView(
                 children: [
                   AllOrder(),

@@ -18,15 +18,13 @@ class _CheckoutPageState extends State<CheckoutPage> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle: true, title: 'Checkout'),
+        child: KAppBar(checkTitle: true, title: 'Checkout'),
       ),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 16),
           child: Column(
-            children:  const [
-              Steppers()
-            ],
+            children: const [Steppers()],
           ),
         ),
       ),

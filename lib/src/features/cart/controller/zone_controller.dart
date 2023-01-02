@@ -1,7 +1,6 @@
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/core/network/api.dart';
 import 'package:finesse/core/network/network_utils.dart';
-import 'package:finesse/src/features/cart/model/cart_model.dart';
 import 'package:finesse/src/features/cart/model/city_model.dart';
 import 'package:finesse/src/features/cart/model/zone_model.dart';
 import 'package:finesse/src/features/cart/state/zone_state.dart';
@@ -10,18 +9,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'cart_controller.dart';
 
 /// Providers
-final zoneProvider = StateNotifierProvider<zoneController, BaseState>(
-  (ref) => zoneController(ref: ref),
+final zoneProvider = StateNotifierProvider<ZoneController, BaseState>(
+  (ref) => ZoneController(ref: ref),
 );
-final cityProvider = StateNotifierProvider<cityController, BaseState>(
-  (ref) => cityController(ref: ref),
+final cityProvider = StateNotifierProvider<CityController, BaseState>(
+  (ref) => CityController(ref: ref),
 );
 
 /// Controllers
-class zoneController extends StateNotifier<BaseState> {
+class ZoneController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  zoneController({this.ref}) : super(const InitialState());
+  ZoneController({this.ref}) : super(const InitialState());
   ZoneModel? zoneModel;
   int deliveryFee = 0;
   int roundingFee = 0;
@@ -30,10 +29,9 @@ class zoneController extends StateNotifier<BaseState> {
 
   Future allZone({id = ""}) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     try {
-      responseBody = await Network.handleResponse(
-          await Network.getRequest(API.allZone(id: id)));
+      responseBody = await Network.handleResponse(await Network.getRequest(API.allZone(id: id)));
       if (responseBody != null) {
         zoneModel = ZoneModel.fromJson(responseBody);
         state = ZoneSuccessState(zoneModel);
@@ -66,18 +64,17 @@ class zoneController extends StateNotifier<BaseState> {
   }
 }
 
-class cityController extends StateNotifier<BaseState> {
+class CityController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  cityController({this.ref}) : super(const InitialState());
+  CityController({this.ref}) : super(const InitialState());
   CityModel? cityModel;
 
   Future allCity() async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     try {
-      responseBody =
-          await Network.handleResponse(await Network.getRequest(API.allCity));
+      responseBody = await Network.handleResponse(await Network.getRequest(API.allCity));
       if (responseBody != null) {
         cityModel = CityModel.fromJson(responseBody);
         state = CitySuccessState(cityModel);

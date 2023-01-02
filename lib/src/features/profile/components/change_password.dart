@@ -26,7 +26,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle: true, title: 'Change Password'),
+        child: KAppBar(checkTitle: true, title: 'Change Password'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -72,7 +72,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   ),
                 ],
               ),
-              SizedBox(height: context.screenHeight*0.27),
+              SizedBox(height: context.screenHeight * 0.27),
               KButton(
                 title: 'Change Password',
                 onTap: () {

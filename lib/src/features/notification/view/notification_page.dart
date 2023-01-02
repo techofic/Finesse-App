@@ -27,18 +27,16 @@ class _NotificationPageState extends State<NotificationPage> {
       builder: (context, ref, _) {
         final notificationState = ref.watch(notificationProvider);
         final List<NotiDetail> notification =
-            notificationState is GetNotificationSuccessState
-                ? notificationState.notificationModel!.notiDetails
-                : [];
+            notificationState is GetNotificationSuccessState ? notificationState.notificationModel!.notiDetails : [];
         return Scaffold(
           backgroundColor: KColor.appBackground,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(56),
-            child: KappBar(
+            child: KAppBar(
               checkTitle: true,
               dotCheck: true,
               title: 'Notification',
-              onTap: ()=>Navigator.pushNamed(context, '/mainScreen'),
+              onTap: () => Navigator.pushNamed(context, '/mainScreen'),
             ),
           ),
           body: Container(
@@ -61,13 +59,10 @@ class _NotificationPageState extends State<NotificationPage> {
                       children: [
                         Text(
                           'Today',
-                          style: KTextStyle.subtitle1
-                              .copyWith(color: KColor.blackbg),
+                          style: KTextStyle.subtitle1.copyWith(color: KColor.blackbg),
                         ),
                         const SizedBox(height: 16),
-                        if(notificationState is LoadingState)...[
-                          const KLoading(shimmerHeight: 114)
-                        ],
+                        if (notificationState is LoadingState) ...[const KLoading(shimmerHeight: 114)],
                         ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -75,8 +70,7 @@ class _NotificationPageState extends State<NotificationPage> {
                           itemBuilder: (BuildContext context, int index) {
                             return NotificationCard(
                               msg: notification[index].msg,
-                              date: createDate(
-                                  notification[index].createdAt.toString(), 1),
+                              date: createDate(notification[index].createdAt.toString(), 1),
                               cancel: () {
                                 setState(() {
                                   Navigator.pop(context);
@@ -84,9 +78,7 @@ class _NotificationPageState extends State<NotificationPage> {
                               },
                               delete: () {
                                 if (notificationState is! LoadingState) {
-                                  ref
-                                      .read(notificationProvider.notifier)
-                                      .deleteNotification(
+                                  ref.read(notificationProvider.notifier).deleteNotification(
                                         id: notification[index].id.toString(),
                                       );
                                 }

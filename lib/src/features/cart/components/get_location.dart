@@ -14,8 +14,7 @@ class DeliveryAddress extends StatefulWidget {
   String? zones;
   final bool? checkCities;
 
-  DeliveryAddress({Key? key, this.cities, this.zones, this.checkCities})
-      : super(key: key);
+  DeliveryAddress({Key? key, this.cities, this.zones, this.checkCities}) : super(key: key);
 
   @override
   State<DeliveryAddress> createState() => _DeliveryAddressState();
@@ -28,10 +27,8 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
       builder: (context, ref, _) {
         final zoneState = ref.watch(zoneProvider);
         final cityState = ref.watch(cityProvider);
-        final List<Zone>? zoneData =
-            zoneState is ZoneSuccessState ? zoneState.zoneModel?.zones : [];
-        final List<City>? cityData =
-            cityState is CitySuccessState ? cityState.cityModel?.cities : [];
+        final List<Zone>? zoneData = zoneState is ZoneSuccessState ? zoneState.zoneModel?.zones : [];
+        final List<City>? cityData = cityState is CitySuccessState ? cityState.cityModel?.cities : [];
 
         return Container(
           height: 48,
@@ -48,15 +45,14 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                 isExpanded: true,
                 hint: Text(
                   widget.checkCities == true ? 'city' : 'zone',
-                  style: KTextStyle.subtitle3.copyWith(
+                  style: KTextStyle.bodyText1.copyWith(
                     color: KColor.blackbg.withOpacity(0.4),
                   ),
                 ),
                 dropdownColor: KColor.appBackground,
                 menuMaxHeight: context.screenHeight * 0.5,
                 alignment: AlignmentDirectional.bottomStart,
-                value:
-                    widget.checkCities == true ? widget.cities : widget.zones,
+                value: widget.checkCities == true ? widget.cities : widget.zones,
                 icon: const Icon(
                   Icons.keyboard_arrow_down,
                   color: KColor.blackbg,
@@ -64,9 +60,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                 iconSize: 16,
                 onChanged: (newValue) {
                   setState(() {
-                    widget.checkCities == true
-                        ? widget.cities = newValue
-                        : widget.zones = newValue;
+                    widget.checkCities == true ? widget.cities = newValue : widget.zones = newValue;
                     if (widget.checkCities == true) widget.zones = null;
                   });
                   if (widget.checkCities == true) {
@@ -80,7 +74,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                             value: location.id.toString(),
                             child: Text(
                               location.name.toString(),
-                              style: KTextStyle.subtitle3.copyWith(
+                              style: KTextStyle.bodyText1.copyWith(
                                 color: KColor.blackbg.withOpacity(0.4),
                               ),
                             ),
@@ -93,7 +87,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                             value: position.id.toString(),
                             child: Text(
                               position.zoneName.toString(),
-                              style: KTextStyle.subtitle3.copyWith(
+                              style: KTextStyle.bodyText1.copyWith(
                                 color: KColor.blackbg.withOpacity(0.4),
                               ),
                             ),

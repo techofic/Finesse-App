@@ -16,7 +16,7 @@ class ZoneDropdown extends StatefulWidget {
 
 class _ZoneDropdownState extends State<ZoneDropdown> {
   String? _zones;
-  String? _cities;
+  // String? _cities;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,7 @@ class _ZoneDropdownState extends State<ZoneDropdown> {
       builder: (context, ref, _) {
         final zoneState = ref.watch(zoneProvider);
 
-        final List<Zone>? zoneData =
-            zoneState is ZoneSuccessState ? zoneState.zoneModel?.zones : [];
+        final List<Zone>? zoneData = zoneState is ZoneSuccessState ? zoneState.zoneModel?.zones : [];
 
         return SingleChildScrollView(
           child: Column(
@@ -50,7 +49,7 @@ class _ZoneDropdownState extends State<ZoneDropdown> {
                           isExpanded: true,
                           hint: Text(
                             'zone',
-                            style: KTextStyle.subtitle3.copyWith(
+                            style: KTextStyle.bodyText1.copyWith(
                               color: KColor.blackbg.withOpacity(0.4),
                             ),
                           ),
@@ -66,11 +65,9 @@ class _ZoneDropdownState extends State<ZoneDropdown> {
                           onChanged: (newValue) {
                             setState(() {
                               _zones = newValue as String?;
-                              _cities = null;
+                              // _cities = null;
                             });
-                            ref
-                                .read(zoneProvider.notifier)
-                                .allZone();
+                            ref.read(zoneProvider.notifier).allZone();
                           },
                           items: zoneData?.map(
                             (position) {
@@ -78,7 +75,7 @@ class _ZoneDropdownState extends State<ZoneDropdown> {
                                 value: position.id.toString(),
                                 child: Text(
                                   position.zoneName.toString(),
-                                  style: KTextStyle.subtitle3.copyWith(
+                                  style: KTextStyle.bodyText1.copyWith(
                                     color: KColor.blackbg.withOpacity(0.4),
                                   ),
                                 ),

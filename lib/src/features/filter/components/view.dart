@@ -50,9 +50,7 @@ class _ViewState extends State<View> {
                       width: context.screenWidth * 0.44,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: index == currentIndex
-                            ? KColor.blackbg.withOpacity(0.8)
-                            : KColor.searchColor.withOpacity(0.8),
+                        color: index == currentIndex ? KColor.blackbg.withOpacity(0.8) : KColor.searchColor.withOpacity(0.8),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
@@ -62,17 +60,13 @@ class _ViewState extends State<View> {
                             SvgPicture.asset(
                               itemsIcon[index],
                               height: 19,
-                              color: index == currentIndex
-                                  ? KColor.whiteBackground
-                                  : KColor.blackbg,
+                              color: index == currentIndex ? KColor.whiteBackground : KColor.blackbg,
                             ),
                             const SizedBox(width: 8),
                             Text(
                               items[index],
-                              style: KTextStyle.subtitle3.copyWith(
-                                color: index == currentIndex
-                                    ? KColor.whiteBackground
-                                    : KColor.blackbg.withOpacity(0.4),
+                              style: KTextStyle.bodyText1.copyWith(
+                                color: index == currentIndex ? KColor.whiteBackground : KColor.blackbg.withOpacity(0.4),
                               ),
                             ),
                           ],

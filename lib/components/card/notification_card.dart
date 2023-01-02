@@ -10,7 +10,7 @@ class NotificationCard extends StatefulWidget {
   final String? date;
   final VoidCallback? cancel;
   final VoidCallback? delete;
-  const NotificationCard({this.cancel,this.delete,Key? key, this.msg, this.date}) : super(key: key);
+  const NotificationCard({this.cancel, this.delete, Key? key, this.msg, this.date}) : super(key: key);
 
   @override
   State<NotificationCard> createState() => _NotificationCardState();
@@ -31,17 +31,15 @@ class _NotificationCardState extends State<NotificationCard> {
           builder: (BuildContext context) {
             return KConfirmDialog(
               message: 'Delete product',
-              subMessage:
-              'Are you sure you want to delete this product?',
+              subMessage: 'Are you sure you want to delete this product?',
               onCancel: widget.cancel,
               onDelete: widget.delete,
             );
           },
         );
-
       },
       background: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
         margin: const EdgeInsets.only(bottom: 8),
         decoration: const BoxDecoration(
           color: KColor.deleteColor,
@@ -53,12 +51,15 @@ class _NotificationCardState extends State<NotificationCard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Image.asset('assets/images/Delete.png',height: 23,),
+            Image.asset(
+              'assets/images/Delete.png',
+              height: 23,
+            ),
           ],
         ),
       ),
       child: Container(
-        margin: const EdgeInsets.only(top: 10,bottom:8,left: 2,right: 2),
+        margin: const EdgeInsets.only(top: 10, bottom: 8, left: 2, right: 2),
         padding: const EdgeInsets.only(left: 20),
         height: 114,
         decoration: BoxDecoration(
@@ -100,15 +101,13 @@ class _NotificationCardState extends State<NotificationCard> {
                     flex: 2,
                     child: Text(
                       widget.msg.toString(),
-                      style: KTextStyle.subtitle3
-                          .copyWith(color: KColor.blackbg.withOpacity(0.7)),
+                      style: KTextStyle.bodyText1.copyWith(color: KColor.blackbg.withOpacity(0.7)),
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     widget.date.toString(),
-                    style: KTextStyle.subtitle5
-                        .copyWith(color: KColor.blackbg.withOpacity(0.3)),
+                    style: KTextStyle.caption1.copyWith(color: KColor.blackbg.withOpacity(0.3)),
                   )
                 ],
               ),

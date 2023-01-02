@@ -22,11 +22,11 @@ class _OrderDetailsState extends State<OrderDetails> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle: true, title: 'Order Details'),
+        child: KAppBar(checkTitle: true, title: 'Order Details'),
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -47,7 +47,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   ),
                   Text(
                     "6 May",
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.3),
                     ),
                   ),
@@ -66,21 +66,21 @@ class _OrderDetailsState extends State<OrderDetails> {
                   const SizedBox(height: 16),
                   Text(
                     "Mariam Crane",
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.3),
                     ),
                   ),
                   const SizedBox(height: 7),
                   Text(
                     "+97 4556 7681",
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.3),
                     ),
                   ),
                   const SizedBox(height: 7),
                   Text(
                     "House No 8, Lane 5, St John Hill City, Toronto",
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.3),
                     ),
                   ),
@@ -99,21 +99,21 @@ class _OrderDetailsState extends State<OrderDetails> {
                   const SizedBox(height: 16),
                   Text(
                     "Mariam Crane",
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.3),
                     ),
                   ),
                   const SizedBox(height: 7),
                   Text(
                     "+97 4556 7681",
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.3),
                     ),
                   ),
                   const SizedBox(height: 7),
                   Text(
                     "House No 8, Lane 5, St John Hill City, Toronto",
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.3),
                     ),
                   ),
@@ -139,13 +139,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                           const SizedBox(width: 3),
                           Text(
                             "Payment made via Paypal",
-                            style: KTextStyle.subtitle3.copyWith(
+                            style: KTextStyle.bodyText1.copyWith(
                               color: KColor.blackbg.withOpacity(0.6),
                             ),
                           ),
                         ],
                       ),
-                      Image.asset(AssetPath.paypalLogo,height: 24)
+                      Image.asset(AssetPath.paypalLogo, height: 24)
                     ],
                   ),
                 ],
@@ -163,7 +163,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                   const SizedBox(height: 16),
                   Text(
                     "Delivered",
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.selectColor,
                     ),
                   ),
@@ -215,8 +215,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                           children: [
                             Text(
                               'Hanging Clock',
-                              style: KTextStyle.subtitle4
-                                  .copyWith(color: KColor.blackbg,
+                              style: KTextStyle.bodyText2.copyWith(
+                                color: KColor.blackbg,
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -252,13 +252,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                 children: [
                   Text(
                     'Subtotal',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),
                   Text(
                     '\$269.4',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),
@@ -270,13 +270,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                 children: [
                   Text(
                     'Shipping Fee',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),
                   Text(
                     '\$269.4',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),
@@ -293,13 +293,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                 children: [
                   Text(
                     'Grand Total',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),
                   Text(
                     '\$269.4',
-                    style: KTextStyle.subtitle3.copyWith(
+                    style: KTextStyle.bodyText1.copyWith(
                       color: KColor.blackbg.withOpacity(0.6),
                     ),
                   ),
@@ -319,7 +319,6 @@ class _OrderDetailsState extends State<OrderDetails> {
                   Navigator.pushNamed(context, '/trackOrder');
                 },
               ),
-
               const SizedBox(height: 36),
             ],
           ),

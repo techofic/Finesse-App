@@ -12,8 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 /// Providers
-final notificationProvider =
-    StateNotifierProvider<NotificationController, BaseState>(
+final notificationProvider = StateNotifierProvider<NotificationController, BaseState>(
   (ref) => NotificationController(ref: ref),
 );
 
@@ -26,7 +25,9 @@ class NotificationController extends StateNotifier<BaseState> {
 
   Future fetchNotification() async {
     state = const LoadingState();
-    var responseBody;
+
+    dynamic responseBody;
+
     try {
       responseBody = await Network.handleResponse(
         await Network.getRequest(API.getNotification),
@@ -44,14 +45,12 @@ class NotificationController extends StateNotifier<BaseState> {
     }
   }
 
-  Future deleteNotification({
-    required String id,
-  }) async {
+  Future deleteNotification({required String id}) async {
     state = const LoadingState();
-    var responseBody;
-    var requestBody = {
-      'id': id,
-    };
+
+    dynamic responseBody;
+    var requestBody = {'id': id};
+
     try {
       responseBody = await Network.handleResponse(
         await Network.postRequest(API.deleteNotification, requestBody),
@@ -66,7 +65,7 @@ class NotificationController extends StateNotifier<BaseState> {
             bgColor: KColor.selectColor,
           );
 
-          NavigationService?.navigateToReplacement(
+          NavigationService.navigateToReplacement(
             CupertinoPageRoute(
               builder: (context) => const ProductInfo(),
             ),
@@ -82,14 +81,12 @@ class NotificationController extends StateNotifier<BaseState> {
     }
   }
 
-  Future updateNotification({
-    required String id,
-  }) async {
+  Future updateNotification({required String id}) async {
     state = const LoadingState();
-    var responseBody;
-    var requestBody = {
-      'id': id,
-    };
+
+    dynamic responseBody;
+    var requestBody = {'id': id};
+
     try {
       responseBody = await Network.handleResponse(
         await Network.postRequest(API.updateNotification, requestBody),
@@ -103,7 +100,7 @@ class NotificationController extends StateNotifier<BaseState> {
             "Update Notification Successfully",
             bgColor: KColor.selectColor,
           );
-          NavigationService?.navigateToReplacement(
+          NavigationService.navigateToReplacement(
             CupertinoPageRoute(
               builder: (context) => const ProductInfo(),
             ),

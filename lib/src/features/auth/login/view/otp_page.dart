@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:finesse/components/appbar/appbar.dart';
 import 'package:finesse/components/button/k_button.dart';
-import 'package:finesse/constants/shared_preference_data.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/auth/signup/controller/otp_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -23,13 +22,12 @@ class OtpPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _OtpPageState createState() => _OtpPageState();
+  State<OtpPage> createState() => _OtpPageState();
 }
 
 class _OtpPageState extends State<OtpPage> {
   TextEditingController otp = TextEditingController();
   StreamController<ErrorAnimationType>? errorController;
-  final SharedPreferencesHelper _helper = SharedPreferencesHelper();
   bool hasError = false;
   String currentText = "";
   String? localName;
@@ -68,7 +66,7 @@ class _OtpPageState extends State<OtpPage> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(),
+        child: KAppBar(),
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
@@ -92,8 +90,7 @@ class _OtpPageState extends State<OtpPage> {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
               child: RichText(
                 text: TextSpan(
                   text: "Enter the code sent to ",
@@ -151,8 +148,7 @@ class _OtpPageState extends State<OtpPage> {
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Text(
                 hasError ? "Please fill up all the cells properly" : "",
-                style:
-                    KTextStyle.subtitle1.copyWith(color: KColor.errorRedText),
+                style: KTextStyle.subtitle1.copyWith(color: KColor.errorRedText),
               ),
             ),
             Row(
@@ -162,28 +158,26 @@ class _OtpPageState extends State<OtpPage> {
                   "Didn't receive the code? ",
                   style: KTextStyle.dialog.copyWith(color: KColor.blackbg),
                 ),
-                Consumer(
-                  builder: (context, ref, _) {
-                    final authState = ref.watch(otpProvider);
-                    return TextButton(
-                      onPressed: (){
-                        if (authState is! LoadingState) {
-                          if (_formKey.currentState!.validate()) {
-                            ref.read(otpProvider.notifier).otpSendAgain(
-                              phone: widget.phoneNumber.toString(),
-                            );
-                          }
+                Consumer(builder: (context, ref, _) {
+                  final authState = ref.watch(otpProvider);
+                  return TextButton(
+                    onPressed: () {
+                      if (authState is! LoadingState) {
+                        if (_formKey.currentState!.validate()) {
+                          ref.read(otpProvider.notifier).otpSendAgain(
+                                phone: widget.phoneNumber.toString(),
+                              );
                         }
-                      },
-                      child: Text(
-                        authState is LoadingState ? 'Please wait...' : 'Resend',
-                        style: KTextStyle.subtitle1.copyWith(
-                          color: KColor.blackbg,
-                        ),
+                      }
+                    },
+                    child: Text(
+                      authState is LoadingState ? 'Please wait...' : 'Resend',
+                      style: KTextStyle.subtitle1.copyWith(
+                        color: KColor.blackbg,
                       ),
-                    );
-                  }
-                ),
+                    ),
+                  );
+                }),
               ],
             ),
             const SizedBox(height: 20),
@@ -191,8 +185,7 @@ class _OtpPageState extends State<OtpPage> {
               builder: (context, ref, _) {
                 final authState = ref.watch(otpProvider);
                 return KButton(
-                  title:
-                      authState is LoadingState ? 'Please wait...' : 'Send Otp',
+                  title: authState is LoadingState ? 'Please wait...' : 'Send Otp',
                   onTap: () {
                     if (authState is! LoadingState) {
                       if (_formKey.currentState!.validate()) {

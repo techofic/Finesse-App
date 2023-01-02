@@ -9,13 +9,7 @@ class NameTextField extends StatefulWidget {
   final String hintText;
   final bool readOnly;
 
-  NameTextField(
-      {Key? key,
-      required this.label,
-      required this.controller,
-      required this.hintText,
-      required this.readOnly})
-      : super(key: key);
+  NameTextField({Key? key, required this.label, required this.controller, required this.hintText, required this.readOnly}) : super(key: key);
   TextEditingController controller = TextEditingController();
 
   @override
@@ -43,14 +37,14 @@ class _NameTextFieldState extends State<NameTextField> {
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: _focusNode.hasFocus
-            ? KTextStyle.subtitle3.copyWith(color: KColor.blackbg)
-            : KTextStyle.subtitle3.copyWith(
+            ? KTextStyle.bodyText1.copyWith(color: KColor.blackbg)
+            : KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.4),
               ),
         labelText: widget.label,
         labelStyle: _focusNode.hasFocus
-            ? KTextStyle.subtitle3.copyWith(color: KColor.blackbg)
-            : KTextStyle.subtitle3.copyWith(
+            ? KTextStyle.bodyText1.copyWith(color: KColor.blackbg)
+            : KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.6),
               ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),

@@ -24,7 +24,7 @@ class _AddNewAddressState extends State<AddNewAddress> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle: true, title: 'Add New Address'),
+        child: KAppBar(checkTitle: true, title: 'Add New Address'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -62,18 +62,14 @@ class _AddNewAddressState extends State<AddNewAddress> {
                                 width: 111,
                                 height: 40,
                                 decoration: BoxDecoration(
-                                  color: index == currentIndex
-                                      ? KColor.blackbg.withOpacity(0.8)
-                                      : KColor.searchColor.withOpacity(0.8),
+                                  color: index == currentIndex ? KColor.blackbg.withOpacity(0.8) : KColor.searchColor.withOpacity(0.8),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: Center(
                                   child: Text(
                                     items[index],
-                                    style: KTextStyle.subtitle3.copyWith(
-                                      color: index == currentIndex
-                                          ? KColor.whiteBackground
-                                          : KColor.blackbg.withOpacity(0.4),
+                                    style: KTextStyle.bodyText1.copyWith(
+                                      color: index == currentIndex ? KColor.whiteBackground : KColor.blackbg.withOpacity(0.4),
                                     ),
                                   ),
                                 ),

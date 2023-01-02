@@ -13,7 +13,7 @@ class EmptyProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: context.screenHeight*0.8,
+        height: context.screenHeight * 0.8,
         margin: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -21,14 +21,14 @@ class EmptyProductPage extends StatelessWidget {
           children: [
             Text(
               '$message',
-              style: KTextStyle.subtitle3.copyWith(
+              style: KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg,
               ),
             ),
             const SizedBox(height: 30),
             KButton(
               title: 'Continue Shopping',
-              onTap: (){
+              onTap: () {
                 Navigator.pushNamed(context, '/mainScreen');
               },
             )

@@ -19,7 +19,6 @@ class ContactPage extends StatefulWidget {
 }
 
 class _ContactPageState extends State<ContactPage> {
-
   TextEditingController name = TextEditingController();
   TextEditingController message = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -31,7 +30,7 @@ class _ContactPageState extends State<ContactPage> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle: true, title: 'Contact Us'),
+        child: KAppBar(checkTitle: true, title: 'Contact Us'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -168,7 +167,7 @@ class _ContactPageState extends State<ContactPage> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 18.0,bottom: 24),
+                padding: const EdgeInsets.only(top: 18.0, bottom: 24),
                 child: Divider(
                   color: KColor.baseBlack.withOpacity(0.1),
                   thickness: 1,
@@ -182,7 +181,7 @@ class _ContactPageState extends State<ContactPage> {
                   ),
                 ),
               ),
-              SizedBox(height: context.screenHeight*0.06),
+              SizedBox(height: context.screenHeight * 0.06),
               NameTextField(
                 controller: name,
                 readOnly: false,
@@ -211,7 +210,7 @@ class _ContactPageState extends State<ContactPage> {
                 hintText: 'Type your message here',
                 label: '',
               ),
-              SizedBox(height:context.screenHeight*0.05),
+              SizedBox(height: context.screenHeight * 0.05),
               KButton(
                 title: 'Send Message',
                 onTap: () {

@@ -1,7 +1,6 @@
 import 'package:finesse/components/dropdown/k_dropdown.dart';
 import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:finesse/src/features/product_details/model/all_branda.dart';
-import 'package:finesse/src/features/product_details/model/product_details_model.dart';
 import 'package:finesse/src/features/product_details/state/product_details_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
@@ -27,16 +26,14 @@ class _ProductVariationState extends State<ProductVariation> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
-         final brandState = ref.watch(allBrandsProvider);
-        final List<Brand> brandData = brandState is AllBrandsSuccessState
-            ? brandState.brandModel!.brands
-            : [];
+        final brandState = ref.watch(allBrandsProvider);
+        final List<Brand> brandData = brandState is AllBrandsSuccessState ? brandState.brandModel!.brands : [];
 
-        final productDetailsState = ref.watch(productDetailsProvider);
-        final List<Value>? productImageList =
-        productDetailsState is ProductDetailsSuccessState
-            ? productDetailsState.productDetailsModel?.product.color
-            : [];
+        // final productDetailsState = ref.watch(productDetailsProvider);
+        // final List<Value>? productImageList =
+        // productDetailsState is ProductDetailsSuccessState
+        //     ? productDetailsState.productDetailsModel?.product.color
+        //     : [];
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,18 +70,14 @@ class _ProductVariationState extends State<ProductVariation> {
                           width: 48,
                           height: 48,
                           decoration: BoxDecoration(
-                            color: index == currentIndex
-                                ? KColor.blackbg.withOpacity(0.8)
-                                : KColor.searchColor.withOpacity(0.8),
+                            color: index == currentIndex ? KColor.blackbg.withOpacity(0.8) : KColor.searchColor.withOpacity(0.8),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Center(
                             child: Text(
                               items[index],
-                              style: KTextStyle.subtitle3.copyWith(
-                                color: index == currentIndex
-                                    ? KColor.whiteBackground
-                                    : KColor.blackbg.withOpacity(0.4),
+                              style: KTextStyle.bodyText1.copyWith(
+                                color: index == currentIndex ? KColor.whiteBackground : KColor.blackbg.withOpacity(0.4),
                               ),
                             ),
                           ),

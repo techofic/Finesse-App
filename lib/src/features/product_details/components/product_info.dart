@@ -1,9 +1,8 @@
 import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/core/base/base_state.dart';
-import 'package:finesse/src/features/product_details/components/product_variation.dart';
 import 'package:finesse/src/features/product_details/components/product_description.dart';
 import 'package:finesse/src/features/product_details/components/product_review.dart';
-import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
+import 'package:finesse/src/features/product_details/components/product_variation.dart';
 import 'package:finesse/src/features/product_details/controller/product_recommendation_controller.dart';
 import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -88,9 +87,7 @@ class _ProductInfoState extends State<ProductInfo> {
                                   id: widget.id.toString(),
                                 );
                           }
-                          ref
-                              .read(wishlistProvider.notifier)
-                              .fetchWishlistProducts();
+                          ref.read(wishlistProvider.notifier).fetchWishlistProducts();
                         },
                         child: Material(
                           borderRadius: BorderRadius.circular(32),
@@ -134,10 +131,7 @@ class _ProductInfoState extends State<ProductInfo> {
                                     setState(() {
                                       currentIndex = index;
                                     });
-                                    ref
-                                        .read(productRecommendationProvider
-                                            .notifier)
-                                        .fetchProductsRecommendation(
+                                    ref.read(productRecommendationProvider.notifier).fetchProductsRecommendation(
                                           widget.id.toString(),
                                         );
                                   },
@@ -147,18 +141,14 @@ class _ProductInfoState extends State<ProductInfo> {
                                     width: 111,
                                     height: 40,
                                     decoration: BoxDecoration(
-                                      color: index == currentIndex
-                                          ? KColor.blackbg.withOpacity(0.8)
-                                          : KColor.searchColor.withOpacity(0.8),
+                                      color: index == currentIndex ? KColor.blackbg.withOpacity(0.8) : KColor.searchColor.withOpacity(0.8),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     child: Center(
                                       child: Text(
                                         items[index],
-                                        style: KTextStyle.subtitle3.copyWith(
-                                          color: index == currentIndex
-                                              ? KColor.whiteBackground
-                                              : KColor.blackbg.withOpacity(0.4),
+                                        style: KTextStyle.bodyText1.copyWith(
+                                          color: index == currentIndex ? KColor.whiteBackground : KColor.blackbg.withOpacity(0.4),
                                         ),
                                       ),
                                     ),
@@ -173,10 +163,8 @@ class _ProductInfoState extends State<ProductInfo> {
                   ),
 
                   /// MAIN BODY
-                  if (currentIndex == 0)
-                    ProductVariation(id: widget.id.toString()),
-                  if (currentIndex == 1)
-                    ProductDescription(id: widget.id.toString()),
+                  if (currentIndex == 0) ProductVariation(id: widget.id.toString()),
+                  if (currentIndex == 1) ProductDescription(id: widget.id.toString()),
                   if (currentIndex == 2) const ProductReview(),
                 ],
               ),

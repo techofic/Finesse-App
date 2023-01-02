@@ -14,19 +14,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 /// Providers
-final reportProvider = StateNotifierProvider<reportController, BaseState>(
-  (ref) => reportController(ref: ref),
+final reportProvider = StateNotifierProvider<ReportController, BaseState>(
+  (ref) => ReportController(ref: ref),
 );
 
-final profileProvider = StateNotifierProvider<profileController, BaseState>(
-  (ref) => profileController(ref: ref),
+final profileProvider = StateNotifierProvider<ProfileController, BaseState>(
+  (ref) => ProfileController(ref: ref),
 );
 
 /// Controllers
-class reportController extends StateNotifier<BaseState> {
+class ReportController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  reportController({this.ref}) : super(const InitialState());
+  ReportController({this.ref}) : super(const InitialState());
   ReportModel? reportModel;
 
   Future report({
@@ -37,7 +37,7 @@ class reportController extends StateNotifier<BaseState> {
     required String image,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'description': description,
       'reason': reason,
@@ -56,9 +56,9 @@ class reportController extends StateNotifier<BaseState> {
           setValue(token, responseBody['token']);
           toast("Add report Successfully", bgColor: KColor.selectColor);
 
-          NavigationService?.navigateToReplacement(
+          NavigationService.navigateToReplacement(
             CupertinoPageRoute(
-              builder: (context) => SignupPage(),
+              builder: (context) => const SignupPage(),
             ),
           );
         }
@@ -74,7 +74,7 @@ class reportController extends StateNotifier<BaseState> {
 
   Future fetchReports() async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     try {
       responseBody = await Network.handleResponse(
         await Network.getRequest(API.getReport),
@@ -93,10 +93,10 @@ class reportController extends StateNotifier<BaseState> {
   }
 }
 
-class profileController extends StateNotifier<BaseState> {
+class ProfileController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  profileController({this.ref}) : super(const InitialState());
+  ProfileController({this.ref}) : super(const InitialState());
 
   User? userModel;
 
@@ -107,20 +107,20 @@ class profileController extends StateNotifier<BaseState> {
     required User user,
   }) async {
     state = const LoadingState();
-    var responseBody;
-    var customer = {
-      "id": user.customer.id,
-      "userId": user.customer.userId,
-      "customerName": user.customer.customerName,
-      "email": user.customer.email,
-      "zone": "60 feet road",
-      "facebook": user.customer.facebook,
-      "instagram": user.customer.instagram,
-      "cityId": 14,
-      "areaId": 8375,
-      "zoneId": 412,
-      "postCode": null
-    };
+    dynamic responseBody;
+    // Map<String, dynamic> customer = {
+    //   "id": user.customer.id,
+    //   "userId": user.customer.userId,
+    //   "customerName": user.customer.customerName,
+    //   "email": user.customer.email,
+    //   "zone": "60 feet road",
+    //   "facebook": user.customer.facebook,
+    //   "instagram": user.customer.instagram,
+    //   "cityId": 14,
+    //   "areaId": 8375,
+    //   "zoneId": 412,
+    //   "postCode": null
+    // };
     var requestBody = {
       'id': id,
       'name': name,
@@ -150,7 +150,7 @@ class profileController extends StateNotifier<BaseState> {
           setValue(token, responseBody['token']);
           toast("Edit user Successfully", bgColor: KColor.selectColor);
 
-          NavigationService?.navigateToReplacement(
+          NavigationService.navigateToReplacement(
             CupertinoPageRoute(
               builder: (context) => const ProfilePage(),
             ),
@@ -205,11 +205,9 @@ class OrderController extends StateNotifier<BaseState> {
     required int referralDiscountAmount,
     required int roundAmount,
     required int shippingPrice,
-
-
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       // 'description': description,
       // 'reason': reason,
@@ -228,9 +226,9 @@ class OrderController extends StateNotifier<BaseState> {
           setValue(token, responseBody['token']);
           toast("Add report Successfully", bgColor: KColor.selectColor);
 
-          NavigationService?.navigateToReplacement(
+          NavigationService.navigateToReplacement(
             CupertinoPageRoute(
-              builder: (context) => SignupPage(),
+              builder: (context) => const SignupPage(),
             ),
           );
         }
@@ -246,7 +244,7 @@ class OrderController extends StateNotifier<BaseState> {
 
   Future fetchOrders() async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     try {
       responseBody = await Network.handleResponse(
         await Network.getRequest(API.getOrder),
@@ -269,7 +267,7 @@ class OrderController extends StateNotifier<BaseState> {
     required int invoiceId,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {'id': id, 'invoice_id': invoiceId};
     try {
       responseBody = await Network.handleResponse(
@@ -282,9 +280,9 @@ class OrderController extends StateNotifier<BaseState> {
           setValue(token, responseBody['token']);
           toast("Order Post Successfully", bgColor: KColor.selectColor);
 
-          NavigationService?.navigateToReplacement(
+          NavigationService.navigateToReplacement(
             CupertinoPageRoute(
-              builder: (context) => SignupPage(),
+              builder: (context) => const SignupPage(),
             ),
           );
         }

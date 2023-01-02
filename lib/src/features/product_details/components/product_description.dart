@@ -14,8 +14,7 @@ class ProductDescription extends StatefulWidget {
   final String? id;
   final String? description;
 
-  const ProductDescription({this.description, this.id, Key? key})
-      : super(key: key);
+  const ProductDescription({this.description, this.id, Key? key}) : super(key: key);
 
   @override
   State<ProductDescription> createState() => _ProductDescriptionState();
@@ -29,8 +28,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
     return Consumer(
       builder: (context, ref, _) {
         final productDetailsState = ref.watch(productDetailsProvider);
-        final productRecommendationState =
-            ref.watch(productRecommendationProvider);
+        final productRecommendationState = ref.watch(productRecommendationProvider);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,11 +37,9 @@ class _ProductDescriptionState extends State<ProductDescription> {
               'Description',
               style: KTextStyle.subtitle7.copyWith(color: Colors.black),
             ),
-
             if (productDetailsState is ProductDetailsSuccessState) ...[
               Html(
-                data: productDetailsState
-                    .productDetailsModel?.product.briefDescription ??'No data available',
+                data: productDetailsState.productDetailsModel?.product.briefDescription ?? 'No data available',
                 style: {
                   'span': Style(
                     color: KColor.blackbg.withOpacity(0.5),
@@ -55,26 +51,20 @@ class _ProductDescriptionState extends State<ProductDescription> {
                 },
               ),
             ],
-
-            if (productRecommendationState
-                is ProductRecommendationSuccessState) ...{
+            if (productRecommendationState is ProductRecommendationSuccessState) ...{
               Text(
                 'Recommended',
-                style: KTextStyle.subtitle4.copyWith(color: Colors.black),
+                style: KTextStyle.bodyText2.copyWith(color: Colors.black),
               ),
-
               SizedBox(
                 height: 170,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: productRecommendationState
-                      .productRecommendationModel?.product.length,
+                  itemCount: productRecommendationState.productRecommendationModel?.product.length,
                   itemBuilder: (BuildContext context, int index) {
                     return RecommendCard(
-                      img: productRecommendationState.productRecommendationModel
-                          ?.product[index].productImage,
-                      price: productRecommendationState.productRecommendationModel
-                          ?.product[index].sellingPrice.toString(),
+                      img: productRecommendationState.productRecommendationModel?.product[index].productImage,
+                      price: productRecommendationState.productRecommendationModel?.product[index].sellingPrice.toString(),
                     );
                   },
                 ),

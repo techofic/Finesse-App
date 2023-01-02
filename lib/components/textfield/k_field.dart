@@ -38,8 +38,8 @@ class _KTextFieldState extends State<KTextField> {
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: _focusNode.hasFocus
-            ? KTextStyle.subtitle3.copyWith(color: KColor.blackbg)
-            : KTextStyle.subtitle3.copyWith(
+            ? KTextStyle.bodyText1.copyWith(color: KColor.blackbg)
+            : KTextStyle.bodyText1.copyWith(
                 color: KColor.blackbg.withOpacity(0.4),
               ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 19.0),

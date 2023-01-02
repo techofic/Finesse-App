@@ -15,15 +15,15 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:finesse/src/features/wishlist/model/wishlist_product_model.dart';
 
 /// Providers
-final cartProvider = StateNotifierProvider<cartController, BaseState>(
-  (ref) => cartController(ref: ref),
+final cartProvider = StateNotifierProvider<CartController, BaseState>(
+  (ref) => CartController(ref: ref),
 );
 
 /// Controllers
-class cartController extends StateNotifier<BaseState> {
+class CartController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  cartController({this.ref}) : super(const InitialState());
+  CartController({this.ref}) : super(const InitialState());
   CartModel? cartModel;
   int subtotal = 0;
 
@@ -33,7 +33,7 @@ class cartController extends StateNotifier<BaseState> {
     required int quantity,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'averageBuyingPrice': product.averageBuyingPrice,
       'barCode': barCode,
@@ -73,10 +73,9 @@ class cartController extends StateNotifier<BaseState> {
 
           setValue(loggedIn, true);
           setValue(token, responseBody['token']);
-          toast("Product add in wishlist Successful",
-              bgColor: KColor.selectColor);
+          toast("Product add in wishlist Successful", bgColor: KColor.selectColor);
 
-          NavigationService?.navigateToReplacement(
+          NavigationService.navigateToReplacement(
             CupertinoPageRoute(
               builder: (context) => const CartPage(),
             ),
@@ -92,13 +91,11 @@ class cartController extends StateNotifier<BaseState> {
     }
   }
 
-
   Future cartDetails() async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     try {
-      responseBody =
-          await Network.handleResponse(await Network.getRequest(API.getCart));
+      responseBody = await Network.handleResponse(await Network.getRequest(API.getCart));
       if (responseBody != null) {
         cartModel = CartModel.fromJson(responseBody);
         state = CartSuccessState(cartModel);
@@ -118,7 +115,7 @@ class cartController extends StateNotifier<BaseState> {
     required String quantity,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'id': id,
       'quantity': quantity,
@@ -133,12 +130,11 @@ class cartController extends StateNotifier<BaseState> {
           totalCart();
           setValue(loggedIn, true);
           setValue(token, responseBody['token']);
-          toast("Product delete in wishlist Successful",
-              bgColor: KColor.selectColor);
+          toast("Product delete in wishlist Successful", bgColor: KColor.selectColor);
 
-          NavigationService?.navigateToReplacement(
+          NavigationService.navigateToReplacement(
             CupertinoPageRoute(
-              builder: (context) => ProductInfo(),
+              builder: (context) => const ProductInfo(),
             ),
           );
         }
@@ -156,7 +152,7 @@ class cartController extends StateNotifier<BaseState> {
     required String id,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'id': id,
     };
@@ -175,9 +171,9 @@ class cartController extends StateNotifier<BaseState> {
             bgColor: KColor.selectColor,
           );
 
-          NavigationService?.navigateToReplacement(
+          NavigationService.navigateToReplacement(
             CupertinoPageRoute(
-              builder: (context) => ProductInfo(),
+              builder: (context) => const ProductInfo(),
             ),
           );
         }
@@ -191,13 +187,12 @@ class cartController extends StateNotifier<BaseState> {
     }
   }
 
-  void totalCart(){
-    int total=0;
-    for(int i=0;i<cartModel!.allCarts.length;i++){
-      total += cartModel!.allCarts[i].details!.sellingPrice!*cartModel!.allCarts[i].quantity!;
+  void totalCart() {
+    int total = 0;
+    for (int i = 0; i < cartModel!.allCarts.length; i++) {
+      total += cartModel!.allCarts[i].details!.sellingPrice! * cartModel!.allCarts[i].quantity!;
     }
     subtotal = total;
     print('subtotal : $subtotal');
   }
-
 }

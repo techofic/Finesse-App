@@ -12,15 +12,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Providers
-final discountProvider = StateNotifierProvider<discountController, BaseState>(
-  (ref) => discountController(ref: ref),
+final discountProvider = StateNotifierProvider<DiscountController, BaseState>(
+  (ref) => DiscountController(ref: ref),
 );
 
 /// Controllers
-class discountController extends StateNotifier<BaseState> {
+class DiscountController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  discountController({this.ref}) : super(const InitialState());
+  DiscountController({this.ref}) : super(const InitialState());
   PromoCodeModel? promoCodeModel;
   ReferralCodeModel? referralCodeModel;
   VoucherCodeModel? voucherCodeModel;
@@ -29,7 +29,7 @@ class discountController extends StateNotifier<BaseState> {
     required String code,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'code': code,
     };
@@ -58,7 +58,7 @@ class discountController extends StateNotifier<BaseState> {
     required String barCode,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'barCode': barCode,
     };
@@ -87,7 +87,7 @@ class discountController extends StateNotifier<BaseState> {
     required String code,
   }) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     var requestBody = {
       'code': code,
     };
@@ -99,8 +99,7 @@ class discountController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         state = const SignupSuccessState();
         print("Gift voucher code Successful");
-        NavigationService.navigateToReplacement(
-            CupertinoPageRoute(builder: (context) => const CartPage()));
+        NavigationService.navigateToReplacement(CupertinoPageRoute(builder: (context) => const CartPage()));
       } else {
         state = const ErrorState();
       }

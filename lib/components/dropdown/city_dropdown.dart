@@ -16,7 +16,7 @@ class CityDropdown extends StatefulWidget {
 
 class _CityDropdownState extends State<CityDropdown> {
   String? _cities;
-  String? _zones;
+  // String? _zones;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,7 @@ class _CityDropdownState extends State<CityDropdown> {
       builder: (context, ref, _) {
         final cityState = ref.watch(cityProvider);
 
-        final List<City>? cityData =
-            cityState is CitySuccessState ? cityState.cityModel?.cities : [];
+        final List<City>? cityData = cityState is CitySuccessState ? cityState.cityModel?.cities : [];
 
         return SingleChildScrollView(
           child: Column(
@@ -50,7 +49,7 @@ class _CityDropdownState extends State<CityDropdown> {
                           isExpanded: true,
                           hint: Text(
                             'city',
-                            style: KTextStyle.subtitle3.copyWith(
+                            style: KTextStyle.bodyText1.copyWith(
                               color: KColor.blackbg.withOpacity(0.4),
                             ),
                           ),
@@ -66,11 +65,9 @@ class _CityDropdownState extends State<CityDropdown> {
                           onChanged: (newValue) {
                             setState(() {
                               _cities = newValue;
-                              _zones = null;
+                              // _zones = null;
                             });
-                            ref
-                                .read(zoneProvider.notifier)
-                                .allZone(id: _cities);
+                            ref.read(zoneProvider.notifier).allZone(id: _cities);
                           },
                           items: cityData?.map(
                                 (location) {
@@ -78,7 +75,7 @@ class _CityDropdownState extends State<CityDropdown> {
                                     value: location.id.toString(),
                                     child: Text(
                                       location.name.toString(),
-                                      style: KTextStyle.subtitle3.copyWith(
+                                      style: KTextStyle.bodyText1.copyWith(
                                         color: KColor.blackbg.withOpacity(0.4),
                                       ),
                                     ),

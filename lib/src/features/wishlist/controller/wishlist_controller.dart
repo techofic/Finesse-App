@@ -12,25 +12,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 /// Providers
-final wishlistProvider = StateNotifierProvider<wishlistController, BaseState>(
-  (ref) => wishlistController(ref: ref),
+final wishlistProvider = StateNotifierProvider<WishlistController, BaseState>(
+  (ref) => WishlistController(ref: ref),
 );
 
 /// Controllers
-class wishlistController extends StateNotifier<BaseState> {
+class WishlistController extends StateNotifier<BaseState> {
   final Ref? ref;
 
-  wishlistController({this.ref}) : super(const InitialState());
+  WishlistController({this.ref}) : super(const InitialState());
   WishlistModel? wishlistModel;
 
-  Future addWishlist({
-    required String id,
-  }) async {
+  Future addWishlist({required String id}) async {
     state = const LoadingState();
-    var responseBody;
-    var requestBody = {
-      'id': id,
-    };
+
+    dynamic responseBody;
+    var requestBody = {'id': id};
+
     try {
       responseBody = await Network.handleResponse(
         await Network.postRequest(API.addWishlist, requestBody),
@@ -40,11 +38,9 @@ class wishlistController extends StateNotifier<BaseState> {
           state = const AddWishlistSuccessState();
           setValue(loggedIn, true);
           setValue(token, responseBody['token']);
-          toast("Product add in wishlist Successful",
-              bgColor: KColor.selectColor);
+          toast("Product add in wishlist Successful", bgColor: KColor.selectColor);
 
-          NavigationService?.navigateToReplacement(
-
+          NavigationService.navigateToReplacement(
             CupertinoPageRoute(
               builder: (context) => const WishlistPage(),
             ),
@@ -62,7 +58,9 @@ class wishlistController extends StateNotifier<BaseState> {
 
   Future fetchWishlistProducts() async {
     state = const LoadingState();
-    var responseBody;
+    
+    dynamic responseBody;
+
     try {
       responseBody = await Network.handleResponse(
         await Network.getRequest(API.getWishlist),
@@ -80,14 +78,12 @@ class wishlistController extends StateNotifier<BaseState> {
     }
   }
 
-  Future deleteWishlist({
-    required String id,
-  }) async {
+  Future deleteWishlist({required String id}) async {
     state = const LoadingState();
-    var responseBody;
-    var requestBody = {
-      'id': id,
-    };
+
+    dynamic responseBody;
+    var requestBody = {'id': id};
+
     try {
       responseBody = await Network.handleResponse(
         await Network.postRequest(API.deleteWishlist, requestBody),
@@ -97,10 +93,9 @@ class wishlistController extends StateNotifier<BaseState> {
           state = const DeleteWishlistSuccessState();
           setValue(loggedIn, true);
           setValue(token, responseBody['token']);
-          toast("Product delete in wishlist Successful",
-              bgColor: KColor.selectColor);
+          toast("Product delete in wishlist Successful", bgColor: KColor.selectColor);
 
-          NavigationService?.navigateToReplacement(
+          NavigationService.navigateToReplacement(
             CupertinoPageRoute(
               builder: (context) => const WishlistPage(),
             ),

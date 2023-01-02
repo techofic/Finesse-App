@@ -9,8 +9,7 @@ class ReportCard extends StatefulWidget {
   final String? reason;
   final String? img;
 
-  const ReportCard({this.id, this.date, this.reason, this.img, Key? key})
-      : super(key: key);
+  const ReportCard({this.id, this.date, this.reason, this.img, Key? key}) : super(key: key);
 
   @override
   State<ReportCard> createState() => _ReportCardState();
@@ -53,7 +52,7 @@ class _ReportCardState extends State<ReportCard> {
           const SizedBox(height: 8),
           Text(
             "Placed on ${widget.date}",
-            style: KTextStyle.subtitle3.copyWith(
+            style: KTextStyle.bodyText1.copyWith(
               color: KColor.blackbg.withOpacity(0.3),
             ),
           ),
@@ -62,13 +61,13 @@ class _ReportCardState extends State<ReportCard> {
             children: [
               Text(
                 "Reason: ",
-                style: KTextStyle.subtitle4.copyWith(
+                style: KTextStyle.bodyText2.copyWith(
                   color: KColor.blackbg,
                 ),
               ),
               Text(
                 "${widget.reason}",
-                style: KTextStyle.subtitle4.copyWith(
+                style: KTextStyle.bodyText2.copyWith(
                   color: KColor.deleteColor,
                 ),
               ),
@@ -111,7 +110,7 @@ class _ReportCardState extends State<ReportCard> {
                   children: [
                     Text(
                       'Hanging Clock',
-                      style: KTextStyle.subtitle4.copyWith(
+                      style: KTextStyle.bodyText2.copyWith(
                         color: KColor.blackbg,
                       ),
                     ),

@@ -17,18 +17,7 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   int selectIndex = 0;
-  List<String> category = [
-    'All',
-    'Clothing',
-    'Grocery',
-    'Kid’s',
-    'Beauty',
-    'Home',
-    'Men’s Fashion',
-    'Electronics',
-    'Outdoor',
-    'Drugs'
-  ];
+  List<String> category = ['All', 'Clothing', 'Grocery', 'Kid’s', 'Beauty', 'Home', 'Men’s Fashion', 'Electronics', 'Outdoor', 'Drugs'];
   List<dynamic> categoryIcons = [
     'assets/images/all.png',
     'assets/images/clothing.png',
@@ -47,14 +36,12 @@ class _CategoryPageState extends State<CategoryPage> {
     return Consumer(
       builder: (context, ref, _) {
         final categoryState = ref.watch(categoryProvider);
-        final List<Group>? categoryData = categoryState is CategorySuccessState
-            ? categoryState.categoryModel?.groups
-            : [];
+        final List<Group>? categoryData = categoryState is CategorySuccessState ? categoryState.categoryModel?.groups : [];
         return Scaffold(
           backgroundColor: KColor.appBackground,
           appBar: const PreferredSize(
             preferredSize: Size.fromHeight(56),
-            child: KappBar(checkTitle: true, title: 'Categories'),
+            child: KAppBar(checkTitle: true, title: 'Categories'),
           ),
           body: Container(
             margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),

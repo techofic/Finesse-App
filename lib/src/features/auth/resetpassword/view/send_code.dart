@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:finesse/components/appbar/appbar.dart';
 import 'package:finesse/components/button/k_button.dart';
-import 'package:finesse/constants/shared_preference_data.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/auth/login/controller/login_controller.dart';
 import 'package:finesse/src/features/auth/login/state/login_state.dart';
@@ -23,15 +22,14 @@ class SendCode extends StatefulWidget {
     this.phoneNumber,
     this.password,
   }) : super(key: key);
-
+  
   @override
-  _SendCodeState createState() => _SendCodeState();
+  State<SendCode> createState() => _SendCodeState();
 }
 
 class _SendCodeState extends State<SendCode> {
   TextEditingController otp = TextEditingController();
   StreamController<ErrorAnimationType>? errorController;
-  final SharedPreferencesHelper _helper = SharedPreferencesHelper();
   bool hasError = false;
   String currentText = "";
   final _formKey = GlobalKey<FormState>();
@@ -63,7 +61,7 @@ class _SendCodeState extends State<SendCode> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(),
+        child: KAppBar(),
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
@@ -79,8 +77,7 @@ class _SendCodeState extends State<SendCode> {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
               child: RichText(
                 text: TextSpan(
                   text: "Enter the code sent to ",
@@ -99,19 +96,17 @@ class _SendCodeState extends State<SendCode> {
               ),
             ),
             const SizedBox(height: 12),
-            Consumer(
-              builder: (context, ref, _) {
-                final countOtpState = ref.watch(loginProvider);
-                return Column(
-                  children: [
-                    if(countOtpState is LoginSuccessState)...[
-                      //if(countOtpState.userModel!.user.otpCount ==3)
-                      Text(countOtpState.userModel!.otpCount.toString()),
-                    ]
-                  ],
-                );
-              }
-            ),
+            Consumer(builder: (context, ref, _) {
+              final countOtpState = ref.watch(loginProvider);
+              return Column(
+                children: [
+                  if (countOtpState is LoginSuccessState) ...[
+                    //if(countOtpState.userModel!.user.otpCount ==3)
+                    Text(countOtpState.userModel!.otpCount.toString()),
+                  ]
+                ],
+              );
+            }),
             const SizedBox(height: 20),
             Form(
               key: _formKey,
@@ -152,8 +147,7 @@ class _SendCodeState extends State<SendCode> {
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Text(
                 hasError ? "Please fill up all the cells properly" : "",
-                style:
-                    KTextStyle.subtitle1.copyWith(color: KColor.errorRedText),
+                style: KTextStyle.subtitle1.copyWith(color: KColor.errorRedText),
               ),
             ),
             Row(
@@ -188,8 +182,7 @@ class _SendCodeState extends State<SendCode> {
               builder: (context, ref, _) {
                 final authState = ref.watch(otpProvider);
                 return KButton(
-                  title:
-                      authState is LoadingState ? 'Please wait...' : 'Send Otp',
+                  title: authState is LoadingState ? 'Please wait...' : 'Send Otp',
                   onTap: () {
                     if (authState is! LoadingState) {
                       if (_formKey.currentState!.validate()) {

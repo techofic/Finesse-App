@@ -29,7 +29,6 @@ class _ReportIssueState extends State<ReportIssue> {
   TextEditingController id = TextEditingController();
   TextEditingController description = TextEditingController();
   File? image;
-  bool _enabled = true;
 
   Future pickImage(ImageSource source) async {
     try {
@@ -50,14 +49,13 @@ class _ReportIssueState extends State<ReportIssue> {
       builder: (context, ref, _) {
         final reportState = ref.watch(reportProvider);
         final userState = ref.watch(loginProvider);
-        final User? userData =
-            userState is LoginSuccessState ? userState.userModel : null;
+        final User? userData = userState is LoginSuccessState ? userState.userModel : null;
 
         return Scaffold(
           backgroundColor: KColor.appBackground,
           appBar: const PreferredSize(
             preferredSize: Size.fromHeight(56),
-            child: KappBar(checkTitle: true, title: 'Report Issue'),
+            child: KAppBar(checkTitle: true, title: 'Report Issue'),
           ),
           body: SingleChildScrollView(
             child: Container(
@@ -130,7 +128,7 @@ class _ReportIssueState extends State<ReportIssue> {
                                 const SizedBox(height: 8),
                                 Text(
                                   'Click or drag files here to upload',
-                                  style: KTextStyle.subtitle3.copyWith(
+                                  style: KTextStyle.bodyText1.copyWith(
                                     color: KColor.blackbg.withOpacity(0.6),
                                   ),
                                 ),
@@ -145,9 +143,7 @@ class _ReportIssueState extends State<ReportIssue> {
                   ),
                   SizedBox(height: context.screenHeight * 0.05),
                   KButton(
-                    title: reportState is LoadingState
-                        ? 'Please wait...'
-                        : 'Save Changes',
+                    title: reportState is LoadingState ? 'Please wait...' : 'Save Changes',
                     onTap: () {
                       if (reportState is! LoadingState) {
                         ref.read(reportProvider.notifier).report(

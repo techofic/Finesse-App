@@ -18,9 +18,9 @@ class ShopController extends StateNotifier<BaseState> {
   ShopDataModel? shopDataModel;
   List<ShopDataModel>? searchModel = [];
 
-  Future fetchShopProductList({str=""}) async {
+  Future fetchShopProductList({str = ""}) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     try {
       responseBody = await Network.handleResponse(
         await Network.getRequest(API.shop(str: str)),
@@ -37,5 +37,4 @@ class ShopController extends StateNotifier<BaseState> {
       state = const ErrorState();
     }
   }
-
 }

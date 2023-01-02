@@ -6,8 +6,7 @@ import 'package:finesse/src/features/product_details/state/product_recommendatio
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Providers
-final productRecommendationProvider =
-    StateNotifierProvider<ProductRecommendationController, BaseState>(
+final productRecommendationProvider = StateNotifierProvider<ProductRecommendationController, BaseState>(
   (ref) => ProductRecommendationController(ref: ref),
 );
 
@@ -20,14 +19,13 @@ class ProductRecommendationController extends StateNotifier<BaseState> {
 
   Future fetchProductsRecommendation(productId) async {
     state = const LoadingState();
-    var responseBody;
+    dynamic responseBody;
     try {
       responseBody = await Network.handleResponse(
         await Network.getRequest(API.productRecommendation(productId)),
       );
       if (responseBody != null) {
-        productRecommendationModel =
-            ProductRecommendationModel.fromJson(responseBody);
+        productRecommendationModel = ProductRecommendationModel.fromJson(responseBody);
         state = ProductRecommendationSuccessState(productRecommendationModel);
       } else {
         state = const ErrorState();

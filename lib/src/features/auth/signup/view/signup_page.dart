@@ -1,4 +1,3 @@
-
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/textfield/k_email_field.dart';
 import 'package:finesse/components/textfield/k_password_field.dart';
@@ -38,15 +37,7 @@ class _SignupPageState extends State<SignupPage> {
   bool isSelected = false;
   var selectedColor = KColor.blackbg;
   String _verticalGroupValue = "English(United States)";
-  final List<String> _status = [
-    "English (UK)",
-    "Portuguese",
-    "Espinosa",
-    "Francais",
-    "Turkce",
-    "Italiano",
-    "Hindi"
-  ];
+  final List<String> _status = ["English (UK)", "Portuguese", "Espinosa", "Francais", "Turkce", "Italiano", "Hindi"];
 
   @override
   Widget build(BuildContext context) {
@@ -132,26 +123,20 @@ class _SignupPageState extends State<SignupPage> {
                           builder: (context, ref, _) {
                             final authState = ref.watch(signupProvider);
                             return KButton(
-                              title: authState is LoadingState
-                                  ? 'Please wait...'
-                                  : 'Create Account',
+                              title: authState is LoadingState ? 'Please wait...' : 'Create Account',
                               onTap: () {
                                 if (authState is! LoadingState) {
                                   if (_formKey.currentState!.validate()) {
                                     if (password.text != confirmPassword.text) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
+                                      ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(
-                                          content:
-                                              Text("Password does not match"),
-                                          duration:
-                                              Duration(milliseconds: 3000),
+                                          content: Text("Password does not match"),
+                                          duration: Duration(milliseconds: 3000),
                                         ),
                                       );
                                     }
                                     ref.read(signupProvider.notifier).register(
-                                          name:
-                                              "${firstName.text} ${lastName.text}",
+                                          name: "${firstName.text} ${lastName.text}",
                                           email: email.text,
                                           phone: phone.text,
                                           password: password.text,
@@ -192,7 +177,7 @@ class _SignupPageState extends State<SignupPage> {
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'Already a member?',
-                                  style: KTextStyle.subtitle3.copyWith(
+                                  style: KTextStyle.bodyText1.copyWith(
                                     color: KColor.blackbg.withOpacity(0.4),
                                   ),
                                 ),
@@ -220,33 +205,6 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   // ignore: non_constant_identifier_names
-  InkWell _SelectLanguage(BuildContext context) {
-    return InkWell(
-      onTap: () async {
-        await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return languageDialogbox();
-          },
-        );
-        setState(() {});
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            _verticalGroupValue,
-            style: KTextStyle.subtitle3.copyWith(color: KColor.blackbg),
-          ),
-          const SizedBox(width: 8),
-          SvgPicture.asset(
-            'assets/images/down_arrow.svg',
-            color: KColor.blackbg,
-          )
-        ],
-      ),
-    );
-  }
 
   StatefulBuilder languageDialogbox() {
     return StatefulBuilder(
@@ -261,8 +219,7 @@ class _SignupPageState extends State<SignupPage> {
             height: 512,
             width: double.infinity,
             child: Container(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -274,7 +231,7 @@ class _SignupPageState extends State<SignupPage> {
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 19),
                     child: SearchTextField(
-                      callbackFunction: (e){},
+                      callbackFunction: (e) {},
                       controller: search,
                       readOnly: false,
                       hintText: 'Search...',

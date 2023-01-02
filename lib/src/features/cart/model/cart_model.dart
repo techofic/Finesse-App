@@ -172,9 +172,9 @@ class VproductClass {
         openingUnitPrice: json["openingUnitPrice"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        img: json["img"] == null ? null : json["img"],
-        discount: json["discount"] == null ? null : json["discount"],
-        quantity: json["quantity"] == null ? null : json["quantity"],
+        img: json["img"],
+        discount: json["discount"],
+        quantity: json["quantity"],
       );
 
   Map<String?, dynamic> toJson() =>
@@ -203,9 +203,9 @@ class VproductClass {
         "openingUnitPrice": openingUnitPrice,
         "created_at": createdAt,
         "updated_at": updatedAt,
-        "img": img == null ? null : img,
-        "discount": discount == null ? null : discount,
-        "quantity": quantity == null ? null : quantity,
+        "img": img,
+        "discount": discount,
+        "quantity": quantity,
       };
 }
 

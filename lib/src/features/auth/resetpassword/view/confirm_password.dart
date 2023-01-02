@@ -12,7 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ConfirmPasswordPage extends StatefulWidget {
   final String? token;
   final String? phoneNumber;
-  const ConfirmPasswordPage({this.token,this.phoneNumber, Key? key}) : super(key: key);
+  const ConfirmPasswordPage({this.token, this.phoneNumber, Key? key}) : super(key: key);
 
   @override
   State<ConfirmPasswordPage> createState() => _ConfirmPasswordPageState();
@@ -28,7 +28,7 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle: true, title: 'Reset Password'),
+        child: KAppBar(checkTitle: true, title: 'Reset Password'),
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
@@ -69,11 +69,10 @@ class _ConfirmPasswordPageState extends State<ConfirmPasswordPage> {
                   onTap: () {
                     if (authState is! LoadingState) {
                       ref.read(resetPasswordProvider.notifier).resetPassword(
-                            token: widget.token.toString(),
-                            password: password.text,
-                            confirmPassword: confirmPassword.text,
-                            phone: widget.phoneNumber.toString()
-                          );
+                          token: widget.token.toString(),
+                          password: password.text,
+                          confirmPassword: confirmPassword.text,
+                          phone: widget.phoneNumber.toString());
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {

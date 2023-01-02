@@ -17,7 +17,7 @@ class _AboutPageState extends State<AboutPage> {
       backgroundColor: KColor.appBackground,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
-        child: KappBar(checkTitle: true, title: 'About Us'),
+        child: KAppBar(checkTitle: true, title: 'About Us'),
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
@@ -36,7 +36,7 @@ class _AboutPageState extends State<AboutPage> {
                 ),
                 Text(
                   '\u00a9 2022 Designed By Finesse',
-                  style: KTextStyle.subtitle3.copyWith(
+                  style: KTextStyle.bodyText1.copyWith(
                     color: KColor.blackbg.withOpacity(0.6),
                   ),
                 ),
