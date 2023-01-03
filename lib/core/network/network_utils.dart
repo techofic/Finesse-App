@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/service/navigation_service.dart';
 import 'package:finesse/src/features/auth/login/view/login_page.dart';
@@ -7,6 +8,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'api.dart';
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
+}
 
 class Network {
   static String noInternetMessage = "Check your connection!";

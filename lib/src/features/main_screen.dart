@@ -1,11 +1,10 @@
-import 'package:finesse/components/appbar/k_appbar.dart';
+import 'package:finesse/components/appbar/home_app_bar.dart';
 import 'package:finesse/components/drawer/k_drawer.dart';
 import 'package:finesse/components/navigation/chip_style.dart';
 import 'package:finesse/components/navigation/inspired/inspired.dart';
 import 'package:finesse/components/navigation/k_navigation_bar.dart';
 import 'package:finesse/components/navigation/tab_item.dart';
 import 'package:finesse/constants/asset_path.dart';
-import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/auth/login/controller/login_controller.dart';
 import 'package:finesse/src/features/cart/controller/cart_controller.dart';
@@ -14,10 +13,9 @@ import 'package:finesse/src/features/home/views/home_page.dart';
 import 'package:finesse/src/features/profile/view/profile_page.dart';
 import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
 import 'package:finesse/src/features/wishlist/view/wishlist_page.dart';
-import 'package:finesse/styles/k_colors.dart';
+import 'package:finesse/styles/b_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -36,18 +34,12 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       builder: (context, ref, _) {
         final wishlistState = ref.watch(wishlistProvider);
         // final cartState = ref.watch(cartProvider);
-        bool checkLogin = getBoolAsync(isLoggedIn, defaultValue: false);
 
         return Container(
           color: KColor.appBackground,
           child: Scaffold(
-            appBar: checkLogin
-                ? const PreferredSize(
-                    preferredSize: Size.fromHeight(56),
-                    child: KAppBar(),
-                  )
-                : AppBar(backgroundColor: KColor.appBackground, elevation: 0),
-            drawer: checkLogin ? const Drawer(child: KDrawer()) : const Drawer(backgroundColor: KColor.appBackground),
+            appBar: const PreferredSize(preferredSize: Size.fromHeight(56), child: HomeAppBar()),
+            drawer: const Drawer(child: KDrawer()),
             body: SizedBox.expand(
               child: PageView(
                 physics: const NeverScrollableScrollPhysics(),
@@ -65,28 +57,15 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                   CartPage(),
                   WishlistPage(),
                   ProfilePage(),
-                  //SettingPage()
                 ],
               ),
             ),
             bottomNavigationBar: KNavigationBar(
               items: const [
-                TabItem(
-                  icon: AssetPath.homeBottomIcon,
-                  title: 'Home',
-                ),
-                TabItem(
-                  icon: AssetPath.cartBottomIcon,
-                  title: 'Cart',
-                ),
-                TabItem(
-                  icon: AssetPath.wishlistBottomIcon,
-                  title: 'Wishlist',
-                ),
-                TabItem(
-                  icon: AssetPath.profileBottomIcon,
-                  title: 'Account',
-                ),
+                TabItem(icon: AssetPath.homeBottomIcon, title: 'Home'),
+                TabItem(icon: AssetPath.cartBottomIcon, title: 'Cart'),
+                TabItem(icon: AssetPath.wishlistBottomIcon, title: 'Wishlist'),
+                TabItem(icon: AssetPath.profileBottomIcon, title: 'Account'),
               ],
               backgroundColor: KColor.appBackground,
               color: KColor.black.withOpacity(0.5),
@@ -103,11 +82,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                   curve: Curves.linear,
                 );
               },
-              titleStyle: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: Colors.black.withOpacity(0.3),
-              ),
+              titleStyle: KTextStyle.caption1.copyWith(fontWeight: FontWeight.w600, color: KColor.black.withOpacity(.3)),
               iconSize: 24,
               elevation: 15,
               chipStyle: const ChipStyle(convexBridge: true, background: KColor.blackbg),

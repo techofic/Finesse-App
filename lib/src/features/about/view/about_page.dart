@@ -1,4 +1,4 @@
-import 'package:finesse/components/appbar/appbar.dart';
+import 'package:finesse/components/appbar/k_app_bar.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';

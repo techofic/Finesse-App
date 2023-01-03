@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:finesse/constants/shared_preference_constant.dart';
+import 'package:finesse/core/network/network_utils.dart';
 import 'package:finesse/route/route_generator.dart';
 import 'package:finesse/service/navigation_service.dart';
 import 'package:finesse/src/features/auth/login/controller/login_controller.dart';
@@ -11,6 +12,7 @@ import 'package:finesse/src/features/home/controllers/product_category_controlle
 import 'package:finesse/src/features/home/controllers/shop_controller.dart';
 import 'package:finesse/src/features/home/controllers/slider_controller.dart';
 import 'package:finesse/src/features/notification/controller/notification_controller.dart';
+import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:finesse/src/features/profile/controller/profile_controller.dart';
 import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +20,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import 'src/features/product_details/controller/product_details_controller.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
   await initialize();
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -31,8 +32,7 @@ class MyApp extends ConsumerStatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _MyAppState createState() => _MyAppState();
+  ConsumerState<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
@@ -65,19 +65,10 @@ class _MyAppState extends ConsumerState<MyApp> {
     return MaterialApp(
       title: 'Finesse',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: GoogleFonts.inter().fontFamily,
-      ),
+      theme: ThemeData(fontFamily: GoogleFonts.inter().fontFamily),
       initialRoute: '/mainScreen',
       onGenerateRoute: RouteGenerator.generateRoute,
       navigatorKey: NavigationService.navigatorKey,
     );
-  }
-}
-
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }

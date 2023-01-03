@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:finesse/components/appbar/appbar.dart';
+import 'package:finesse/components/appbar/k_app_bar.dart';
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/card/review_card.dart';
 import 'package:finesse/components/dialog/k_dialog.dart';

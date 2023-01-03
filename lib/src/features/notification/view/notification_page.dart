@@ -1,4 +1,4 @@
-import 'package:finesse/components/appbar/appbar.dart';
+import 'package:finesse/components/appbar/k_app_bar.dart';
 import 'package:finesse/components/card/notification_card.dart';
 import 'package:finesse/components/shimmer/k_shimmer.dart';
 import 'package:finesse/components/textfield/k_search_field.dart';

@@ -1,4 +1,4 @@
-import 'package:finesse/components/appbar/appbar.dart';
+import 'package:finesse/components/appbar/k_app_bar.dart';
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/components/textfield/k_description_field.dart';
 import 'package:finesse/components/textfield/k_email_field.dart';

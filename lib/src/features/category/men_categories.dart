@@ -1,4 +1,4 @@
-import 'package:finesse/components/appbar/k_appbar.dart';
+import 'package:finesse/components/appbar/home_app_bar.dart';
 import 'package:finesse/components/drawer/k_drawer.dart';
 import 'package:finesse/components/filter/k_filter.dart';
 import 'package:finesse/components/slider/k_slider.dart';
@@ -24,7 +24,7 @@ class _MenSectionState extends State<MenSection> {
         backgroundColor: KColor.appBackground,
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(56),
-          child: KAppBar(),
+          child: HomeAppBar(),
         ),
         drawer: const Drawer(child: KDrawer()),
         body: Container(

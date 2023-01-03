@@ -1,4 +1,4 @@
-import 'package:finesse/components/appbar/appbar.dart';
+import 'package:finesse/components/appbar/k_app_bar.dart';
 import 'package:finesse/src/features/home/controllers/category_controller.dart';
 import 'package:finesse/src/features/home/models/category_model.dart';
 import 'package:finesse/src/features/home/state/category_state.dart';

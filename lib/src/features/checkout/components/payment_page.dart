@@ -6,7 +6,7 @@ import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../components/appbar/appbar.dart';
+import '../../../../components/appbar/k_app_bar.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({Key? key}) : super(key: key);

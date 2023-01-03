@@ -1,4 +1,4 @@
-import 'package:finesse/components/appbar/appbar.dart';
+import 'package:finesse/components/appbar/k_app_bar.dart';
 import 'package:finesse/components/stepper/k_stepper.dart';
 import 'package:finesse/components/textfield/k_search_field.dart';
 import 'package:finesse/constants/asset_path.dart';

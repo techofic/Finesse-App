@@ -1,4 +1,4 @@
-import 'package:finesse/components/appbar/appbar.dart';
+import 'package:finesse/components/appbar/k_app_bar.dart';
 import 'package:finesse/components/button/k_border_btn.dart';
 import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/src/features/auth/login/view/login_page.dart';

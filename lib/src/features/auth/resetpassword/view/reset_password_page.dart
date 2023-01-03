@@ -1,5 +1,5 @@
 import 'package:find_dropdown/find_dropdown.dart';
-import 'package:finesse/components/appbar/appbar.dart';
+import 'package:finesse/components/appbar/k_app_bar.dart';
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/auth/resetpassword/controller/password_reset_controller.dart';
