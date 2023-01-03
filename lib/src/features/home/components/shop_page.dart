@@ -41,7 +41,7 @@ class _ShopPageState extends State<ShopPage> {
             child: KAppBar(checkTitle: true, title: 'Shop'),
           ),
           body: Container(
-            margin: const EdgeInsets.only(top: 12, left: 12),
+            margin: const EdgeInsets.only(top: 12, left: 12, right: 12),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,9 +52,7 @@ class _ShopPageState extends State<ShopPage> {
                       Expanded(
                         flex: 8,
                         child: SearchTextField(
-                          callbackFunction: (query) {
-                            ref.read(shopProvider.notifier).fetchShopProductList(str: query);
-                          },
+                          callbackFunction: (query) => ref.read(shopProvider.notifier).fetchShopProductList(str: query),
                           controller: controller,
                           readOnly: false,
                           hintText: 'Search here...',
@@ -68,13 +66,8 @@ class _ShopPageState extends State<ShopPage> {
                           color: KColor.searchColor.withOpacity(0.8),
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Center(
-                          child: Image.asset(
-                            AssetPath.filterIcon,
-                            height: 24,
-                          ),
-                        ),
-                      )
+                        child: Center(child: Image.asset(AssetPath.filterIcon, height: 24)),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 24),
@@ -112,15 +105,11 @@ class _ShopPageState extends State<ShopPage> {
                                     'id': shopData[index].id,
                                   },
                                 );
-                                ref.read(productDetailsProvider.notifier).fetchProductsDetails(
-                                      shopData[index].id,
-                                    );
+                                ref.read(productDetailsProvider.notifier).fetchProductsDetails(shopData[index].id);
                               },
                               pressed: () {
                                 if (wishlistState is! LoadingState) {
-                                  ref.read(wishlistProvider.notifier).addWishlist(
-                                        id: shopData[index].id.toString(),
-                                      );
+                                  ref.read(wishlistProvider.notifier).addWishlist(id: shopData[index].id.toString());
                                 }
                                 ref.read(wishlistProvider.notifier).fetchWishlistProducts();
                               });

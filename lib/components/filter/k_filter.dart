@@ -1,8 +1,7 @@
-import 'package:finesse/constants/asset_path.dart';
+import 'package:finesse/components/textfield/k_search_field.dart';
+import 'package:finesse/service/navigation_service.dart';
+import 'package:finesse/src/features/home/components/shop_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../styles/k_colors.dart';
-import '../textfield/k_search_field.dart';
 
 class KFilter extends StatefulWidget {
   final bool? check;
@@ -25,53 +24,15 @@ class _KFilterState extends State<KFilter> {
         Expanded(
           flex: 8,
           child: SearchTextField(
-            callbackFunction: (value) {
-              setState(() {
-                value = controller.text;
-              });
-            },
+            onTap: () => Navigator.push(context, FadeRoute(page: const ShopPage())),
             controller: controller,
-            readOnly: false,
+            readOnly: true,
             hintText: 'Search...',
           ),
         ),
-        const SizedBox(width: 10),
-        InkWell(
-          onTap: ()=>Navigator.pushNamed(context, '/shop'),
-          child: Container(
-            height: 48,
-            width: 48,
-            decoration: BoxDecoration(
-              color: KColor.searchColor.withOpacity(0.8),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Center(
-              child: SvgPicture.asset(AssetPath.homeSearchIcon),
-            ),
-          ),
-        )
+        // const SizedBox(width: 10),
         // InkWell(
-        //   onTap: () {
-        //     showModalBottomSheet(
-        //       isScrollControlled: true,
-        //       shape: const RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.only(
-        //           topLeft: Radius.circular(20.0),
-        //           topRight: Radius.circular(20.0),
-        //         ),
-        //       ),
-        //       context: context,
-        //       builder: (context) {
-        //         return AnimatedContainer(
-        //           duration: const Duration(milliseconds: 300),
-        //           margin: const EdgeInsets.symmetric(horizontal: 8),
-        //           curve: Curves.easeInOutExpo,
-        //           height: context.screenHeight*0.87,
-        //           child: const FilterPage(),
-        //         );
-        //       },
-        //     );
-        //   },
+        //   onTap: () => Navigator.pushNamed(context, '/shop'),
         //   child: Container(
         //     height: 48,
         //     width: 48,
@@ -80,9 +41,7 @@ class _KFilterState extends State<KFilter> {
         //       borderRadius: BorderRadius.circular(15),
         //     ),
         //     child: Center(
-        //       child: isChecked
-        //           ? SvgPicture.asset(AssetPath.homeSearchIcon)
-        //           : Image.asset(AssetPath.filterIcon),
+        //       child: SvgPicture.asset(AssetPath.homeSearchIcon),
         //     ),
         //   ),
         // )
