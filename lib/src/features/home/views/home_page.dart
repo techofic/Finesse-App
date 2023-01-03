@@ -40,7 +40,9 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 8),
               const PopularCategory(),
               const SizedBox(height: 23),
-              _categoryHeader('New Arrivals', () {}),
+              _categoryHeader('New Arrivals', () {
+                Navigator.pushNamed(context, '/shop');
+              }, showViewAll: true),
               const NewArrivals(),
               const SizedBox(height: 32),
               _categoryHeader('Featured Products', () {}),
@@ -53,7 +55,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Column _categoryHeader(title, tap) {
+  Column _categoryHeader(title, tap, {bool showViewAll = false}) {
     return Column(
       children: [
         Row(
@@ -63,15 +65,16 @@ class _HomePageState extends State<HomePage> {
               title,
               style: KTextStyle.headline2.copyWith(color: KColor.blackbg),
             ),
-            InkWell(
-              onTap: tap,
-              child: Text(
-                'View all',
-                style: KTextStyle.bodyText3.copyWith(
-                  color: Colors.black.withOpacity(0.3),
+            if (showViewAll)
+              InkWell(
+                onTap: tap,
+                child: Text(
+                  'View all',
+                  style: KTextStyle.bodyText3.copyWith(
+                    color: Colors.black.withOpacity(0.3),
+                  ),
                 ),
               ),
-            ),
           ],
         ),
         const SizedBox(height: 16),

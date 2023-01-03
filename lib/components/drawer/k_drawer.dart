@@ -135,9 +135,7 @@ class KDrawer extends ConsumerWidget {
                         const SizedBox(width: 10),
                         Text(
                           '01998-685230',
-                          style: KTextStyle.subtitle1.copyWith(
-                            color: KColor.whiteBackground.withOpacity(0.8),
-                          ),
+                          style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground.withOpacity(0.8)),
                         )
                       ],
                     ),
