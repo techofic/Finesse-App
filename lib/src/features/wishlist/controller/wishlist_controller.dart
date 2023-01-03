@@ -36,7 +36,7 @@ class WishlistController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         if (responseBody['token'] != null) {
           state = const AddWishlistSuccessState();
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           toast("Product add in wishlist Successful", bgColor: KColor.selectColor);
 
@@ -58,7 +58,7 @@ class WishlistController extends StateNotifier<BaseState> {
 
   Future fetchWishlistProducts() async {
     state = const LoadingState();
-    
+
     dynamic responseBody;
 
     try {
@@ -91,7 +91,7 @@ class WishlistController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         if (responseBody['token'] != null) {
           state = const DeleteWishlistSuccessState();
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           toast("Product delete in wishlist Successful", bgColor: KColor.selectColor);
 

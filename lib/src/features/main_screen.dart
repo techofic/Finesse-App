@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       builder: (context, ref, _) {
         final wishlistState = ref.watch(wishlistProvider);
         // final cartState = ref.watch(cartProvider);
-        bool checkLogin = getBoolAsync(loggedIn, defaultValue: false);
+        bool checkLogin = getBoolAsync(isLoggedIn, defaultValue: false);
 
         return Container(
           color: KColor.appBackground,

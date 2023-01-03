@@ -58,7 +58,7 @@ class NotificationController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         if (responseBody['token'] != null) {
           state = const DeleteNotificationSuccessState();
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           toast(
             "Delete Notification Successfully",
@@ -94,7 +94,7 @@ class NotificationController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         if (responseBody['token'] != null) {
           state = const UpdateNotificationSuccessState();
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           toast(
             "Update Notification Successfully",

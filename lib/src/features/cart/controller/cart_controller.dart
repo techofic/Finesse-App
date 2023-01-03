@@ -71,7 +71,7 @@ class CartController extends StateNotifier<BaseState> {
         if (responseBody['token'] != null) {
           state = const AddWishlistSuccessState();
 
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           toast("Product add in wishlist Successful", bgColor: KColor.selectColor);
 
@@ -128,7 +128,7 @@ class CartController extends StateNotifier<BaseState> {
         if (responseBody['token'] != null) {
           state = const DeleteWishlistSuccessState();
           totalCart();
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           toast("Product delete in wishlist Successful", bgColor: KColor.selectColor);
 
@@ -164,7 +164,7 @@ class CartController extends StateNotifier<BaseState> {
         if (responseBody['token'] != null) {
           state = const DeleteCartSuccessState();
           totalCart();
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           toast(
             "Product delete in cart Successful",

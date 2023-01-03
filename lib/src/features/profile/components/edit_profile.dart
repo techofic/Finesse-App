@@ -20,7 +20,7 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
-        bool checkLogin = getBoolAsync(loggedIn, defaultValue: false);
+        bool checkLogin = getBoolAsync(isLoggedIn, defaultValue: false);
         return checkLogin
             ? Scaffold(
                 backgroundColor: KColor.appBackground,

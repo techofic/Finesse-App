@@ -18,7 +18,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
-    bool checkLogin = getBoolAsync(loggedIn, defaultValue: false);
+    bool checkLogin = getBoolAsync(isLoggedIn, defaultValue: false);
     return checkLogin
         ? Scaffold(
             backgroundColor: KColor.appBackground,
@@ -46,8 +46,7 @@ class _CartPageState extends State<CartPage> {
                         Flexible(
                           child: KButton(
                             title: 'Checkout',
-                            onTap: () =>
-                                Navigator.pushNamed(context, '/addAddress'),
+                            onTap: () => Navigator.pushNamed(context, '/addAddress'),
                           ),
                         ),
                       ],

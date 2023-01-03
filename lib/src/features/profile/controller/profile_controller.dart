@@ -52,7 +52,7 @@ class ReportController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         if (responseBody['token'] != null) {
           state = const ReportSuccessState();
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           toast("Add report Successfully", bgColor: KColor.selectColor);
 
@@ -146,7 +146,7 @@ class ProfileController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         if (responseBody['token'] != null) {
           state = const EditProfileSuccessState();
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           toast("Edit user Successfully", bgColor: KColor.selectColor);
 
@@ -222,7 +222,7 @@ class OrderController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         if (responseBody['token'] != null) {
           state = const ReportSuccessState();
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           toast("Add report Successfully", bgColor: KColor.selectColor);
 
@@ -276,7 +276,7 @@ class OrderController extends StateNotifier<BaseState> {
       if (responseBody != null) {
         if (responseBody['token'] != null) {
           state = const OrderSuccessState();
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           toast("Order Post Successfully", bgColor: KColor.selectColor);
 

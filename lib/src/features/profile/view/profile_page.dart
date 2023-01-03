@@ -26,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
       builder: (context, ref, _) {
         final userState = ref.watch(loginProvider);
         final User? userData = userState is LoginSuccessState ? userState.userModel : null;
-        bool checkLogin = getBoolAsync(loggedIn, defaultValue: false);
+        bool checkLogin = getBoolAsync(isLoggedIn, defaultValue: false);
         print(checkLogin.toString());
         return checkLogin
             ? Scaffold(

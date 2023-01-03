@@ -45,7 +45,7 @@ class LoginController extends StateNotifier<BaseState> {
           print("usermodel = $userModel\n");
 
           state = LoginSuccessState(userModel);
-          setValue(loggedIn, true);
+          setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
           setValue(rememberToken, responseBody['token']);
           toast("Login Successful", bgColor: KColor.selectColor);
@@ -74,7 +74,7 @@ class LoginController extends StateNotifier<BaseState> {
         await Network.getRequest(API.logout),
       );
       if (responseBody != null) {
-        setValue(loggedIn, false);
+        setValue(isLoggedIn, false);
         // var userData;
         state = LoginSuccessState(userModel);
         toast("Logout", bgColor: KColor.selectColor);

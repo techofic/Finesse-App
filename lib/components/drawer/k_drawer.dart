@@ -1,20 +1,21 @@
-
+import 'package:finesse/constants/shared_preference_constant.dart';
+import 'package:finesse/styles/b_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../styles/k_colors.dart';
-import '../../styles/k_text_style.dart';
-
-class KDrawer extends StatelessWidget {
+class KDrawer extends ConsumerWidget {
   const KDrawer({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       color: KColor.blackbg,
-      padding: const EdgeInsets.symmetric(vertical: 40.0,horizontal: 30),
+      padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 30),
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +32,7 @@ class KDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 40),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushNamed(context, '/mainScreen');
                   },
                   child: Text(
@@ -41,7 +42,7 @@ class KDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushNamed(context, '/shop');
                   },
                   child: Text(
@@ -51,7 +52,7 @@ class KDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushNamed(context, '/shop');
                   },
                   child: Text(
@@ -61,7 +62,7 @@ class KDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushNamed(context, '/shop');
                   },
                   child: Text(
@@ -71,7 +72,7 @@ class KDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushNamed(context, '/contact');
                   },
                   child: Text(
@@ -81,7 +82,7 @@ class KDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushNamed(context, '/about');
                   },
                   child: Text(
@@ -89,42 +90,43 @@ class KDrawer extends StatelessWidget {
                     style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
                   ),
                 ),
-                SizedBox(height: context.screenHeight*0.1),
-                InkWell(
-                  onTap: (){
-                    Navigator.pushNamed(context, '/login');
-                  },
-                  child: Text(
-                    'Log In',
-                    style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
+                SizedBox(height: context.screenHeight * 0.1),
+                if (!getBoolAsync(isLoggedIn))
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        child: Text(
+                          'Log In',
+                          style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/signup');
+                        },
+                        child: Text(
+                          'Register',
+                          style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 16),
-                InkWell(
-                  onTap: (){
-                    Navigator.pushNamed(context, '/signup');
-                  },
-                  child: Text(
-                    'Register',
-                    style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
-                  ),
-                ),
               ],
             ),
-            const SizedBox(height:70),
+            const SizedBox(height: 70),
             Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Divider(
-                    color: KColor.whiteBackground.withOpacity(0.2),
-                    thickness: 1,
-                  ),
+                  Divider(color: KColor.whiteBackground.withOpacity(0.2), thickness: 1),
                   const SizedBox(height: 40),
                   InkWell(
-                    onTap: (){
-                      // ignore: deprecated_member_use
-                      launch('tel:+88019373848');
+                    onTap: () {
+                      launchUrl(Uri(scheme: 'tel', path: '+8801998685230'));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -132,7 +134,7 @@ class KDrawer extends StatelessWidget {
                         SvgPicture.asset('assets/images/phoneIcon.svg'),
                         const SizedBox(width: 10),
                         Text(
-                          '+88 019 3738 48',
+                          '01998-685230',
                           style: KTextStyle.subtitle1.copyWith(
                             color: KColor.whiteBackground.withOpacity(0.8),
                           ),
@@ -142,9 +144,8 @@ class KDrawer extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   InkWell(
-                    onTap: (){
-                      // ignore: deprecated_member_use
-                      launch('mailto:smith@example.org?subject=Finesse&body=First Email');
+                    onTap: () {
+                      launchUrl(Uri(scheme: 'mailto', path: 'finessebangladesh@gmail.com'));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -152,8 +153,9 @@ class KDrawer extends StatelessWidget {
                         SvgPicture.asset('assets/images/emailIcon.svg'),
                         const SizedBox(width: 10),
                         Text(
-                          'finesse330@gmail.com',
+                          'finessebangladesh@gmail.com',
                           style: KTextStyle.subtitle1.copyWith(
+                            fontSize: 14,
                             color: KColor.whiteBackground.withOpacity(0.8),
                           ),
                         ),
@@ -166,29 +168,25 @@ class KDrawer extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () {
-                          // ignore: deprecated_member_use
-                          launch('https://www.facebook.com/');
+                          launchUrlString('https://www.facebook.com/finesselifestyleofficial');
                         },
                         icon: SvgPicture.asset('assets/images/facebookIcon.svg'),
                       ),
                       IconButton(
                         onPressed: () {
-                          // ignore: deprecated_member_use
-                          launch('https://www.instagram.com/');
+                          launchUrlString('https://www.instagram.com/finesse_lifestyle_bd/');
                         },
                         icon: SvgPicture.asset('assets/images/instaIcon.svg'),
                       ),
                       IconButton(
                         onPressed: () {
-                          // ignore: deprecated_member_use
-                          launch('https://www.youtube.com/');
+                          launchUrlString('https://www.youtube.com/channel/UCSUcQ8_MuhFzNh4E5BlTR-g');
                         },
                         icon: SvgPicture.asset('assets/images/youtubeIcon.svg'),
                       ),
                       IconButton(
                         onPressed: () {
-                          // ignore: deprecated_member_use
-                          launch('https://www.tiktok.com/');
+                          launchUrlString('https://www.tiktok.com/@finesselifestyle');
                         },
                         icon: SvgPicture.asset('assets/images/tiktokIcon.svg'),
                       ),

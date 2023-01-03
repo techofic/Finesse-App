@@ -45,7 +45,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   bool _isLoggedIn = false;
 
   initData() {
-    _isLoggedIn = getBoolAsync(loggedIn, defaultValue: false);
+    _isLoggedIn = getBoolAsync(isLoggedIn, defaultValue: false);
     if (_isLoggedIn) ref.read(loginProvider.notifier).userModel;
     ref.read(sliderProvider.notifier).fetchSliderDetails();
     ref.read(productCategoryProvider.notifier).fetchProductsCategoryDetails();

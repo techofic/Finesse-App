@@ -28,30 +28,23 @@ class _WishlistPageState extends State<WishlistPage> {
         final wishlistProductsState = ref.watch(wishlistProvider);
         final cartState = ref.watch(cartProvider);
 
-        final List<Datum>? wishlistData =
-            wishlistProductsState is WishlistSuccessState
-                ? wishlistProductsState.wishlistModel?.wishlist.data
-                : [];
+        final List<Datum>? wishlistData = wishlistProductsState is WishlistSuccessState ? wishlistProductsState.wishlistModel?.wishlist.data : [];
 
-        bool checkLogin = getBoolAsync(loggedIn, defaultValue: false);
+        bool checkLogin = getBoolAsync(isLoggedIn, defaultValue: false);
 
         return checkLogin
             ? Scaffold(
                 backgroundColor: KColor.appBackground,
                 body: SingleChildScrollView(
                   child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 12),
+                    margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                     child: Column(
                       children: [
-                        if (wishlistProductsState is LoadingState) ...[
-                          const KLoading(shimmerHeight: 123)
-                        ],
+                        if (wishlistProductsState is LoadingState) ...[const KLoading(shimmerHeight: 123)],
                         if (wishlistProductsState is WishlistSuccessState) ...[
                           wishlistData!.isEmpty
                               ? const EmptyProductPage(
-                                  message:
-                                      'Your haven’t added anything to your wishlist yet.Add your favourites here.',
+                                  message: 'Your haven’t added anything to your wishlist yet.Add your favourites here.',
                                 )
                               : ListView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
@@ -59,55 +52,34 @@ class _WishlistPageState extends State<WishlistPage> {
                                   itemCount: wishlistData.length,
                                   itemBuilder: (ctx, index) {
                                     return WishlistCard(
-                                      img: wishlistData[index]
-                                          .product
-                                          .productImage,
+                                      img: wishlistData[index].product.productImage,
                                       isChecked: true,
-                                      productName: wishlistData[index]
-                                          .product
-                                          .productName,
-                                      group: wishlistData[index]
-                                          .product
-                                          .allgroup
-                                          .groupName,
-                                      price: wishlistData[index]
-                                          .product
-                                          .sellingPrice,
+                                      productName: wishlistData[index].product.productName,
+                                      group: wishlistData[index].product.allgroup.groupName,
+                                      price: wishlistData[index].product.sellingPrice,
                                       cancel: () {
                                         setState(() {
                                           Navigator.pop(context);
                                         });
                                       },
                                       delete: () {
-                                        if (wishlistProductsState
-                                            is! LoadingState) {
-                                          ref
-                                              .read(wishlistProvider.notifier)
-                                              .deleteWishlist(
-                                                id: wishlistData[index]
-                                                    .id
-                                                    .toString(),
+                                        if (wishlistProductsState is! LoadingState) {
+                                          ref.read(wishlistProvider.notifier).deleteWishlist(
+                                                id: wishlistData[index].id.toString(),
                                               );
                                         }
                                         Navigator.pop(context);
-                                        ref
-                                            .read(wishlistProvider.notifier)
-                                            .fetchWishlistProducts();
+                                        ref.read(wishlistProvider.notifier).fetchWishlistProducts();
                                       },
                                       add: () {
                                         if (cartState is! LoadingState) {
-                                          ref
-                                              .read(cartProvider.notifier)
-                                              .addCart(
-                                                product:
-                                                    wishlistData[index].product,
+                                          ref.read(cartProvider.notifier).addCart(
+                                                product: wishlistData[index].product,
                                                 barCode: "3211",
                                                 quantity: 1,
                                               );
                                         }
-                                        ref
-                                            .read(cartProvider.notifier)
-                                            .cartDetails();
+                                        ref.read(cartProvider.notifier).cartDetails();
                                       },
                                     );
                                   },

@@ -11,8 +11,7 @@ import 'api.dart';
 class Network {
   static String noInternetMessage = "Check your connection!";
 
-  static getRequest(String endPoint,
-      {bool requireToken = true, bool noBaseUrl = false}) async {
+  static getRequest(String endPoint, {bool requireToken = true, bool noBaseUrl = false}) async {
     if (await isNetworkAvailable()) {
       Response response;
       var accessToken = getStringAsync(token);
@@ -29,12 +28,9 @@ class Network {
       print('\nURL: ${API.base}$endPoint');
       print("Headers: $headers\n");
       if (requireToken) {
-        response = await get(
-            Uri.parse(noBaseUrl ? endPoint : '${API.base}$endPoint'),
-            headers: headers);
+        response = await get(Uri.parse(noBaseUrl ? endPoint : '${API.base}$endPoint'), headers: headers);
       } else {
-        response =
-            await get(Uri.parse(noBaseUrl ? endPoint : '${API.base}$endPoint'));
+        response = await get(Uri.parse(noBaseUrl ? endPoint : '${API.base}$endPoint'));
       }
 
       return response;
@@ -59,8 +55,7 @@ class Network {
       print("Headers: $headers");
       print('Request Body: ${jsonEncode(body)}\n');
 
-      Response response = await post(Uri.parse('${API.base}$endPoint'),
-          body: jsonEncode(body), headers: headers);
+      Response response = await post(Uri.parse('${API.base}$endPoint'), body: jsonEncode(body), headers: headers);
 
       //print('Response: $response');
       return response;
@@ -88,9 +83,8 @@ class Network {
         /// Session expired
         toast('Session expired! Login to continue...', bgColor: KColor.red);
 
-        setValue(loggedIn, false);
-        NavigationService.navigateToReplacement(
-            CupertinoPageRoute(builder: (_) => const LoginPage()));
+        setValue(isLoggedIn, false);
+        NavigationService.navigateToReplacement(CupertinoPageRoute(builder: (_) => const LoginPage()));
       } else if (response.statusCode == 422) {
         /// Custom validation message
         toast(
