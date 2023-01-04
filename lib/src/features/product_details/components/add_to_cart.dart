@@ -10,10 +10,12 @@ class AddToCart extends StatefulWidget {
   final VoidCallback remove;
   final VoidCallback cart;
 
-   AddToCart({
+  AddToCart({
     Key? key,
     this.quantity = 0,
-    required this.cart, required this.add, required this.remove,
+    required this.cart,
+    required this.add,
+    required this.remove,
   }) : super(key: key);
 
   @override
@@ -94,9 +96,7 @@ class _AddToCartState extends State<AddToCart> {
               child: Center(
                 child: Text(
                   'Add to cart',
-                  style: KTextStyle.subtitle1.copyWith(
-                    color: KColor.whiteBackground,
-                  ),
+                  style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
                 ),
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:finesse/constants/asset_path.dart';
+import 'package:finesse/src/features/product_details/components/add_to_cart.dart';
 import 'package:finesse/src/features/product_details/components/product_info.dart';
 import 'package:finesse/src/features/product_details/components/product_preview.dart';
 import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
@@ -9,8 +10,6 @@ import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../components/add_to_cart.dart';
 
 class ProductDetails extends StatefulWidget {
   final String? productName;

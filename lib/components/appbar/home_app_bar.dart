@@ -1,3 +1,4 @@
+import 'package:finesse/components/filter/k_filter.dart';
 import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/src/features/notification/controller/notification_controller.dart';
@@ -34,6 +35,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
           );
         },
       ),
+      title: const KFilter(),
       actions: [
         Consumer(
           builder: (context, ref, _) {

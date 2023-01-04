@@ -1,4 +1,5 @@
 import 'package:finesse/constants/asset_path.dart';
+import 'package:finesse/styles/b_style.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -43,6 +44,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
               widget.onTap!();
             }
           : null,
+      textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: const EdgeInsets.all(14.0),

@@ -1,4 +1,3 @@
-import 'package:finesse/components/filter/k_filter.dart';
 import 'package:finesse/components/slider/k_slider.dart';
 import 'package:finesse/src/features/home/components/category_section.dart';
 import 'package:finesse/src/features/home/components/featured_products.dart';
@@ -21,13 +20,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: KColor.appBackground,
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const KFilter(check: true),
-              const SizedBox(height: 24),
               const KSlider(selectSliders: 1),
               const SizedBox(height: 31),
               _categoryHeader(

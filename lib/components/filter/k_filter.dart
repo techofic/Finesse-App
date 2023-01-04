@@ -22,12 +22,14 @@ class _KFilterState extends State<KFilter> {
     return Row(
       children: [
         Expanded(
-          flex: 8,
-          child: SearchTextField(
-            onTap: () => Navigator.push(context, FadeRoute(page: const ShopPage())),
-            controller: controller,
-            readOnly: true,
-            hintText: 'Search...',
+          child: SizedBox(
+            height: 40,
+            child: SearchTextField(
+              onTap: () => Navigator.push(context, FadeRoute(page: const ShopPage())),
+              controller: controller,
+              readOnly: true,
+              hintText: 'Search...',
+            ),
           ),
         ),
         // const SizedBox(width: 10),
