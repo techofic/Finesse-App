@@ -1,3 +1,4 @@
+import 'package:finesse/src/features/home/controllers/shop_controller.dart';
 import 'package:finesse/src/features/home/controllers/slider_controller.dart';
 import 'package:finesse/src/features/home/models/slider_model.dart';
 import 'package:finesse/src/features/home/state/slider_state.dart';
@@ -34,24 +35,24 @@ class _PopularCategoryState extends State<PopularCategory> {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(right: 12),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 18,
-                          vertical: 10,
-                        ),
-                        height: 36,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: KColor.blackbg.withOpacity(0.7),
+                      InkWell(
+                        onTap: () {
+                          ref.read(shopProvider.notifier).fetchShopProductList(categoryId: popularCategory[index].id);
+
+                          Navigator.pushNamed(context, '/shop');
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(right: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                          height: 36,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: KColor.blackbg.withOpacity(0.7)),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            popularCategory[index].catName.toString(),
-                            style: KTextStyle.bodyText3.copyWith(
-                              color: Colors.black.withOpacity(0.7),
+                          child: Center(
+                            child: Text(
+                              popularCategory[index].catName.toString(),
+                              style: KTextStyle.bodyText3.copyWith(color: Colors.black.withOpacity(0.7)),
                             ),
                           ),
                         ),
@@ -71,9 +72,7 @@ class _PopularCategoryState extends State<PopularCategory> {
                 itemBuilder: (context, index) {
                   return Container(
                     margin: const EdgeInsets.only(right: 16),
-                    child: Image.network(
-                      middleBanner[index].image,
-                    ),
+                    child: Image.network(middleBanner[index].image),
                   );
                 },
               ),

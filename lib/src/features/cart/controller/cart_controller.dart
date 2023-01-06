@@ -12,7 +12,6 @@ import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:finesse/src/features/wishlist/model/wishlist_product_model.dart';
 
 /// Providers
 final cartProvider = StateNotifierProvider<CartController, BaseState>(
@@ -27,41 +26,13 @@ class CartController extends StateNotifier<BaseState> {
   CartModel? cartModel;
   int subtotal = 0;
 
-  Future addCart({
-    required Product product,
-    required String barCode,
-    required int quantity,
-  }) async {
+  Future addCart({required int mproductId, required int id, required int quantity}) async {
     state = const LoadingState();
     dynamic responseBody;
     var requestBody = {
-      'averageBuyingPrice': product.averageBuyingPrice,
-      'barCode': barCode,
-      'brand': product.allbrand.name,
-      'brandId': product.brandId,
-      'catName': product.allcategory.catName,
-      'categoryId': product.categoryId,
-      'created_at': product.createdAt.toIso8601String(),
-      'date': "0000-00-00",
-      'discount': product.discount,
-      'groupId': product.groupId,
-      'groupName': product.allgroup.groupName,
-      'id': product.id,
-      'images': [],
-      'img': product.productImage,
-      'menuId': product.menuId,
-      'model': product.model,
-      'mproductId': product.id,
-      'openingQuantity': product.openingQuantity,
-      'openingUnitPrice': product.openingUnitPrice,
-      'productImage': product.productImage,
-      'productName': product.productName,
+      'mproductId': mproductId,
+      'id': id,
       'quantity': quantity,
-      'sellingPrice': product.sellingPrice,
-      'stock': product.stock,
-      'unit': "Pcs",
-      'updated_at': product.updatedAt.toIso8601String(),
-      'variation': "{\"Color\":\"Blue\",\"Size\":\"M\"}",
     };
     try {
       responseBody = await Network.handleResponse(
@@ -90,6 +61,66 @@ class CartController extends StateNotifier<BaseState> {
       state = const ErrorState();
     }
   }
+
+  // Future addCart({required Product product, required String barCode, required int quantity}) async {
+  //   state = const LoadingState();
+  //   dynamic responseBody;
+  //   var requestBody = {
+  //     'averageBuyingPrice': product.averageBuyingPrice,
+  //     'barCode': barCode,
+  //     'brand': product.allbrand.name,
+  //     'brandId': product.brandId,
+  //     'catName': product.allcategory.catName,
+  //     'categoryId': product.categoryId,
+  //     'created_at': product.createdAt.toIso8601String(),
+  //     'date': "0000-00-00",
+  //     'discount': product.discount,
+  //     'groupId': product.groupId,
+  //     'groupName': product.allgroup.groupName,
+  //     'id': product.id,
+  //     'images': [],
+  //     'img': product.productImage,
+  //     'menuId': product.menuId,
+  //     'model': product.model,
+  //     'mproductId': product.id,
+  //     'openingQuantity': product.openingQuantity,
+  //     'openingUnitPrice': product.openingUnitPrice,
+  //     'productImage': product.productImage,
+  //     'productName': product.productName,
+  //     'quantity': quantity,
+  //     'sellingPrice': product.sellingPrice,
+  //     'stock': product.stock,
+  //     'unit': "Pcs",
+  //     'updated_at': product.updatedAt.toIso8601String(),
+  //     'variation': "{\"Color\":\"Blue\",\"Size\":\"M\"}",
+  //   };
+  //   try {
+  //     responseBody = await Network.handleResponse(
+  //       await Network.postRequest(API.addCart, requestBody),
+  //     );
+  //     if (responseBody != null) {
+  //       if (responseBody['token'] != null) {
+  //         state = const AddWishlistSuccessState();
+
+  //         setValue(isLoggedIn, true);
+  //         setValue(token, responseBody['token']);
+  //         toast("Product add in wishlist Successful", bgColor: KColor.selectColor);
+
+  //         NavigationService.navigateToReplacement(
+  //           CupertinoPageRoute(
+  //             builder: (context) => const CartPage(),
+  //           ),
+  //         );
+  //       }
+  //     } else {
+  //       state = const ErrorState();
+  //     }
+  //   } catch (error, stackTrace) {
+  //     print(error);
+  //     print(stackTrace);
+  //     state = const ErrorState();
+  //   }
+  // }
 
   Future cartDetails() async {
     state = const LoadingState();

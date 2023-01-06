@@ -40,6 +40,7 @@ class KColor {
   */
   static const Color black = Colors.black;
   static const Color white = Colors.white;
+  static Color? grey350 = Colors.grey[350];
   static const Color grey = Color(0xFFB4B4B4);
   static const Color red = Colors.red;
   static const Color red12 = Color(0xFFFF3D00);
@@ -57,5 +58,4 @@ class KColor {
   static const Color filterColorTwo = Color(0xFF006DAA);
   static const Color deleteColor = Color(0xFFC32727);
   static const Color selectColor = Color(0xFF37AF59);
-
 }

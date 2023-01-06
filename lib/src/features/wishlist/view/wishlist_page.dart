@@ -73,11 +73,11 @@ class _WishlistPageState extends State<WishlistPage> {
                                       },
                                       add: () {
                                         if (cartState is! LoadingState) {
-                                          ref.read(cartProvider.notifier).addCart(
-                                                product: wishlistData[index].product,
-                                                barCode: "3211",
-                                                quantity: 1,
-                                              );
+                                          // ref.read(cartProvider.notifier).addCart(
+                                          //       product: wishlistData[index].product,
+                                          //       barCode: "3211",
+                                          //       quantity: 1,
+                                          //     );
                                         }
                                         ref.read(cartProvider.notifier).cartDetails();
                                       },

@@ -1,4 +1,7 @@
 import 'package:finesse/constants/asset_path.dart';
+import 'package:finesse/constants/shared_preference_constant.dart';
+import 'package:finesse/core/base/base_state.dart';
+import 'package:finesse/src/features/cart/controller/cart_controller.dart';
 import 'package:finesse/src/features/product_details/components/add_to_cart.dart';
 import 'package:finesse/src/features/product_details/components/product_info.dart';
 import 'package:finesse/src/features/product_details/components/product_preview.dart';
@@ -10,6 +13,7 @@ import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class ProductDetails extends StatefulWidget {
   final String? productName;
@@ -32,20 +36,16 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  List<String> items = [
-    "Variations",
-    "Descriptions",
-    "Reviews",
-  ];
+  List<String> items = ["Variations", "Descriptions", "Reviews"];
   int currentIndex = 0;
-  int quantity = 0;
+  int quantity = 1;
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
         final wishlistProductsState = ref.watch(wishlistProvider);
-        // final cartState = ref.watch(cartProvider);
+        final cartState = ref.watch(cartProvider);
 
         return Scaffold(
           backgroundColor: KColor.whiteBackground,
@@ -56,11 +56,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: const Icon(
-                Icons.arrow_back,
-                size: 24,
-                color: KColor.blackbg,
-              ),
+              child: const Icon(Icons.arrow_back, size: 24, color: KColor.blackbg),
             ),
             actions: [
               if (wishlistProductsState is WishlistSuccessState) ...[
@@ -82,9 +78,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               child: Center(
                                 child: Text(
                                   wishlistProductsState.wishlistModel!.wishlist.total.toString(),
-                                  style: KTextStyle.overline.copyWith(
-                                    color: KColor.white,
-                                  ),
+                                  style: KTextStyle.overline.copyWith(color: KColor.white),
                                 ),
                               ),
                             ),
@@ -99,9 +93,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
           body: Column(
             children: [
-              ProductPreview(
-                id: widget.id.toString(),
-              ),
+              ProductPreview(id: widget.id.toString()),
               ProductInfo(
                 productName: widget.productName,
                 productGroup: widget.productGroup,
@@ -125,16 +117,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                   });
                 },
                 cart: () {
-                  // if (cartState is! LoadingState) {
-                  //   ref
-                  //       .read(cartProvider.notifier)
-                  //       .addCart(
-                  //     product:
-                  //     wishlistData[index].product,
-                  //     barCode: "3211",
-                  //     quantity: quantity,
-                  //   );
-                  // }
+                  if (!getBoolAsync(isLoggedIn)) {
+                    toast('You need to login to continue...', bgColor: KColor.red);
+                    Navigator.pushNamed(context, '/login');
+                  }
+                  if (cartState is! LoadingState) {
+                    // ref.read(cartProvider.notifier).addCart(
+
+                    //     );
+                  }
                 },
               ),
             ],

@@ -16,18 +16,18 @@ class ProductCard extends StatelessWidget {
   final VoidCallback? tap;
   final VoidCallback? pressed;
 
-  const ProductCard(
-      {required this.img,
-      required this.check,
-      required this.name,
-      required this.genre,
-      required this.discount,
-      required this.offerPrice,
-      required this.regularPrice,
-      this.tap,
-      this.pressed,
-      Key? key})
-      : super(key: key);
+  const ProductCard({
+    required this.img,
+    required this.check,
+    required this.name,
+    required this.genre,
+    required this.discount,
+    required this.offerPrice,
+    required this.regularPrice,
+    this.tap,
+    this.pressed,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +36,8 @@ class ProductCard extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: MediaQuery.of(context).size.width * 0.4,
-            height: 198,
-            //padding: const EdgeInsets.only(left: 12,right: 12),
+            width: MediaQuery.of(context).size.width * 0.5,
+            height: 275,
             margin: const EdgeInsets.only(top: 12, right: 12, left: 6),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
@@ -61,13 +60,10 @@ class ProductCard extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 91,
+                  height: 168,
                   width: context.screenWidth,
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
                     child: CachedNetworkImage(
                       imageUrl: '$img',
                       fit: BoxFit.fill,
@@ -78,11 +74,7 @@ class ProductCard extends StatelessWidget {
                 const SizedBox(height: 6),
                 Flexible(
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                      right: 12.0,
-                      left: 12.0,
-                      bottom: 4.0,
-                    ),
+                    padding: const EdgeInsets.only(right: 12.0, left: 12.0, bottom: 4.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,14 +83,13 @@ class ProductCard extends StatelessWidget {
                           child: Text(
                             '$name',
                             style: KTextStyle.caption1.copyWith(color: KColor.blackbg),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           '$genre',
-                          style: KTextStyle.caption2.copyWith(
-                            color: KColor.blackbg.withOpacity(0.3),
-                          ),
+                          style: KTextStyle.caption2.copyWith(color: KColor.blackbg.withOpacity(0.3)),
                         ),
                         const SizedBox(height: 6),
                         Row(
@@ -119,16 +110,12 @@ class ProductCard extends StatelessWidget {
                                     children: [
                                       Text(
                                         '$regularPrice',
-                                        style: KTextStyle.caption2.copyWith(
-                                          color: KColor.blackbg.withOpacity(0.3),
-                                        ),
+                                        style: KTextStyle.caption2.copyWith(color: KColor.blackbg.withOpacity(0.3)),
                                       ),
                                       Positioned(
                                         left: 8,
                                         bottom: 1,
-                                        child: SvgPicture.asset(
-                                          'assets/images/line.svg',
-                                        ),
+                                        child: SvgPicture.asset('assets/images/line.svg'),
                                       )
                                     ],
                                   ),
@@ -157,11 +144,7 @@ class ProductCard extends StatelessWidget {
                                 child: const CircleAvatar(
                                   radius: 13,
                                   backgroundColor: KColor.appBackground,
-                                  child: Icon(
-                                    Icons.favorite_outlined,
-                                    color: Colors.black,
-                                    size: 13,
-                                  ),
+                                  child: Icon(Icons.favorite_outlined, color: Colors.black, size: 13),
                                 ),
                               ),
                             ),
@@ -183,10 +166,7 @@ class ProductCard extends StatelessWidget {
                 child: Container(
                   width: 51,
                   height: 24,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: KColor.stickerColor,
-                  ),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: KColor.black),
                   child: Center(
                     child: Text(
                       '$discount',

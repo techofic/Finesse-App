@@ -5,7 +5,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Rating extends StatefulWidget {
-  const Rating({Key? key}) : super(key: key);
+  final Function()? onRatingUpdate;
+  final double initialRating, starHeight;
+
+  const Rating({Key? key, this.initialRating = 0.0, this.starHeight = 20, this.onRatingUpdate}) : super(key: key);
 
   @override
   State<Rating> createState() => _RatingState();
@@ -18,30 +21,22 @@ class _RatingState extends State<Rating> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RatingBar.builder(
-          initialRating: 2,
-          minRating: 1,
+          initialRating: widget.initialRating,
+          minRating: 0,
           direction: Axis.horizontal,
           allowHalfRating: false,
           itemCount: 5,
           unratedColor: KColor.filterDividerColor,
-          itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-          itemBuilder: (ctx, index) => SvgPicture.asset(
-              AssetPath.startIcon,
-              height: 30,
-              color:  KColor.rattingColor
-          ),
+          // itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+          itemBuilder: (ctx, index) => SvgPicture.asset(AssetPath.startIcon, height: widget.starHeight, color: KColor.rattingColor),
           onRatingUpdate: (rating) {
-            setState(() {
-              //selectedRatting = rating as int;
-            });
+            widget.onRatingUpdate!();
           },
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.0),
-          child: Divider(
-            color: KColor.filterDividerColor,
-          ),
-        ),
+        // const Padding(
+        //   padding: EdgeInsets.symmetric(vertical: 10.0),
+        //   child: Divider(color: KColor.filterDividerColor),
+        // ),
       ],
     );
   }

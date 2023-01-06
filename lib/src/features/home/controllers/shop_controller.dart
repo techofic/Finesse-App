@@ -18,13 +18,15 @@ class ShopController extends StateNotifier<BaseState> {
   ShopDataModel? shopDataModel;
   List<ShopDataModel>? searchModel = [];
 
-  Future fetchShopProductList({str = ""}) async {
+  Future fetchShopProductList({str, groupId, categoryId}) async {
     state = const LoadingState();
     dynamic responseBody;
+
     try {
       responseBody = await Network.handleResponse(
-        await Network.getRequest(API.shop(str: str)),
+        await Network.getRequest(API.shop(str: str, groupId: groupId, categoryId: categoryId)),
       );
+
       if (responseBody != null) {
         shopDataModel = ShopDataModel.fromJson(responseBody);
         state = ShopSuccessState(shopDataModel);

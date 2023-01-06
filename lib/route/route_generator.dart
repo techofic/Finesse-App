@@ -1,4 +1,5 @@
 import 'package:finesse/src/features/about/view/about_page.dart';
+import 'package:finesse/src/features/auth/login/view/login_page.dart';
 import 'package:finesse/src/features/auth/login/view/otp_page.dart';
 import 'package:finesse/src/features/auth/resetpassword/view/confirm_password.dart';
 import 'package:finesse/src/features/auth/resetpassword/view/reset_password_page.dart';
@@ -25,6 +26,7 @@ import 'package:finesse/src/features/profile/components/change_password.dart';
 import 'package:finesse/src/features/profile/components/dashboard.dart';
 import 'package:finesse/src/features/profile/components/edit_profile.dart';
 import 'package:finesse/src/features/profile/components/my_order.dart';
+import 'package:finesse/src/features/profile/components/notifications.dart';
 import 'package:finesse/src/features/profile/components/order_details.dart';
 import 'package:finesse/src/features/profile/components/report_issue.dart';
 import 'package:finesse/src/features/profile/components/report_list.dart';
@@ -33,77 +35,74 @@ import 'package:finesse/src/features/profile/components/write_review.dart';
 import 'package:finesse/src/features/profile/view/profile_page.dart';
 import 'package:finesse/src/features/settings/view/settings_page.dart';
 import 'package:finesse/src/features/wishlist/view/wishlist_page.dart';
-import 'package:flutter/material.dart';
-
-import '../src/features/auth/login/view/login_page.dart';
-import '../src/features/profile/components/notifications.dart';
+import 'package:flutter/cupertino.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final Map? arguments = settings.arguments as Map?;
     switch (settings.name) {
       case '/login':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const LoginPage(),
         );
       case '/otp':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => OtpPage(
             phoneNumber: arguments!['phoneNumber'],
             password: arguments['password'],
           ),
         );
       case '/signup':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const SignupPage(),
         );
       case '/home':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const HomePage(),
         );
       case '/cart':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const CartPage(),
         );
       case '/shop':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const ShopPage(),
         );
       case '/mainScreen':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const MainScreen(),
         );
       case '/resetPassword':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const ResetPasswordPage(),
         );
       case '/setOtp':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => SendCode(
             phoneNumber: arguments!['phoneNumber'],
           ),
         );
       case '/confirmPassword':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => ConfirmPasswordPage(
             token: arguments!['token'],
             phoneNumber: arguments['phoneNumber'],
           ),
         );
       case '/notification':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const NotificationPage(),
         );
       case '/category':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const CategoryPage(),
         );
       case '/menCategories':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const MenSection(),
         );
       case '/productDetails':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => ProductDetails(
             productName: arguments!['productName'],
             productGroup: arguments['productGroup'],
@@ -113,7 +112,7 @@ class RouteGenerator {
           ),
         );
       // case '/productInfo':
-      //   return MaterialPageRoute(
+      //   return CupertinoPageRoute(
       //     builder: (_) => ProductDetails(
       //       productName: arguments!['productName'],
       //       productGroup: arguments['productGroup'],
@@ -122,7 +121,7 @@ class RouteGenerator {
       //     ),
       //   );
       // case '/productDescription':
-      //   return MaterialPageRoute(
+      //   return CupertinoPageRoute(
       //     builder: (_) => ProductDetails(
       //       productName: arguments!['productName'],
       //       productGroup: arguments['productGroup'],
@@ -131,99 +130,99 @@ class RouteGenerator {
       //     ),
       //   );
       case '/profile':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const ProfilePage(),
         );
       case '/dashboard':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const Dashboard(),
         );
       case '/myOrder':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const MyOrder(),
         );
       case '/orderDetails':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const OrderDetails(),
         );
       case '/writeReview':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const WriteReview(),
         );
       case '/trackOrder':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const TrackOrder(),
         );
       case '/notifications':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const Notifications(),
         );
       case '/addressInfo':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const AddressInfo(),
         );
       case '/accountDetails':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const AccountDetails(),
         );
       case '/changePassword':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const ChangePassword(),
         );
       case '/editProfile':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const EditProfile(),
         );
       case '/reportIssue':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const ReportIssue(),
         );
       case '/reportList':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const ReportList(),
         );
       case '/wishlist':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const WishlistPage(),
         );
       case '/checkout':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const CheckoutPage(),
         );
       case '/payment':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const PaymentPage(),
         );
       case '/preview':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const PreviewPage(),
         );
       case '/confirmOrder':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const ConfirmOrder(),
         );
       case '/checkoutNewAddress':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const AddNewAddress(),
         );
       case '/about':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const AboutPage(),
         );
       case '/contact':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const ContactPage(),
         );
       case '/settings':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const SettingPage(),
         );
       case '/addAddress':
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const AddressPage(),
         );
       default:
-        return MaterialPageRoute(
+        return CupertinoPageRoute(
           builder: (_) => const HomePage(),
         );
     }

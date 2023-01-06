@@ -3,11 +3,10 @@ import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/home/controllers/product_category_controller.dart';
 import 'package:finesse/src/features/home/models/products_category_model.dart';
 import 'package:finesse/src/features/home/state/product_category_state.dart';
+import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../product_details/controller/product_details_controller.dart';
 
 class NewArrivals extends StatefulWidget {
   const NewArrivals({Key? key}) : super(key: key);
@@ -22,19 +21,14 @@ class _NewArrivalsState extends State<NewArrivals> {
     return Consumer(builder: (context, ref, _) {
       final wishlistState = ref.watch(wishlistProvider);
       final newArrivalState = ref.watch(productCategoryProvider);
-      final List<Product>? newCategory =
-          newArrivalState is ProductCategorySuccessState
-              ? newArrivalState.productsCategory?.newProducts
-              : [];
+      final List<Product>? newCategory = newArrivalState is ProductCategorySuccessState ? newArrivalState.productsCategory?.newProducts : [];
       final List<MiddlePromotionalCard>? promotionalBanner =
-          newArrivalState is ProductCategorySuccessState
-              ? newArrivalState.productsCategory?.middlePromotionalCard
-              : [];
+          newArrivalState is ProductCategorySuccessState ? newArrivalState.productsCategory?.middlePromotionalCard : [];
 
       return Column(
         children: [
           SizedBox(
-            height: 222,
+            height: 300,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: newCategory!.length,
@@ -47,7 +41,8 @@ class _NewArrivalsState extends State<NewArrivals> {
                   regularPrice: "",
                   discount: newCategory[index].discount.toString(),
                   check: true,
-                  tap: (){
+                  tap: () {
+                    ref.read(productDetailsProvider.notifier).fetchProductsDetails(newCategory[index].id);
                     Navigator.pushNamed(
                       context,
                       '/productDetails',
@@ -59,17 +54,10 @@ class _NewArrivalsState extends State<NewArrivals> {
                         'id': newCategory[index].id,
                       },
                     );
-                    ref
-                        .read(productDetailsProvider.notifier)
-                        .fetchProductsDetails(
-                      newCategory[index].id,
-                    );
                   },
                   pressed: () {
                     if (wishlistState is! LoadingState) {
-                      ref.read(wishlistProvider.notifier).addWishlist(
-                        id: newCategory[index].id.toString(),
-                      );
+                      ref.read(wishlistProvider.notifier).addWishlist(id: newCategory[index].id.toString());
                     }
                     ref.read(wishlistProvider.notifier).fetchWishlistProducts();
                   },

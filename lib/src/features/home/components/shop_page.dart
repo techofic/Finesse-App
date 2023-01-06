@@ -72,50 +72,52 @@ class _ShopPageState extends State<ShopPage> {
                   ),
                   const SizedBox(height: 24),
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: GridView.builder(
-                        physics: const ScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 3.0,
-                          mainAxisSpacing: 6.0,
-                          childAspectRatio: 9 / 10,
-                        ),
-                        itemCount: shopData?.length,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) {
-                          return ProductCard(
-                              img: shopData![index].productImage,
-                              name: shopData[index].productName,
-                              genre: shopData[index].allgroup.groupName.toString().split('.').last,
-                              offerPrice: shopData[index].sellingPrice.toString(),
-                              regularPrice: "",
-                              discount: shopData[index].discount.toString(),
-                              check: false,
-                              tap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  '/productDetails',
-                                  arguments: {
-                                    'productName': shopData[index].productName,
-                                    'productGroup': shopData[index].allgroup.groupName.toString().split('.').last,
-                                    'price': shopData[index].sellingPrice.toString(),
-                                    'description': shopData[index].briefDescription,
-                                    'id': shopData[index].id,
-                                  },
-                                );
-                                ref.read(productDetailsProvider.notifier).fetchProductsDetails(shopData[index].id);
+                    child: shopData!.isEmpty
+                        ? const Center(child: Text('No products found!'))
+                        : SingleChildScrollView(
+                            child: GridView.builder(
+                              physics: const ScrollPhysics(),
+                              shrinkWrap: true,
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 3.0,
+                                mainAxisSpacing: 6.0,
+                                childAspectRatio: 7 / 10,
+                              ),
+                              itemCount: shopData.length,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) {
+                                return ProductCard(
+                                    img: shopData[index].productImage,
+                                    name: shopData[index].productName,
+                                    genre: shopData[index].allgroup.groupName.toString().split('.').last,
+                                    offerPrice: shopData[index].sellingPrice.toString(),
+                                    regularPrice: "",
+                                    discount: shopData[index].discount.toString(),
+                                    check: false,
+                                    tap: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/productDetails',
+                                        arguments: {
+                                          'productName': shopData[index].productName,
+                                          'productGroup': shopData[index].allgroup.groupName.toString().split('.').last,
+                                          'price': shopData[index].sellingPrice.toString(),
+                                          'description': shopData[index].briefDescription,
+                                          'id': shopData[index].id,
+                                        },
+                                      );
+                                      ref.read(productDetailsProvider.notifier).fetchProductsDetails(shopData[index].id);
+                                    },
+                                    pressed: () {
+                                      if (wishlistState is! LoadingState) {
+                                        ref.read(wishlistProvider.notifier).addWishlist(id: shopData[index].id.toString());
+                                      }
+                                      ref.read(wishlistProvider.notifier).fetchWishlistProducts();
+                                    });
                               },
-                              pressed: () {
-                                if (wishlistState is! LoadingState) {
-                                  ref.read(wishlistProvider.notifier).addWishlist(id: shopData[index].id.toString());
-                                }
-                                ref.read(wishlistProvider.notifier).fetchWishlistProducts();
-                              });
-                        },
-                      ),
-                    ),
+                            ),
+                          ),
                   ),
                 ],
               ),

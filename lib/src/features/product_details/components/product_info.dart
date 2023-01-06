@@ -1,5 +1,5 @@
-import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/core/base/base_state.dart';
+import 'package:finesse/src/features/filter/components/rating.dart';
 import 'package:finesse/src/features/product_details/components/product_description.dart';
 import 'package:finesse/src/features/product_details/components/product_review.dart';
 import 'package:finesse/src/features/product_details/components/product_variation.dart';
@@ -9,9 +9,8 @@ import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class ProductInfo extends StatefulWidget {
+class ProductInfo extends ConsumerStatefulWidget {
   final String? productName;
   final String? productGroup;
   final String? price;
@@ -28,19 +27,18 @@ class ProductInfo extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ProductInfo> createState() => _ProductInfoState();
+  ConsumerState<ProductInfo> createState() => _ProductInfoState();
 }
 
-class _ProductInfoState extends State<ProductInfo> {
-  List<String> items = [
-    "Variations",
-    "Descriptions",
-    "Reviews",
-  ];
+class _ProductInfoState extends ConsumerState<ProductInfo> {
+  List<String> items = ["Variations", "Descriptions", "Reviews"];
   int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final wishlistState = ref.watch(wishlistProvider);
+    // final productDetailsState = ref.watch(productDetailsProvider);
+
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
@@ -54,16 +52,13 @@ class _ProductInfoState extends State<ProductInfo> {
                   Expanded(
                     child: Text(
                       widget.productName.toString(),
-                      style: KTextStyle.headline2.copyWith(
-                        color: KColor.blackbg,
-                      ),
+                      style: KTextStyle.headline2.copyWith(color: KColor.blackbg),
                     ),
                   ),
+                  const SizedBox(width: 5),
                   Text(
-                    widget.price.toString(),
-                    style: KTextStyle.headline2.copyWith(
-                      color: KColor.blackbg,
-                    ),
+                    '৳${widget.price}',
+                    style: KTextStyle.headline2.copyWith(color: KColor.blackbg),
                   ),
                 ],
               ),
@@ -73,43 +68,34 @@ class _ProductInfoState extends State<ProductInfo> {
                 children: [
                   Text(
                     widget.productGroup.toString(),
-                    style: KTextStyle.subtitle7.copyWith(
-                      color: KColor.blackbg.withOpacity(0.3),
-                    ),
+                    style: KTextStyle.subtitle7.copyWith(color: KColor.blackbg.withOpacity(0.3)),
                   ),
-                  Consumer(
-                    builder: (context, ref, _) {
-                      final wishlistState = ref.watch(wishlistProvider);
-                      return InkWell(
-                        onTap: () {
-                          if (wishlistState is! LoadingState) {
-                            ref.read(wishlistProvider.notifier).addWishlist(
-                                  id: widget.id.toString(),
-                                );
-                          }
-                          ref.read(wishlistProvider.notifier).fetchWishlistProducts();
-                        },
-                        child: Material(
-                          borderRadius: BorderRadius.circular(32),
-                          elevation: 4,
-                          child: const CircleAvatar(
-                            backgroundColor: KColor.appBackground,
-                            radius: 16,
-                            child: Icon(
-                              Icons.favorite_outlined,
-                              color: KColor.baseBlack,
-                              size: 13,
-                            ),
-                          ),
-                        ),
-                      );
+                  InkWell(
+                    onTap: () {
+                      if (wishlistState is! LoadingState) {
+                        ref.read(wishlistProvider.notifier).addWishlist(id: widget.id.toString());
+                      }
+                      ref.read(wishlistProvider.notifier).fetchWishlistProducts();
                     },
+                    child: Material(
+                      borderRadius: BorderRadius.circular(32),
+                      elevation: 4,
+                      child: const CircleAvatar(
+                        backgroundColor: KColor.appBackground,
+                        radius: 16,
+                        child: Icon(
+                          Icons.favorite_outlined,
+                          color: KColor.baseBlack,
+                          size: 13,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 19.0, bottom: 19),
-                child: SvgPicture.asset(AssetPath.ratingIcon),
+              const Padding(
+                padding: EdgeInsets.only(top: 19.0, bottom: 19),
+                child: Rating(),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,9 +117,7 @@ class _ProductInfoState extends State<ProductInfo> {
                                     setState(() {
                                       currentIndex = index;
                                     });
-                                    ref.read(productRecommendationProvider.notifier).fetchProductsRecommendation(
-                                          widget.id.toString(),
-                                        );
+                                    ref.read(productRecommendationProvider.notifier).fetchProductsRecommendation(widget.id.toString());
                                   },
                                   child: AnimatedContainer(
                                     duration: const Duration(milliseconds: 300),
@@ -163,7 +147,7 @@ class _ProductInfoState extends State<ProductInfo> {
                   ),
 
                   /// MAIN BODY
-                  if (currentIndex == 0) ProductVariation(id: widget.id.toString()),
+                  if (currentIndex == 0) const ProductVariation(),
                   if (currentIndex == 1) ProductDescription(id: widget.id.toString()),
                   if (currentIndex == 2) const ProductReview(),
                 ],

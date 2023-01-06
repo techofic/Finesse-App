@@ -1,22 +1,28 @@
 class ProductDetailsModel {
   ProductDetailsModel({
-    required this.allVariation,
-    required this.product,
+    this.success = true,
+    this.allVariation,
+    this.allVariationProduct,
+    this.product,
   });
 
-  List<AllVariation> allVariation;
-  Product product;
+  bool success;
+  List<AllVariation>? allVariation;
+  List<AllVariationProduct>? allVariationProduct;
+  Product? product;
 
-  factory ProductDetailsModel.fromJson(Map<String?, dynamic> json) =>
-      ProductDetailsModel(
-        allVariation: List<AllVariation>.from(
-            json["allVariation"].map((x) => AllVariation.fromJson(x))),
+  factory ProductDetailsModel.fromJson(Map<String, dynamic> json) => ProductDetailsModel(
+        success: json["success"],
+        allVariation: List<AllVariation>.from((json["allVariation"] ?? []).map((x) => AllVariation.fromJson(x))),
+        allVariationProduct: List<AllVariationProduct>.from((json["allVariationProduct"] ?? []).map((x) => AllVariationProduct.fromJson(x))),
         product: Product.fromJson(json["product"]),
       );
 
-  Map<String?, dynamic> toJson() => {
-        "allVariation": List<dynamic>.from(allVariation.map((x) => x.toJson())),
-        "product": product.toJson(),
+  Map<String, dynamic> toJson() => {
+        "success": success,
+        "allVariation": List<dynamic>.from((allVariation ?? []).map((x) => x.toJson())),
+        "allVariationProduct": List<dynamic>.from((allVariationProduct ?? []).map((x) => x.toJson())),
+        "product": product?.toJson(),
       };
 }
 
@@ -25,26 +31,38 @@ class AllVariation {
     this.id,
     this.mproductId,
     this.name,
-    required this.values,
+    this.createdAt,
+    this.updatedAt,
+    this.values,
+    this.isDisabled,
   });
 
   int? id;
   int? mproductId;
   String? name;
-  List<Value> values;
+  dynamic createdAt;
+  dynamic updatedAt;
+  List<Value>? values;
+  bool? isDisabled;
 
-  factory AllVariation.fromJson(Map<String?, dynamic> json) => AllVariation(
+  factory AllVariation.fromJson(Map<String, dynamic> json) => AllVariation(
         id: json["id"],
         mproductId: json["mproductId"],
         name: json["name"],
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
         values: List<Value>.from(json["values"].map((x) => Value.fromJson(x))),
+        isDisabled: json["isDisabled"],
       );
 
-  Map<String?, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "mproductId": mproductId,
         "name": name,
-        "values": List<dynamic>.from(values.map((x) => x.toJson())),
+        "created_at": createdAt,
+        "updated_at": updatedAt,
+        "values": List<dynamic>.from((values ?? []).map((x) => x.toJson())),
+        "isDisabled": isDisabled,
       };
 }
 
@@ -52,345 +70,212 @@ class Value {
   Value({
     this.pvariationId,
     this.value,
+    this.isDisabled = false,
   });
 
   int? pvariationId;
   String? value;
+  bool isDisabled;
 
-  factory Value.fromJson(Map<String?, dynamic> json) => Value(
+  factory Value.fromJson(Map<String, dynamic> json) => Value(
         pvariationId: json["pvariationId"],
         value: json["value"],
+        isDisabled: json["isDisabled"] ?? false,
       );
 
-  Map<String?, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "pvariationId": pvariationId,
         "value": value,
+        "isDisabled": isDisabled,
       };
 }
 
-class Product {
-  Product({
+class AllVariationProduct {
+  AllVariationProduct({
     this.id,
-    this.menuId,
-    this.groupId,
-    this.categoryId,
-    this.brandId,
+    this.mproductId,
     this.productName,
     this.model,
-    this.description,
-    this.briefDescription,
+    this.variation,
     this.sellingPrice,
-    this.averageBuyingPrice,
-    this.productImage,
-    required this.images,
-    this.isNew,
-    this.totalSale,
-    this.isFeatured,
     this.stock,
-    this.discount,
-    this.adminDiscount,
-    this.appDiscount,
-    this.openingQuantity,
-    this.openingUnitPrice,
-    this.isAvailable,
-    required this.details,
-    this.isWishlist,
-    required this.allgroup,
-    required this.menu,
-    required this.allcategory,
-    required this.allbrand,
-    required this.tags,
-    required this.allImages,
-    this.avgRating,
-    required this.meta,
+    this.variationformat,
+    this.allImages,
   });
 
   int? id;
-  int? menuId;
-  int? groupId;
-  int? categoryId;
-  int? brandId;
+  int? mproductId;
   String? productName;
   String? model;
-  String? description;
-  String? briefDescription;
+  String? variation;
   int? sellingPrice;
-  String? averageBuyingPrice;
-  String? productImage;
-  List<ProductImage> images;
-  List<Value>? color;
-  int? isNew;
-  int? totalSale;
-  int? isFeatured;
   int? stock;
-  int? discount;
-  int? adminDiscount;
-  int? appDiscount;
-  String? openingQuantity;
-  String? openingUnitPrice;
-  int? isAvailable;
-  Details details;
-  dynamic isWishlist;
-  Allgroup allgroup;
-  Menu menu;
-  Allcategory allcategory;
-  Allbrand allbrand;
-  List<AllImage> tags;
-  List<AllImage> allImages;
-  dynamic avgRating;
-  Meta meta;
+  Variationformat? variationformat;
+  List<AllImage>? allImages;
 
-  factory Product.fromJson(Map<String?, dynamic> json) => Product(
+  factory AllVariationProduct.fromJson(Map<String, dynamic> json) => AllVariationProduct(
         id: json["id"],
-        menuId: json["menuId"],
-        groupId: json["groupId"],
-        categoryId: json["categoryId"],
-        brandId: json["brandId"],
+        mproductId: json["mproductId"],
         productName: json["productName"],
         model: json["model"],
-        description: json["description"],
-        briefDescription: json["brief_description"],
+        variation: json["variation"],
         sellingPrice: json["sellingPrice"],
-        averageBuyingPrice: json["averageBuyingPrice"],
-        productImage: json["productImage"],
-        images: List<ProductImage>.from(json["images"].map((x) => ProductImage.fromJson(x))),
-        isNew: json["isNew"],
-        totalSale: json["totalSale"],
-        isFeatured: json["isFeatured"],
         stock: json["stock"],
-        discount: json["discount"],
-        adminDiscount: json["adminDiscount"],
-        appDiscount: json["appDiscount"],
-        openingQuantity: json["openingQuantity"],
-        openingUnitPrice: json["openingUnitPrice"],
-        isAvailable: json["isAvailable"],
-        details: Details.fromJson(json["details"]),
-        isWishlist: json["isWishlist"],
-        allgroup: Allgroup.fromJson(json["allgroup"]),
-        menu: Menu.fromJson(json["menu"]),
-        allcategory: Allcategory.fromJson(json["allcategory"]),
-        allbrand: Allbrand.fromJson(json["allbrand"]),
-        tags:
-            List<AllImage>.from(json["tags"].map((x) => AllImage.fromJson(x))),
-        allImages: List<AllImage>.from(
-            json["allImages"].map((x) => AllImage.fromJson(x))),
-        avgRating: json["avgRating"],
-        meta: Meta.fromJson(json["__meta__"]),
+        variationformat: Variationformat.fromJson(json["variationformat"]),
+        allImages: List<AllImage>.from((json["allImages"] ?? []).map((x) => AllImage.fromJson(x))),
       );
 
-  Map<String?, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
-        "menuId": menuId,
-        "groupId": groupId,
-        "categoryId": categoryId,
-        "brandId": brandId,
+        "mproductId": mproductId,
         "productName": productName,
         "model": model,
-        "description": description,
-        "brief_description": briefDescription,
+        "variation": variation,
         "sellingPrice": sellingPrice,
-        "averageBuyingPrice": averageBuyingPrice,
-        "productImage": productImage,
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
-        "isNew": isNew,
-        "totalSale": totalSale,
-        "isFeatured": isFeatured,
         "stock": stock,
-        "discount": discount,
-        "adminDiscount": adminDiscount,
-        "appDiscount": appDiscount,
-        "openingQuantity": openingQuantity,
-        "openingUnitPrice": openingUnitPrice,
-        "isAvailable": isAvailable,
-        "details": details.toJson(),
-        "isWishlist": isWishlist,
-        "allgroup": allgroup.toJson(),
-        "menu": menu.toJson(),
-        "allcategory": allcategory.toJson(),
-        "allbrand": allbrand.toJson(),
-        "tags": List<dynamic>.from(tags.map((x) => x.toJson())),
-        "allImages": List<dynamic>.from(allImages.map((x) => x.toJson())),
-        "avgRating": avgRating,
-        "__meta__": meta.toJson(),
+        "variationformat": variationformat?.toJson(),
+        "allImages": List<dynamic>.from((allImages ?? []).map((x) => x.toJson())),
       };
 }
 
 class AllImage {
   AllImage({
     this.id,
+    this.mproductId,
     this.productId,
     this.url,
-    this.tagId,
+    this.createdAt,
+    this.updatedAt,
   });
 
   int? id;
+  int? mproductId;
   int? productId;
   String? url;
-  int? tagId;
+  dynamic createdAt;
+  dynamic updatedAt;
 
-  factory AllImage.fromJson(Map<String?, dynamic> json) => AllImage(
+  factory AllImage.fromJson(Map<String, dynamic> json) => AllImage(
         id: json["id"],
+        mproductId: json["mproductId"],
         productId: json["productId"],
         url: json["url"],
-        tagId: json["tagId"],
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
       );
 
-  Map<String?, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
+        "mproductId": mproductId,
         "productId": productId,
         "url": url,
-        "tagId": tagId,
+        "created_at": createdAt,
+        "updated_at": updatedAt,
       };
 }
 
-class Allbrand {
-  Allbrand({
-    this.id,
-    this.name,
-  });
-
-  int? id;
-  String? name;
-
-  factory Allbrand.fromJson(Map<String?, dynamic> json) => Allbrand(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String?, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
-}
-
-class Allcategory {
-  Allcategory({
-    this.id,
-    this.catName,
-    this.menuId,
-    this.groupId,
-    this.isFeatured,
-    this.isMenuFeatured,
-  });
-
-  int? id;
-  String? catName;
-  int? menuId;
-  int? groupId;
-  int? isFeatured;
-  int? isMenuFeatured;
-
-  factory Allcategory.fromJson(Map<String?, dynamic> json) => Allcategory(
-        id: json["id"],
-        catName: json["catName"],
-        menuId: json["menuId"],
-        groupId: json["group_id"],
-        isFeatured: json["isFeatured"],
-        isMenuFeatured: json["isMenuFeatured"],
-      );
-
-  Map<String?, dynamic> toJson() => {
-        "id": id,
-        "catName": catName,
-        "menuId": menuId,
-        "group_id": groupId,
-        "isFeatured": isFeatured,
-        "isMenuFeatured": isMenuFeatured,
-      };
-}
-
-class Allgroup {
-  Allgroup({
-    this.id,
-    this.menuId,
-    this.groupName,
-    this.discount,
-  });
-
-  int? id;
-  int? menuId;
-  String? groupName;
-  int? discount;
-
-  factory Allgroup.fromJson(Map<String?, dynamic> json) => Allgroup(
-        id: json["id"],
-        menuId: json["menuId"],
-        groupName: json["groupName"],
-        discount: json["discount"],
-      );
-
-  Map<String?, dynamic> toJson() => {
-        "id": id,
-        "menuId": menuId,
-        "groupName": groupName,
-        "discount": discount,
-      };
-}
-
-class Details {
-  Details({
-    this.color,
-  });
+class Variationformat {
+  Variationformat({this.color});
 
   String? color;
 
-  factory Details.fromJson(Map<String?, dynamic> json) => Details(
+  factory Variationformat.fromJson(Map<String, dynamic> json) => Variationformat(
         color: json["Color"],
       );
 
-  Map<String?, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "Color": color,
       };
 }
 
-class ProductImage {
-  ProductImage({
-    this.url,
-  });
-
-  String? url;
-
-  factory ProductImage.fromJson(Map<String?, dynamic> json) => ProductImage(
-        url: json["url"],
-      );
-
-  Map<String?, dynamic> toJson() => {
-        "url": url,
-      };
-}
-
-class Menu {
-  Menu({
+class Product {
+  Product({
     this.id,
-    this.name,
+    this.orderNo,
+    this.slug,
+    this.productName,
+    this.productImage,
+    this.model,
+    this.brand,
+    this.category,
+    this.subcategory,
+    this.sellingPrice,
+    this.briefDescription,
+    this.discountedPrice,
+    this.discount,
+    this.isNew,
+    this.isFeatured,
+    this.stock,
+    this.isWishlist,
+    this.rating,
+    this.reviews,
+    this.allImages,
   });
 
   int? id;
-  String? name;
+  int? orderNo;
+  String? slug;
+  String? productName;
+  String? productImage;
+  String? model;
+  String? brand;
+  String? category;
+  String? subcategory;
+  int? sellingPrice;
+  String? briefDescription;
+  int? discountedPrice;
+  int? discount;
+  int? isNew;
+  int? isFeatured;
+  int? stock;
+  bool? isWishlist;
+  int? rating;
+  int? reviews;
+  List<AllImage>? allImages;
 
-  factory Menu.fromJson(Map<String?, dynamic> json) => Menu(
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
-        name: json["name"],
+        orderNo: json["order_no"],
+        slug: json["slug"],
+        productName: json["productName"],
+        productImage: json["productImage"],
+        model: json["model"],
+        brand: json["brand"],
+        category: json["category"],
+        subcategory: json["subcategory"],
+        sellingPrice: json["sellingPrice"],
+        briefDescription: json["brief_description"],
+        discountedPrice: json["discountedPrice"],
+        discount: json["discount"],
+        isNew: json["isNew"],
+        isFeatured: json["isFeatured"],
+        stock: json["stock"],
+        isWishlist: json["isWishlist"],
+        rating: json["rating"],
+        reviews: json["reviews"],
+        allImages: List<AllImage>.from((json["allImages"] ?? []).map((x) => AllImage.fromJson(x))),
       );
 
-  Map<String?, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
-        "name": name,
-      };
-}
-
-class Meta {
-  Meta({
-    this.allreviewsCount,
-  });
-
-  int? allreviewsCount;
-
-  factory Meta.fromJson(Map<String?, dynamic> json) => Meta(
-        allreviewsCount: json["allreviews_count"],
-      );
-
-  Map<String?, dynamic> toJson() => {
-        "allreviews_count": allreviewsCount,
+        "order_no": orderNo,
+        "slug": slug,
+        "productName": productName,
+        "productImage": productImage,
+        "model": model,
+        "brand": brand,
+        "category": category,
+        "subcategory": subcategory,
+        "sellingPrice": sellingPrice,
+        "brief_description": briefDescription,
+        "discountedPrice": discountedPrice,
+        "discount": discount,
+        "isNew": isNew,
+        "isFeatured": isFeatured,
+        "stock": stock,
+        "isWishlist": isWishlist,
+        "rating": rating,
+        "reviews": reviews,
+        "allImages": List<dynamic>.from((allImages ?? []).map((x) => x.toJson())),
       };
 }

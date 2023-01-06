@@ -39,7 +39,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
             ),
             if (productDetailsState is ProductDetailsSuccessState) ...[
               Html(
-                data: productDetailsState.productDetailsModel?.product.briefDescription ?? 'No data available',
+                data: productDetailsState.productDetailsModel?.product?.briefDescription ?? 'No data available',
                 style: {
                   'span': Style(
                     color: KColor.blackbg.withOpacity(0.5),

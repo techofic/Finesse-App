@@ -22,14 +22,12 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
         final wishlistState = ref.watch(wishlistProvider);
         final featureCategoryState = ref.watch(productCategoryProvider);
         final List<Product>? featureCategory =
-            featureCategoryState is ProductCategorySuccessState
-                ? featureCategoryState.productsCategory?.featuredProducts
-                : [];
+            featureCategoryState is ProductCategorySuccessState ? featureCategoryState.productsCategory?.featuredProducts : [];
 
         return Column(
           children: [
             SizedBox(
-              height: 220,
+              height: 300,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: featureCategory!.length,
@@ -41,8 +39,8 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
                     offerPrice: featureCategory[index].sellingPrice.toString(),
                     regularPrice: "",
                     discount: featureCategory[index].discount.toString(),
-                    check: featureCategory[index].discount.toString()=="0"?false:true,
-                    tap: (){
+                    check: featureCategory[index].discount.toString() == "0" ? false : true,
+                    tap: () {
                       Navigator.pushNamed(
                         context,
                         '/productDetails',
@@ -58,8 +56,8 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
                     pressed: () {
                       if (wishlistState is! LoadingState) {
                         ref.read(wishlistProvider.notifier).addWishlist(
-                          id: featureCategory[index].id.toString(),
-                        );
+                              id: featureCategory[index].id.toString(),
+                            );
                       }
                       ref.read(wishlistProvider.notifier).fetchWishlistProducts();
                     },

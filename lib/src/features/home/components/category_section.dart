@@ -1,5 +1,6 @@
 import 'package:finesse/constants/asset_path.dart';
 import 'package:finesse/src/features/home/controllers/category_controller.dart';
+import 'package:finesse/src/features/home/controllers/shop_controller.dart';
 import 'package:finesse/src/features/home/models/category_model.dart';
 import 'package:finesse/src/features/home/state/category_state.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -16,16 +17,7 @@ class CategorySection extends StatefulWidget {
 }
 
 class _CategorySectionState extends State<CategorySection> {
-  int selectIndex = 0;
-  List<dynamic> categoryIcons = [
-    AssetPath.boxIcon,
-    AssetPath.boxIcon,
-    AssetPath.boxIcon,
-    AssetPath.boxIcon,
-    AssetPath.boxIcon,
-    AssetPath.boxIcon,
-    AssetPath.boxIcon,
-  ];
+  int selectIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +25,7 @@ class _CategorySectionState extends State<CategorySection> {
       builder: (context, ref, _) {
         final categoryState = ref.watch(categoryProvider);
         final List<Group>? categoryData = categoryState is CategorySuccessState ? categoryState.categoryModel?.groups : [];
+
         return SizedBox(
           height: 85,
           child: ListView.builder(
@@ -42,9 +35,9 @@ class _CategorySectionState extends State<CategorySection> {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  setState(() {
-                    selectIndex = index;
-                  });
+                  // setState(() => selectIndex = index);
+                  ref.read(shopProvider.notifier).fetchShopProductList(groupId: categoryData[index].id);
+                  Navigator.pushNamed(context, '/shop');
                 },
                 child: Column(
                   children: [
@@ -58,7 +51,7 @@ class _CategorySectionState extends State<CategorySection> {
                       ),
                       child: Center(
                         child: SvgPicture.asset(
-                          categoryIcons[index],
+                          AssetPath.boxIcon,
                           color: index == selectIndex ? KColor.whiteBackground : KColor.blackbg,
                         ),
                       ),

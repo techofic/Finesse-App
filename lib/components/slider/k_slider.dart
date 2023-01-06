@@ -26,9 +26,7 @@ class _KSliderState extends State<KSlider> {
     return Consumer(
       builder: (context, ref, _) {
         final sliderState = ref.watch(sliderProvider);
-        final List<MainSlider>? sliderData = sliderState is SliderSuccessState
-            ? sliderState.homeSliderModel?.mainSlider
-            : [];
+        final List<MainSlider>? sliderData = sliderState is SliderSuccessState ? sliderState.homeSliderModel?.mainSlider : [];
         List<BannerModel> bannerList = sliderData!
             .map(
               (entry) => BannerModel(
@@ -57,7 +55,7 @@ class _KSliderState extends State<KSlider> {
                         spaceBetween: 4,
                         widthAnimation: 30,
                       ),
-                      height: 140,
+                      height: 180,
                       borderRadius: 10,
                       activeColor: KColor.blackbg,
                       animation: true,
