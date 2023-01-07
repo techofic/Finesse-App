@@ -86,7 +86,9 @@ class _ProductInfoState extends ConsumerState<ProductInfo> {
                             }
 
                             if (wishlistState is! LoadingState) {
-                              await ref.read(wishlistProvider.notifier).addWishlist(id: widget.id.toString());
+                              productDetails!.product!.isWishlist
+                                  ? await ref.read(wishlistProvider.notifier).deleteWishlist(id: widget.id.toString())
+                                  : await ref.read(wishlistProvider.notifier).addWishlist(id: widget.id.toString());
                             }
                             ref.read(wishlistProvider.notifier).fetchWishlistProducts();
                           },

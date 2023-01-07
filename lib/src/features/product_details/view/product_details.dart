@@ -5,8 +5,6 @@ import 'package:finesse/src/features/cart/controller/cart_controller.dart';
 import 'package:finesse/src/features/product_details/components/add_to_cart.dart';
 import 'package:finesse/src/features/product_details/components/product_info.dart';
 import 'package:finesse/src/features/product_details/components/product_preview.dart';
-import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
-import 'package:finesse/src/features/wishlist/state/wishlist_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
@@ -44,7 +42,6 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
-        final wishlistProductsState = ref.watch(wishlistProvider);
         final cartState = ref.watch(cartProvider);
 
         return Scaffold(
@@ -59,36 +56,34 @@ class _ProductDetailsState extends State<ProductDetails> {
               child: const Icon(Icons.arrow_back, size: 24, color: KColor.blackbg),
             ),
             actions: [
-              if (wishlistProductsState is WishlistSuccessState) ...[
-                InkWell(
-                  onTap: () => Navigator.pushNamed(context, '/cart'),
-                  child: SizedBox(
-                    width: context.screenWidth * 0.2,
-                    child: Stack(
-                      children: [
-                        Center(child: SvgPicture.asset(AssetPath.cartIcon)),
-                        Positioned(
-                          right: 18,
-                          top: 8,
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: CircleAvatar(
-                              radius: 10,
-                              backgroundColor: KColor.stickerColor,
-                              child: Center(
-                                child: Text(
-                                  wishlistProductsState.wishlistModel!.wishlist.total.toString(),
-                                  style: KTextStyle.overline.copyWith(color: KColor.white),
-                                ),
+              InkWell(
+                onTap: () => Navigator.pushNamed(context, '/cart'),
+                child: SizedBox(
+                  width: context.screenWidth * 0.2,
+                  child: Stack(
+                    children: [
+                      Center(child: SvgPicture.asset(AssetPath.cartIcon)),
+                      Positioned(
+                        right: 18,
+                        top: 8,
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: CircleAvatar(
+                            radius: 10,
+                            backgroundColor: KColor.stickerColor,
+                            child: Center(
+                              child: Text(
+                                '0',
+                                style: KTextStyle.overline.copyWith(color: KColor.white),
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ],
           ),
           body: Column(
