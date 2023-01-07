@@ -96,6 +96,8 @@ class _ShopPageState extends State<ShopPage> {
                                     discount: shopData[index].discount.toString(),
                                     check: false,
                                     tap: () {
+                                      ref.read(productDetailsProvider.notifier).fetchProductsDetails(shopData[index].id);
+
                                       Navigator.pushNamed(
                                         context,
                                         '/productDetails',

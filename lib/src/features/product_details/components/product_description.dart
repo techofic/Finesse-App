@@ -63,10 +63,10 @@ class _ProductDescriptionState extends State<ProductDescription> {
                   scrollDirection: Axis.horizontal,
                   itemCount: productRecommendationState.productRecommendationModel?.product.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return RecommendCard(
-                      img: productRecommendationState.productRecommendationModel?.product[index].productImage,
-                      price: productRecommendationState.productRecommendationModel?.product[index].sellingPrice.toString(),
-                    );
+                    return RecommendCard(productData: productRecommendationState.productRecommendationModel!.product[index]
+                        // .productImage,
+                        // price: productRecommendationState.productRecommendationModel?.product[index].sellingPrice.toString(),
+                        );
                   },
                 ),
               ),

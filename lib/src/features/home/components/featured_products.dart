@@ -3,6 +3,7 @@ import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/src/features/home/controllers/product_category_controller.dart';
 import 'package:finesse/src/features/home/models/products_category_model.dart';
 import 'package:finesse/src/features/home/state/product_category_state.dart';
+import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:finesse/src/features/wishlist/controller/wishlist_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,6 +42,8 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
                     discount: featureCategory[index].discount.toString(),
                     check: featureCategory[index].discount.toString() == "0" ? false : true,
                     tap: () {
+                      ref.read(productDetailsProvider.notifier).fetchProductsDetails(featureCategory[index].id);
+
                       Navigator.pushNamed(
                         context,
                         '/productDetails',
