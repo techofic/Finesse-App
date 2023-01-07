@@ -41,7 +41,9 @@ class KDropdownField extends StatefulWidget {
 class _KDropdownFieldState extends State<KDropdownField> {
   @override
   void initState() {
-    widget.initialValue == null ? widget.controller!.text = widget.dropdownFieldOptions[0].value! : widget.controller!.text = widget.initialValue!;
+    widget.initialValue == null
+        ? widget.controller!.text = widget.dropdownFieldOptions.firstWhere((element) => !element.isDisabled).value!
+        : widget.controller!.text = widget.initialValue!;
     // if (widget.selectedIdController != null) widget.selectedIdController!.text = widget.dropdownFieldOptions[0].pvariationId.toString();
 
     super.initState();

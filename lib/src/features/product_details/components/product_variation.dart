@@ -23,9 +23,17 @@ class _ProductVariationState extends ConsumerState<ProductVariation> {
     final productDetailsState = ref.watch(productDetailsProvider);
     final productDetails = productDetailsState is ProductDetailsSuccessState ? productDetailsState.productDetailsModel : null;
 
+    if (productDetailsState is ProductDetailsSuccessState) {
+      if (variationControllers.isNotEmpty) variationControllers.clear();
+      if (variationControllers.isEmpty) {
+        for (int i = 0; i < productDetailsState.productDetailsModel!.allVariation!.length; i++) {
+          variationControllers.add(TextEditingController());
+        }
+      }
+    }
     ref.listen(productDetailsProvider, (_, state) {
-      variationControllers.clear();
       if (state is ProductDetailsSuccessState) {
+        if (variationControllers.isNotEmpty) variationControllers.clear();
         for (int i = 0; i < state.productDetailsModel!.allVariation!.length; i++) {
           variationControllers.add(TextEditingController());
         }
@@ -68,7 +76,7 @@ class _ProductVariationState extends ConsumerState<ProductVariation> {
                   }
                 },
                 isCallback: true,
-                initialValue: productDetails.allVariation![index].values!.first.value,
+                initialValue: productDetails.allVariation![index].values!.firstWhere((element) => !element.isDisabled).value,
                 validator: (value) => value.isEmpty ? 'This field is required' : null,
               );
             },

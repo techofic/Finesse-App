@@ -18,22 +18,18 @@ class _RecommendCardState extends State<RecommendCard> {
       children: [
         Container(
           height: 113,
-          //padding: const EdgeInsets.only(left: 18, right: 18, top: 16),
           margin: const EdgeInsets.only(right: 20, left: 8, top: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            //color: Colors.lightBlueAccent,
             color: KColor.appBackground,
             boxShadow: [
               BoxShadow(
-                //color: Colors.redAccent,
                 color: KColor.shadowColor.withOpacity(0.2),
                 spreadRadius: 0,
                 blurRadius: 12,
                 offset: const Offset(4, 4), // changes position of shadow
               ),
               BoxShadow(
-                //color: Colors.redAccent,
                 color: KColor.shadowColor.withOpacity(0.2),
                 spreadRadius: 0,
                 blurRadius: 12,
@@ -43,17 +39,13 @@ class _RecommendCardState extends State<RecommendCard> {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              '${widget.img}',
-              height: 113,
-              fit: BoxFit.cover,
-            ),
+            child: Image.network('${widget.img}', height: 113, fit: BoxFit.cover),
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(right: 20.0, top: 6),
           child: Text(
-            '${widget.price}',
+            '৳${widget.price}',
             style: KTextStyle.bodyText2.copyWith(color: KColor.blackbg),
           ),
         ),

@@ -5,6 +5,7 @@ import 'package:finesse/src/features/product_details/state/product_details_state
 import 'package:finesse/src/features/product_details/state/product_recommendation_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,20 +38,20 @@ class _ProductDescriptionState extends State<ProductDescription> {
               'Description',
               style: KTextStyle.subtitle7.copyWith(color: Colors.black),
             ),
-            if (productDetailsState is ProductDetailsSuccessState) ...[
-              Html(
-                data: productDetailsState.productDetailsModel?.product?.briefDescription ?? 'No data available',
-                style: {
-                  'span': Style(
-                    color: KColor.blackbg.withOpacity(0.5),
-                    fontSize: FontSize.medium,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: GoogleFonts.inter().fontFamily,
-                    whiteSpace: WhiteSpace.NORMAL,
-                  ),
-                },
-              ),
-            ],
+            productDetailsState is ProductDetailsSuccessState
+                ? Html(
+                    data: productDetailsState.productDetailsModel?.product?.briefDescription ?? 'No data available',
+                    style: {
+                      'span': Style(
+                        color: KColor.blackbg.withOpacity(0.5),
+                        fontSize: FontSize.medium,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: GoogleFonts.inter().fontFamily,
+                        whiteSpace: WhiteSpace.NORMAL,
+                      ),
+                    },
+                  )
+                : const Center(child: CupertinoActivityIndicator()),
             if (productRecommendationState is ProductRecommendationSuccessState) ...{
               Text(
                 'Recommended',
@@ -69,6 +70,8 @@ class _ProductDescriptionState extends State<ProductDescription> {
                   },
                 ),
               ),
+            } else ...{
+              const Center(child: CupertinoActivityIndicator()),
             }
           ],
         );

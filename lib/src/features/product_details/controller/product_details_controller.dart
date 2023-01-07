@@ -24,6 +24,10 @@ class ProductDetailsController extends StateNotifier<BaseState> {
   ProductDetailsModel? productDetailsModel;
   ColorModel? colorModel;
 
+  updateSuccessState() {
+    state = ProductDetailsSuccessState(productDetailsModel);
+  }
+
   Future fetchProductsDetails(productId) async {
     state = const LoadingState();
     dynamic responseBody;

@@ -206,8 +206,8 @@ class Product {
     this.isNew,
     this.isFeatured,
     this.stock,
-    this.isWishlist,
-    this.rating,
+    this.isWishlist = false,
+    this.rating = 0.0,
     this.reviews,
     this.allImages,
   });
@@ -228,8 +228,8 @@ class Product {
   int? isNew;
   int? isFeatured;
   int? stock;
-  bool? isWishlist;
-  int? rating;
+  bool isWishlist;
+  double? rating;
   int? reviews;
   List<AllImage>? allImages;
 
@@ -250,8 +250,8 @@ class Product {
         isNew: json["isNew"],
         isFeatured: json["isFeatured"],
         stock: json["stock"],
-        isWishlist: json["isWishlist"],
-        rating: json["rating"],
+        isWishlist: json["isWishlist"] ?? false,
+        rating: double.parse(json["rating"].toString()),
         reviews: json["reviews"],
         allImages: List<AllImage>.from((json["allImages"] ?? []).map((x) => AllImage.fromJson(x))),
       );

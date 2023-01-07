@@ -118,7 +118,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 },
                 cart: () {
                   if (!getBoolAsync(isLoggedIn)) {
-                    toast('You need to login to continue...', bgColor: KColor.red);
+                    toast('Please login to continue...', bgColor: KColor.red);
                     Navigator.pushNamed(context, '/login');
                   }
                   if (cartState is! LoadingState) {

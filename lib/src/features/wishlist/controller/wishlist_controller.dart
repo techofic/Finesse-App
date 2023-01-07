@@ -3,6 +3,7 @@ import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/core/network/api.dart';
 import 'package:finesse/core/network/network_utils.dart';
 import 'package:finesse/service/navigation_service.dart';
+import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:finesse/src/features/wishlist/model/wishlist_product_model.dart';
 import 'package:finesse/src/features/wishlist/state/wishlist_state.dart';
 import 'package:finesse/src/features/wishlist/view/wishlist_page.dart';
@@ -29,6 +30,9 @@ class WishlistController extends StateNotifier<BaseState> {
     dynamic responseBody;
     var requestBody = {'id': id};
 
+    ref!.read(productDetailsProvider.notifier).productDetailsModel!.product!.isWishlist = true;
+    ref!.read(productDetailsProvider.notifier).updateSuccessState();
+
     try {
       responseBody = await Network.handleResponse(
         await Network.postRequest(API.addWishlist, requestBody),
@@ -38,13 +42,10 @@ class WishlistController extends StateNotifier<BaseState> {
           state = const AddWishlistSuccessState();
           setValue(isLoggedIn, true);
           setValue(token, responseBody['token']);
-          toast("Product add in wishlist Successful", bgColor: KColor.selectColor);
+          toast("Product added to wishlist successfully!", bgColor: KColor.selectColor);
 
-          NavigationService.navigateToReplacement(
-            CupertinoPageRoute(
-              builder: (context) => const WishlistPage(),
-            ),
-          );
+          //   CupertinoPageRoute(builder: (context) => const WishlistPage()),
+          // );
         }
       } else {
         state = const ErrorState();

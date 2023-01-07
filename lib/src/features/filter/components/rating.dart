@@ -26,11 +26,12 @@ class _RatingState extends State<Rating> {
           direction: Axis.horizontal,
           allowHalfRating: false,
           itemCount: 5,
+          glowRadius: 0,
+          itemSize: widget.starHeight,
           unratedColor: KColor.filterDividerColor,
-          // itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-          itemBuilder: (ctx, index) => SvgPicture.asset(AssetPath.startIcon, height: widget.starHeight, color: KColor.rattingColor),
+          itemBuilder: (ctx, index) => SvgPicture.asset(AssetPath.startIcon, height: 30, color: KColor.rattingColor),
           onRatingUpdate: (rating) {
-            widget.onRatingUpdate!();
+            if (widget.onRatingUpdate != null) widget.onRatingUpdate!();
           },
         ),
         // const Padding(

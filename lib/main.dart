@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:finesse/constants/shared_preference_constant.dart';
+import 'package:finesse/core/logger/logger.dart';
 import 'package:finesse/core/network/network_utils.dart';
 import 'package:finesse/route/route_generator.dart';
 import 'package:finesse/service/navigation_service.dart';
@@ -25,7 +26,7 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
   await initialize();
 
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(ProviderScope(observers: [Logger()], child: const MyApp()));
 }
 
 class MyApp extends ConsumerStatefulWidget {
