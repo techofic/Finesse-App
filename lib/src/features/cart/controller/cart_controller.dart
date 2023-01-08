@@ -5,7 +5,6 @@ import 'package:finesse/core/network/network_utils.dart';
 import 'package:finesse/service/navigation_service.dart';
 import 'package:finesse/src/features/cart/model/cart_model.dart';
 import 'package:finesse/src/features/cart/state/cart_state.dart';
-import 'package:finesse/src/features/cart/view/cart_page.dart';
 import 'package:finesse/src/features/product_details/components/product_info.dart';
 import 'package:finesse/src/features/wishlist/state/wishlist_state.dart';
 import 'package:finesse/styles/k_colors.dart';
@@ -21,12 +20,15 @@ final cartProvider = StateNotifierProvider<CartController, BaseState>(
 /// Controllers
 class CartController extends StateNotifier<BaseState> {
   final Ref? ref;
-
   CartController({this.ref}) : super(const InitialState());
+
   CartModel? cartModel;
   int subtotal = 0;
+  int mproductId = -1, id = -1;
 
-  Future addCart({required int mproductId, required int id, required int quantity}) async {
+  Future addCart(
+      // {required int mproductId, required int id}
+      {required int quantity}) async {
     state = const LoadingState();
     dynamic responseBody;
     var requestBody = {
@@ -34,24 +36,14 @@ class CartController extends StateNotifier<BaseState> {
       'id': id,
       'quantity': quantity,
     };
+
     try {
       responseBody = await Network.handleResponse(
         await Network.postRequest(API.addCart, requestBody),
       );
       if (responseBody != null) {
-        if (responseBody['token'] != null) {
-          state = const AddWishlistSuccessState();
-
-          setValue(isLoggedIn, true);
-          setValue(token, responseBody['token']);
-          toast("Product add in wishlist Successful", bgColor: KColor.selectColor);
-
-          NavigationService.navigateToReplacement(
-            CupertinoPageRoute(
-              builder: (context) => const CartPage(),
-            ),
-          );
-        }
+        toast("Product added to cart", bgColor: KColor.selectColor);
+        // TODO :: Replace cart details success state
       } else {
         state = const ErrorState();
       }

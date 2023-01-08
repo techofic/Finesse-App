@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:finesse/components/dropdown/k_dropdown_field.dart';
+import 'package:finesse/src/features/cart/controller/cart_controller.dart';
 import 'package:finesse/src/features/product_details/controller/product_details_controller.dart';
 import 'package:finesse/src/features/product_details/state/product_details_state.dart';
 import 'package:finesse/styles/b_style.dart';
@@ -24,19 +25,22 @@ class _ProductVariationState extends ConsumerState<ProductVariation> {
     final productDetails = productDetailsState is ProductDetailsSuccessState ? productDetailsState.productDetailsModel : null;
 
     if (productDetailsState is ProductDetailsSuccessState) {
-      if (variationControllers.isNotEmpty) variationControllers.clear();
+      print('build if');
+      // if (variationControllers.isNotEmpty) variationControllers.clear();
       if (variationControllers.isEmpty) {
         for (int i = 0; i < productDetailsState.productDetailsModel!.allVariation!.length; i++) {
           variationControllers.add(TextEditingController());
         }
+        variationControllers = variationControllers.toSet().toList();
       }
     }
     ref.listen(productDetailsProvider, (_, state) {
+      print('build listen');
       if (state is ProductDetailsSuccessState) {
-        if (variationControllers.isNotEmpty) variationControllers.clear();
         for (int i = 0; i < state.productDetailsModel!.allVariation!.length; i++) {
           variationControllers.add(TextEditingController());
         }
+        variationControllers = variationControllers.toSet().toList();
       }
     });
 
@@ -69,6 +73,8 @@ class _ProductVariationState extends ConsumerState<ProductVariation> {
                       //     '$i ${jsonEncode(variation)} - ${productDetails.allVariationProduct![i].variation} ${jsonEncode(variation) == productDetails.allVariationProduct![i].variation}');
                       if (jsonEncode(variation) == productDetails.allVariationProduct![i].variation) {
                         isAvailable = true;
+                        ref.read(cartProvider.notifier).mproductId = productDetails.allVariationProduct![i].mproductId!;
+                        ref.read(cartProvider.notifier).id = productDetails.allVariationProduct![i].id!;
                         break;
                       }
                     }

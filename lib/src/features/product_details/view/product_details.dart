@@ -63,6 +63,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: Stack(
                     children: [
                       Center(child: SvgPicture.asset(AssetPath.cartIcon)),
+                      // TODO :: cart items count
                       Positioned(
                         right: 18,
                         top: 8,
@@ -117,9 +118,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     Navigator.pushNamed(context, '/login');
                   }
                   if (cartState is! LoadingState) {
-                    // ref.read(cartProvider.notifier).addCart(
-
-                    //     );
+                    ref.read(cartProvider.notifier).addCart(quantity: quantity);
                   }
                 },
               ),
