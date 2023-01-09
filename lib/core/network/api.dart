@@ -47,7 +47,7 @@ class API {
   static const updateCart = 'app/cart_update';
   static const deleteCart = 'app/cart_delete';
   static const allCity = 'app/cities';
-  static allZone({id = ""}) => 'app/zones/$id';
+  static allZone({id = ""}) => 'app/zones?city=$id';
   static const getPromoCode = 'app/checkCoupon';
   static const getReferralCode = 'app/checkReferralCode';
   static const getGiftVoucher = 'app/checkGiftVoucherCode';

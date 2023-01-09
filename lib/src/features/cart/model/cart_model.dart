@@ -1,24 +1,5 @@
 class CartModel {
   CartModel({
-    required this.allCarts,
-  });
-
-  List<AllCart> allCarts;
-
-  factory CartModel.fromJson(Map<String?, dynamic> json) =>
-      CartModel(
-        allCarts: List<AllCart>.from(
-            json["allCarts"].map((x) => AllCart.fromJson(x))),
-      );
-
-  Map<String?, dynamic> toJson() =>
-      {
-        "allCarts": List<dynamic>.from(allCarts.map((x) => x.toJson())),
-      };
-}
-
-class AllCart {
-  AllCart({
     this.id,
     this.userId,
     this.productId,
@@ -42,16 +23,15 @@ class AllCart {
   int? menuId;
   int? categoryId;
   int? subcategoryId;
-  String?product;
+  String? product;
   int? quantity;
   DateTime? createdAt;
   DateTime? updatedAt;
-  VproductClass? details;
+  Details? details;
   Mproduct? mproduct;
-  VproductClass? vproduct;
+  Details? vproduct;
 
-  factory AllCart.fromJson(Map<String?, dynamic> json) =>
-      AllCart(
+  factory CartModel.fromJson(Map<String, dynamic> json) => CartModel(
         id: json["id"],
         userId: json["userId"],
         productId: json["productId"],
@@ -63,13 +43,12 @@ class AllCart {
         quantity: json["quantity"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        details: VproductClass.fromJson(json["details"]),
+        details: Details.fromJson(json["details"]),
         mproduct: Mproduct.fromJson(json["mproduct"]),
-        vproduct: VproductClass.fromJson(json["vproduct"]),
+        vproduct: Details.fromJson(json["vproduct"]),
       );
 
-  Map<String?, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "userId": userId,
         "productId": productId,
@@ -79,16 +58,16 @@ class AllCart {
         "subcategoryId": subcategoryId,
         "product": product,
         "quantity": quantity,
-        "created_at": createdAt,
-        "updated_at": updatedAt,
-        "details": details,
-        "mproduct": mproduct,
-        "vproduct": vproduct,
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
+        "details": details!.toJson(),
+        "mproduct": mproduct!.toJson(),
+        "vproduct": vproduct!.toJson(),
       };
 }
 
-class VproductClass {
-  VproductClass({
+class Details {
+  Details({
     this.id,
     this.menuId,
     this.groupId,
@@ -96,9 +75,6 @@ class VproductClass {
     this.brandId,
     this.mproductId,
     this.productName,
-    this.groupName,
-    this.catName,
-    this.brand,
     this.unit,
     this.model,
     this.variation,
@@ -111,11 +87,11 @@ class VproductClass {
     this.date,
     this.openingQuantity,
     this.openingUnitPrice,
-    required this.createdAt,
-    required this.updatedAt,
-    this.img,
-    this.discount,
-    this.quantity,
+    this.isAvailable,
+    this.isArchived,
+    this.createdAt,
+    this.updatedAt,
+    this.variationformat,
   });
 
   int? id;
@@ -125,9 +101,6 @@ class VproductClass {
   int? brandId;
   int? mproductId;
   String? productName;
-  String? groupName;
-  String? catName;
-  String? brand;
   String? unit;
   String? model;
   String? variation;
@@ -140,14 +113,13 @@ class VproductClass {
   String? date;
   String? openingQuantity;
   String? openingUnitPrice;
-  DateTime createdAt;
-  DateTime updatedAt;
-  String? img;
-  int? discount;
-  int? quantity;
+  int? isAvailable;
+  int? isArchived;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  Map<String, dynamic>? variationformat;
 
-  factory VproductClass.fromJson(Map<String?, dynamic> json) =>
-      VproductClass(
+  factory Details.fromJson(Map<String, dynamic> json) => Details(
         id: json["id"],
         menuId: json["menuId"],
         groupId: json["groupId"],
@@ -155,9 +127,6 @@ class VproductClass {
         brandId: json["brandId"],
         mproductId: json["mproductId"],
         productName: json["productName"],
-        groupName: json["groupName"],
-        catName: json["catName"],
-        brand: json["brand"],
         unit: json["unit"],
         model: json["model"],
         variation: json["variation"],
@@ -170,15 +139,14 @@ class VproductClass {
         date: json["date"],
         openingQuantity: json["openingQuantity"],
         openingUnitPrice: json["openingUnitPrice"],
+        isAvailable: json["isAvailable"],
+        isArchived: json["is_archived"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        img: json["img"],
-        discount: json["discount"],
-        quantity: json["quantity"],
+        variationformat: json["variationformat"],
       );
 
-  Map<String?, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "menuId": menuId,
         "groupId": groupId,
@@ -186,9 +154,6 @@ class VproductClass {
         "brandId": brandId,
         "mproductId": mproductId,
         "productName": productName,
-        "groupName": groupName,
-        "catName": catName,
-        "brand": brand,
         "unit": unit,
         "model": model,
         "variation": variation,
@@ -201,17 +166,34 @@ class VproductClass {
         "date": date,
         "openingQuantity": openingQuantity,
         "openingUnitPrice": openingUnitPrice,
-        "created_at": createdAt,
-        "updated_at": updatedAt,
-        "img": img,
-        "discount": discount,
-        "quantity": quantity,
+        "isAvailable": isAvailable,
+        "is_archived": isArchived,
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
+        "variationformat": variationformat,
       };
 }
+
+// class Variationformat {
+//   Variationformat({
+//     this.color,
+//   });
+//
+//   String? color;
+//
+//   factory Variationformat.fromJson(Map<String, dynamic> json) => Variationformat(
+//         color: json["Color"],
+//       );
+//
+//   Map<String, dynamic> toJson() => {
+//         "Color": color,
+//       };
+// }
 
 class Mproduct {
   Mproduct({
     this.id,
+    this.slug,
     this.menuId,
     this.groupId,
     this.categoryId,
@@ -219,6 +201,7 @@ class Mproduct {
     this.productName,
     this.model,
     this.description,
+    this.unit,
     this.briefDescription,
     this.sellingPrice,
     this.averageBuyingPrice,
@@ -234,12 +217,15 @@ class Mproduct {
     this.openingQuantity,
     this.openingUnitPrice,
     this.isAvailable,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.details,
+    this.isArchived,
+    this.orderNo,
+    this.createdAt,
+    this.updatedAt,
+    // this.details,
   });
 
   int? id;
+  String? slug;
   int? menuId;
   int? groupId;
   int? categoryId;
@@ -247,11 +233,12 @@ class Mproduct {
   String? productName;
   String? model;
   String? description;
-  dynamic briefDescription;
+  String? unit;
+  String? briefDescription;
   int? sellingPrice;
   String? averageBuyingPrice;
   String? productImage;
-  String? images;
+  dynamic images;
   int? isNew;
   int? totalSale;
   int? isFeatured;
@@ -262,13 +249,15 @@ class Mproduct {
   String? openingQuantity;
   String? openingUnitPrice;
   int? isAvailable;
-  DateTime createdAt;
-  DateTime updatedAt;
-  MproductDetails details;
+  int? isArchived;
+  int? orderNo;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  // Variationformat? details;
 
-  factory Mproduct.fromJson(Map<String?, dynamic> json) =>
-      Mproduct(
+  factory Mproduct.fromJson(Map<String, dynamic> json) => Mproduct(
         id: json["id"],
+        slug: json["slug"],
         menuId: json["menuId"],
         groupId: json["groupId"],
         categoryId: json["categoryId"],
@@ -276,6 +265,7 @@ class Mproduct {
         productName: json["productName"],
         model: json["model"],
         description: json["description"],
+        unit: json["unit"],
         briefDescription: json["brief_description"],
         sellingPrice: json["sellingPrice"],
         averageBuyingPrice: json["averageBuyingPrice"],
@@ -291,14 +281,16 @@ class Mproduct {
         openingQuantity: json["openingQuantity"],
         openingUnitPrice: json["openingUnitPrice"],
         isAvailable: json["isAvailable"],
+        isArchived: json["is_archived"],
+        orderNo: json["order_no"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        details: MproductDetails.fromJson(json["details"]),
+        // details: Variationformat.fromJson(json["details"]),
       );
 
-  Map<String?, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         "id": id,
+        "slug": slug,
         "menuId": menuId,
         "groupId": groupId,
         "categoryId": categoryId,
@@ -306,6 +298,7 @@ class Mproduct {
         "productName": productName,
         "model": model,
         "description": description,
+        "unit": unit,
         "brief_description": briefDescription,
         "sellingPrice": sellingPrice,
         "averageBuyingPrice": averageBuyingPrice,
@@ -321,26 +314,10 @@ class Mproduct {
         "openingQuantity": openingQuantity,
         "openingUnitPrice": openingUnitPrice,
         "isAvailable": isAvailable,
-        "created_at": createdAt,
-        "updated_at": updatedAt,
-        "details": details.toJson(),
-      };
-}
-
-class MproductDetails {
-  MproductDetails({
-    this.color,
-  });
-
-  dynamic color;
-
-  factory MproductDetails.fromJson(Map<String?, dynamic> json) =>
-      MproductDetails(
-        color: json["Color"],
-      );
-
-  Map<String?, dynamic> toJson() =>
-      {
-        "Color": color,
+        "is_archived": isArchived,
+        "order_no": orderNo,
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
+        // "details": details!.toJson(),
       };
 }

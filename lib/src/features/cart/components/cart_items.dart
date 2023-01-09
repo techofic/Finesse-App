@@ -22,31 +22,26 @@ class _CartItemsState extends State<CartItems> {
     return Consumer(
       builder: (context, ref, _) {
         final cartState = ref.watch(cartProvider);
-        final List<AllCart>? cartData =
-            cartState is CartSuccessState ? cartState.cartModel?.allCarts : [];
+        final List<CartModel>? cartData = cartState is CartSuccessState ? cartState.cartList : [];
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (cartState is LoadingState) ...[
-              const KLoading(shimmerHeight: 123)
-            ],
+            if (cartState is LoadingState) ...[const KLoading(shimmerHeight: 123)],
             if (cartState is CartSuccessState) ...[
-              cartState.cartModel!.allCarts.isEmpty
-                  ? const EmptyProductPage(
-                      message: 'Your cart is empty',
-                    )
+              cartData!.isEmpty
+                  ? const EmptyProductPage(message: 'Your cart is empty')
                   : ListView.builder(
                       physics: const ScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: cartState.cartModel?.allCarts.length,
+                      itemCount: cartData.length,
                       itemBuilder: (ctx, index) {
                         return WishlistCard(
-                          img: cartData?[index].details?.img,
+                          img: cartData[index].mproduct?.productImage,
                           isChecked: false,
-                          productName: cartData?[index].details?.productName,
-                          group: cartData?[index].details?.groupName,
-                          price: cartData?[index].details?.sellingPrice,
-                          quantity: cartData?[index].quantity,
+                          productName: '${cartData[index].vproduct!.productName!}${cartData[index].vproduct?.variationformat?.values}',
+                          price: cartData[index].vproduct?.sellingPrice,
+                          quantity: cartData[index].quantity,
                           cancel: () {
                             setState(() {
                               Navigator.pop(context);
@@ -54,10 +49,7 @@ class _CartItemsState extends State<CartItems> {
                           },
                           delete: () {
                             if (cartState is! LoadingState) {
-                              ref.read(cartProvider.notifier).deleteCart(
-                                    id: cartState.cartModel!.allCarts[index].id
-                                        .toString(),
-                                  );
+                              ref.read(cartProvider.notifier).deleteCart(id: cartData[index].id.toString());
                             }
                             Navigator.pop(context);
                             ref.read(cartProvider.notifier).cartDetails();

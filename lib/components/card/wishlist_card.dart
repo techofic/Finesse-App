@@ -67,19 +67,12 @@ class _WishlistCardState extends State<WishlistCard> {
         margin: const EdgeInsets.only(bottom: 16),
         decoration: const BoxDecoration(
           color: KColor.deleteColor,
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(15.0),
-            bottomRight: Radius.circular(15.0),
-          ),
+          borderRadius: BorderRadius.only(topRight: Radius.circular(15.0), bottomRight: Radius.circular(15.0)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Image.asset(
-              'assets/images/Delete.png',
-              height: 23,
-              fit: BoxFit.fill,
-            ),
+            Image.asset('assets/images/Delete.png', height: 23, fit: BoxFit.fill),
           ],
         ),
       ),
@@ -113,10 +106,7 @@ class _WishlistCardState extends State<WishlistCard> {
                 SizedBox(
                   height: 123,
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      bottomLeft: Radius.circular(15),
-                    ),
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), bottomLeft: Radius.circular(15)),
                     child: CachedNetworkImage(
                       imageUrl: '${widget.img}',
                       fit: BoxFit.fill,
@@ -137,18 +127,14 @@ class _WishlistCardState extends State<WishlistCard> {
                             Flexible(
                               child: Text(
                                 '${widget.productName}',
-                                style: KTextStyle.bodyText1.copyWith(
-                                  color: KColor.blackbg,
-                                ),
+                                style: KTextStyle.bodyText1.copyWith(color: KColor.blackbg),
                               ),
                             ),
-                            const SizedBox(height: 8),
-                            Text(
-                              '${widget.group}',
-                              style: KTextStyle.caption1.copyWith(
-                                color: KColor.blackbg.withOpacity(0.3),
-                              ),
-                            )
+                            // const SizedBox(height: 8),
+                            // Text(
+                            //   '${widget.group}',
+                            //   style: KTextStyle.caption1.copyWith(color: KColor.blackbg.withOpacity(0.3)),
+                            // )
                           ],
                         ),
                       ),
@@ -160,9 +146,7 @@ class _WishlistCardState extends State<WishlistCard> {
                           children: [
                             Text(
                               "\$${widget.price.toString()}",
-                              style: KTextStyle.subtitle1.copyWith(
-                                color: KColor.blackbg,
-                              ),
+                              style: KTextStyle.subtitle1.copyWith(color: KColor.blackbg),
                             ),
                             widget.isChecked == true ? SizedBox(width: context.screenWidth * 0.32) : SizedBox(width: context.screenWidth * 0.14),
                             widget.isChecked == true
@@ -191,25 +175,16 @@ class _WishlistCardState extends State<WishlistCard> {
                                           height: 32,
                                           width: 32,
                                           decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: KColor.blackbg,
-                                              width: 1,
-                                            ),
+                                            border: Border.all(color: KColor.blackbg, width: 1),
                                             borderRadius: BorderRadius.circular(10),
                                           ),
                                           child: const Center(
-                                            child: Icon(
-                                              Icons.add,
-                                              size: 10,
-                                              color: KColor.blackbg,
-                                            ),
+                                            child: Icon(Icons.add, size: 10, color: KColor.blackbg),
                                           ),
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 12.0,
-                                        ),
+                                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
                                         child: Text(
                                           widget.quantity.toString(),
                                           style: KTextStyle.headline4.copyWith(
@@ -235,13 +210,7 @@ class _WishlistCardState extends State<WishlistCard> {
                                             border: Border.all(color: KColor.blackbg, width: 1),
                                             borderRadius: BorderRadius.circular(10),
                                           ),
-                                          child: const Center(
-                                            child: Icon(
-                                              Icons.remove,
-                                              size: 10,
-                                              color: KColor.blackbg,
-                                            ),
-                                          ),
+                                          child: const Center(child: Icon(Icons.remove, size: 10, color: KColor.blackbg)),
                                         ),
                                       ),
                                     ],

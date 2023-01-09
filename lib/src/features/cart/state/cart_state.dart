@@ -6,9 +6,9 @@ class AddCartSuccessState extends SuccessState {
 }
 
 class CartSuccessState extends SuccessState {
-  final CartModel? cartModel;
+  final List<CartModel> cartList;
 
-  const CartSuccessState(this.cartModel);
+  const CartSuccessState(this.cartList);
 }
 
 class UpdateCartSuccessState extends SuccessState {

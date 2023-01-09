@@ -15,7 +15,7 @@ class KDropdownField extends StatefulWidget {
   final Function? callbackFunction, onTap;
   final bool? isCallback;
   final bool isDisabled;
-  // final TextEditingController? selectedIdController;
+  final bool isEdit;
   final String? initialValue;
 
   KDropdownField({
@@ -30,7 +30,7 @@ class KDropdownField extends StatefulWidget {
     this.onTap,
     this.isCallback = false,
     this.isDisabled = false,
-    // this.selectedIdController,
+    this.isEdit = false,
     this.initialValue,
   }) : super(key: key);
 
@@ -41,10 +41,10 @@ class KDropdownField extends StatefulWidget {
 class _KDropdownFieldState extends State<KDropdownField> {
   @override
   void initState() {
-    widget.initialValue == null
-        ? widget.controller!.text = widget.dropdownFieldOptions.firstWhere((element) => !element.isDisabled).value!
-        : widget.controller!.text = widget.initialValue!;
-    // if (widget.selectedIdController != null) widget.selectedIdController!.text = widget.dropdownFieldOptions[0].pvariationId.toString();
+    // widget.initialValue == null
+    //     ? widget.controller!.text = widget.dropdownFieldOptions.firstWhere((element) => !element.isDisabled).value!
+    //     : widget.controller!.text = widget.initialValue!;
+    // // if (widget.selectedIdController != null) widget.selectedIdController!.text = widget.dropdownFieldOptions[0].pvariationId.toString();
 
     super.initState();
   }
@@ -91,9 +91,10 @@ class _KDropdownFieldState extends State<KDropdownField> {
                   return widget.errorMessage == null || widget.errorMessage!.isEmpty ? null : widget.errorMessage;
                 },
                 decoration: const InputDecoration(border: InputBorder.none, errorStyle: TextStyle(fontSize: 0, height: 0)),
+                hint: Text('Select ${widget.title}', style: KTextStyle.bodyText3.copyWith(color: KColor.grey)),
                 disabledHint: Text(widget.disabledHint ?? "Select", style: KTextStyle.bodyText3.copyWith(color: KColor.grey)),
                 isExpanded: true,
-                value: widget.controller!.text,
+                value: widget.isEdit ? widget.controller!.text : null,
                 icon: Padding(
                   padding: EdgeInsets.only(right: KSize.getWidth(context, 12)),
                   child: const Icon(Icons.keyboard_arrow_down, size: 25, color: KColor.grey),

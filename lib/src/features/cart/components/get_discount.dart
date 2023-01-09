@@ -9,24 +9,26 @@ import 'package:finesse/styles/k_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class GetDiscount extends StatelessWidget {
+class GetDiscount extends StatefulWidget {
   const GetDiscount({Key? key}) : super(key: key);
+
+  @override
+  State<GetDiscount> createState() => _GetDiscountState();
+}
+
+class _GetDiscountState extends State<GetDiscount> {
+  TextEditingController promoCodeController = TextEditingController();
+  TextEditingController referralCodeController = TextEditingController();
+  TextEditingController giftCodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
         final codeState = ref.watch(discountProvider);
-        final PromoCodeModel? promoCodeData = codeState is PromoCodeSuccessState
-            ? codeState.promoCodeModel
-            : null;
-        final ReferralCodeModel? referralCodeData =
-            codeState is ReferralCodeSuccessState
-                ? codeState.referralCodeModel
-                : null;
-        TextEditingController promoCodeController = TextEditingController();
-        TextEditingController referralCodeController = TextEditingController();
-        TextEditingController giftCodeController = TextEditingController();
+        final PromoCodeModel? promoCodeData = codeState is PromoCodeSuccessState ? codeState.promoCodeModel : null;
+        final ReferralCodeModel? referralCodeData = codeState is ReferralCodeSuccessState ? codeState.referralCodeModel : null;
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,14 +37,11 @@ class GetDiscount extends StatelessWidget {
                 : CouponCodeCard(
                     controller: promoCodeController,
                     title: 'Promo Code',
-                    hintText: 'promo code',
-                    buttonText:
-                        codeState is LoadingState ? 'Clear' : 'Apply Code',
+                    hintText: 'Promo Code',
+                    buttonText: codeState is LoadingState ? 'Clear' : 'Apply Code',
                     tap: () {
                       if (codeState is! LoadingState) {
-                        ref
-                            .read(discountProvider.notifier)
-                            .sendPromoCode(code: promoCodeController.text);
+                        ref.read(discountProvider.notifier).sendPromoCode(code: promoCodeController.text);
                       }
                     },
                   ),
@@ -52,13 +51,11 @@ class GetDiscount extends StatelessWidget {
                 : CouponCodeCard(
                     controller: referralCodeController,
                     title: 'Referral Code',
-                    hintText: 'referral Code',
-                    buttonText:
-                        codeState is LoadingState ? 'Clear' : 'Apply Code',
+                    hintText: 'Referral Code',
+                    buttonText: codeState is LoadingState ? 'Clear' : 'Apply Code',
                     tap: () {
                       if (codeState is! LoadingState) {
-                        ref.read(discountProvider.notifier).sendCReferralCode(
-                            barCode: referralCodeController.text);
+                        ref.read(discountProvider.notifier).sendCReferralCode(barCode: referralCodeController.text);
                       }
                     },
                   ),
@@ -66,22 +63,18 @@ class GetDiscount extends StatelessWidget {
             if (codeState is ReferralCodeSuccessState) ...[
               Text(
                 codeState.referralCodeModel!.message.toString(),
-                style: KTextStyle.subtitle2.copyWith(
-                  color: KColor.blackbg,
-                ),
+                style: KTextStyle.subtitle2.copyWith(color: KColor.blackbg),
               ),
               const SizedBox(height: 15),
             ],
             CouponCodeCard(
               controller: giftCodeController,
               title: 'Gift Voucher',
-              hintText: 'gift voucher',
+              hintText: 'Gift Voucher',
               buttonText: codeState is LoadingState ? 'Clear' : 'Apply Code',
               tap: () {
                 if (codeState is! LoadingState) {
-                  ref
-                      .read(discountProvider.notifier)
-                      .sendGiftVoucher(code: giftCodeController.text);
+                  ref.read(discountProvider.notifier).sendGiftVoucher(code: giftCodeController.text);
                 }
               },
             ),

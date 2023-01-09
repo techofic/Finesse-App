@@ -28,13 +28,8 @@ class _ProductsAmountState extends State<ProductsAmount> {
     return Consumer(
       builder: (context, ref, _) {
         final codeState = ref.watch(discountProvider);
-        final PromoCodeModel? promoCodeData = codeState is PromoCodeSuccessState
-            ? codeState.promoCodeModel
-            : null;
-        final ReferralCodeModel? referralCodeData =
-            codeState is ReferralCodeSuccessState
-                ? codeState.referralCodeModel
-                : null;
+        final PromoCodeModel? promoCodeData = codeState is PromoCodeSuccessState ? codeState.promoCodeModel : null;
+        final ReferralCodeModel? referralCodeData = codeState is ReferralCodeSuccessState ? codeState.referralCodeModel : null;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

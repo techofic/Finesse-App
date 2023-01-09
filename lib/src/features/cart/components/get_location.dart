@@ -33,10 +33,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
         return Container(
           height: 48,
           width: context.screenWidth,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: KColor.searchColor.withOpacity(0.8),
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: KColor.searchColor.withOpacity(0.8)),
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: DropdownButtonHideUnderline(
             child: Padding(
@@ -44,19 +41,14 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
               child: DropdownButton<String>(
                 isExpanded: true,
                 hint: Text(
-                  widget.checkCities == true ? 'city' : 'zone',
-                  style: KTextStyle.bodyText1.copyWith(
-                    color: KColor.blackbg.withOpacity(0.4),
-                  ),
+                  widget.checkCities == true ? 'City' : 'Zone',
+                  style: KTextStyle.bodyText1.copyWith(color: KColor.blackbg.withOpacity(0.4)),
                 ),
                 dropdownColor: KColor.appBackground,
                 menuMaxHeight: context.screenHeight * 0.5,
-                alignment: AlignmentDirectional.bottomStart,
+                alignment: AlignmentDirectional.centerStart,
                 value: widget.checkCities == true ? widget.cities : widget.zones,
-                icon: const Icon(
-                  Icons.keyboard_arrow_down,
-                  color: KColor.blackbg,
-                ),
+                icon: const Icon(Icons.keyboard_arrow_down, color: KColor.blackbg),
                 iconSize: 16,
                 onChanged: (newValue) {
                   setState(() {

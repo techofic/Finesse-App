@@ -56,7 +56,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     ref.read(cartProvider.notifier).cartDetails();
     ref.read(reportProvider.notifier).fetchReports();
     ref.read(notificationProvider.notifier).fetchNotification();
-    ref.read(zoneProvider.notifier).allZone();
+    // ref.read(zoneProvider.notifier).allZone();
     ref.read(cityProvider.notifier).allCity();
     ref.read(allBrandsProvider.notifier).fetchAllBrands();
   }

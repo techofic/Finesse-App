@@ -2,13 +2,10 @@ import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/core/network/api.dart';
 import 'package:finesse/core/network/network_utils.dart';
-import 'package:finesse/service/navigation_service.dart';
 import 'package:finesse/src/features/cart/model/cart_model.dart';
 import 'package:finesse/src/features/cart/state/cart_state.dart';
-import 'package:finesse/src/features/product_details/components/product_info.dart';
 import 'package:finesse/src/features/wishlist/state/wishlist_state.dart';
 import 'package:finesse/styles/k_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -22,14 +19,17 @@ class CartController extends StateNotifier<BaseState> {
   final Ref? ref;
   CartController({this.ref}) : super(const InitialState());
 
-  CartModel? cartModel;
+  List<CartModel> cartList = [];
   int subtotal = 0;
   int mproductId = -1, id = -1;
 
   Future addCart(
       // {required int mproductId, required int id}
       {required int quantity}) async {
+    if (mproductId == -1) return toast('Please select variation first', bgColor: KColor.red);
+
     state = const LoadingState();
+
     dynamic responseBody;
     var requestBody = {
       'mproductId': mproductId,
@@ -120,8 +120,8 @@ class CartController extends StateNotifier<BaseState> {
     try {
       responseBody = await Network.handleResponse(await Network.getRequest(API.getCart));
       if (responseBody != null) {
-        cartModel = CartModel.fromJson(responseBody);
-        state = CartSuccessState(cartModel);
+        cartList = (responseBody['allCarts'] as List<dynamic>).map((x) => CartModel.fromJson(x)).toList();
+        state = CartSuccessState(cartList);
         totalCart();
       } else {
         state = const ErrorState();
@@ -148,19 +148,10 @@ class CartController extends StateNotifier<BaseState> {
         await Network.postRequest(API.updateCart, requestBody),
       );
       if (responseBody != null) {
-        if (responseBody['token'] != null) {
-          state = const DeleteWishlistSuccessState();
-          totalCart();
-          setValue(isLoggedIn, true);
-          setValue(token, responseBody['token']);
-          toast("Product delete in wishlist Successful", bgColor: KColor.selectColor);
+        totalCart();
 
-          NavigationService.navigateToReplacement(
-            CupertinoPageRoute(
-              builder: (context) => const ProductInfo(),
-            ),
-          );
-        }
+        toast("Product delete in wishlist Successful", bgColor: KColor.selectColor);
+        state = const DeleteWishlistSuccessState();
       } else {
         state = const ErrorState();
       }
@@ -171,35 +162,25 @@ class CartController extends StateNotifier<BaseState> {
     }
   }
 
-  Future deleteCart({
-    required String id,
-  }) async {
+  Future deleteCart({required String id}) async {
     state = const LoadingState();
+
     dynamic responseBody;
     var requestBody = {
       'id': id,
     };
+
     try {
       responseBody = await Network.handleResponse(
         await Network.postRequest(API.deleteCart, requestBody),
       );
       if (responseBody != null) {
-        if (responseBody['token'] != null) {
-          state = const DeleteCartSuccessState();
-          totalCart();
-          setValue(isLoggedIn, true);
-          setValue(token, responseBody['token']);
-          toast(
-            "Product delete in cart Successful",
-            bgColor: KColor.selectColor,
-          );
+        totalCart();
 
-          NavigationService.navigateToReplacement(
-            CupertinoPageRoute(
-              builder: (context) => const ProductInfo(),
-            ),
-          );
-        }
+        setValue(token, responseBody['token']);
+        toast("Product delete in cart Successful", bgColor: KColor.selectColor);
+
+        state = const DeleteCartSuccessState();
       } else {
         state = const ErrorState();
       }
@@ -212,8 +193,8 @@ class CartController extends StateNotifier<BaseState> {
 
   void totalCart() {
     int total = 0;
-    for (int i = 0; i < cartModel!.allCarts.length; i++) {
-      total += cartModel!.allCarts[i].details!.sellingPrice! * cartModel!.allCarts[i].quantity!;
+    for (int i = 0; i < cartList.length; i++) {
+      total += cartList[i].details!.sellingPrice! * cartList[i].quantity!;
     }
     subtotal = total;
     print('subtotal : $subtotal');
