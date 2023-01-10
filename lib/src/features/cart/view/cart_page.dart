@@ -1,3 +1,4 @@
+import 'package:finesse/components/appbar/k_app_bar.dart';
 import 'package:finesse/components/button/k_border_btn.dart';
 import 'package:finesse/components/button/k_button.dart';
 import 'package:finesse/constants/shared_preference_constant.dart';
@@ -9,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({Key? key}) : super(key: key);
+  final bool isFromBottomNav;
+  const CartPage({Key? key, this.isFromBottomNav = false}) : super(key: key);
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -19,9 +21,14 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     bool checkLogin = getBoolAsync(isLoggedIn, defaultValue: false);
+
     return checkLogin
         ? Scaffold(
             backgroundColor: KColor.appBackground,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(widget.isFromBottomNav ? 0 : 56),
+              child: const KAppBar(checkTitle: true, dotCheck: false, title: 'Cart'),
+            ),
             body: SingleChildScrollView(
               child: Container(
                 alignment: Alignment.center,

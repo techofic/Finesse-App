@@ -123,11 +123,4 @@ class KTextStyle {
     fontWeight: FontWeight.w400,
     fontFamily: GoogleFonts.inter().fontFamily,
   );
-
-  static TextStyle overline = TextStyle(
-    fontSize: 8,
-    fontWeight: FontWeight.w500,
-    height: 2,
-    fontFamily: GoogleFonts.inter().fontFamily,
-  );
 }

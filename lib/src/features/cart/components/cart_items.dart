@@ -22,14 +22,14 @@ class _CartItemsState extends State<CartItems> {
     return Consumer(
       builder: (context, ref, _) {
         final cartState = ref.watch(cartProvider);
-        final List<CartModel>? cartData = cartState is CartSuccessState ? cartState.cartList : [];
+        final List<CartModel> cartData = cartState is CartSuccessState ? cartState.cartList : [];
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (cartState is LoadingState) ...[const KLoading(shimmerHeight: 123)],
             if (cartState is CartSuccessState) ...[
-              cartData!.isEmpty
+              cartData.isEmpty
                   ? const EmptyProductPage(message: 'Your cart is empty')
                   : ListView.builder(
                       physics: const ScrollPhysics(),

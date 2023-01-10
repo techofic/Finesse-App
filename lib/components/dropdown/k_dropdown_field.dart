@@ -41,12 +41,14 @@ class KDropdownField extends StatefulWidget {
 class _KDropdownFieldState extends State<KDropdownField> {
   @override
   void initState() {
+    super.initState();
+
+    print('widget.isDisabled = ${widget.isDisabled}');
+
     // widget.initialValue == null
     //     ? widget.controller!.text = widget.dropdownFieldOptions.firstWhere((element) => !element.isDisabled).value!
     //     : widget.controller!.text = widget.initialValue!;
     // // if (widget.selectedIdController != null) widget.selectedIdController!.text = widget.dropdownFieldOptions[0].pvariationId.toString();
-
-    super.initState();
   }
 
   @override
@@ -91,43 +93,40 @@ class _KDropdownFieldState extends State<KDropdownField> {
                   return widget.errorMessage == null || widget.errorMessage!.isEmpty ? null : widget.errorMessage;
                 },
                 decoration: const InputDecoration(border: InputBorder.none, errorStyle: TextStyle(fontSize: 0, height: 0)),
-                hint: Text('Select ${widget.title}', style: KTextStyle.bodyText3.copyWith(color: KColor.grey)),
-                disabledHint: Text(widget.disabledHint ?? "Select", style: KTextStyle.bodyText3.copyWith(color: KColor.grey)),
+                hint: Text('Select ${widget.title}', style: KTextStyle.bodyText3.copyWith(color: KColor.blackbg.withOpacity(.5))),
+                disabledHint: Text(widget.disabledHint ?? "Select", style: KTextStyle.bodyText3.copyWith(color: KColor.grey350)),
                 isExpanded: true,
                 value: widget.isEdit ? widget.controller!.text : null,
                 icon: Padding(
                   padding: EdgeInsets.only(right: KSize.getWidth(context, 12)),
-                  child: const Icon(Icons.keyboard_arrow_down, size: 25, color: KColor.grey),
+                  child: Icon(Icons.keyboard_arrow_down, size: 25, color: widget.isDisabled ? KColor.grey350 : KColor.blackbg.withOpacity(.5)),
                 ),
                 items: widget.dropdownFieldOptions.map((dynamic dropDownStringItem) {
                   return DropdownMenuItem<String>(
-                      value: dropDownStringItem.value,
-                      child: Text(
-                        dropDownStringItem.value,
-                        textAlign: TextAlign.left,
-                        style: KTextStyle.bodyText3.copyWith(
-                          color: widget
-                                  .dropdownFieldOptions[
-                                      widget.dropdownFieldOptions.indexWhere((element) => element.value == dropDownStringItem.value)]
-                                  .isDisabled
-                              ? KColor.grey350
-                              : KColor.blackbg.withOpacity(.4),
-                        ),
-                      ));
+                    value: dropDownStringItem.value,
+                    enabled: !dropDownStringItem.isDisabled,
+                    child: Text(
+                      dropDownStringItem.value,
+                      textAlign: TextAlign.left,
+                      style: KTextStyle.bodyText3.copyWith(
+                        color: dropDownStringItem.isDisabled ? KColor.grey350 : KColor.blackbg.withOpacity(.6),
+                      ),
+                    ),
+                  );
                 }).toList(),
                 onChanged: widget.isDisabled
                     ? null
                     : (String? value) {
                         print('onChanged... onChanged... onChanged...');
-                        if (!widget.dropdownFieldOptions[widget.dropdownFieldOptions.indexWhere((element) => element.value == value)].isDisabled) {
-                          {
-                            setState(() {
-                              widget.controller!.text = value ?? '';
-                            });
+                        // if (!widget.dropdownFieldOptions[widget.dropdownFieldOptions.indexWhere((element) => element.value == value)].isDisabled) {
+                        //   {
+                        setState(() {
+                          widget.controller!.text = value ?? '';
+                        });
 
-                            if (widget.isCallback!) widget.callbackFunction!();
-                          }
-                        }
+                        if (widget.isCallback!) widget.callbackFunction!();
+                        // }
+                        // }
                       },
               ),
             ),

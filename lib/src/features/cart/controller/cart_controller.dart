@@ -4,6 +4,7 @@ import 'package:finesse/core/network/api.dart';
 import 'package:finesse/core/network/network_utils.dart';
 import 'package:finesse/src/features/cart/model/cart_model.dart';
 import 'package:finesse/src/features/cart/state/cart_state.dart';
+import 'package:finesse/src/features/product_details/model/product_details_model.dart';
 import 'package:finesse/src/features/wishlist/state/wishlist_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,19 +22,24 @@ class CartController extends StateNotifier<BaseState> {
 
   List<CartModel> cartList = [];
   int subtotal = 0;
-  int mproductId = -1, id = -1;
+  AllVariationProduct? productVariationDetails;
 
-  Future addCart(
+  Future addCart({required int quantity}
       // {required int mproductId, required int id}
-      {required int quantity}) async {
-    if (mproductId == -1) return toast('Please select variation first', bgColor: KColor.red);
+      ) async {
+    if (productVariationDetails != null && productVariationDetails!.mproductId == -1) {
+      return toast('Please select variation first!', bgColor: KColor.red);
+    }
+    if (quantity > productVariationDetails!.stock) {
+      return toast('Stock limit exceeded!', bgColor: KColor.red);
+    }
 
     state = const LoadingState();
 
     dynamic responseBody;
     var requestBody = {
-      'mproductId': mproductId,
-      'id': id,
+      'mproductId': productVariationDetails!.mproductId,
+      'id': productVariationDetails!.id,
       'quantity': quantity,
     };
 
@@ -43,6 +49,8 @@ class CartController extends StateNotifier<BaseState> {
       );
       if (responseBody != null) {
         toast("Product added to cart", bgColor: KColor.selectColor);
+        cartList = (responseBody['allCarts'] as List<dynamic>).map((x) => CartModel.fromJson(x)).toList();
+        state = CartSuccessState(cartList);
         // TODO :: Replace cart details success state
       } else {
         state = const ErrorState();

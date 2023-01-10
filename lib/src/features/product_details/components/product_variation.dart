@@ -54,7 +54,7 @@ class _ProductVariationState extends ConsumerState<ProductVariation> {
                 title: '${productDetails.allVariation?[index].name}',
                 dropdownFieldOptions: productDetails.allVariation![index].values!,
                 disabledHint: 'Select ${productDetails.allVariation?[index].name}',
-                isDisabled: (index != 0 && index < productDetails.allVariation!.length - 1) && (variationControllers[index - 1].text.isNotEmpty),
+                isDisabled: (index != 0 && index <= productDetails.allVariation!.length - 1) && (variationControllers[index - 1].text.isEmpty),
                 controller: variationControllers[index],
                 callbackFunction: () {
                   Map<String, String> variation = {};
@@ -73,12 +73,18 @@ class _ProductVariationState extends ConsumerState<ProductVariation> {
                       //     '$i ${jsonEncode(variation)} - ${productDetails.allVariationProduct![i].variation} ${jsonEncode(variation) == productDetails.allVariationProduct![i].variation}');
                       if (jsonEncode(variation) == productDetails.allVariationProduct![i].variation) {
                         isAvailable = true;
-                        ref.read(cartProvider.notifier).mproductId = productDetails.allVariationProduct![i].mproductId!;
-                        ref.read(cartProvider.notifier).id = productDetails.allVariationProduct![i].id!;
+                        ref.read(cartProvider.notifier).productVariationDetails = productDetails.allVariationProduct![i];
+
                         break;
                       }
                     }
-                    if (!isAvailable) toast('Product not available', bgColor: KColor.red);
+
+                    if ((index != 0 && index < productDetails.allVariation!.length - 1)) {
+                      toast('Select ${productDetails.allVariation![index].name}', bgColor: KColor.red);
+                    } else if ((index != 0 && index <= productDetails.allVariation!.length - 1)) {
+                      if (!isAvailable) toast('Product not available', bgColor: KColor.red);
+                    }
+                    setState(() {});
                   }
                 },
                 isCallback: true,

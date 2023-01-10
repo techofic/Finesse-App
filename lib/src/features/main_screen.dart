@@ -54,7 +54,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                 },
                 children: const [
                   HomePage(),
-                  CartPage(),
+                  CartPage(isFromBottomNav: true),
                   WishlistPage(),
                   ProfilePage(),
                 ],

@@ -98,7 +98,7 @@ class AllVariationProduct {
     this.model,
     this.variation,
     this.sellingPrice,
-    this.stock,
+    this.stock = 0,
     this.variationformat,
     this.allImages,
   });
@@ -109,7 +109,7 @@ class AllVariationProduct {
   String? model;
   String? variation;
   int? sellingPrice;
-  int? stock;
+  int stock;
   Variationformat? variationformat;
   List<AllImage>? allImages;
 
@@ -120,7 +120,7 @@ class AllVariationProduct {
         model: json["model"],
         variation: json["variation"],
         sellingPrice: json["sellingPrice"],
-        stock: json["stock"],
+        stock: json["stock"] ?? 0,
         variationformat: Variationformat.fromJson(json["variationformat"]),
         allImages: List<AllImage>.from((json["allImages"] ?? []).map((x) => AllImage.fromJson(x))),
       );
