@@ -18,6 +18,8 @@ class API {
   static const resetCode = 'app/sendActivationCode';
   static const resetPassword = 'app/reset-password';
 
+  static const initdata = 'app/initdata';
+
   //Slider
   static const slider = 'app/allFrontSliders';
 

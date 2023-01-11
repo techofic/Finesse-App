@@ -1,11 +1,9 @@
-import 'package:finesse/constants/shared_preference_constant.dart';
 import 'package:finesse/core/base/base_state.dart';
 import 'package:finesse/core/network/api.dart';
 import 'package:finesse/core/network/network_utils.dart';
 import 'package:finesse/src/features/cart/model/cart_model.dart';
 import 'package:finesse/src/features/cart/state/cart_state.dart';
 import 'package:finesse/src/features/product_details/model/product_details_model.dart';
-import 'package:finesse/src/features/wishlist/state/wishlist_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -27,10 +25,10 @@ class CartController extends StateNotifier<BaseState> {
   Future addCart({required int quantity}
       // {required int mproductId, required int id}
       ) async {
-    if (productVariationDetails != null && productVariationDetails!.mproductId == -1) {
+    print('productVariationDetails = $productVariationDetails');
+    if (productVariationDetails == null) {
       return toast('Please select variation first!', bgColor: KColor.red);
-    }
-    if (quantity > productVariationDetails!.stock) {
+    } else if (productVariationDetails != null && quantity > productVariationDetails!.stock) {
       return toast('Stock limit exceeded!', bgColor: KColor.red);
     }
 
@@ -48,12 +46,12 @@ class CartController extends StateNotifier<BaseState> {
         await Network.postRequest(API.addCart, requestBody),
       );
       if (responseBody != null) {
-        toast("Product added to cart", bgColor: KColor.selectColor);
         cartList = (responseBody['allCarts'] as List<dynamic>).map((x) => CartModel.fromJson(x)).toList();
+        toast("Product added to cart", bgColor: KColor.selectColor);
         state = CartSuccessState(cartList);
-        // TODO :: Replace cart details success state
+        totalCart();
       } else {
-        state = const ErrorState();
+        state = CartSuccessState(cartList);
       }
     } catch (error, stackTrace) {
       print(error);
@@ -61,66 +59,6 @@ class CartController extends StateNotifier<BaseState> {
       state = const ErrorState();
     }
   }
-
-  // Future addCart({required Product product, required String barCode, required int quantity}) async {
-  //   state = const LoadingState();
-  //   dynamic responseBody;
-  //   var requestBody = {
-  //     'averageBuyingPrice': product.averageBuyingPrice,
-  //     'barCode': barCode,
-  //     'brand': product.allbrand.name,
-  //     'brandId': product.brandId,
-  //     'catName': product.allcategory.catName,
-  //     'categoryId': product.categoryId,
-  //     'created_at': product.createdAt.toIso8601String(),
-  //     'date': "0000-00-00",
-  //     'discount': product.discount,
-  //     'groupId': product.groupId,
-  //     'groupName': product.allgroup.groupName,
-  //     'id': product.id,
-  //     'images': [],
-  //     'img': product.productImage,
-  //     'menuId': product.menuId,
-  //     'model': product.model,
-  //     'mproductId': product.id,
-  //     'openingQuantity': product.openingQuantity,
-  //     'openingUnitPrice': product.openingUnitPrice,
-  //     'productImage': product.productImage,
-  //     'productName': product.productName,
-  //     'quantity': quantity,
-  //     'sellingPrice': product.sellingPrice,
-  //     'stock': product.stock,
-  //     'unit': "Pcs",
-  //     'updated_at': product.updatedAt.toIso8601String(),
-  //     'variation': "{\"Color\":\"Blue\",\"Size\":\"M\"}",
-  //   };
-  //   try {
-  //     responseBody = await Network.handleResponse(
-  //       await Network.postRequest(API.addCart, requestBody),
-  //     );
-  //     if (responseBody != null) {
-  //       if (responseBody['token'] != null) {
-  //         state = const AddWishlistSuccessState();
-
-  //         setValue(isLoggedIn, true);
-  //         setValue(token, responseBody['token']);
-  //         toast("Product add in wishlist Successful", bgColor: KColor.selectColor);
-
-  //         NavigationService.navigateToReplacement(
-  //           CupertinoPageRoute(
-  //             builder: (context) => const CartPage(),
-  //           ),
-  //         );
-  //       }
-  //     } else {
-  //       state = const ErrorState();
-  //     }
-  //   } catch (error, stackTrace) {
-  //     print(error);
-  //     print(stackTrace);
-  //     state = const ErrorState();
-  //   }
-  // }
 
   Future cartDetails() async {
     state = const LoadingState();
@@ -142,12 +80,13 @@ class CartController extends StateNotifier<BaseState> {
   }
 
   Future updateCart({
-    required String id,
-    required String quantity,
+    required id,
+    required quantity,
   }) async {
     state = const LoadingState();
     dynamic responseBody;
     var requestBody = {
+      // 'mproductId': 121,
       'id': id,
       'quantity': quantity,
     };
@@ -156,12 +95,12 @@ class CartController extends StateNotifier<BaseState> {
         await Network.postRequest(API.updateCart, requestBody),
       );
       if (responseBody != null) {
+        cartList = (responseBody['allCarts'] as List<dynamic>).map((x) => CartModel.fromJson(x)).toList();
+        toast("Product quantity updated in cart successfully!", bgColor: KColor.selectColor);
+        state = CartSuccessState(cartList);
         totalCart();
-
-        toast("Product delete in wishlist Successful", bgColor: KColor.selectColor);
-        state = const DeleteWishlistSuccessState();
       } else {
-        state = const ErrorState();
+        state = CartSuccessState(cartList);
       }
     } catch (error, stackTrace) {
       print(error);
@@ -174,23 +113,19 @@ class CartController extends StateNotifier<BaseState> {
     state = const LoadingState();
 
     dynamic responseBody;
-    var requestBody = {
-      'id': id,
-    };
+    var requestBody = {'id': id};
 
     try {
       responseBody = await Network.handleResponse(
         await Network.postRequest(API.deleteCart, requestBody),
       );
       if (responseBody != null) {
+        cartList = (responseBody['allCarts'] as List<dynamic>).map((x) => CartModel.fromJson(x)).toList();
+        toast("Product removed from cart successfully!", bgColor: KColor.selectColor);
+        state = CartSuccessState(cartList);
         totalCart();
-
-        setValue(token, responseBody['token']);
-        toast("Product delete in cart Successful", bgColor: KColor.selectColor);
-
-        state = const DeleteCartSuccessState();
       } else {
-        state = const ErrorState();
+        state = CartSuccessState(cartList);
       }
     } catch (error, stackTrace) {
       print(error);

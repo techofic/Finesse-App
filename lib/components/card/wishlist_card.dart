@@ -1,15 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:finesse/components/dialog/k_confirm_dialog.dart';
+import 'package:finesse/src/features/cart/controller/cart_controller.dart';
+import 'package:finesse/styles/b_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../styles/k_colors.dart';
-import '../../styles/k_text_style.dart';
 
 // ignore: must_be_immutable
-class WishlistCard extends StatefulWidget {
+class WishlistCard extends ConsumerStatefulWidget {
   int? quantity;
+  int? productId;
   final String? img;
   final bool? isChecked;
   final String? productName;
@@ -22,6 +24,7 @@ class WishlistCard extends StatefulWidget {
 
   WishlistCard({
     required this.img,
+    required this.productId,
     this.quantity,
     this.isChecked,
     this.productName,
@@ -35,10 +38,10 @@ class WishlistCard extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<WishlistCard> createState() => _WishlistCardState();
+  ConsumerState<WishlistCard> createState() => _WishlistCardState();
 }
 
-class _WishlistCardState extends State<WishlistCard> {
+class _WishlistCardState extends ConsumerState<WishlistCard> {
   int count = 0;
 
   @override
@@ -155,11 +158,7 @@ class _WishlistCardState extends State<WishlistCard> {
                                     child: CircleAvatar(
                                       radius: 18,
                                       backgroundColor: KColor.baseBlack,
-                                      child: SvgPicture.asset(
-                                        'assets/images/trolly.svg',
-                                        color: Colors.white,
-                                        height: 19,
-                                      ),
+                                      child: SvgPicture.asset('assets/images/trolly.svg', color: Colors.white, height: 19),
                                     ),
                                   )
                                 : Row(
@@ -170,6 +169,8 @@ class _WishlistCardState extends State<WishlistCard> {
                                           setState(() {
                                             widget.quantity = (widget.quantity! + 1);
                                           });
+
+                                          ref.read(cartProvider.notifier).updateCart(quantity: widget.quantity, id: widget.productId);
                                         },
                                         child: Container(
                                           height: 32,
@@ -195,13 +196,13 @@ class _WishlistCardState extends State<WishlistCard> {
                                       InkWell(
                                         borderRadius: BorderRadius.circular(10),
                                         onTap: () {
-                                          setState(() {
-                                            widget.quantity = (widget.quantity! - 1);
-                                            if (widget.quantity! < 0) {
-                                              widget.quantity = 0;
-                                            }
-                                          });
-                                          // ref.read(cartProvider.notifier).up;
+                                          if (widget.quantity! > 1) {
+                                            setState(() {
+                                              widget.quantity = (widget.quantity! - 1);
+                                            });
+
+                                            ref.read(cartProvider.notifier).updateCart(quantity: widget.quantity, id: widget.productId);
+                                          }
                                         },
                                         child: Container(
                                           height: 32,

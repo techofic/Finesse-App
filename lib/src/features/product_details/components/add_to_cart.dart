@@ -1,10 +1,14 @@
+import 'package:finesse/src/features/cart/controller/cart_controller.dart';
+import 'package:finesse/src/features/cart/state/cart_state.dart';
 import 'package:finesse/styles/k_colors.dart';
 import 'package:finesse/styles/k_text_style.dart';
 import 'package:finesse/utils/extension.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ignore: must_be_immutable
-class AddToCart extends StatefulWidget {
+class AddToCart extends ConsumerStatefulWidget {
   int quantity;
   final VoidCallback add;
   final VoidCallback remove;
@@ -19,14 +23,14 @@ class AddToCart extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<AddToCart> createState() => _AddToCartState();
+  ConsumerState<AddToCart> createState() => _AddToCartState();
 }
 
-class _AddToCartState extends State<AddToCart> {
-  //int widget.quantity = 0;
-
+class _AddToCartState extends ConsumerState<AddToCart> {
   @override
   Widget build(BuildContext context) {
+    final cartState = ref.watch(cartProvider);
+
     return Container(
       height: context.screenHeight * 0.12,
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -89,15 +93,14 @@ class _AddToCartState extends State<AddToCart> {
             child: Container(
               height: 54,
               width: context.screenWidth * 0.45,
-              decoration: BoxDecoration(
-                color: KColor.blackbg,
-                borderRadius: BorderRadius.circular(15),
-              ),
+              decoration: BoxDecoration(color: KColor.blackbg, borderRadius: BorderRadius.circular(15)),
               child: Center(
-                child: Text(
-                  'Add to cart',
-                  style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
-                ),
+                child: cartState is CartSuccessState
+                    ? Text(
+                        'Add to cart',
+                        style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
+                      )
+                    : const CupertinoActivityIndicator(),
               ),
             ),
           ),

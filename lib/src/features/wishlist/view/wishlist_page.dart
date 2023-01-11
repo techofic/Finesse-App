@@ -53,6 +53,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                   itemBuilder: (ctx, index) {
                                     return WishlistCard(
                                       img: wishlistData[index].product.productImage,
+                                      productId: wishlistData[index].product.id,
                                       isChecked: true,
                                       productName: wishlistData[index].product.productName,
                                       group: wishlistData[index].product.allgroup.groupName,
