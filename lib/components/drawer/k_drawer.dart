@@ -1,4 +1,8 @@
 import 'package:finesse/constants/shared_preference_constant.dart';
+import 'package:finesse/src/features/home/controllers/menu_data_controller.dart';
+import 'package:finesse/src/features/home/controllers/shop_controller.dart';
+import 'package:finesse/src/features/home/models/menu_data_model.dart';
+import 'package:finesse/src/features/home/state/menu_data_state.dart';
 import 'package:finesse/styles/b_style.dart';
 import 'package:finesse/utils/extension.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +17,9 @@ class KDrawer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final menuState = ref.watch(menuDataProvider);
+    final List<MenuDataModel>? menuData = menuState is MenuDataSuccessState ? menuState.menuList : [];
+
     return Container(
       color: KColor.blackbg,
       padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 30),
@@ -41,36 +48,35 @@ class KDrawer extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/shop');
+                ListView.builder(
+                  itemCount: menuData!.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            if (menuData[index].isActive == 1) {
+                              ref.read(shopProvider.notifier).fetchShopProductList(categoryId: menuData[index].id);
+
+                              Navigator.pushNamed(context, '/shop');
+                            } else {
+                              toast('Coming soon...');
+                            }
+                          },
+                          child: Text(
+                            menuData[index].name ?? '',
+                            style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    );
                   },
-                  child: Text(
-                    'Men',
-                    style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
-                  ),
                 ),
-                const SizedBox(height: 16),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/shop');
-                  },
-                  child: Text(
-                    'Women',
-                    style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/shop');
-                  },
-                  child: Text(
-                    'Kids',
-                    style: KTextStyle.subtitle1.copyWith(color: KColor.whiteBackground),
-                  ),
-                ),
-                const SizedBox(height: 16),
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, '/contact');

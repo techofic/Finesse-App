@@ -9,6 +9,7 @@ import 'package:finesse/src/features/auth/login/controller/login_controller.dart
 import 'package:finesse/src/features/cart/controller/cart_controller.dart';
 import 'package:finesse/src/features/cart/controller/zone_controller.dart';
 import 'package:finesse/src/features/home/controllers/category_controller.dart';
+import 'package:finesse/src/features/home/controllers/menu_data_controller.dart';
 import 'package:finesse/src/features/home/controllers/product_category_controller.dart';
 import 'package:finesse/src/features/home/controllers/shop_controller.dart';
 import 'package:finesse/src/features/home/controllers/slider_controller.dart';
@@ -59,6 +60,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     // ref.read(zoneProvider.notifier).allZone();
     ref.read(cityProvider.notifier).allCity();
     ref.read(allBrandsProvider.notifier).fetchAllBrands();
+    ref.read(menuDataProvider.notifier).fetchMenuData();
   }
 
   @override

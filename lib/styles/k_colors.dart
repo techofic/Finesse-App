@@ -43,6 +43,7 @@ class KColor {
   static Color? grey350 = Colors.grey[350];
   static const Color grey = Color(0xFFB4B4B4);
   static const Color red = Colors.red;
+  static const Color yellow = Colors.yellow;
   static const Color red12 = Color(0xFFFF3D00);
   static const Color rattingColor = Color(0xFFFFB800);
   static const Color blackbg = Color(0xFF1B1B1B);
